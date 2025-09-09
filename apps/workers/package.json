@@ -1,0 +1,19 @@
+{
+  "name": "@glow/workers",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx watch src/index.ts",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "bullmq": "^5.9.0",
+    "ioredis": "^5.4.1",
+    "mongoose": "^8.5.3",
+    "pino": "^9.3.2"
+  }
+}
