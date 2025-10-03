@@ -2,4 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body { height: 100%; }
+:root {
+  --background: #F5F7FF;
+  --foreground: #0B0E18;
+  --card: rgba(255, 255, 255, 0.8);
+  --border: rgba(0, 31, 84, 0.12);
+  --accent: #D72638;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #05060A;
+  --foreground: #F8FBFF;
+  --card: rgba(14, 16, 26, 0.85);
+  --border: rgba(255, 107, 0, 0.18);
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-[var(--background)] text-[var(--foreground)] font-sans antialiased;
+  background-image: radial-gradient(circle at 10% 20%, rgba(255, 107, 0, 0.08), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(0, 31, 84, 0.08), transparent 50%);
+}
+
+a {
+  @apply text-glow-primary underline-offset-4 transition-colors duration-200;
+}
+
+a:hover {
+  @apply text-glow-accent;
+}
+
+::selection {
+  background: rgba(255, 107, 0, 0.35);
+  color: #fff;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border border-[var(--border)] bg-[var(--card)] backdrop-blur-xl shadow-glow-soft;
+  }
+
+  .glow-gradient-text {
+    background-image: linear-gradient(135deg, #FF6B00 0%, #D72638 50%, #FF6B00 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+}

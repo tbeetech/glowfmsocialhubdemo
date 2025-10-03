@@ -1,0 +1,15 @@
+
+> @glow/workers@0.1.0 dev C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\workers
+> tsx watch src/index.ts
+
+C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\node_modules\.pnpm\bullmq@5.59.0\node_modules\bullmq\dist\cjs\classes\redis-connection.js:72
+                throw new Error(msg);
+                      ^
+
+Error: BullMQ: Your redis options maxRetriesPerRequest must be null.
+    at RedisConnection.checkBlockingOptions (C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\node_modules\.pnpm\bullmq@5.59.0\node_modules\bullmq\src\classes\redis-connection.ts:143:15)
+    at new RedisConnection (C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\node_modules\.pnpm\bullmq@5.59.0\node_modules\bullmq\src\classes\redis-connection.ts:113:12)
+    at new Worker (C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\node_modules\.pnpm\bullmq@5.59.0\node_modules\bullmq\src\classes\worker.ts:327:31)
+    at make (C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\workers\src\index.ts:7:10)
+    at <anonymous> (C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\workers\src\index.ts:10:1)
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)

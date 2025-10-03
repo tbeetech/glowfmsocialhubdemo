@@ -1,24 +1,78 @@
+﻿import type { ReactNode } from "react";
+import type { Metadata } from "next";
+import Script from "next/script";
+import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
+import { GlowNav } from "@/components/ui/GlowNav";
+import { GlowFooter } from "@/components/ui/GlowFooter";
 
-export const metadata = { title: "Glow 99.1 FM • Social Hub" };
+const displayFont = Manrope({ subsets: ["latin"], variable: "--font-display" });
+const bodyFont = Inter({ subsets: ["latin"], variable: "--font-body" });
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const themeInitializer = `(() => {
+  try {
+    const storage = localStorage.getItem('glow.theme');
+    const stored = storage ? JSON.parse(storage) : null;
+    const mode = stored?.state?.mode;
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (mode === 'dark' || (!mode && systemDark)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch (error) {
+    console.warn('Theme hydrate failed', error);
+  }
+})();`;
+
+export const metadata: Metadata = {
+  title: "Glow 99.1 FM - Social Engagement Hub",
+  description: "Experience Glow FM online: live shows, social buzz, polls, quests, notifications, and analytics for the campus community.",
+  keywords: ["Glow FM", "Glow Ember Challenge", "Campus Radio", "Social Hub", "Nigeria"],
+  metadataBase: new URL("https://glow991fm.com"),
+  openGraph: {
+    title: "Glow 99.1 FM - Social Engagement Hub",
+    description: "Stream shows, react to highlights, join quests, and submit your stories to Glow FM.",
+    url: "https://glow991fm.com/social",
+    type: "website",
+    images: [
+      {
+        url: "https://res.cloudinary.com/demo/image/upload/v1720000000/glowfm/social-hub-cover.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Glow FM Social Hub"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@glow991fm",
+    creator: "@glow991fm",
+    title: "Glow 99.1 FM - Social Engagement Hub",
+    description: "Join Glow FM's social universe with live content, quests and rewards.",
+    images: ["https://res.cloudinary.com/demo/image/upload/v1720000000/glowfm/social-hub-cover.jpg"]
+  }
+};
+
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-neutral-950 text-white">
-        <div className="w-full border-b border-neutral-800 bg-neutral-900/80 sticky top-0 z-40">
-          <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-            <div className="font-bold">Glow 99.1 FM • @glow991fm</div>
-            <div className="text-sm opacity-75">Your Station, Your Voice</div>
-          </div>
-        </div>
-        <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
-        <footer className="mt-16 border-t border-neutral-800">
-          <div className="mx-auto max-w-6xl px-4 py-6 text-sm opacity-75">
-            Follow us everywhere • WhatsApp available • Glow 99.1 FM • @glow991fm
-          </div>
-        </footer>
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`} id="top">
+      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)]" suppressHydrationWarning>
+        <Script id="theme-init" strategy="beforeInteractive">{themeInitializer}</Script>
+        <GlowNav />
+        <main className="mx-auto max-w-6xl px-4 pb-24 pt-8 lg:pt-12">{children}</main>
+        <a
+          href="https://glow991fm.com/schedules/"
+          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/70 px-5 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-white shadow-lg backdrop-blur"
+          aria-label="View Glow FM schedule"
+        >
+          <span className="hidden sm:inline">View Schedule</span>
+          <span className="sm:hidden">Schedule</span>
+        </a>
+        <GlowFooter />
       </body>
     </html>
   );
 }
+
+
+
+

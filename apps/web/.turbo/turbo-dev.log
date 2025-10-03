@@ -1,0 +1,188 @@
+
+> @glow/web@0.1.0 dev C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web
+> next dev -p 3000
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+ ✓ Ready in 5.9s
+ ○ Compiling / ...
+ ⨯ ./lib/cn.ts:2:1
+Module not found: Can't resolve 'tailwind-merge'
+[0m [90m 1 |[39m [36mimport[39m { type [33mClassValue[39m[33m,[39m clsx } [36mfrom[39m [32m"clsx"[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { twMerge } [36mfrom[39m [32m"tailwind-merge"[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 3 |[39m[0m
+[0m [90m 4 |[39m [36mexport[39m [36mfunction[39m cn([33m...[39minputs[33m:[39m [33mClassValue[39m[]) {[0m
+[0m [90m 5 |[39m   [36mreturn[39m twMerge(clsx(inputs))[33m;[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/AnimatedSection.tsx
+ ⨯ ./lib/cn.ts:2:1
+Module not found: Can't resolve 'tailwind-merge'
+[0m [90m 1 |[39m [36mimport[39m { type [33mClassValue[39m[33m,[39m clsx } [36mfrom[39m [32m"clsx"[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 2 |[39m [36mimport[39m { twMerge } [36mfrom[39m [32m"tailwind-merge"[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 3 |[39m[0m
+[0m [90m 4 |[39m [36mexport[39m [36mfunction[39m cn([33m...[39minputs[33m:[39m [33mClassValue[39m[]) {[0m
+[0m [90m 5 |[39m   [36mreturn[39m twMerge(clsx(inputs))[33m;[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/AnimatedSection.tsx
+ GET /_next/static/webpack/393f3dc4329f1cf7.webpack.hot-update.json 500 in 16838ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET / 500 in 4617ms
+ GET / 500 in 97ms
+ ⨯ ./app/layout.tsx
+Error: Failed to read source code from C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\app\layout.tsx
+
+Caused by:
+    stream did not contain valid UTF-8
+
+Import trace for requested module:
+./app/layout.tsx
+ GET /_next/static/webpack/393f3dc4329f1cf7.webpack.hot-update.json 500 in 565ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⨯ ./app/layout.tsx
+Error: Failed to read source code from C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\app\layout.tsx
+
+Caused by:
+    stream did not contain valid UTF-8
+
+Import trace for requested module:
+./app/layout.tsx
+ GET / 500 in 470ms
+The user aborted a request.
+
+Retrying 1/3...
+The user aborted a request.
+
+Retrying 1/3...
+The user aborted a request.
+
+Retrying 1/3...
+The user aborted a request.
+
+Retrying 1/3...
+ ⨯ ./components/ui/DarkModeToggle.tsx:4:1
+Module not found: Can't resolve 'lucide-react'
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useEffect } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mMoonStar[39m[33m,[39m [33mSunMedium[39m } [36mfrom[39m [32m"lucide-react"[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { cn } [36mfrom[39m [32m"@/lib/cn"[39m[33m;[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { useThemeStore } [36mfrom[39m [32m"@/lib/theme-store"[39m[33m;[39m[0m
+[0m [90m 7 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/ui/GlowNav.tsx
+ GET /_next/static/webpack/393f3dc4329f1cf7.webpack.hot-update.json 500 in 12712ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⨯ ./components/ui/DarkModeToggle.tsx:4:1
+Module not found: Can't resolve 'lucide-react'
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useEffect } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mMoonStar[39m[33m,[39m [33mSunMedium[39m } [36mfrom[39m [32m"lucide-react"[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { cn } [36mfrom[39m [32m"@/lib/cn"[39m[33m;[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { useThemeStore } [36mfrom[39m [32m"@/lib/theme-store"[39m[33m;[39m[0m
+[0m [90m 7 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./components/ui/GlowNav.tsx
+ GET / 500 in 1910ms
+[Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\client-development\7.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\client-development\\7.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\client-development\7.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\client-development\\7.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\client-development\7.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\client-development\\7.pack.gz'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\client-development\7.pack.gz'
+[Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\5.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\5.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\5.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\5.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\5.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\5.pack.gz'
+}
+[Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\8.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\8.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\8.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\8.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\8.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\8.pack.gz'
+}
+[Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\7.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\7.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\7.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\7.pack.gz'
+}
+ ⨯ unhandledRejection: [Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\7.pack.gz'] {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: 'C:\\Users\\tobir\\Desktop\\glowsite\\glowfmsocialhubdemo\\apps\\web\\.next\\cache\\webpack\\server-development\\7.pack.gz'
+}
+<w> [webpack.cache.PackFileCacheStrategy] Caching failed for pack: Error: ENOENT: no such file or directory, stat 'C:\Users\tobir\Desktop\glowsite\glowfmsocialhubdemo\apps\web\.next\cache\webpack\server-development\5.pack.gz'
+ ⨯ ./components/ui/DarkModeToggle.tsx:4:1
+Module not found: Can't resolve 'lucide-react'
+[0m [90m 2 |[39m[0m
+[0m [90m 3 |[39m [36mimport[39m { useEffect } [36mfrom[39m [32m"react"[39m[33m;[39m[0m
+[0m[31m[1m>[22m[39m[90m 4 |[39m [36mimport[39m { [33mMoonStar[39m[33m,[39m [33mSunMedium[39m } [36mfrom[39m [32m"lucide-react"[39m[33m;[39m[0m
+[0m [90m   |[39m [31m[1m^[22m[39m[0m
+[0m [90m 5 |[39m [36mimport[39m { cn } [36mfrom[39m [32m"@/lib/cn"[39m[33m;[39m[0m
+[0m [90m 6 |[39m [36mimport[39m { useThemeStore } [36mfrom[39m [32m"@/lib/theme-store"[39m[33m;[39m[0m
+[0m [90m 7 |[39m[0m
+
+https://nextjs.org/docs/messages/module-not-found
+

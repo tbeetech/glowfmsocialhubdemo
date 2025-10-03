@@ -1,13 +1,26 @@
-/** @type {import('next').NextConfig} */
+﻿/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: { domains: ["res.cloudinary.com"] },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'drive.google.com',
+        pathname: '/uc**'
+      }
+    ]
+  },
   headers: async () => [
     {
-      source: "/(.*)",
+      source: '/(.*)',
       headers: [
-        { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-        { key: "Permissions-Policy", value: "geolocation=(), camera=()" }
+        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        { key: 'Permissions-Policy', value: 'geolocation=(), camera=()' }
       ]
     }
   ]

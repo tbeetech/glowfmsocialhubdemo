@@ -1,4 +1,4 @@
-# Glow 99.1 FM • MERN Social Hub (Core 77%)
+# Glow 99.1 FM - MERN Social Hub (Core 77%)
 
 TypeScript monorepo implementing the core platform features: deep links, social wall, reactions,
 polls, quests, leaderboards, UGC intake, notifications, analytics, and workers for ranking.

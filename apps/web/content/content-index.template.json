@@ -1,0 +1,100 @@
+{
+  "rootFolderId": "1v8MBIgPAelgAWXmD2KRZLEMaVLek-BtK",
+  "brand": {
+    "folderId": "1-jUDyoAkh-unXliXZ_iswmgXjsXke7qQ",
+    "logoFiles": [
+      {
+        "name": "standard glowfm logo.jpg",
+        "fileId": "1AoQZlN5WxtMgoRcAWXj-62NrS6lSMw25"
+      }
+    ],
+    "colorNotesFileId": "1bExyX_R3JI_X1YW8XFQDE9Z_q05VU3Hb",
+    "favicon": {
+      "folderId": "1XGM1z4XxxKhLXVlJx7Rosk6YGLXR-8zu",
+      "fileId": "1CBlCIPS6Jx0LyOj-gPQ-Te1iXT7A9i9t"
+    }
+  },
+  "home": {
+    "folderId": "1r8Y59I0H83Kd_gUG4uGIYgf8saw_3IYw",
+    "hero": {
+      "folderId": "1cq_gqWOhQGpb59zTk-kNkRxfaqTwyN5B",
+      "ctaStepsFileId": "1yFR_EmsH8BhnvkK4tp-FDyFcI7_aruG1"
+    }
+  },
+  "shows": {
+    "folderId": "1AEg_d5_6DV6WmOSEMh7JQAlIIODJLqIK",
+    "ctaLinkFileId": "1N2afIRZEqQXOOFpLSlwCeAAkZcPHlo4C",
+    "items": [
+      {
+        "slug": "ijinle-odu",
+        "artworkFileId": "1u314QJsKt0Qq-r7yXQNI6Mn7X-BNpG-L"
+      },
+      {
+        "slug": "kayefi-nla",
+        "artworkFileId": "1yKl0ov8OO0KmiYvc4bD4aZEI2DSeuNxV"
+      },
+      {
+        "slug": "glow-kiddies",
+        "artworkFileId": "1hrSbf2AevuyvMGWar6LemcLwhJe2Uaon"
+      },
+      {
+        "slug": "glow-fm-connect",
+        "artworkFileId": "1o5YzG2EWLmbiInmxYOVHCO14aMTO2026"
+      },
+      {
+        "slug": "double-joy-of-sports",
+        "artworkFileId": "1C3mnbxEjArt89znHxInPIuJFY3Zdpkwy"
+      },
+      {
+        "slug": "political-hangout",
+        "artworkFileId": "1dKSt9NnUP9OPsK7ilR_p-oRb5tMURI_S"
+      },
+      {
+        "slug": "issues-in-the-dailies",
+        "artworkFileId": "1jLRDaHpsjwFFnsVBR0fkpS6hDSsY6X3z"
+      },
+      {
+        "slug": "womens-world",
+        "artworkFileId": "1T-ursMUFLmU7tGRLl03yk-dKwGpF8-UK"
+      }
+    ]
+  },
+  "calendar": {
+    "folderId": "qQw_snd-mnWGHV32ocIyA9tB28VJINVbi",
+    "structure": "{year}/{event}/",
+    "fields": [
+      "poster.jpg",
+      "details.txt",
+      "cta-link.txt"
+    ]
+  },
+  "blog": {
+    "folderId": "5MD4_lGiEKN4IEbYVJXO5NDqJgnuLW8cN",
+    "postStructure": "{slug}/",
+    "required": [
+      "hero.jpg",
+      "body.md",
+      "meta.json"
+    ]
+  },
+  "podcast": {
+    "folderId": "1rVlS64gwIJNbGtoG_SNdGTIz4LdR35o4",
+    "seasonStructure": "Season {number}/",
+    "episodeStructure": "{episode}-slug/",
+    "required": [
+      "audio.mp3",
+      "episode.json",
+      "artwork.jpg",
+      "transcript.md"
+    ],
+    "waveform": {
+      "optional": true,
+      "file": "waveform.json"
+    }
+  },
+  "footer": {
+    "folderId": "19yXs0tpcaZlI3bLM_AuGUihsPTYgrt69",
+    "linksFileId": "1efhEAFeysBspLLmJqIzHSvUvRFyvlhS5",
+    "contactFileId": "JJF8np-QV4GUc50OqWE4J2u7lKGU2rP1C"
+  }
+}

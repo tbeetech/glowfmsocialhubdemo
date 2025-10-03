@@ -1,13 +1,48 @@
-import { Queue, QueueScheduler } from "bullmq";
+import { Queue, QueueScheduler, JobsOptions } from "bullmq";
 import IORedis from "ioredis";
 import { config } from "./config";
 
-export const connection = new IORedis(config.redisUrl);
+interface QueueLike {
+  add(name: string, data: Record<string, unknown>, opts?: JobsOptions): Promise<void>;
+}
 
-export const queues = {
-  verifyQuest: new Queue("verify-quest", { connection }),
-  notify: new Queue("notify", { connection })
-};
+const useMock = config.redisUrl === "mock" || process.env.USE_MEMORY_REDIS === "true";
 
-new QueueScheduler("verify-quest", { connection });
-new QueueScheduler("notify", { connection });
+let connection: IORedis | null = null;
+
+function createNoopQueue(name: string): QueueLike {
+  return {
+    async add(jobName, data) {
+      console.info(`[queue:${name}] skipped job "${jobName}" (redis mocked)`, data);
+    },
+  };
+}
+
+let queues: { verifyQuest: QueueLike; notify: QueueLike };
+
+if (useMock) {
+  queues = {
+    verifyQuest: createNoopQueue("verify-quest"),
+    notify: createNoopQueue("notify"),
+  };
+  console.info("[redis] using in-memory mock queues");
+} else {
+  connection = new IORedis(config.redisUrl, {
+    maxRetriesPerRequest: 1,
+    enableOfflineQueue: false,
+  });
+
+  connection.on("error", (error) => {
+    console.error("[redis] connection error", error);
+  });
+
+  queues = {
+    verifyQuest: new Queue("verify-quest", { connection }),
+    notify: new Queue("notify", { connection }),
+  };
+
+  new QueueScheduler("verify-quest", { connection });
+  new QueueScheduler("notify", { connection });
+}
+
+export { connection, queues };
