@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PrefsSchema } from "@shared/schemas";
+import { PrefsSchema } from "@glow/shared";
 
 export const prefs = Router();
 

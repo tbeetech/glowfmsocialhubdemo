@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ReactionSchema } from "@shared/schemas";
+import { ReactionSchema } from "@glow/shared";
 import { Reaction } from "../models/reaction";
 import { rateLimit } from "../middleware/rateLimit";
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { CreateDeeplinkSchema } from "@shared/schemas";
+import { CreateDeeplinkSchema } from "@glow/shared";
 import { nanoid } from "nanoid";
 
 export const deeplinks = Router();

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { LinkIdentitySchema } from "@shared/schemas";
+import { LinkIdentitySchema } from "@glow/shared";
 
 export const identity = Router();
 

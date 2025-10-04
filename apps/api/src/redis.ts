@@ -1,9 +1,9 @@
-import { Queue, QueueScheduler, JobsOptions } from "bullmq";
+import { Queue, JobsOptions, Job } from "bullmq";
 import IORedis from "ioredis";
 import { config } from "./config";
 
 interface QueueLike {
-  add(name: string, data: Record<string, unknown>, opts?: JobsOptions): Promise<void>;
+  add(name: string, data: Record<string, unknown>, opts?: JobsOptions): Promise<Job | void>;
 }
 
 const useMock = config.redisUrl === "mock" || process.env.USE_MEMORY_REDIS === "true";
@@ -41,8 +41,8 @@ if (useMock) {
     notify: new Queue("notify", { connection }),
   };
 
-  new QueueScheduler("verify-quest", { connection });
-  new QueueScheduler("notify", { connection });
 }
 
 export { connection, queues };
+
+

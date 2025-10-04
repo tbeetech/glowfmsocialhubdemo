@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { PollVoteSchema } from "@shared/schemas";
+import { PollVoteSchema } from "@glow/shared";
 import { Poll } from "../models/poll";
 
 export const polls = Router();

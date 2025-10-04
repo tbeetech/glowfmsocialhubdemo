@@ -1,4 +1,4 @@
-import { forwardRef, type ButtonHTMLAttributes } from "react";
+import { forwardRef, type ButtonHTMLAttributes, type ForwardedRef, type ReactNode } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/cn";
 
@@ -23,23 +23,36 @@ type GlowButtonSize = "sm" | "md" | "lg" | "xl";
 
 type NativeButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-export interface GlowButtonProps extends NativeButtonProps {
+export interface GlowButtonProps extends Omit<NativeButtonProps, "children"> {
   variant?: GlowButtonVariant;
   size?: GlowButtonSize;
   asChild?: boolean;
+  children?: ReactNode;
 }
 
-export const GlowButton = forwardRef<HTMLElement, GlowButtonProps>(
-  ({ className, variant = "primary", size = "md", asChild = false, ...props }, ref) => {
-    const Component = asChild ? Slot : "button";
-    const componentProps = asChild ? props : { type: "button", ...props };
+type InternalButtonProps = Omit<GlowButtonProps, "variant" | "size" | "asChild">;
+
+function coerceRef(ref: ForwardedRef<HTMLButtonElement>): ForwardedRef<HTMLElement> {
+  return ref as unknown as ForwardedRef<HTMLElement>;
+}
+
+export const GlowButton = forwardRef<HTMLButtonElement, GlowButtonProps>(
+  ({ className, variant = "primary", size = "md", asChild = false, children, ...rest }, ref) => {
+    const commonClassName = cn(baseStyles, variantStyles[variant], sizeStyles[size], className);
+    const { type: providedType, ...otherProps } = rest;
+
+    if (asChild) {
+      return (
+        <Slot ref={coerceRef(ref)} className={commonClassName} {...(otherProps as InternalButtonProps)}>
+          {children}
+        </Slot>
+      );
+    }
 
     return (
-      <Component
-        ref={ref as any}
-        className={cn(baseStyles, variantStyles[variant], sizeStyles[size], className)}
-        {...componentProps}
-      />
+      <button ref={ref} type={providedType ?? "button"} className={commonClassName} {...otherProps}>
+        {children}
+      </button>
     );
   }
 );

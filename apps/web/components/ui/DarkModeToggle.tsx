@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect } from "react";
 import { cn } from "@/lib/cn";
@@ -63,7 +63,8 @@ export function DarkModeToggle({ className }: { className?: string }) {
 
   useEffect(() => {
     if (!hydrated) {
-      useThemeStore.persist.rehydrate().then(() => setHydrated(true));
+      const rehydrateResult = useThemeStore.persist.rehydrate();
+      Promise.resolve(rehydrateResult).then(() => setHydrated(true));
     }
   }, [hydrated, setHydrated]);
 
@@ -91,3 +92,4 @@ export function DarkModeToggle({ className }: { className?: string }) {
     </button>
   );
 }
+
