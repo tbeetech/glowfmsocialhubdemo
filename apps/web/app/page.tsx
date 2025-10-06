@@ -3,6 +3,10 @@ import Image from "next/image";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { GlowButton } from "@/components/ui/GlowButton";
+import { CountdownClock } from "@/components/CountdownClock";
+import { NextPrograms } from "@/components/NextPrograms";
+import type { ProgramSlot } from "@/components/NextPrograms";
+import { Facebook } from "lucide-react";
 import { FollowBar } from "@/components/FollowBar";
 
 const showLineup = [
@@ -72,24 +76,80 @@ const showLineup = [
   }
 ];
 
-const calendarHighlights = [
+const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
+
+const programSchedule: ProgramSlot[] = [
   {
-    title: "Ember Challenge Audition Week",
-    date: "Oct 7 - Oct 11",
-    detail: "Campus qualifiers go live on Facebook with producers dropping surprise briefs at 5:00 PM daily.",
-    cta: { label: "View livestream grid", href: "/social-media#facebook-spotlight" }
+    title: "Ijinle Odu",
+    description: "Deep Yoruba storytelling that bridges heritage, music, and modern campus energy.",
+    hosts: "Onikale and Abeni",
+    startTime: "05:00",
+    durationMinutes: 120,
+    days: [1],
+    ctaHref: "https://www.facebook.com/Glowfm/live_ijinle"
   },
   {
-    title: "Glow Culture Street Jam",
-    date: "Oct 18",
-    detail: "Outdoor broadcast with creator booths, TikTok reel battles, and merch drops for early birds.",
-    cta: { label: "RSVP on Instagram", href: "https://instagram.com/glow991fm" }
+    title: "Kayefi Nla",
+    description: "Mystery topics, supernatural tales, and late night confessions with immersive sound design.",
+    hosts: "DJ Kayefi",
+    startTime: "19:00",
+    durationMinutes: 120,
+    days: [2],
+    ctaHref: "https://www.facebook.com/Glowfm/live_kayefi"
   },
   {
-    title: "Advertiser Lab Webinar",
-    date: "Oct 28",
-    detail: "Learn how Glow FM social data boosts campus business campaigns ahead of the festive rush.",
-    cta: { label: "Save a seat", href: "/advertisement" }
+    title: "Glow Kiddies",
+    description: "Interactive games, kiddie quizzes, and animated lessons for the youngest Glow tribe.",
+    hosts: "Auntie Mimi",
+    startTime: "08:00",
+    durationMinutes: 90,
+    days: [6],
+    ctaHref: "https://www.facebook.com/Glowfm/live_kiddies"
+  },
+  {
+    title: "Glow FM Connect",
+    description: "Live social mentions, audience shout-outs, and trending stories from the Glow digital squad.",
+    hosts: "The Social Desk",
+    startTime: "12:00",
+    durationMinutes: 120,
+    days: [1, 2, 3, 4, 5],
+    ctaHref: "https://www.facebook.com/Glowfm/live_connect"
+  },
+  {
+    title: "Double Joy of Sports",
+    description: "Crunch stats, fan debates, and highlight reels from campus and pro leagues.",
+    hosts: "Coach Double J",
+    startTime: "18:00",
+    durationMinutes: 90,
+    days: [3],
+    ctaHref: "https://www.facebook.com/Glowfm/live_sports"
+  },
+  {
+    title: "Political Hangout",
+    description: "Policy breakdowns and youth town hall conversations that keep power accountable.",
+    hosts: "Gloria and The Roundtable",
+    startTime: "20:00",
+    durationMinutes: 60,
+    days: [4],
+    ctaHref: "https://www.facebook.com/Glowfm/live_politics"
+  },
+  {
+    title: "Issues in the Dailies",
+    description: "Sharp press reviews, fact checks, and social reaction threads with the Glow editorial team.",
+    hosts: "The Newsroom",
+    startTime: "09:00",
+    durationMinutes: 60,
+    days: [1, 2, 3, 4, 5],
+    ctaHref: "https://www.facebook.com/Glowfm/live_dailies"
+  },
+  {
+    title: "Women's World",
+    description: "Spotlighting women trailblazers, wellness experts, and community advocates.",
+    hosts: "The Sisterhood",
+    startTime: "17:00",
+    durationMinutes: 90,
+    days: [0],
+    ctaHref: "https://www.facebook.com/Glowfm/live_women"
   }
 ];
 
@@ -119,7 +179,7 @@ export default function Home() {
               Glow FM Social Hub and Ember Challenge Command Center
             </h1>
             <p className="max-w-2xl text-base text-white/80 md:text-lg">
-              Celebrate our digital wins, track live programming, and jump straight into campaigns engineered by the Glow social media squad. Everything you need to follow, repost, and win with 99.1 FM lives here.
+              Celebrate our digital wins, track live programming, and explore sponsorship-ready advertising campaigns engineered by the Glow social media squad. Everything you need to follow, repost, and win with 99.1 FM lives here.
             </p>
             <div className="flex flex-wrap gap-4">
               <GlowButton size="lg" variant="accent" className="uppercase tracking-[0.3em]" asChild>
@@ -131,20 +191,17 @@ export default function Home() {
             </div>
             <FollowBar />
           </div>
-          <div className="relative hidden min-h-[320px] overflow-hidden rounded-3xl border border-white/15 bg-black/20 shadow-2xl md:block">
-            <Image
-              src="https://res.cloudinary.com/demo/image/upload/v1720000000/glowfm/ember-challenge-hero.jpg"
-              alt="Glow FM hosts streaming the Ember Challenge"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 space-y-2 text-sm">
-              <p className="font-display text-lg uppercase tracking-[0.4em] text-white/80">Live Countdown</p>
-              <p className="text-xl font-semibold">Ember Challenge stage call goes live this Thursday at 5:00 PM.</p>
-              <p className="text-white/65">Prep your entries and stay glued to our Facebook livestream.</p>
+          <div className="flex min-h-[320px] flex-col justify-between rounded-3xl border border-white/15 bg-black/70 p-8 shadow-2xl backdrop-blur">
+            <div className="space-y-2 text-sm text-white/80">
+              <p className="font-display text-lg uppercase tracking-[0.4em] text-white/70">Live Countdown</p>
+              <p className="text-2xl font-semibold text-white">Ember Challenge Kickoff goes on November 3rd 6:00 PM.</p>
+              <p className="text-white/60">Prep your entries, align your promos, and meet us on the Facebook livestream.</p>
             </div>
+            <CountdownClock
+              target="2024-11-03T18:00:00+01:00"
+              className="mt-6"
+              labels={{ days: "Days left", hours: "Hours", minutes: "Minutes", seconds: "Seconds" }}
+            />
           </div>
         </div>
       </AnimatedSection>
@@ -156,8 +213,10 @@ export default function Home() {
           headerClassName="bg-gradient-to-br from-glow-primary via-glow-accent to-glow-secondary"
           className="shadow-glow-emphasis"
           actions={
-            <GlowButton asChild size="sm">
-              <Link href="/contact">Talk to the social team</Link>
+            <GlowButton asChild size="sm" variant="accent">
+              <a href={WHATSAPP_BROADCAST_LINK} target="_blank" rel="noreferrer">
+                Join WhatsApp broadcast
+              </a>
             </GlowButton>
           }
         >
@@ -167,7 +226,7 @@ export default function Home() {
             </p>
             <ol className="grid gap-3 text-sm md:grid-cols-2">
               {emberChecklist.map((item) => (
-                <li key={item} className="rounded-2xl border border-white/10 bg-white/10 p-4 text-white dark:border-white/10 dark:bg-white/5 dark:text-white">
+                <li key={item} className="rounded-2xl border border-black/10 bg-white/80 p-4 text-[var(--foreground)] shadow-sm transition dark:border-white/15 dark:bg-white/10 dark:text-white">
                   {item}
                 </li>
               ))}
@@ -203,20 +262,11 @@ export default function Home() {
               Track the next broadcasts, pop-up events, and digital campaigns curated by the Glow social media crew.
             </p>
           </div>
-          <GlowButton asChild variant="ghost" size="sm">
-            <Link href="/blog">Read the newsroom briefings</Link>
+          <GlowButton size="sm" variant="ghost" disabled className="cursor-not-allowed opacity-60">
+            Blog updates coming soon
           </GlowButton>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {calendarHighlights.map((item) => (
-            <GlowCard key={item.title} title={item.title} description={item.date} className="shadow-glow-soft">
-              <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">{item.detail}</p>
-              <GlowButton asChild size="sm" variant="ghost" className="mt-6">
-                <Link href={item.cta.href}>{item.cta.label}</Link>
-              </GlowButton>
-            </GlowCard>
-          ))}
-        </div>
+        <NextPrograms schedule={programSchedule} />
       </AnimatedSection>
 
       <AnimatedSection id="shows" delay={0.15} className="space-y-8">
@@ -227,8 +277,9 @@ export default function Home() {
               Meet the programs driving our biggest social traction. Tap any card to join the livestream on Facebook.
             </p>
           </div>
-          <GlowButton asChild variant="secondary" size="sm">
-            <Link href="https://facebook.com/glow991fm" target="_blank" rel="noreferrer">
+          <GlowButton asChild variant="secondary" size="sm" className="gap-2">
+            <Link href="https://www.facebook.com/Glowfm/" target="_blank" rel="noreferrer">
+              <Facebook className="h-4 w-4" aria-hidden />
               Follow our Facebook Live hub
             </Link>
           </GlowButton>

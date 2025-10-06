@@ -4,14 +4,14 @@
     "folderId": "1-jUDyoAkh-unXliXZ_iswmgXjsXke7qQ",
     "logoFiles": [
       {
-        "name": "standard glowfm logo.jpg",
-        "fileId": "1AoQZlN5WxtMgoRcAWXj-62NrS6lSMw25"
+        "fileId": "1fNwTYWrKleuBSuqeir05K1m6k_eD_fXf",
+        "name": "logo.png"
       }
     ],
     "colorNotesFileId": "1bExyX_R3JI_X1YW8XFQDE9Z_q05VU3Hb",
     "favicon": {
       "folderId": "1XGM1z4XxxKhLXVlJx7Rosk6YGLXR-8zu",
-      "fileId": "1CBlCIPS6Jx0LyOj-gPQ-Te1iXT7A9i9t"
+      "fileId": "1fNwTYWrKleuBSuqeir05K1m6k_eD_fXf"
     }
   },
   "home": {
@@ -96,5 +96,9 @@
     "folderId": "19yXs0tpcaZlI3bLM_AuGUihsPTYgrt69",
     "linksFileId": "1efhEAFeysBspLLmJqIzHSvUvRFyvlhS5",
     "contactFileId": "JJF8np-QV4GUc50OqWE4J2u7lKGU2rP1C"
+  },
+  "socialMedia": {
+    "embeddingsFileId": "1MZ0iiIyvE6C58-E0kpci5h90O3Szvoic",
+    "folderId": "1WovOqpSuGEPEVlgXeY3QXNBn7lb4qiMh"
   }
 }

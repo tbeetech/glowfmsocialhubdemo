@@ -2,11 +2,15 @@
 import { GlowCard } from "@/components/ui/GlowCard";
 import { GlowButton } from "@/components/ui/GlowButton";
 
+const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
+
 const contactChannels = [
-  { label: "Studio Hotline", value: "+234 800 0000 991", href: "tel:+2348000000991" },
-  { label: "WhatsApp Voice Notes", value: "+234 704 991 0099", href: "https://wa.me/2347049910099" },
-  { label: "Email", value: "social@glow991fm.com", href: "mailto:social@glow991fm.com" }
-];
+  { label: "Media House | Traffic", value: "0805 482 0000", href: "tel:+2348054820000" },
+  { label: "Studio Hotline", value: "0805 551 1110", href: "tel:+2348055511110" },
+  { label: "Studio Hotline", value: "0706 677 1822", href: "tel:+2347066771822" },
+  { label: "WhatsApp Broadcast", value: "Join Ember WhatsApp broadcast", href: WHATSAPP_BROADCAST_LINK },
+  { label: "Email", value: "glow991fm@gmail.com", href: "mailto:glow991fm@gmail.com" }
+] as const;
 
 const faqSections = [
   {
@@ -30,7 +34,7 @@ const faqSections = [
       { question: "How will I know if I am shortlisted?", answer: "Look out for a WhatsApp message or phone call from the social desk before Thursday." }
     ]
   }
-];
+] as const;
 
 export default function ContactPage() {
   return (
@@ -49,7 +53,13 @@ export default function ContactPage() {
 
       <AnimatedSection className="grid gap-6 lg:grid-cols-[1.3fr,1fr]">
         <GlowCard title="Send Us a Message" description="All fields support spell check" headerClassName="bg-gradient-to-r from-glow-secondary to-glow-primary" className="shadow-glow-emphasis">
-          <form className="space-y-5" action="#" method="post">
+          <form
+            className="space-y-5"
+            action="mailto:careers@glowfmradio.com,chairman@glowfmradio.com,marketing@glowfmradio.com?subject=Glow%20FM%20Contact%20Submission"
+            method="post"
+            encType="text/plain"
+            target="_blank"
+          >
             <div className="grid gap-4 md:grid-cols-2">
               <label className="space-y-2 text-sm text-[var(--foreground)]/80 dark:text-white/80">
                 <span>Full name</span>
@@ -92,9 +102,9 @@ export default function ContactPage() {
         <GlowCard title="Reach Us Quickly" description="Direct channels" className="shadow-glow-soft">
           <ul className="space-y-4 text-sm text-[var(--foreground)]/80 dark:text-white/80">
             {contactChannels.map((channel) => (
-              <li key={channel.label} className="rounded-2xl border border-white/15 bg-white/5 p-4 dark:bg-white/5">
+              <li key={`${channel.label}-${channel.value}`} className="rounded-2xl border border-white/15 bg-white/5 p-4 dark:bg-white/5">
                 <p className="text-xs uppercase tracking-[0.35em] text-glow-secondary">{channel.label}</p>
-                <a href={channel.href} className="mt-1 block text-lg font-semibold text-white hover:text-glow-accent">
+                <a href={channel.href} className="mt-1 block text-lg font-semibold text-[var(--foreground)] hover:text-glow-accent dark:text-white">
                   {channel.value}
                 </a>
               </li>
@@ -126,5 +136,3 @@ export default function ContactPage() {
     </div>
   );
 }
-
-

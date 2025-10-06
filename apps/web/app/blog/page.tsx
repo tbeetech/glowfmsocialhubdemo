@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { GlowButton } from "@/components/ui/GlowButton";
@@ -82,16 +82,24 @@ export default function BlogPage() {
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {featuredPosts.map((post) => (
-            <GlowCard key={post.title} title={post.title} description={`${post.category} - ${post.readingTime}`}>
-              <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">{post.excerpt}</p>
-              <p className="mt-4 text-xs uppercase tracking-[0.35em] text-glow-secondary">By {post.author}</p>
-              <GlowButton asChild size="sm" variant="ghost" className="mt-4 uppercase tracking-[0.3em]">
-                <Link href="#" aria-label={`Read ${post.title}`}>
-                  Read draft
-                </Link>
+          <GlowCard
+            key={post.title}
+            title={post.title}
+            description={`${post.category} - ${post.readingTime}`}
+            className="group relative overflow-hidden opacity-70"
+          >
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/60 text-lg font-semibold uppercase tracking-[0.35em] text-white transition-opacity duration-300 group-hover:opacity-100">
+              Coming soon
+            </div>
+            <div className="relative z-10 space-y-4 text-sm text-[var(--foreground)]/80 dark:text-white/80">
+              <p>{post.excerpt}</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-glow-secondary">By {post.author}</p>
+              <GlowButton size="sm" variant="ghost" disabled className="cursor-not-allowed opacity-70">
+                Coming soon
               </GlowButton>
-            </GlowCard>
-          ))}
+            </div>
+          </GlowCard>
+        ))}
         </div>
       </AnimatedSection>
 
@@ -109,15 +117,23 @@ export default function BlogPage() {
         </div>
         <div className="grid gap-6 md:grid-cols-2">
           {newsroomNotes.map((note) => (
-            <GlowCard key={note.title} title={note.title} description={note.anchor} className="shadow-glow-soft">
-              <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">{note.summary}</p>
-              <p className="mt-4 text-xs text-[var(--foreground)]/60 dark:text-white/60">Update this summary with your latest briefing.</p>
-            </GlowCard>
-          ))}
+          <GlowCard
+            key={note.title}
+            title={note.title}
+            description={note.anchor}
+            className="group relative overflow-hidden opacity-70 shadow-glow-soft"
+          >
+            <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/50 text-base font-semibold uppercase tracking-[0.35em] text-white transition-opacity duration-300 group-hover:opacity-100">
+              Coming soon
+            </div>
+            <div className="relative z-10 space-y-3 text-sm text-[var(--foreground)]/80 dark:text-white/80">
+              <p>{note.summary}</p>
+              <p className="text-xs text-[var(--foreground)]/60 dark:text-white/60">Update this summary with your latest briefing.</p>
+            </div>
+          </GlowCard>
+        ))}
         </div>
       </AnimatedSection>
     </div>
   );
 }
-
-

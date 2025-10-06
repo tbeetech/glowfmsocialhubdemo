@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { DarkModeToggle } from "@/components/ui/DarkModeToggle";
@@ -51,11 +52,45 @@ function CloseIcon({ className }: IconProps) {
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Social Media", href: "/social-media" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "/blog", disabled: true },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "Advertisement", href: "/advertisement" }
-];
+] as const;
+
+type NavItem = (typeof navLinks)[number];
+
+const logoUrl = "https://drive.google.com/uc?id=1fNwTYWrKleuBSuqeir05K1m6k_eD_fXf";
+
+const linkClasses = "text-sm font-semibold uppercase tracking-[0.15em] text-white/75 transition hover:text-white";
+
+function renderLink(item: NavItem, extra?: string, onClick?: () => void) {
+  const { href, label } = item;
+  const disabled = 'disabled' in item && Boolean(item.disabled);
+  const classes = cn(linkClasses, extra, disabled && "cursor-not-allowed opacity-60");
+
+  if (disabled) {
+    return (
+      <span key={label} className={classes} aria-disabled="true" title={`${label} coming soon`}>
+        {label} · Coming soon
+      </span>
+    );
+  }
+
+  if (href.startsWith("#")) {
+    return (
+      <a key={href} href={href} className={classes} onClick={onClick}>
+        {label}
+      </a>
+    );
+  }
+
+  return (
+    <Link key={href} href={href} className={classes} onClick={onClick} prefetch>
+      {label}
+    </Link>
+  );
+}
 
 export function GlowNav({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);
@@ -72,29 +107,13 @@ export function GlowNav({ className }: { className?: string }) {
     };
   }, [open]);
 
-  const linkClasses = "text-sm font-semibold uppercase tracking-[0.15em] text-white/75 transition hover:text-white";
-
-  const renderLink = (href: string, label: string, extra?: string, onClick?: () => void) => {
-    const isHash = href.startsWith("#");
-    if (isHash) {
-      return (
-        <a key={href} href={href} className={cn(linkClasses, extra)} onClick={onClick}>
-          {label}
-        </a>
-      );
-    }
-    return (
-      <Link key={href} href={href} className={cn(linkClasses, extra)} onClick={onClick} prefetch>
-        {label}
-      </Link>
-    );
-  };
-
   return (
     <header className={cn("sticky top-0 z-50 border-b border-white/10 bg-gradient-to-r from-black/65 via-glow-secondary/70 to-black/65 backdrop-blur-xl", className)}>
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-3 text-white" prefetch>
-          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-lg font-bold text-glow-primary">GF</span>
+          <span className="relative h-10 w-10 overflow-hidden rounded-full border border-white/15 bg-white/5">
+            <Image src={logoUrl} alt="Glow FM logo" fill sizes="40px" className="object-contain" priority />
+          </span>
           <div className="flex flex-col leading-tight">
             <span className="font-display text-lg font-semibold uppercase tracking-widest">Glow FM</span>
             <span className="text-xs text-white/70">Social Engagement Hub</span>
@@ -102,7 +121,7 @@ export function GlowNav({ className }: { className?: string }) {
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link) => renderLink(link.href, link.label))}
+          {navLinks.map((link) => renderLink(link))}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
@@ -146,10 +165,9 @@ export function GlowNav({ className }: { className?: string }) {
             <div className="flex flex-col gap-4">
               {navLinks.map((link) =>
                 renderLink(
-                  link.href,
-                  link.label,
+                  link,
                   "rounded-full bg-white/5 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/90 hover:bg-white/10",
-                  () => setOpen(false)
+                  ('disabled' in link && link.disabled) ? undefined : () => setOpen(false)
                 )
               )}
             </div>
@@ -167,4 +185,3 @@ export function GlowNav({ className }: { className?: string }) {
     </header>
   );
 }
-

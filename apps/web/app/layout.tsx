@@ -1,4 +1,4 @@
-﻿import type { ReactNode } from "react";
+import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Manrope, Inter } from "next/font/google";
@@ -24,6 +24,10 @@ const themeInitializer = `(() => {
 })();`;
 
 export const metadata: Metadata = {
+  icons: {
+    icon: "https://drive.google.com/uc?id=1fNwTYWrKleuBSuqeir05K1m6k_eD_fXf",
+    shortcut: "https://drive.google.com/uc?id=1fNwTYWrKleuBSuqeir05K1m6k_eD_fXf"
+  },
   title: "Glow 99.1 FM - Social Engagement Hub",
   description: "Experience Glow FM online: live shows, social buzz, polls, quests, notifications, and analytics for the campus community.",
   keywords: ["Glow FM", "Glow Ember Challenge", "Campus Radio", "Social Hub", "Nigeria"],
@@ -72,6 +76,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
 
 
 

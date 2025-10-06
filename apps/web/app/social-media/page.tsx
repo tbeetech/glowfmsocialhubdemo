@@ -8,19 +8,19 @@ import { FollowBar } from "@/components/FollowBar";
 const youtubeHighlights = [
   {
     title: "Ember Challenge Cypher Warm-Up",
-    embedId: "REPLACE_WITH_VIDEO_ID_1",
+    embedId: "S7VAYn4Zi1o",
     description: "Behind-the-scenes prep with our top three finalists and the Glow creative coaches.",
     stats: "Premiered last week"
   },
   {
     title: "Glow News Flash: Campus Innovation Day",
-    embedId: "REPLACE_WITH_VIDEO_ID_2",
+    embedId: "0ASXKv2_0C4",
     description: "Recap of the live broadcast featuring student founders and media influencers.",
     stats: "12 minute highlight"
   },
   {
     title: "Wellness Wednesdays Livestream",
-    embedId: "REPLACE_WITH_VIDEO_ID_3",
+    embedId: "9h_lcRPbw8E",
     description: "Interactive Q&A with the Women's World crew covering wellness routines and mental health tips.",
     stats: "Recorded in studio"
   }
@@ -29,42 +29,43 @@ const youtubeHighlights = [
 const tiktokReels = [
   {
     title: "Glow Dance Tunnel",
-    embedUrl: "https://www.tiktok.com/embed/v2/REPLACE_WITH_TIKTOK_ID_1",
+    embedUrl: "https://www.tiktok.com/embed/v2/7556648983347596562",
     metric: "45K plays"
   },
   {
     title: "Kayefi Nla Midnight Confession",
-    embedUrl: "https://www.tiktok.com/embed/v2/REPLACE_WITH_TIKTOK_ID_2",
+    embedUrl: "https://www.tiktok.com/embed/v2/7548485844806503685",
     metric: "33K plays"
   },
   {
     title: "Double Joy Locker Room Banter",
-    embedUrl: "https://www.tiktok.com/embed/v2/REPLACE_WITH_TIKTOK_ID_3",
+    embedUrl: "https://www.tiktok.com/embed/v2/7555841229204851986",
     metric: "28K plays"
   }
 ];
 
+const fallbackInstagramThumbnail = "https://drive.google.com/uc?id=1fNwTYWrKleuBSuqeir05K1m6k_eD_fXf";
+
 const instagramSpotlight = [
   {
-    title: "Street Jam Countdown",
-    thumbnail: "https://res.cloudinary.com/demo/image/upload/v1720000000/glowfm/ig-street-jam.jpg",
-    caption: "Carousel teaser and merch drop giveaway.",
-    href: "https://instagram.com/glow991fm"
+    title: "Ember Countdown Reels",
+    thumbnail: fallbackInstagramThumbnail,
+    caption: "Swipe through the daily Ember Challenge teasers and behind-the-scenes prep shots.",
+    href: "https://www.instagram.com/reel/DPBV0b7gP_f/"
   },
   {
-    title: "Glow Kiddies Art Wall",
-    thumbnail: "https://res.cloudinary.com/demo/image/upload/v1720000000/glowfm/ig-kiddies.jpg",
-    caption: "Swipe through the best fan drawings of the week.",
-    href: "https://instagram.com/glow991fm"
+    title: "Glow Kiddies Fan Reactions",
+    thumbnail: fallbackInstagramThumbnail,
+    caption: "Audience shout-outs and junior creatives remixing the Saturday morning show.",
+    href: "https://www.instagram.com/reel/DPLg4ihCuqw/"
   },
   {
-    title: "Women's World Panel",
-    thumbnail: "https://res.cloudinary.com/demo/image/upload/v1720000000/glowfm/ig-women.jpg",
-    caption: "Live studio portraits from our sisterhood conversation circle.",
-    href: "https://instagram.com/glow991fm"
+    title: "Women's World Backstage",
+    thumbnail: fallbackInstagramThumbnail,
+    caption: "Highlights from our sisterhood panels plus studio portraits and quotes to repost.",
+    href: "https://www.instagram.com/reel/DO6ReQPDQJp/"
   }
 ];
-
 const xHighlights = [
   {
     title: "Glow FM Trends",
@@ -84,17 +85,17 @@ const facebookStreams = [
   {
     title: "Ijinle Odu Livestream",
     summary: "Watch the dawn storytelling session with real-time comments pinned by the social desk.",
-    permalink: "https://facebook.com/glow991fm/live_ijinle"
+    permalink: "https://www.facebook.com/Glowfm/live_ijinle"
   },
   {
     title: "Ember Challenge Results Show",
     summary: "Weekly reveal with community voting recap and behind-the-scenes polls.",
-    permalink: "https://facebook.com/glow991fm/live_challenge"
+    permalink: "https://www.facebook.com/Glowfm/live_challenge"
   },
   {
     title: "Women's World Live Studio",
     summary: "Interactive panel featuring campus founders with live Q&A prompts.",
-    permalink: "https://facebook.com/glow991fm/live_women"
+    permalink: "https://www.facebook.com/Glowfm/live_women"
   }
 ];
 
@@ -109,7 +110,7 @@ export default function SocialMediaPage() {
             </span>
             <h1 className="text-4xl font-bold md:text-5xl">Glow FM Spotlight Streams</h1>
             <p className="max-w-2xl text-base text-white/80 md:text-lg">
-              Access embeddable showreels, reel carousels, and live thread recaps curated by the Glow FM digital team. Swap the placeholders below with the latest links from YouTube Studio, TikTok Business Suite, Instagram, X, and Facebook Creator Studio.
+              Access embeddable showreels, reel carousels, and live thread recaps curated by the Glow FM digital team. Pull the latest IDs from the Social media content display embedding links Drive folder to keep every block wired to fresh campaigns.
             </p>
             <div className="flex flex-wrap gap-4">
               <GlowButton asChild size="lg" variant="accent" className="uppercase tracking-[0.3em]">
@@ -225,7 +226,7 @@ export default function SocialMediaPage() {
             <GlowCard key={item.title} title={item.title}>
               <div className="space-y-4">
                 <div className="relative h-56 overflow-hidden rounded-2xl border border-white/15">
-                  <Image src={item.thumbnail} alt={item.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 320px" />
+                  <Image src={item.thumbnail ?? fallbackInstagramThumbnail} alt={item.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 320px" />
                 </div>
                 <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">{item.caption}</p>
                 <GlowButton asChild size="sm" className="uppercase tracking-[0.3em]">
@@ -276,7 +277,7 @@ export default function SocialMediaPage() {
             </p>
           </div>
           <GlowButton asChild variant="secondary" size="sm">
-            <Link href="https://facebook.com/glow991fm" target="_blank" rel="noreferrer">
+            <Link href="https://www.facebook.com/Glowfm/" target="_blank" rel="noreferrer">
               Follow Glow FM on Facebook
             </Link>
           </GlowButton>
