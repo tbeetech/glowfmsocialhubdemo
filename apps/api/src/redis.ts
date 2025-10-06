@@ -28,7 +28,7 @@ if (useMock) {
   console.info("[redis] using in-memory mock queues");
 } else {
   connection = new IORedis(config.redisUrl, {
-    maxRetriesPerRequest: 1,
+    maxRetriesPerRequest: null,
     enableOfflineQueue: false,
   });
 
@@ -44,5 +44,6 @@ if (useMock) {
 }
 
 export { connection, queues };
+
 
 
