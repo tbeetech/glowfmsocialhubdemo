@@ -1,11 +1,48 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import Link from "next/link";
-import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowCard } from "@/components/ui/GlowCard";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { FollowBar } from "@/components/FollowBar";
 
-const youtubeHighlights = [
+const YOUTUBE_CHANNEL_URL = "https://youtube.com/@glow991fm";
+const YOUTUBE_THUMBNAIL_BASE = "https://img.youtube.com/vi";
+const TIKTOK_PROFILE_URL = "https://www.tiktok.com/@glow991fm";
+
+type YouTubeHighlight = {
+  title: string;
+  embedId: string;
+  description: string;
+  stats: string;
+};
+
+type TikTokReel = {
+  title: string;
+  clipId: string;
+  summary: string;
+  metric: string;
+};
+
+type InstagramSpotlight = {
+  title: string;
+  thumbnail?: string;
+  caption: string;
+  href: string;
+};
+
+type ThreadHighlight = {
+  title: string;
+  handle: string;
+  summary: string;
+  permalink: string;
+};
+
+type FacebookStream = {
+  title: string;
+  summary: string;
+  permalink: string;
+};
+
+const youtubeHighlights: YouTubeHighlight[] = [
   {
     title: "Ember Challenge Cypher Warm-Up",
     embedId: "S7VAYn4Zi1o",
@@ -26,27 +63,30 @@ const youtubeHighlights = [
   }
 ];
 
-const tiktokReels = [
+const tiktokReels: TikTokReel[] = [
   {
     title: "Glow Dance Tunnel",
-    embedUrl: "https://www.tiktok.com/embed/v2/7556648983347596562",
+    clipId: "7556648983347596562",
+    summary: "Glow crew kicks off the Ember Challenge warm-up from the dance tunnel with crowd energy checks.",
     metric: "45K plays"
   },
   {
     title: "Kayefi Nla Midnight Confession",
-    embedUrl: "https://www.tiktok.com/embed/v2/7548485844806503685",
+    clipId: "7548485844806503685",
+    summary: "Late-night confession mashup with Kayefi Nla sparked duet replies and green room laughs.",
     metric: "33K plays"
   },
   {
     title: "Double Joy Locker Room Banter",
-    embedUrl: "https://www.tiktok.com/embed/v2/7555841229204851986",
+    clipId: "7555841229204851986",
+    summary: "Locker room banter with Double Joy and finalists instantly turned into remix territory.",
     metric: "28K plays"
   }
 ];
 
 const fallbackInstagramThumbnail = "https://drive.google.com/uc?id=1fNwTYWrKleuBSuqeir05K1m6k_eD_fXf";
 
-const instagramSpotlight = [
+const instagramSpotlight: InstagramSpotlight[] = [
   {
     title: "Ember Countdown Reels",
     thumbnail: fallbackInstagramThumbnail,
@@ -66,7 +106,8 @@ const instagramSpotlight = [
     href: "https://www.instagram.com/reel/DO6ReQPDQJp/"
   }
 ];
-const xHighlights = [
+
+const xHighlights: ThreadHighlight[] = [
   {
     title: "Glow FM Trends",
     handle: "@glow991fm",
@@ -81,7 +122,7 @@ const xHighlights = [
   }
 ];
 
-const facebookStreams = [
+const facebookStreams: FacebookStream[] = [
   {
     title: "Ijinle Odu Livestream",
     summary: "Watch the dawn storytelling session with real-time comments pinned by the social desk.",
@@ -99,10 +140,14 @@ const facebookStreams = [
   }
 ];
 
+const youtubeWatchUrl = (embedId: string) => `https://www.youtube.com/watch?v=${embedId}`;
+const youtubeThumbnailUrl = (embedId: string) => `${YOUTUBE_THUMBNAIL_BASE}/${embedId}/hqdefault.jpg`;
+const tikTokClipUrl = (clipId: string) => `${TIKTOK_PROFILE_URL}/video/${clipId}`;
+
 export default function SocialMediaPage() {
   return (
     <div className="space-y-16">
-      <AnimatedSection className="rounded-3xl bg-glow-hero p-8 text-white shadow-glow-emphasis">
+      <section className="rounded-3xl bg-glow-hero p-8 text-white shadow-glow-emphasis">
         <div className="grid gap-10 md:grid-cols-[1.4fr,1fr] md:items-center">
           <div className="space-y-6">
             <span className="inline-flex items-center rounded-full bg-white/10 px-4 py-1 text-xs uppercase tracking-[0.3em] text-white/80">
@@ -110,7 +155,7 @@ export default function SocialMediaPage() {
             </span>
             <h1 className="text-4xl font-bold md:text-5xl">Glow FM Spotlight Streams</h1>
             <p className="max-w-2xl text-base text-white/80 md:text-lg">
-              Access embeddable showreels, reel carousels, and live thread recaps curated by the Glow FM digital team. Pull the latest IDs from the Social media content display embedding links Drive folder to keep every block wired to fresh campaigns.
+              Access embeddable showreels, reel carousels, and live thread recaps curated by the Glow FM digital team. Pull the latest IDs from the Social media content display embedding links drive folder to keep every block wired to fresh campaigns.
             </p>
             <div className="flex flex-wrap gap-4">
               <GlowButton asChild size="lg" variant="accent" className="uppercase tracking-[0.3em]">
@@ -125,89 +170,98 @@ export default function SocialMediaPage() {
           <div className="hidden min-h-[280px] rounded-3xl border border-white/15 bg-black/20 p-6 shadow-2xl md:block">
             <p className="text-sm uppercase tracking-[0.35em] text-white/60">Workflow Tips</p>
             <ul className="mt-4 space-y-3 text-sm text-white/75">
-              <li>Update video IDs in <code className="rounded bg-white/10 px-2 py-1">youtubeHighlights</code>.</li>
-              <li>Swap TikTok embed URLs in <code className="rounded bg-white/10 px-2 py-1">tiktokReels</code>.</li>
+              <li>
+                Update video IDs in <code className="rounded bg-white/10 px-2 py-1">youtubeHighlights</code> to refresh each preview card.
+              </li>
+              <li>
+                Swap TikTok <code className="rounded bg-white/10 px-2 py-1">clipId</code> values whenever a new short drops.
+              </li>
               <li>Replace image thumbnails with the latest Instagram carousel covers.</li>
               <li>Refresh thread and livestream permalinks before each campaign.</li>
             </ul>
           </div>
         </div>
-      </AnimatedSection>
+      </section>
 
-      <AnimatedSection id="youtube" delay={0.05} className="space-y-6">
+      <section id="youtube" className="space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-3xl font-semibold">YouTube Spotlight Cascade</h2>
             <p className="text-sm text-[var(--foreground)]/70 dark:text-white/70">
-              Glassy embeds ready for your hottest livestream replays, news capsules, and documentaries.
+              Glassy previews ready for your hottest livestream replays, news capsules, and documentaries.
             </p>
           </div>
           <GlowButton asChild variant="secondary" size="sm">
-            <Link href="https://youtube.com" target="_blank" rel="noreferrer">
+            <Link href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noreferrer">
               Visit Glow FM YouTube
             </Link>
           </GlowButton>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {youtubeHighlights.map((video) => (
-            <GlowCard key={video.title} title={video.title} description={video.stats} headerClassName="bg-white/5" className="shadow-glow-soft">
+            <GlowCard key={video.embedId} title={video.title} description={video.stats} headerClassName="bg-white/5" className="shadow-glow-soft">
               <div className="space-y-4">
-                <div className="aspect-video overflow-hidden rounded-3xl border border-white/15 bg-black/50">
-                  <iframe
-                    className="h-full w-full" 
-                    src={`https://www.youtube.com/embed/${video.embedId}`}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
+                <div className="relative aspect-video overflow-hidden rounded-3xl border border-white/15 bg-black/60">
+                  <Image
+                    src={youtubeThumbnailUrl(video.embedId)}
+                    alt={`${video.title} thumbnail`}
+                    fill
+                    sizes="(max-width:768px) 100vw, 320px"
+                    className="object-cover"
                   />
                 </div>
                 <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">{video.description}</p>
-                <p className="text-xs uppercase tracking-[0.35em] text-glow-secondary">Replace embedId with the latest video ID.</p>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <GlowButton asChild size="sm" variant="accent" className="uppercase tracking-[0.3em]">
+                    <a href={youtubeWatchUrl(video.embedId)} target="_blank" rel="noreferrer">
+                      Watch highlight
+                    </a>
+                  </GlowButton>
+                  <p className="text-xs text-[var(--foreground)]/60 dark:text-white/60">Swap the embedId with the latest video ID.</p>
+                </div>
               </div>
             </GlowCard>
           ))}
         </div>
-      </AnimatedSection>
+      </section>
 
-      <AnimatedSection id="tiktok" delay={0.1} className="space-y-6">
+      <section id="tiktok" className="space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-3xl font-semibold">TikTok Reels Carousel</h2>
             <p className="text-sm text-[var(--foreground)]/70 dark:text-white/70">
-              Material-inspired frames with a bold glow edge. Update the <code className="rounded bg-black/10 px-2 py-1">embedUrl</code> values with the latest TikTok clips.
+              Material-inspired frames with a bold glow edge. Each card links out to the latest campus clips.
             </p>
           </div>
           <GlowButton asChild variant="ghost" size="sm">
-            <Link href="https://tiktok.com/@glow991fm" target="_blank" rel="noreferrer">
+            <Link href={TIKTOK_PROFILE_URL} target="_blank" rel="noreferrer">
               See more on TikTok
             </Link>
           </GlowButton>
         </div>
-        <div className="overflow-x-auto">
-          <div className="flex gap-6 pb-4">
-            {tiktokReels.map((reel) => (
-              <div key={reel.title} className="w-72 flex-shrink-0 rounded-3xl border border-white/10 bg-gradient-to-br from-[#0b0f1c] via-[#131b2c] to-[#0b0f1c] p-4 shadow-glow-emphasis">
-                <div className="aspect-[9/16] overflow-hidden rounded-2xl border border-white/15 bg-black/70">
-                  <iframe
-                    className="h-full w-full"
-                    src={reel.embedUrl}
-                    title={reel.title}
-                    allow="encrypted-media; clipboard-write"
-                    allowFullScreen
-                  />
+        <div className="grid gap-6 md:grid-cols-3">
+          {tiktokReels.map((reel) => (
+            <GlowCard key={reel.clipId} title={reel.title} className="shadow-glow-soft">
+              <div className="space-y-4">
+                <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#0b0f1c] via-[#131b2c] to-[#0b0f1c] p-6 text-white shadow-glow-emphasis">
+                  <p className="text-sm text-white/90">{reel.summary}</p>
                 </div>
-                <div className="mt-4 space-y-2 text-sm text-white/80">
-                  <p className="font-semibold">{reel.title}</p>
-                  <p className="text-xs uppercase tracking-[0.35em] text-glow-accent">{reel.metric}</p>
-                  <p className="text-xs text-white/60">Swap the embedUrl with the TikTok share link for each reel.</p>
+                <div className="flex items-center justify-between text-xs uppercase tracking-[0.3em] text-white/70">
+                  <span className="text-glow-accent">{reel.metric}</span>
+                  <GlowButton asChild size="sm" variant="accent" className="uppercase tracking-[0.3em]">
+                    <a href={tikTokClipUrl(reel.clipId)} target="_blank" rel="noreferrer">
+                      Open clip
+                    </a>
+                  </GlowButton>
                 </div>
+                <p className="text-xs text-[var(--foreground)]/60 dark:text-white/60">Update the clipId to feature the newest TikTok drop.</p>
               </div>
-            ))}
-          </div>
+            </GlowCard>
+          ))}
         </div>
-      </AnimatedSection>
+      </section>
 
-      <AnimatedSection id="instagram" delay={0.15} className="space-y-6">
+      <section id="instagram" className="space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-3xl font-semibold">Instagram Reels Showcase</h2>
@@ -226,7 +280,13 @@ export default function SocialMediaPage() {
             <GlowCard key={item.title} title={item.title}>
               <div className="space-y-4">
                 <div className="relative h-56 overflow-hidden rounded-2xl border border-white/15">
-                  <Image src={item.thumbnail ?? fallbackInstagramThumbnail} alt={item.title} fill className="object-cover" sizes="(max-width:768px) 100vw, 320px" />
+                  <Image
+                    src={item.thumbnail ?? fallbackInstagramThumbnail}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width:768px) 100vw, 320px"
+                  />
                 </div>
                 <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">{item.caption}</p>
                 <GlowButton asChild size="sm" className="uppercase tracking-[0.3em]">
@@ -238,9 +298,9 @@ export default function SocialMediaPage() {
             </GlowCard>
           ))}
         </div>
-      </AnimatedSection>
+      </section>
 
-      <AnimatedSection id="x-highlights" delay={0.2} className="space-y-6">
+      <section id="x-highlights" className="space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-3xl font-semibold">X (Twitter) Live Threads</h2>
@@ -266,9 +326,9 @@ export default function SocialMediaPage() {
             </GlowCard>
           ))}
         </div>
-      </AnimatedSection>
+      </section>
 
-      <AnimatedSection id="facebook-spotlight" delay={0.25} className="space-y-6">
+      <section id="facebook-spotlight" className="space-y-6">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-3xl font-semibold">Facebook Live Spotlight</h2>
@@ -294,7 +354,7 @@ export default function SocialMediaPage() {
             </GlowCard>
           ))}
         </div>
-      </AnimatedSection>
+      </section>
     </div>
   );
 }
