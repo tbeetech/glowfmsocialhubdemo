@@ -5,7 +5,7 @@
     "packageManager": "pnpm@9.7.0",
     "scripts": {
         "build": "turbo build",
-        "dev": "turbo dev",
+        "dev": "turbo run dev --filter @glow/web",
         "lint": "turbo lint",
         "test": "turbo test",
         "seed": "tsx infra/seed.ts",

@@ -14,14 +14,14 @@ const links = [
 
 export function FollowBar() {
   return (
-    <div className="flex flex-wrap gap-3">
+    <div className="flex flex-wrap gap-2 sm:gap-3">
       {links.map(({ label, href }) => (
         <GlowButton
           key={label}
           asChild
           size="sm"
           variant={label === "WhatsApp" ? "accent" : "ghost"}
-          className="uppercase tracking-[0.2em]"
+          className="uppercase tracking-[0.14em] sm:tracking-[0.2em]"
         >
           {href.startsWith("/") ? (
             <Link href={href}>{label}</Link>

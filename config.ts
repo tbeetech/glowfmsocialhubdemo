@@ -1,6 +1,6 @@
 export const config = {
   port: Number(process.env.PORT || 4000),
-  mongoUri: process.env.MONGO_URI || "memory",
+  mongoUri: process.env.MONGO_URI || "disabled",
   redisUrl: process.env.REDIS_URL || "mock",
   jwtSecret: process.env.JWT_SECRET || "replace-me",
   baseUrl: process.env.BASE_URL || "http://localhost:4000",

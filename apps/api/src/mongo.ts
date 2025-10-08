@@ -17,6 +17,11 @@ async function ensureMemoryServer() {
 }
 
 export async function connectMongo() {
+  if (config.mongoUri === "disabled") {
+    console.info("[mongo] disabled via configuration; skipping connection");
+    return mongoose.connection;
+  }
+
   if (connectPromise) {
     return connectPromise;
   }
@@ -45,7 +50,7 @@ export async function connectMongo() {
 
   const connection = await connectPromise;
 
-  if (!cleanupRegistered) {
+  if (!cleanupRegistered && config.mongoUri !== "disabled") {
     const close = async () => {
       await mongoose.disconnect().catch(() => undefined);
       if (memoryServer) {

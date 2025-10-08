@@ -26,12 +26,27 @@ async function main() {
 
   app.use(errorHandler);
 
-  const server = createServer(app);
-  attachSockets(app, server);
+  const startServer = (port: number, attempt = 0) => {
+    const server = createServer(app);
+    attachSockets(app, server);
 
-  server.listen(config.port, () => {
-    console.log(`API listening on :${config.port}`);
-  });
+    server.listen(port, () => {
+      console.log(`API listening on :${port}`);
+    });
+
+    server.on("error", (error: NodeJS.ErrnoException) => {
+      if (error.code === "EADDRINUSE" && attempt < 3) {
+        const nextPort = port + 1;
+        console.warn(`[api] port ${port} is in use, retrying on ${nextPort}`);
+        setTimeout(() => startServer(nextPort, attempt + 1), 200);
+      } else {
+        console.error("[api] failed to start server", error);
+        process.exit(1);
+      }
+    });
+  };
+
+  startServer(config.port);
 }
 
 main().catch((e) => {

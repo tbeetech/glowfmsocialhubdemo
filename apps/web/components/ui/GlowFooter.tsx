@@ -33,7 +33,11 @@ const quickLinks = [
 
 const logoUrl = "https://drive.google.com/uc?id=1fNwTYWrKleuBSuqeir05K1m6k_eD_fXf";
 
-interface ContactDetail { label: string; display: string; href?: string; }
+interface ContactDetail {
+  label: string;
+  display: string;
+  href?: string;
+}
 
 const contactDetails: ReadonlyArray<ContactDetail> = [
   { label: "Media House | Traffic", display: "0805 482 0000", href: "tel:+2348054820000" },
@@ -116,8 +120,26 @@ export function GlowFooter() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10 bg-black/40 py-4 text-center text-xs text-white/50">
-        &copy; {new Date().getFullYear()} Glow 99.1 FM - Built for community storytellers.
+      <div className="border-t border-white/10 bg-black/40 py-4 text-center text-xs text-white/60">
+        &copy; {new Date().getFullYear()} Glow 99.1 FM —{" "}
+        <a
+          href="https://tobseytech.onrender.com"
+          target="_blank"
+          rel="noreferrer"
+          className="font-semibold text-glow-accent underline-offset-4 transition hover:text-white"
+        >
+          Built by toseytech
+        </a>
+        <span className="mx-1 text-white/40">|</span>
+        <a
+          href="https://tbeetech.github.io"
+          target="_blank"
+          rel="noreferrer"
+          className="text-white/60 underline-offset-4 transition hover:text-white/90"
+        >
+          Portfolio
+        </a>
+        .
       </div>
     </footer>
   );

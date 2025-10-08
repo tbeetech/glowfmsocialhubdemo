@@ -109,7 +109,7 @@ function CountdownSegment({
   const direction = getDirection(unit, value, previous);
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-black/40 px-4 py-5 text-center text-white backdrop-blur">
+    <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-black/40 px-3 py-4 text-center text-white backdrop-blur sm:px-4 sm:py-5">
       <AnimatePresence initial={false} mode="popLayout">
         <motion.span
           key={`${unit}-${formatted}`}
@@ -117,12 +117,14 @@ function CountdownSegment({
           animate={prefersReducedMotion ? { opacity: 1 } : { y: 0, opacity: 1 }}
           exit={prefersReducedMotion ? { opacity: 0 } : { y: direction === -1 ? -24 : 24, opacity: 0 }}
           transition={{ duration: prefersReducedMotion ? 0.2 : 0.45, ease: "easeOut" }}
-          className="block font-mono text-3xl font-semibold tabular-nums"
+          className="block font-mono text-2xl font-semibold tabular-nums sm:text-3xl"
         >
           {formatted}
         </motion.span>
       </AnimatePresence>
-      <p className="mt-2 text-xs uppercase tracking-[0.35em] text-white/60">{label}</p>
+      <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-white/60 sm:text-xs sm:tracking-[0.35em]">
+        {label}
+      </p>
     </div>
   );
 }
@@ -177,7 +179,7 @@ export function CountdownClock({ target, className, labels, timezoneLabel }: Cou
           animate={{ opacity: [0.45, 0.8, 0.45], rotate: [0, 8, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
-        <div className="relative grid grid-cols-4 gap-3 rounded-[inherit] bg-black/65 p-5 backdrop-blur-xl">
+        <div className="relative grid grid-cols-2 gap-2 rounded-[inherit] bg-black/65 p-4 backdrop-blur-xl sm:grid-cols-4 sm:gap-3 sm:p-5">
           {segments.map((segment) => (
             <CountdownSegment
               key={segment.unit}
@@ -190,7 +192,7 @@ export function CountdownClock({ target, className, labels, timezoneLabel }: Cou
           ))}
         </div>
       </div>
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs uppercase tracking-[0.3em] text-white/60">
+      <div className="mt-3 flex flex-col items-start gap-2 text-[11px] uppercase tracking-[0.22em] text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-xs sm:tracking-[0.3em]">
         <span>
           {isComplete
             ? "Ember Challenge kickoff is live"
