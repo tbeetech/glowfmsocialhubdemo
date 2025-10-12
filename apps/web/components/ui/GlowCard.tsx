@@ -19,7 +19,7 @@ export function GlowCard({
   children
 }: GlowCardProps) {
   return (
-    <div className={cn("glass-card overflow-hidden", className)}>
+    <div className={cn("glass-card group overflow-hidden", className)}>
       {(title || description || actions) && (
         <div className={cn("bg-glow-card px-5 py-4 text-white sm:px-6 sm:py-5", headerClassName)}>
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">

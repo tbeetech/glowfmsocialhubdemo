@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
 
 interface CountdownClockProps {
   target: string;
@@ -24,12 +23,6 @@ interface Remaining {
 
 type RemainingKey = keyof Remaining;
 
-const BASE_MAP: Partial<Record<RemainingKey, number>> = {
-  hours: 24,
-  minutes: 60,
-  seconds: 60
-};
-
 function calculateRemaining(targetDate: Date): Remaining {
   const now = new Date();
   const diff = targetDate.getTime() - now.getTime();
@@ -47,81 +40,12 @@ function calculateRemaining(targetDate: Date): Remaining {
   return { days, hours, minutes, seconds };
 }
 
-function usePrefersReducedMotion(): boolean {
-  const [prefers, setPrefers] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setPrefers(mediaQuery.matches);
-    update();
-
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", update);
-    } else {
-      mediaQuery.addListener(update);
-    }
-
-    return () => {
-      if (mediaQuery.removeEventListener) {
-        mediaQuery.removeEventListener("change", update);
-      } else {
-        mediaQuery.removeListener(update);
-      }
-    };
-  }, []);
-
-  return prefers;
-}
-
-function getDirection(unit: RemainingKey, current: number, previous: number): -1 | 0 | 1 {
-  if (current === previous) return 0;
-
-  const base = BASE_MAP[unit];
-  if (typeof base === "number") {
-    if (previous === 0 && current === base - 1) {
-      return -1;
-    }
-
-    if (previous === base - 1 && current === 0) {
-      return 1;
-    }
-  }
-
-  return current > previous ? 1 : -1;
-}
-
-function CountdownSegment({
-  label,
-  value,
-  previous,
-  unit,
-  prefersReducedMotion
-}: {
-  label: string;
-  value: number;
-  previous: number;
-  unit: RemainingKey;
-  prefersReducedMotion: boolean;
-}) {
+function CountdownSegment({ label, value }: { label: string; value: number }) {
   const formatted = value.toString().padStart(2, "0");
-  const direction = getDirection(unit, value, previous);
 
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/15 bg-black/40 px-3 py-4 text-center text-white backdrop-blur sm:px-4 sm:py-5">
-      <AnimatePresence initial={false} mode="popLayout">
-        <motion.span
-          key={`${unit}-${formatted}`}
-          initial={prefersReducedMotion ? { opacity: 0 } : { y: direction === -1 ? 24 : -24, opacity: 0 }}
-          animate={prefersReducedMotion ? { opacity: 1 } : { y: 0, opacity: 1 }}
-          exit={prefersReducedMotion ? { opacity: 0 } : { y: direction === -1 ? -24 : 24, opacity: 0 }}
-          transition={{ duration: prefersReducedMotion ? 0.2 : 0.45, ease: "easeOut" }}
-          className="block font-mono text-2xl font-semibold tabular-nums sm:text-3xl"
-        >
-          {formatted}
-        </motion.span>
-      </AnimatePresence>
+    <div className="rounded-2xl border border-white/15 bg-black/70 px-3 py-4 text-center text-white sm:px-4 sm:py-5">
+      <span className="block font-mono text-2xl font-semibold tabular-nums sm:text-3xl">{formatted}</span>
       <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-white/60 sm:text-xs sm:tracking-[0.35em]">
         {label}
       </p>
@@ -132,33 +56,35 @@ function CountdownSegment({
 export function CountdownClock({ target, className, labels, timezoneLabel }: CountdownClockProps) {
   const targetDate = useMemo(() => new Date(target), [target]);
   const [remaining, setRemaining] = useState(() => calculateRemaining(targetDate));
-  const previousRef = useRef(remaining);
-  const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
-    let timeoutId: number;
+    let timeoutId: number | undefined;
+    let frameId: number | undefined;
 
     const scheduleTick = () => {
       setRemaining(calculateRemaining(targetDate));
-      const now = Date.now();
-      const millisUntilNextSecond = 1000 - (now % 1000);
-      timeoutId = window.setTimeout(scheduleTick, Math.max(250, millisUntilNextSecond));
+      timeoutId = window.setTimeout(() => {
+        frameId = window.requestAnimationFrame(scheduleTick);
+      }, 1000);
     };
 
     scheduleTick();
-    return () => window.clearTimeout(timeoutId);
+
+    return () => {
+      if (typeof timeoutId === "number") {
+        window.clearTimeout(timeoutId);
+      }
+      if (typeof frameId === "number") {
+        window.cancelAnimationFrame(frameId);
+      }
+    };
   }, [targetDate]);
 
-  useEffect(() => {
-    previousRef.current = remaining;
-  }, [remaining]);
-
-  const prev = previousRef.current;
-  const segments: Array<{ unit: RemainingKey; label: string; value: number; previous: number }> = [
-    { unit: "days", label: labels?.days ?? "Days", value: remaining.days, previous: prev.days },
-    { unit: "hours", label: labels?.hours ?? "Hours", value: remaining.hours, previous: prev.hours },
-    { unit: "minutes", label: labels?.minutes ?? "Minutes", value: remaining.minutes, previous: prev.minutes },
-    { unit: "seconds", label: labels?.seconds ?? "Seconds", value: remaining.seconds, previous: prev.seconds }
+  const segments: Array<{ unit: RemainingKey; label: string; value: number }> = [
+    { unit: "days", label: labels?.days ?? "Days", value: remaining.days },
+    { unit: "hours", label: labels?.hours ?? "Hours", value: remaining.hours },
+    { unit: "minutes", label: labels?.minutes ?? "Minutes", value: remaining.minutes },
+    { unit: "seconds", label: labels?.seconds ?? "Seconds", value: remaining.seconds }
   ];
 
   const isComplete = segments.every((segment) => segment.value === 0);
@@ -173,22 +99,14 @@ export function CountdownClock({ target, className, labels, timezoneLabel }: Cou
       aria-live={isComplete ? "assertive" : "polite"}
       aria-label={isComplete ? "Countdown complete" : `Counting down to ${targetLabel}`}
     >
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-white/10 via-white/5 to-transparent p-[1px]">
-        <motion.div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(104,131,255,0.22),_transparent_55%)]"
-          animate={{ opacity: [0.45, 0.8, 0.45], rotate: [0, 8, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/80 p-4 sm:p-5">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(104,131,255,0.18),transparent_55%)] opacity-60"
+          aria-hidden
         />
-        <div className="relative grid grid-cols-2 gap-2 rounded-[inherit] bg-black/65 p-4 backdrop-blur-xl sm:grid-cols-4 sm:gap-3 sm:p-5">
+        <div className="relative grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
           {segments.map((segment) => (
-            <CountdownSegment
-              key={segment.unit}
-              label={segment.label}
-              value={segment.value}
-              previous={segment.previous}
-              unit={segment.unit}
-              prefersReducedMotion={prefersReducedMotion}
-            />
+            <CountdownSegment key={segment.unit} label={segment.label} value={segment.value} />
           ))}
         </div>
       </div>

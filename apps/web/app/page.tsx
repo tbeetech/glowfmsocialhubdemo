@@ -226,7 +226,7 @@ export default function Home() {
             </div>
             <FollowBar />
           </div>
-          <div className="flex min-h-[260px] flex-col justify-between rounded-3xl border border-white/15 bg-black/70 p-6 shadow-2xl backdrop-blur sm:min-h-[320px] sm:p-8">
+          <div className="flex min-h-[260px] flex-col justify-between rounded-3xl border border-white/15 bg-black/85 p-6 shadow-2xl sm:min-h-[320px] sm:p-8">
             <div className="space-y-2 text-sm text-white/80">
               <p className="font-display text-lg uppercase tracking-[0.26em] text-white/70 sm:tracking-[0.4em]">Live Countdown</p>
               <p className="text-xl font-semibold text-white sm:text-2xl">Ember Challenge kickoff goes on {kickoffHeadline}.</p>
@@ -336,7 +336,7 @@ export default function Home() {
               <Link href="/social-media#instagram">See promo assets</Link>
             </GlowButton>
           </div>
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-black/40 p-4 shadow-[0_25px_80px_-50px_rgba(255,147,255,0.7)] backdrop-blur">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-black/60 p-4 shadow-[0_25px_80px_-50px_rgba(255,147,255,0.7)]">
             <div className="absolute -top-10 right-0 h-32 w-32 translate-x-1/4 rounded-full bg-glow-accent/30 blur-3xl" />
             <div className="absolute -bottom-12 left-1/4 h-40 w-40 -translate-x-1/2 rounded-full bg-glow-primary/20 blur-3xl" />
             <div className="relative overflow-hidden rounded-[1.5rem] border border-white/15 shadow-lg shadow-black/40">
@@ -473,7 +473,7 @@ export default function Home() {
               </span>
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-sm rounded-[2.8rem] border border-white/15 bg-white/10 p-6 shadow-[0_35px_120px_-45px_rgba(95,210,255,0.65)] backdrop-blur">
+          <div className="relative mx-auto w-full max-w-sm rounded-[2.8rem] border border-white/15 bg-white/15 p-6 shadow-[0_35px_120px_-45px_rgba(95,210,255,0.65)]">
             <div className="absolute inset-x-0 top-4 mx-auto h-10 w-28 rounded-b-3xl bg-black/50 blur-[1px]" />
             <div className="relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-black/70 shadow-inner shadow-black/60">
               <Image

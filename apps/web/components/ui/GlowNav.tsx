@@ -127,7 +127,7 @@ export function GlowNav({ className }: { className?: string }) {
   return (
     <header
       className={cn(
-        "glow-nav sticky top-0 z-50 border-b border-white/10 bg-[rgba(20,18,45,0.82)] backdrop-blur-xl transition-colors duration-500",
+        "glow-nav sticky top-0 z-50 border-b border-white/10 bg-[rgba(20,18,45,0.96)] transition-colors duration-500",
         className
       )}
     >
@@ -172,10 +172,10 @@ export function GlowNav({ className }: { className?: string }) {
 
       {open && (
         <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true">
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-black/80" onClick={() => setOpen(false)} />
           <div
             id="mobile-nav"
-            className="absolute inset-x-4 top-20 rounded-3xl border border-white/15 bg-[rgba(18,14,38,0.92)] p-6 shadow-2xl backdrop-blur-xl"
+            className="absolute inset-x-4 top-20 rounded-3xl border border-white/15 bg-[rgba(18,14,38,0.97)] p-6 shadow-2xl"
           >
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-lg font-semibold text-white">Navigate Glow FM</h2>

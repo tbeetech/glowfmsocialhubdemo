@@ -65,7 +65,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main className="mx-auto max-w-6xl px-4 pb-24 pt-8 lg:pt-12">{children}</main>
         <a
           href="https://glow991fm.com/schedules/"
-          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/70 px-5 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-white shadow-lg backdrop-blur"
+          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/80 px-5 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-white shadow-lg"
           aria-label="View Glow FM schedule"
         >
           <span className="hidden sm:inline">View Schedule</span>
