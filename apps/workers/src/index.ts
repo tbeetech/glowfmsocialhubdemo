@@ -1,11 +1,12 @@
 import { Worker } from "bullmq";
 import IORedis from "ioredis";
 
+
 const redisUrl = process.env.REDIS_URL;
 
-function make(connection: IORedis, name: string, fn: (job: any) => Promise<void>) {
+const make = (connection: IORedis, name: string, fn: (job: any) => Promise<void>) => {
   return new Worker(name, async (job) => fn(job), { connection });
-}
+};
 
 if (!redisUrl || redisUrl === "mock") {
   console.info("[workers] REDIS_URL not provided; worker queue disabled. Set REDIS_URL to enable processing.");
