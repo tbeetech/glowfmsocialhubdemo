@@ -16,6 +16,7 @@
         "autoprefixer": "^10.4.19",
         "chart.js": "^4.4.5",
         "clsx": "^2.1.1",
+        "framer-motion": "^12.23.22",
         "lucide-react": "^0.544.0",
         "next": "14.2.5",
         "postcss": "^8.4.38",
