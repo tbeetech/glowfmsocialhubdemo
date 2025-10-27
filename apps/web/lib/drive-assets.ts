@@ -59,22 +59,24 @@ export const DRIVE_ASSETS = {
 
 /**
  * Generate Google Drive direct image URL
+ * NOTE: Files MUST be shared as "Anyone with the link can view"
  * @param fileId - Google Drive file ID
  * @returns Direct image URL
  */
 export function getDriveImageUrl(fileId: string): string {
-  // Use the thumbnail URL which is more reliable for images
-  return `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000`;
+  // This format works when files are publicly shared
+  return `https://drive.google.com/uc?export=view&id=${fileId}`;
 }
 
 /**
  * Generate Google Drive thumbnail URL
+ * NOTE: Files MUST be shared as "Anyone with the link can view"
  * @param fileId - Google Drive file ID
  * @param size - Thumbnail size (default: 800)
  * @returns Thumbnail URL
  */
-export function getDriveThumbnailUrl(fileId: string, size: number = 800): string {
-  return `https://drive.google.com/thumbnail?id=${fileId}&sz=w${size}`;
+export function getDriveThumbnailUrl(fileId: string, size: number = 2000): string {
+  return `https://drive.google.com/uc?export=view&id=${fileId}`;
 }
 
 /**
