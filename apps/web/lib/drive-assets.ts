@@ -72,10 +72,9 @@ export function getDriveImageUrl(fileId: string): string {
  * Generate Google Drive thumbnail URL
  * NOTE: Files MUST be shared as "Anyone with the link can view"
  * @param fileId - Google Drive file ID
- * @param size - Thumbnail size (default: 800)
  * @returns Thumbnail URL
  */
-export function getDriveThumbnailUrl(fileId: string, size: number = 2000): string {
+export function getDriveThumbnailUrl(fileId: string): string {
   return `https://drive.google.com/uc?export=view&id=${fileId}`;
 }
 
