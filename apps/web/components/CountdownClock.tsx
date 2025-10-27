@@ -46,7 +46,7 @@ function CountdownSegment({ label, value }: { label: string; value: number }) {
 
   return (
     <div className="rounded-2xl border border-white/15 bg-black/70 px-3 py-4 text-center text-white sm:px-4 sm:py-5">
-      <span className="block font-mono text-2xl font-semibold tabular-nums sm:text-3xl">{formatted}</span>
+      <span className="block font-mono text-2xl font-semibold tabular-nums sm:text-3xl" suppressHydrationWarning>{formatted}</span>
       <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-white/60 sm:text-xs sm:tracking-[0.35em]">
         {label}
       </p>

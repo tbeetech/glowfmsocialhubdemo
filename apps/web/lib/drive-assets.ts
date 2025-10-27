@@ -63,7 +63,8 @@ export const DRIVE_ASSETS = {
  * @returns Direct image URL
  */
 export function getDriveImageUrl(fileId: string): string {
-  return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  // Use the thumbnail URL which is more reliable for images
+  return `https://drive.google.com/thumbnail?id=${fileId}&sz=w2000`;
 }
 
 /**
@@ -73,7 +74,7 @@ export function getDriveImageUrl(fileId: string): string {
  * @returns Thumbnail URL
  */
 export function getDriveThumbnailUrl(fileId: string, size: number = 800): string {
-  return `https://lh3.googleusercontent.com/d/${fileId}=s${size}`;
+  return `https://drive.google.com/thumbnail?id=${fileId}&sz=w${size}`;
 }
 
 /**

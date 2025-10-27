@@ -6,6 +6,7 @@ import { GlowCard } from "@/components/ui/GlowCard";
 import { CountdownClock } from "@/components/CountdownClock";
 import { getAsset } from "@/lib/drive-assets";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -18,6 +19,7 @@ export default function HomePage() {
             src={getAsset("heroBackgroundGradient")}
             alt=""
             fill
+            sizes="100vw"
             className="object-cover opacity-30"
             priority
           />
@@ -40,7 +42,9 @@ export default function HomePage() {
                 connect with fellow listeners, and be part of Nigeria&apos;s most engaging campus radio experience.
               </p>
               <div className="flex gap-4">
-                <GlowButton href="/social-media">Explore Now</GlowButton>
+                <GlowButton asChild>
+                  <Link href="/social-media">Explore Now</Link>
+                </GlowButton>
               </div>
             </div>
           </AnimatedSection>
@@ -52,6 +56,7 @@ export default function HomePage() {
                 src={getAsset("heroMicProductCutout")}
                 alt="Professional Broadcasting Microphone"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-contain drop-shadow-2xl"
                 priority
               />
@@ -65,6 +70,7 @@ export default function HomePage() {
             src={getAsset("decorHeroGlowGrid")}
             alt=""
             fill
+            sizes="100vw"
             className="object-cover"
           />
         </div>
@@ -118,13 +124,14 @@ export default function HomePage() {
                         src={getAsset(show.image as any)}
                         alt={show.title}
                         fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
                     <div className="p-6">
                       <h3 className="text-2xl font-bold mb-2">{show.title}</h3>
                       <p className="text-muted-foreground mb-4">{show.description}</p>
-                      <GlowButton variant="outline" size="sm">
+                      <GlowButton variant="ghost" size="sm">
                         Listen Now
                       </GlowButton>
                     </div>
@@ -167,6 +174,7 @@ export default function HomePage() {
                       src={getAsset("heroHostStageCutout")}
                       alt="Glow FM Host"
                       fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-contain drop-shadow-2xl"
                     />
                   </div>
@@ -176,6 +184,7 @@ export default function HomePage() {
                       src={getAsset("decorSignalCluster")}
                       alt=""
                       fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-contain"
                     />
                   </div>
@@ -190,6 +199,7 @@ export default function HomePage() {
               src={getAsset("decorHeroGlowGrid")}
               alt=""
               fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover"
             />
           </div>
@@ -208,6 +218,7 @@ export default function HomePage() {
                     src={getAsset("galleryRunwayPoseCutout")}
                     alt="Challenge Participant"
                     fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-contain drop-shadow-2xl"
                   />
                   {/* Dotted arrow decoration */}
@@ -216,6 +227,7 @@ export default function HomePage() {
                       src={getAsset("decorDottedArrowPath")}
                       alt=""
                       fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-contain"
                     />
                   </div>
@@ -288,6 +300,7 @@ export default function HomePage() {
                           src={getAsset(img as any)}
                           alt={`Prize ${idx + 1}`}
                           fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                           className="object-cover hover:scale-110 transition-transform duration-500"
                         />
                       </div>
@@ -349,6 +362,7 @@ export default function HomePage() {
                   src={getAsset("equipmentBroadcastLaptopCutout")}
                   alt="Grand Prize Laptop"
                   fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-contain drop-shadow-2xl"
                 />
               </div>
@@ -407,6 +421,7 @@ export default function HomePage() {
                       src="/images/glow-app-showcase.png"
                       alt="Glow FM Mobile App"
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-contain drop-shadow-2xl"
                     />
                   </div>
@@ -432,6 +447,7 @@ export default function HomePage() {
                     src={getAsset("caseStudyNotebookWorkspaceWarm")}
                     alt="About Glow FM"
                     fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
@@ -473,11 +489,11 @@ export default function HomePage() {
               <AnimatedSection delay={0.1}>
                 <GlowCard className="p-8 bg-gradient-to-br from-blue-950 to-purple-950 text-white relative overflow-hidden">
                   <div className="relative z-10">
-                    <div className="text-6xl mb-4 opacity-50">"</div>
+                    <div className="text-6xl mb-4 opacity-50">&ldquo;</div>
                     <p className="text-lg mb-6 leading-relaxed">
                       This has been one of my best decisions to listen to Glow FM. 
                       The shows are engaging, the hosts are amazing, and the community 
-                      is so welcoming. I've made so many friends through the challenges!
+                      is so welcoming. I&apos;ve made so many friends through the challenges!
                     </p>
                     <div className="flex items-center gap-4">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent" />
@@ -497,6 +513,7 @@ export default function HomePage() {
                     src={getAsset("featureCardHostReview")}
                     alt="Programme Review"
                     fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
                   />
                 </div>
