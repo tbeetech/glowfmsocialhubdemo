@@ -1,0 +1,65 @@
+const DRIVE_BASE_URL = "https://drive.google.com/uc?export=view&id=";
+
+export const DRIVE_ASSET_IDS = {
+  asset_map_txt: "1ukt0ETWxHbS0JJZPFlZkjLGoeEKHL9AT",
+  background_section_soft_white: "1TTS91QdhnxjRiiLFW40sTVUS4MozKlha",
+  background_section_soft_white_alt: "1xTlKDonshgeVHdRLvaZXytv7QM6LZHP0",
+  case_study_notebook_closeup: "1XNYf3katS_1EHDVOVtK47BRb90A4FNFR",
+  case_study_notebook_cutout_landscape: "1-ooqASUtIrAtcy3xMbbqEqwokvFoV4Ew",
+  case_study_notebook_cutout_landscape_alt: "1JZ0XhmIw10tjvEmEfgFoa44hUThGFsll",
+  case_study_notebook_cutout_tall: "17zmQXAQ97q3hXdVAIlqtq6KC5jhB-7ew",
+  case_study_notebook_desk_flatlay: "14YySc_b7C8GISu_ckn5lHBCjm4xxE3y-",
+  case_study_notebook_workspace_cool: "1yE-M2fEeIUHBAbljGsU9AhQycCqSC9DG",
+  case_study_notebook_workspace_warm: "19MOXd4YbeMz0F5SdWUsOxDKEg6X17jTh",
+  cta_glass_panel: "1v-iwCle-e2VSyPXh5xifyeUvqpF8pJWo",
+  decor_audio_wave_icon: "1H8gJi471_i5PQ9UM9bU-yybkT1q5KrYR",
+  decor_dotted_arrow_path: "1HVveJJV2VHaoYJD3-QT17wJPfHrDCKCn",
+  decor_glass_pip: "1NlH7uBLse25kjKTRADfnMVi1UOD_lk7T",
+  decor_gradient_pad_frame: "1LCB6AF81pDgrDSQeJgQAapR0xcFqXPso",
+  decor_hero_glow_grid: "1jImgBfctNHjWd2gn3AlyUztZ5mKywe1z",
+  decor_profile_ring_badge: "1t3Px66HbZ0iNhP2bAaq983sAoVzsR6jN",
+  decor_signal_cluster: "1I4GvvB2fF1cAreTzTbkIFb0JEYH_UZsk",
+  decor_stage_light_ring_cutout: "1Ar8ADg4ig-fxmBRCWM0gxxk_ggbjtuAC",
+  decor_stage_light_ring_full: "1_vmV-xsmStFGBvrrfAnWGBk1DIjguj-P",
+  decor_testimonial_quote_plate: "1rm7JB4wEQ60TfFvkzQ3ZwGYjZR9uil0n",
+  equipment_broadcast_laptop: "172ybFzduvm5AfII45iVXFMU1-G7QY0qn",
+  equipment_broadcast_laptop_alt: "1gaPr94DQ4SFAHtLDl-t_7DBkLug32w9W",
+  equipment_broadcast_laptop_cutout: "1IJcelCsxkGSbFWs9PtZS0sDNhZnbpDIh",
+  equipment_laptop_sticker_collage: "15x2UEMcgmU49KR7jShI5bD86T7_EApB6",
+  feature_card_host_review: "1yaxYBldTapU3xhEz_5BRmGY82Ltpu6Lh",
+  feature_card_metrics_glass: "1Oax9t0YkwwULg2ThavU3vTVv4QvBPLd_",
+  gallery_event_collage_01: "1QicpV-avekIUBFMcFxqYWWhi9zKZ1H12",
+  gallery_event_collage_02: "1jCaVQ8CmiAj1uVSjd2y7ypeB7Lv3Ta_R",
+  gallery_event_collage_cutout: "1LRXQ46lx7uockTjmDBZn3oufREyw_BGC",
+  gallery_pattern_wall_01: "1yxmIp9drTulJZtxUFMgW6zcVhBDrhIcE",
+  gallery_pattern_wall_02: "1c_ALCkmk3A3d2w8fjN05UoaZ0lPh3ssO",
+  gallery_pattern_wall_cutout: "1rZAmOsw9dA6e54c4MqRW-U0eZYwyJy37",
+  gallery_runway_pose_cutout: "1OMeH5I7i39NxzRczM_u5ds9G-SAB2xme",
+  gallery_runway_pose_full: "1YBISCMz5og6E9pzhxyogUhxoOK1y-gAa",
+  hero_background_gradient: "1_9FD4nSa7SpxGr3DYP6uhY4Yb6c_4des",
+  hero_host_half_cutout: "1gGSj6isZmrx7nJvQN6UwUCpqtizh7Efj",
+  hero_host_smile_cutout: "1TFXmMAXVHGBTPOLJ1vvEkwsnoPowc6Hu",
+  hero_host_smile_full: "1EAYycgxNAtOXWMbK1PmFdMRsBgcT0_Rg",
+  hero_host_stage_cutout: "1p3up5aNZc5a22bvYWSd14k4bEl3LwsK0",
+  hero_host_stage_cutout_alt: "1sMnSWo-0Rhqn3_0rcqfSAT0FpHKCEypZ",
+  hero_mic_product_cutout: "1QLOMuInN30mj49zRkob1m5RXxDdWpNku",
+  hero_mic_product_full: "1jzkDBufXcoDrNkQlv-_kELBrVmCTGd_j",
+  people_listener_profile_01: "1iebFYN7XbAgnkWxukdkdrLDPQy2NC63Z",
+  people_listener_profile_02: "1b_Iby4t_LTZ4K58vmdlhtZg6RyMugxYZ",
+  people_listener_profile_03: "1nOg9L7TR0AvQDeDUSPm4SEuw50likjNP",
+  reference_full_mockup: "1O50TEoAxztNakG7np94qmxIYI2703DYb",
+  showcase_bag_story_01: "1ZHSuKY3XnNY86FbkF9G-UXV_aI0RnUd8",
+  showcase_bag_story_02: "1Ux6cbKZcF9VVv4cVLzPLH42s8csDwFLU",
+  showcase_bag_story_03: "1Sc1QKSdMNigevkd8TXaDXdEziSQIulzi",
+  showcase_bag_story_04: "1IeM2xwPCx_m1mnLm5J9nGgRMng1rlrGf",
+  styleguide_colour_swatches: "1qawM2koeqwVFMViFPxADv4rBxepveUF6",
+  styleguide_typography_spec: "1OnjrUxV88ejVhJNWVroob9LgRgu7C6BR",
+  ui_mockup: "1rcIWj0-ZSwpGkcPYw45ba4ALGCFoYiOd"
+} as const;
+
+export type DriveAssetKey = keyof typeof DRIVE_ASSET_IDS;
+
+export function driveAssetUrl(asset: DriveAssetKey) {
+  return `${DRIVE_BASE_URL}${DRIVE_ASSET_IDS[asset]}`;
+}
+

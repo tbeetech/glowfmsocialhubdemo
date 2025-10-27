@@ -8,3 +8,12 @@ dist
 coverage
 tsconfig.tsbuildinfo
 .turbo
+
+# Google Drive Credentials - DO NOT COMMIT
+credentials.json
+client_secret_*.json
+token.pickle
+glowfm-drive-assets-*.json
+
+# Large asset files
+*.zip

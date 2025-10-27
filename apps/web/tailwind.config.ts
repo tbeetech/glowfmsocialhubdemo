@@ -7,6 +7,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        card: "var(--card)",
+        border: "var(--border)",
+        primary: {
+          DEFAULT: "#FF6B00",
+          foreground: "#FFFFFF",
+        },
+        accent: {
+          DEFAULT: "#D72638",
+          foreground: "#FFFFFF",
+        },
+        muted: {
+          DEFAULT: "#64748B",
+          foreground: "#94A3B8",
+        },
         glow: {
           primary: glowTheme.colors.primary,
           secondary: glowTheme.colors.secondary,

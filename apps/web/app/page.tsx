@@ -1,496 +1,542 @@
-﻿import Link from "next/link";
-import Image from "next/image";
-import dynamic from "next/dynamic";
+"use client";
+
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { GlowCard } from "@/components/ui/GlowCard";
 import { GlowButton } from "@/components/ui/GlowButton";
-import { NextPrograms } from "@/components/NextPrograms";
-import type { ProgramSlot } from "@/components/NextPrograms";
-import { Facebook } from "lucide-react";
-import { FollowBar } from "@/components/FollowBar";
-import emberChallengerPoster from "@/public/images/emberchallenger.jpg";
+import { GlowCard } from "@/components/ui/GlowCard";
+import { CountdownClock } from "@/components/CountdownClock";
+import { getAsset } from "@/lib/drive-assets";
+import Image from "next/image";
 
-const CountdownClock = dynamic(() => import("@/components/CountdownClock").then((mod) => mod.CountdownClock), {
-  ssr: false
-});
-
-const FALLBACK_IMAGE = "/images/Retro-Futuristic%20Glow%2099.1%20FM.png";
-
-const showLineup = [
-  {
-    name: "Ijinle Odu",
-    slot: "Mondays 5:00 AM - 7:00 AM",
-    host: "Onikale and Abeni",
-    description: "Deep Yoruba storytelling that bridges heritage, music, and modern campus energy.",
-    image: FALLBACK_IMAGE,
-    facebookUrl: "https://facebook.com/glow991fm/live_ijinle"
-  },
-  {
-    name: "Kayefi Nla",
-    slot: "Tuesdays 7:00 PM - 9:00 PM",
-    host: "DJ Kayefi",
-    description: "Mystery topics, supernatural tales, and late night confessions with immersive sound design.",
-    image: FALLBACK_IMAGE,
-    facebookUrl: "https://facebook.com/glow991fm/live_kayefi"
-  },
-  {
-    name: "Glow Kiddies",
-    slot: "Saturdays 8:00 AM - 9:30 AM",
-    host: "Auntie Mimi",
-    description: "Interactive games, kiddie quizzes, and animated lessons for the youngest Glow tribe.",
-    image: FALLBACK_IMAGE,
-    facebookUrl: "https://facebook.com/glow991fm/live_kiddies"
-  },
-  {
-    name: "Glow FM Connect",
-    slot: "Weekdays 12:00 PM - 2:00 PM",
-    host: "The Social Desk",
-    description: "Live social mentions, audience shout-outs, and trending stories from the Glow digital squad.",
-    image: FALLBACK_IMAGE,
-    facebookUrl: "https://facebook.com/glow991fm/live_connect"
-  },
-  {
-    name: "Double Joy of Sports",
-    slot: "Wednesdays 6:00 PM - 7:30 PM",
-    host: "Coach Double J",
-    description: "Crunch stats, fan debates, and highlight reels from campus and pro leagues.",
-    image: FALLBACK_IMAGE,
-    facebookUrl: "https://facebook.com/glow991fm/live_sports"
-  },
-  {
-    name: "Political Hangout",
-    slot: "Thursdays 8:00 PM - 9:00 PM",
-    host: "Gloria and The Roundtable",
-    description: "Policy breakdowns and youth town hall conversations that keep power accountable.",
-    image: FALLBACK_IMAGE,
-    facebookUrl: "https://facebook.com/glow991fm/live_politics"
-  },
-  {
-    name: "Issues in the Dailies",
-    slot: "Weekdays 9:00 AM - 10:00 AM",
-    host: "The Newsroom",
-    description: "Sharp press reviews, fact checks, and social reaction threads with the Glow editorial team.",
-    image: FALLBACK_IMAGE,
-    facebookUrl: "https://facebook.com/glow991fm/live_dailies"
-  },
-  {
-    name: "Women&apos;s World",
-    slot: "Sundays 5:00 PM - 6:30 PM",
-    host: "The Sisterhood",
-    description: "Spotlighting women trailblazers, wellness experts, and community advocates.",
-    image: FALLBACK_IMAGE,
-    facebookUrl: "https://facebook.com/glow991fm/live_women"
-  }
-];
-
-const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
-const GOOGLE_PLAY_URL = "https://play.google.com/store/apps/details?id=com.glow991.app";
-
-const programSchedule: ProgramSlot[] = [
-  {
-    title: "Ijinle Odu",
-    description: "Deep Yoruba storytelling that bridges heritage, music, and modern campus energy.",
-    hosts: "Onikale and Abeni",
-    startTime: "05:00",
-    durationMinutes: 120,
-    days: [1],
-    ctaHref: "https://www.facebook.com/Glowfm/live_ijinle"
-  },
-  {
-    title: "Kayefi Nla",
-    description: "Mystery topics, supernatural tales, and late night confessions with immersive sound design.",
-    hosts: "DJ Kayefi",
-    startTime: "19:00",
-    durationMinutes: 120,
-    days: [2],
-    ctaHref: "https://www.facebook.com/Glowfm/live_kayefi"
-  },
-  {
-    title: "Glow Kiddies",
-    description: "Interactive games, kiddie quizzes, and animated lessons for the youngest Glow tribe.",
-    hosts: "Auntie Mimi",
-    startTime: "08:00",
-    durationMinutes: 90,
-    days: [6],
-    ctaHref: "https://www.facebook.com/Glowfm/live_kiddies"
-  },
-  {
-    title: "Glow FM Connect",
-    description: "Live social mentions, audience shout-outs, and trending stories from the Glow digital squad.",
-    hosts: "The Social Desk",
-    startTime: "12:00",
-    durationMinutes: 120,
-    days: [1, 2, 3, 4, 5],
-    ctaHref: "https://www.facebook.com/Glowfm/live_connect"
-  },
-  {
-    title: "Double Joy of Sports",
-    description: "Crunch stats, fan debates, and highlight reels from campus and pro leagues.",
-    hosts: "Coach Double J",
-    startTime: "18:00",
-    durationMinutes: 90,
-    days: [3],
-    ctaHref: "https://www.facebook.com/Glowfm/live_sports"
-  },
-  {
-    title: "Political Hangout",
-    description: "Policy breakdowns and youth town hall conversations that keep power accountable.",
-    hosts: "Gloria and The Roundtable",
-    startTime: "20:00",
-    durationMinutes: 60,
-    days: [4],
-    ctaHref: "https://www.facebook.com/Glowfm/live_politics"
-  },
-  {
-    title: "Issues in the Dailies",
-    description: "Sharp press reviews, fact checks, and social reaction threads with the Glow editorial team.",
-    hosts: "The Newsroom",
-    startTime: "09:00",
-    durationMinutes: 60,
-    days: [1, 2, 3, 4, 5],
-    ctaHref: "https://www.facebook.com/Glowfm/live_dailies"
-  },
-  {
-    title: "Women&apos;s World",
-    description: "Spotlighting women trailblazers, wellness experts, and community advocates.",
-    hosts: "The Sisterhood",
-    startTime: "17:00",
-    durationMinutes: 90,
-    days: [0],
-    ctaHref: "https://www.facebook.com/Glowfm/live_women"
-  }
-];
-
-const emberChecklist = [
-  "Follow Glow FM across Facebook, Instagram, TikTok, X, and YouTube.",
-  "Repost any of our Facebook or Instagram promos and tag @glow991fm.",
-  "Send your full name and phone number via the contact form or WhatsApp hotline.",
-  "Stay tuned to 99.1 FM and Facebook Live during the Thursday 5:00 PM draw for your invite."
-];
-
-const socialProof = [
-  { stat: "120K+", label: "Monthly social reach" },
-  { stat: "45%", label: "Audience growth in 2024" },
-  { stat: "3.5M", label: "Video impressions" }
-];
-
-function getNextEmberKickoffIso(): string {
-  const now = new Date();
-  let year = now.getFullYear();
-  const candidate = new Date(`${year}-11-03T18:00:00+01:00`);
-  if (candidate.getTime() <= now.getTime()) {
-    year += 1;
-  }
-  return `${year}-11-03T18:00:00+01:00`;
-}
-
-const emberKickoffTarget = getNextEmberKickoffIso();
-
-export default function Home() {
-  const kickoffDate = new Date(emberKickoffTarget);
-  const kickoffHeadline = kickoffDate.toLocaleString(undefined, {
-    month: "long",
-    day: "numeric",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZoneName: "short"
-  });
-
+export default function HomePage() {
   return (
-    <div className="space-y-16" id="top">
-      <AnimatedSection className="rounded-3xl bg-glow-hero p-6 text-white shadow-glow-emphasis sm:p-8">
-        <div className="grid gap-8 md:grid-cols-[1.5fr,1fr] md:items-center md:gap-10">
-          <div className="space-y-5 sm:space-y-6">
-            <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/80 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-              Social Media Powerhouse
-            </span>
-            <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl xl:text-6xl">
-              Glow FM Social Hub and Ember Challenge Command Center
-            </h1>
-            <p className="max-w-2xl text-sm text-white/80 sm:text-base md:text-lg">
-              Celebrate our digital wins, track live programming, and explore sponsorship-ready advertising campaigns engineered by the Glow social media squad. Everything you need to follow, repost, and win with 99.1 FM lives here.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <GlowButton size="lg" variant="accent" className="uppercase tracking-[0.2em] sm:tracking-[0.3em]" asChild>
-                <a href="#ember-how-to">Join the Ember Challenge</a>
-              </GlowButton>
-              <GlowButton
-                asChild
-                size="lg"
-                variant="ghost"
-                className="border-white/30 text-white uppercase tracking-[0.2em] sm:tracking-[0.3em]"
-              >
-                <Link href="/social-media">Explore Social Spotlight</Link>
-              </GlowButton>
+    <div className="relative overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={getAsset("heroBackgroundGradient")}
+            alt=""
+            fill
+            className="object-cover opacity-30"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background" />
+        </div>
+
+        <div className="container relative z-10 mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <AnimatedSection delay={0.1}>
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                Connect with the GlowFM;
+                <br />
+                <span className="text-primary">Join & Engage</span> in the
+                <br />
+                Community&apos;s <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Fun</span>
+              </h1>
+              <p className="text-lg text-muted-foreground max-w-lg">
+                Join the vibrant Glow FM community. Participate in exciting challenges, 
+                connect with fellow listeners, and be part of Nigeria&apos;s most engaging campus radio experience.
+              </p>
+              <div className="flex gap-4">
+                <GlowButton href="/social-media">Explore Now</GlowButton>
+              </div>
             </div>
-            <FollowBar />
+          </AnimatedSection>
+
+          {/* Right Image */}
+          <AnimatedSection delay={0.3}>
+            <div className="relative h-[500px] lg:h-[600px]">
+              <Image
+                src={getAsset("heroMicProductCutout")}
+                alt="Professional Broadcasting Microphone"
+                fill
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+            </div>
+          </AnimatedSection>
+        </div>
+
+        {/* Decorative Grid Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 opacity-20">
+          <Image
+            src={getAsset("decorHeroGlowGrid")}
+            alt=""
+            fill
+            className="object-cover"
+          />
+        </div>
+      </section>
+
+      {/* Glow Ember Challenge Ticker */}
+      <div className="bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 py-3 overflow-hidden">
+        <div className="animate-marquee whitespace-nowrap">
+          <span className="text-2xl font-bold mx-8">🎤 Glow Ember Challenge</span>
+          <span className="text-2xl mx-8">⭐ Don&apos;t miss out on the Fun</span>
+          <span className="text-2xl font-bold mx-8">🎁 Amazing Prizes</span>
+          <span className="text-2xl mx-8">🎯 Starts Very Soon</span>
+          <span className="text-2xl font-bold mx-8">🎤 Glow Ember Challenge</span>
+          <span className="text-2xl mx-8">⭐ Don&apos;t miss out on the Fun</span>
+        </div>
+      </div>
+
+      {/* Show Listings Section */}
+      <AnimatedSection>
+        <section className="py-20 relative">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">Show Listings</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Here you can enjoy our amazing live shows, talk shows, and entertainment programs
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                { 
+                  title: "Glow Wellness", 
+                  image: "listenerProfile01",
+                  description: "Your daily dose of health and wellness tips"
+                },
+                { 
+                  title: "Glow Fun Connect", 
+                  image: "listenerProfile02",
+                  description: "Entertainment and music that keeps you connected"
+                },
+                { 
+                  title: "Glow Kiddies", 
+                  image: "listenerProfile03",
+                  description: "Fun and educational content for young listeners"
+                },
+              ].map((show, idx) => (
+                <AnimatedSection key={show.title} delay={0.1 * (idx + 1)}>
+                  <GlowCard className="group overflow-hidden">
+                    <div className="relative h-64 overflow-hidden rounded-t-lg">
+                      <Image
+                        src={getAsset(show.image as any)}
+                        alt={show.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-2xl font-bold mb-2">{show.title}</h3>
+                      <p className="text-muted-foreground mb-4">{show.description}</p>
+                      <GlowButton variant="outline" size="sm">
+                        Listen Now
+                      </GlowButton>
+                    </div>
+                  </GlowCard>
+                </AnimatedSection>
+              ))}
+            </div>
           </div>
-          <div className="flex min-h-[260px] flex-col justify-between rounded-3xl border border-white/15 bg-black/85 p-6 shadow-2xl sm:min-h-[320px] sm:p-8">
-            <div className="space-y-2 text-sm text-white/80">
-              <p className="font-display text-lg uppercase tracking-[0.26em] text-white/70 sm:tracking-[0.4em]">Live Countdown</p>
-              <p className="text-xl font-semibold text-white sm:text-2xl">Ember Challenge kickoff goes on {kickoffHeadline}.</p>
-              <p className="text-white/60">Prep your entries, align your promos, and meet us on the Facebook livestream.</p>
+        </section>
+      </AnimatedSection>
+
+      {/* Glow Ember Challenge Section */}
+      <AnimatedSection>
+        <section className="py-20 bg-gradient-to-br from-primary/10 to-accent/10 relative overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Content */}
+              <div className="space-y-6">
+                <div className="inline-block">
+                  <span className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider rotate-3 inline-block shadow-lg">
+                    Live!!!
+                  </span>
+                </div>
+                <h2 className="text-5xl md:text-6xl font-bold">
+                  Glow Ember Challenge
+                </h2>
+                <p className="text-xl text-muted-foreground">
+                  The Ember Challenge Starts Very Soon. Be Part Of The
+                  <br />
+                  Ember Challenge
+                </p>
+                <GlowButton size="lg">Complete Now</GlowButton>
+              </div>
+
+              {/* Image */}
+              <AnimatedSection delay={0.2}>
+                <div className="relative">
+                  <div className="relative h-[500px]">
+                    <Image
+                      src={getAsset("heroHostStageCutout")}
+                      alt="Glow FM Host"
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                    />
+                  </div>
+                  {/* Decorative Element */}
+                  <div className="absolute top-10 right-10 w-32 h-32 opacity-50">
+                    <Image
+                      src={getAsset("decorSignalCluster")}
+                      alt=""
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              </AnimatedSection>
             </div>
-            <CountdownClock
-              target={emberKickoffTarget}
-              className="mt-5 sm:mt-6"
-              labels={{ days: "Days left", hours: "Hours", minutes: "Minutes", seconds: "Seconds" }}
-              timezoneLabel="WAT (UTC+01)"
+          </div>
+
+          {/* Background decoration */}
+          <div className="absolute top-0 right-0 w-1/3 h-full opacity-10">
+            <Image
+              src={getAsset("decorHeroGlowGrid")}
+              alt=""
+              fill
+              className="object-cover"
             />
           </div>
-        </div>
+        </section>
       </AnimatedSection>
 
-      <AnimatedSection id="ember-how-to" delay={0.05} className="grid gap-6 lg:grid-cols-[1.4fr,1fr]">
-        <GlowCard
-          title="How to Get on the Ember Challenge Stage"
-          description="Your weekly playbook for the 250k grand prize"
-          headerClassName="bg-gradient-to-br from-glow-primary via-glow-accent to-glow-secondary"
-          className="shadow-glow-emphasis"
-          actions={
-            <GlowButton asChild size="sm" variant="accent">
-              <a href={WHATSAPP_BROADCAST_LINK} target="_blank" rel="noreferrer">
-                Join WhatsApp broadcast
-              </a>
-            </GlowButton>
-          }
-        >
-          <div className="space-y-4 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-            <p>
-              Each week our social editors showcase the hottest mixes, spoken word pieces, skits, and on-air callers. Complete the checklist below, submit your details, and you could be our next featured finalist.
-            </p>
-            <ol className="grid gap-3 text-sm md:grid-cols-2">
-              {emberChecklist.map((item) => (
-                <li key={item} className="rounded-2xl border border-black/10 bg-white/80 p-4 text-[var(--foreground)] shadow-sm transition dark:border-white/15 dark:bg-white/10 dark:text-white">
-                  {item}
-                </li>
-              ))}
-            </ol>
-            <div className="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.24em] text-glow-accent sm:gap-3 sm:text-xs sm:tracking-[0.35em]">
-              <span className="rounded-full bg-glow-accent/10 px-3 py-2 sm:px-4">#GlowEmber</span>
-              <span className="rounded-full bg-glow-secondary/15 px-3 py-2 sm:px-4">Weekly winners announced on air</span>
-              <span className="rounded-full bg-white/10 px-3 py-2 sm:px-4">Grand prize: Laptop worth 250k</span>
-            </div>
-          </div>
-        </GlowCard>
-
-        <GlowCard title="Glow Community Pulse" description="Data from the social newsroom" className="shadow-glow-soft">
-          <div className="grid gap-4 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-            {socialProof.map((item) => (
-              <div key={item.label} className="rounded-2xl border border-glow-accent/20 bg-white/10 p-4 text-center dark:bg-white/5">
-                <p className="text-2xl font-semibold text-glow-accent sm:text-3xl">{item.stat}</p>
-                <p className="mt-2 text-[11px] uppercase tracking-[0.24em] sm:text-xs sm:tracking-[0.35em]">{item.label}</p>
-              </div>
-            ))}
-          </div>
-          <GlowButton asChild size="sm" variant="ghost" className="mt-6">
-            <Link href="/advertisement">See partnership decks</Link>
-          </GlowButton>
-        </GlowCard>
-      </AnimatedSection>
-
-      <AnimatedSection id="calendar" delay={0.1} className="space-y-8">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold">Announcements and Calendar Highlights</h2>
-            <p className="text-sm text-[var(--foreground)]/70 dark:text-white/70">
-              Track the next broadcasts, pop-up events, and digital campaigns curated by the Glow social media crew.
-            </p>
-          </div>
-          <GlowButton size="sm" variant="ghost" disabled className="cursor-not-allowed opacity-60">
-            Blog updates coming soon
-          </GlowButton>
-        </div>
-        <NextPrograms schedule={programSchedule} />
-      </AnimatedSection>
-
-      <AnimatedSection
-        id="ember-showcase"
-        delay={0.12}
-        className="overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-[#110f1f] via-[#181f3a] to-[#0c1527] p-6 shadow-[0_35px_110px_-55px_rgba(105,82,255,0.8)]"
-      >
-        <div className="grid gap-6 lg:grid-cols-[1.1fr,1fr] lg:items-center">
-          <div className="space-y-4 text-white">
-            <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.4em] text-white/70">
-              Ember Challenge spotlight
-            </span>
-            <h2 className="text-3xl font-semibold">Campus talents fire up the Ember stage.</h2>
-            <p className="text-sm text-white/80">
-              The Ember Challenge flyer stays pinned across Glow FM socials, uniting dancers, spoken word artists, vocalists, and creators who
-              transform our studios every weekend. Share it with your crew, print it on notice boards, and keep the energy buzzing through finals season.
-            </p>
-            <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/60 sm:gap-3 sm:text-xs sm:tracking-[0.3em]">
-              <span>Shareable poster</span>
-              <span className="h-1 w-1 rounded-full bg-white/40" />
-              <span>Weekly prize pool updates</span>
-              <span className="h-1 w-1 rounded-full bg-white/40" />
-              <span>Glow campus tour</span>
-            </div>
-            <GlowButton
-              asChild
-              variant="accent"
-              size="sm"
-              className="mt-4 rounded-full bg-gradient-to-r from-glow-primary to-glow-accent uppercase tracking-[0.22em] sm:tracking-[0.35em]"
-            >
-              <Link href="/social-media#instagram">See promo assets</Link>
-            </GlowButton>
-          </div>
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-black/60 p-4 shadow-[0_25px_80px_-50px_rgba(255,147,255,0.7)]">
-            <div className="absolute -top-10 right-0 h-32 w-32 translate-x-1/4 rounded-full bg-glow-accent/30 blur-3xl" />
-            <div className="absolute -bottom-12 left-1/4 h-40 w-40 -translate-x-1/2 rounded-full bg-glow-primary/20 blur-3xl" />
-            <div className="relative overflow-hidden rounded-[1.5rem] border border-white/15 shadow-lg shadow-black/40">
-              <Image
-                src={emberChallengerPoster}
-                alt="Glow FM Ember Challenge flyer"
-                className="h-full w-full object-cover"
-                placeholder="blur"
-              />
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection id="shows" delay={0.15} className="space-y-8">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold">Signature On-Air and Live Shows</h2>
-            <p className="text-sm text-[var(--foreground)]/70 dark:text-white/70">
-              Meet the programs driving our biggest social traction. Tap any card to join the livestream on Facebook.
-            </p>
-          </div>
-          <GlowButton asChild variant="secondary" size="sm" className="gap-2">
-            <Link href="https://www.facebook.com/Glowfm/" target="_blank" rel="noreferrer">
-              <Facebook className="h-4 w-4" aria-hidden />
-              Follow our Facebook Live hub
-            </Link>
-          </GlowButton>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {showLineup.map((show) => (
-            <GlowCard key={show.name} title={show.name} description={show.slot}>
-              <div className="space-y-4">
-                <div className="relative h-48 overflow-hidden rounded-2xl border border-white/10">
+      {/* How to Get on the Ember Challenge Stage */}
+      <AnimatedSection>
+        <section className="py-20 relative">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Image */}
+              <AnimatedSection delay={0.1}>
+                <div className="relative h-[600px]">
                   <Image
-                    src={show.image ?? FALLBACK_IMAGE}
-                    alt={show.name}
+                    src={getAsset("galleryRunwayPoseCutout")}
+                    alt="Challenge Participant"
+                    fill
+                    className="object-contain drop-shadow-2xl"
+                  />
+                  {/* Dotted arrow decoration */}
+                  <div className="absolute -bottom-10 -right-10 w-64 h-64 opacity-30">
+                    <Image
+                      src={getAsset("decorDottedArrowPath")}
+                      alt=""
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Content */}
+              <div className="space-y-8">
+                <h2 className="text-4xl md:text-5xl font-bold">
+                  How to Get on the
+                  <br />
+                  Ember Challenge Stage
+                </h2>
+                
+                <div className="space-y-6">
+                  {[
+                    "WASH, Sanitize yourself pieces, table, and an air.",
+                    "register, and complete the GLOW999.1 FM social media account before you leave.",
+                    "Use the app/web to submit your GlowFM Radio number and make sure you...",
+                  ].map((step, idx) => (
+                    <div key={idx} className="flex gap-4 items-start">
+                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold">
+                        {idx + 1}
+                      </div>
+                      <p className="text-muted-foreground pt-1">{step}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="bg-gradient-to-r from-primary/20 to-accent/20 p-6 rounded-lg border border-primary/30">
+                  <p className="font-semibold mb-2">Your weekly podcast for the 2026 great years</p>
+                  <div className="flex gap-2 flex-wrap">
+                    <input
+                      type="email"
+                      placeholder="Enter your email"
+                      className="flex-1 min-w-[200px] px-4 py-2 rounded-lg bg-background border border-input"
+                    />
+                    <GlowButton>Subscribe</GlowButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Countdown Section */}
+      <AnimatedSection>
+        <section className="py-20 bg-gradient-to-br from-background to-primary/5">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Countdown</h2>
+            <p className="text-muted-foreground mb-12">Time To January 1</p>
+            <CountdownClock targetDate={new Date("2026-01-01T00:00:00")} />
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Prizes Section */}
+      <AnimatedSection>
+        <section className="py-20 relative overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Prize Images */}
+              <AnimatedSection delay={0.1}>
+                <div className="relative">
+                  <div className="grid grid-cols-2 gap-4">
+                    {["showcaseBagStory01", "showcaseBagStory02", "showcaseBagStory03", "showcaseBagStory04"].map((img, idx) => (
+                      <div key={img} className="relative h-48 rounded-lg overflow-hidden">
+                        <Image
+                          src={getAsset(img as any)}
+                          alt={`Prize ${idx + 1}`}
+                          fill
+                          className="object-cover hover:scale-110 transition-transform duration-500"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </AnimatedSection>
+
+              {/* Prize List */}
+              <div className="space-y-6">
+                <h2 className="text-4xl md:text-5xl font-bold">
+                  Get a chance to win
+                </h2>
+                
+                <div className="space-y-4">
+                  {[
+                    "Steak Bags",
+                    "Swag Bags",
+                    "T-Shirts & More",
+                    "Free Prize",
+                  ].map((prize, idx) => (
+                    <div key={idx} className="flex items-center gap-3 p-4 rounded-lg bg-card border border-border hover:border-primary transition-colors">
+                      <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                        <svg className="w-4 h-4 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span className="text-lg font-semibold">{prize}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="text-6xl font-black bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                  Prizes
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Grand Prize - Laptop */}
+      <AnimatedSection>
+        <section className="py-20 bg-gradient-to-br from-blue-950 via-purple-950 to-blue-950 text-white relative overflow-hidden">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <div className="inline-block mb-4">
+                <span className="bg-red-500 text-white px-6 py-3 rounded-full text-lg font-bold uppercase tracking-wider rotate-2 inline-block shadow-xl">
+                  WOW!!
+                </span>
+              </div>
+              <h2 className="text-5xl md:text-6xl font-black mb-4">Grand Prize</h2>
+              <p className="text-xl opacity-90">Stand A Chance To Win A Brand New Laptop!</p>
+            </div>
+
+            <div className="relative max-w-4xl mx-auto">
+              <div className="relative h-[400px] md:h-[500px]">
+                <Image
+                  src={getAsset("equipmentBroadcastLaptopCutout")}
+                  alt="Grand Prize Laptop"
+                  fill
+                  className="object-contain drop-shadow-2xl"
+                />
+              </div>
+              
+              <div className="text-center mt-8">
+                <h3 className="text-7xl md:text-8xl font-black bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Laptop
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Background decoration */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-10 left-10 w-32 h-32 bg-blue-400 rounded-full blur-3xl" />
+            <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-400 rounded-full blur-3xl" />
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* Carry the Glow Section */}
+      <AnimatedSection>
+        <section className="py-20 bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-950/20 dark:to-orange-950/20">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Content */}
+              <div className="space-y-6">
+                <h2 className="text-4xl md:text-5xl font-bold">
+                  Carry the Glow wherever
+                  <br />
+                  the day takes you.
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  Download the Glow FM app and stay connected to your favorite shows, 
+                  participate in challenges, and never miss a moment of the action.
+                </p>
+                <ul className="space-y-3">
+                  {[
+                    "🎧 Stream live shows anywhere",
+                    "📱 iOS supported. Using a single signed-on Surface",
+                    "🎯 Participate in real-time challenges",
+                    "🏆 Track your progress and rewards",
+                  ].map((feature, idx) => (
+                    <li key={idx} className="flex items-center gap-3 text-lg">
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* App Preview */}
+              <AnimatedSection delay={0.2}>
+                <div className="relative h-[500px] flex items-center justify-center">
+                  <div className="relative w-full h-full max-w-md">
+                    <Image
+                      src="/images/glow-app-showcase.png"
+                      alt="Glow FM Mobile App"
+                      fill
+                      className="object-contain drop-shadow-2xl"
+                    />
+                  </div>
+                  {/* Decorative elements */}
+                  <div className="absolute top-20 -left-10 w-20 h-20 bg-yellow-400 rounded-full blur-2xl opacity-50" />
+                  <div className="absolute bottom-20 -right-10 w-24 h-24 bg-orange-400 rounded-full blur-2xl opacity-50" />
+                </div>
+              </AnimatedSection>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      {/* About GlowFm Section */}
+      <AnimatedSection>
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Image */}
+              <AnimatedSection delay={0.1}>
+                <div className="relative h-[500px] rounded-2xl overflow-hidden">
+                  <Image
+                    src={getAsset("caseStudyNotebookWorkspaceWarm")}
+                    alt="About Glow FM"
                     fill
                     className="object-cover"
-                    sizes="(max-width:768px) 100vw, 320px"
-                    loading="lazy"
                   />
                 </div>
-                <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">{show.description}</p>
-                <p className="text-[11px] uppercase tracking-[0.24em] text-glow-secondary sm:text-xs sm:tracking-[0.35em]">
-                  Hosted by {show.host}
+              </AnimatedSection>
+
+              {/* Content */}
+              <div className="space-y-6">
+                <h2 className="text-4xl md:text-5xl font-bold">About GlowFm</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed 
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco 
+                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
+                  irure dolor in reprehenderit in voluptate velit esse cillum 
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat 
+                  cupidatat non proident, sunt in culpa qui officia deserunt 
+                  mollit anim id est laborum.
                 </p>
-                <GlowButton asChild size="sm" className="uppercase tracking-[0.18em] sm:tracking-[0.25em]">
-                  <a href={show.facebookUrl} target="_blank" rel="noreferrer">
-                    Watch on Facebook Live
-                  </a>
-                </GlowButton>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Contrary to popular belief, Lorem ipsum dolor sit amet, consectetur 
+                  adipiscing elit. All text and random.
+                </p>
               </div>
-            </GlowCard>
-          ))}
-        </div>
+            </div>
+          </div>
+        </section>
       </AnimatedSection>
 
-      <AnimatedSection id="engage" delay={0.2} className="grid gap-6 lg:grid-cols-[1.2fr,1fr]">
-        <GlowCard
-          title="Content Submission and Listener Call-ins"
-          description="Spark a feature across radio and social"
-          headerClassName="bg-gradient-to-r from-glow-secondary to-glow-primary"
-          className="shadow-glow-emphasis"
-        >
-          <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">
-            Share your story ideas, promo clips, and campus scoops. The Glow newsroom curates social-first stories for radio, YouTube spotlights, and newsletter mentions every week.
-          </p>
-          <ul className="mt-4 space-y-3 text-sm">
-            <li className="flex items-start gap-3">
-              <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-glow-accent/10 text-xs font-semibold text-glow-accent">1</span>
-              <span>Fill out the guided form on our Contact page or drop a WhatsApp voice note.</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-glow-accent/10 text-xs font-semibold text-glow-accent">2</span>
-              <span>Producers curate weekly playlists and send you a confirmation tag when you are shortlisted.</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-glow-accent/10 text-xs font-semibold text-glow-accent">3</span>
-              <span>Join the live call-in or studio session when the social team schedules your segment.</span>
-            </li>
-          </ul>
-          <GlowButton size="lg" className="mt-6 uppercase tracking-[0.22em] sm:tracking-[0.35em]" asChild>
-            <Link href="/contact">Submit a story</Link>
-          </GlowButton>
-        </GlowCard>
+      {/* Programme Reviews */}
+      <AnimatedSection>
+        <section className="py-20 bg-gradient-to-br from-primary/5 to-accent/5">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+              Our Programmes Reviews
+            </h2>
 
-        <GlowCard title="Need campaign support?" description="We build launchpads for brands" className="shadow-glow-soft">
-          <p className="text-sm text-[var(--foreground)]/80 dark:text-white/80">
-            From promoted shout-outs to cross-platform livestream takeovers, our advertising unit maps audience insights to boost your sales outcomes.
-          </p>
-          <ul className="mt-4 space-y-2 text-[11px] uppercase tracking-[0.24em] text-glow-secondary sm:text-xs sm:tracking-[0.35em]">
-            <li>Branded livestream overlays</li>
-            <li>Campus ambassador takeovers</li>
-            <li>Weekly conversion reporting</li>
-          </ul>
-          <GlowButton size="sm" variant="ghost" className="mt-6" asChild>
-            <Link href="/advertisement">Book a strategy session</Link>
-          </GlowButton>
-        </GlowCard>
+            <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Testimonial 1 */}
+              <AnimatedSection delay={0.1}>
+                <GlowCard className="p-8 bg-gradient-to-br from-blue-950 to-purple-950 text-white relative overflow-hidden">
+                  <div className="relative z-10">
+                    <div className="text-6xl mb-4 opacity-50">"</div>
+                    <p className="text-lg mb-6 leading-relaxed">
+                      This has been one of my best decisions to listen to Glow FM. 
+                      The shows are engaging, the hosts are amazing, and the community 
+                      is so welcoming. I've made so many friends through the challenges!
+                    </p>
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent" />
+                      <div>
+                        <p className="font-bold">Sarah Johnson</p>
+                        <p className="text-sm opacity-75">Regular Listener</p>
+                      </div>
+                    </div>
+                  </div>
+                </GlowCard>
+              </AnimatedSection>
+
+              {/* Testimonial 2 */}
+              <AnimatedSection delay={0.2}>
+                <div className="relative h-full min-h-[300px] rounded-2xl overflow-hidden">
+                  <Image
+                    src={getAsset("featureCardHostReview")}
+                    alt="Programme Review"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </AnimatedSection>
+            </div>
+          </div>
+        </section>
       </AnimatedSection>
 
-      <AnimatedSection
-        id="app-experience"
-        delay={0.3}
-        className="overflow-hidden rounded-3xl border border-white/10 bg-[radial-gradient(circle_at_top,#3d4bff1c,transparent)] p-6 shadow-[0_30px_120px_-60px_rgba(97,193,255,0.75)] dark:bg-[radial-gradient(circle_at_top,#1a233d,#0b111d)] sm:p-8"
-      >
-        <div className="grid gap-8 lg:grid-cols-[1.1fr,1fr] lg:items-center lg:gap-10">
-          <div className="space-y-6">
-            <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-white/70 sm:px-4 sm:text-xs sm:tracking-[0.35em]">
-              Glow mobile suite
-            </span>
-            <h2 className="text-3xl font-semibold text-white">Carry the Glow wherever the day takes you.</h2>
-            <p className="text-sm text-white/80">
-              Stream live shows, drop voice notes to presenters, and catch instant Ember Challenge alerts within the Glow 99.1 FM Android app.
-              The interface mirrors our on-air vibe—glassy, cinematic, and engineered for late-night listening sessions.
-            </p>
-            <p className="text-sm text-white/70">
-              Sync notification reminders, toggle dark neon themes, and jump between music blocks or talk segments from a single playback surface.
-            </p>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-              <GlowButton
-                asChild
-                size="lg"
-                variant="accent"
-                className="gap-3 rounded-2xl bg-gradient-to-r from-glow-primary to-glow-accent uppercase tracking-[0.18em] shadow-[0_16px_45px_-18px_rgba(123,97,255,0.95)] hover:shadow-[0_24px_60px_-20px_rgba(97,193,255,0.75)] sm:tracking-[0.25em]"
-              >
-                <a href={GOOGLE_PLAY_URL} target="_blank" rel="noreferrer">
-                  <span className="text-base font-semibold">Get it on Google Play</span>
+      {/* Link Up With The Wall */}
+      <AnimatedSection>
+        <section className="py-20 bg-gradient-to-br from-blue-950 via-purple-950 to-pink-950 text-white">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-12">Link Up With The Wall</h2>
+            
+            <div className="flex flex-wrap justify-center gap-8">
+              {[
+                { name: "Twitter", icon: "𝕏", url: "https://twitter.com/glow991fm" },
+                { name: "Youtube", icon: "▶", url: "https://youtube.com/@glow991fm" },
+                { name: "Facebook", icon: "f", url: "https://facebook.com/glow991fm" },
+                { name: "TikTok", icon: "♪", url: "https://tiktok.com/@glow991fm" },
+                { name: "Instagram", icon: "📷", url: "https://instagram.com/glow991fm" },
+              ].map((social) => (
+                <a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex flex-col items-center gap-3 hover:scale-110 transition-transform"
+                >
+                  <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-3xl group-hover:bg-white/20 transition-colors">
+                    {social.icon}
+                  </div>
+                  <span className="font-semibold">{social.name}</span>
                 </a>
-              </GlowButton>
-              <span className="text-[11px] uppercase tracking-[0.24em] text-white/60 sm:text-xs sm:tracking-[0.35em]">
-                iOS release in progress
-              </span>
+              ))}
             </div>
           </div>
-          <div className="relative mx-auto w-full max-w-sm rounded-[2.8rem] border border-white/15 bg-white/15 p-6 shadow-[0_35px_120px_-45px_rgba(95,210,255,0.65)]">
-            <div className="absolute inset-x-0 top-4 mx-auto h-10 w-28 rounded-b-3xl bg-black/50 blur-[1px]" />
-            <div className="relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-black/70 shadow-inner shadow-black/60">
-              <Image
-                src="/images/glow-app-showcase.png"
-                alt="Glow FM mobile app interface"
-                width={640}
-                height={1280}
-                className="h-full w-full object-cover"
-                priority={false}
-              />
-            </div>
-            <div className="absolute -bottom-10 left-1/2 h-32 w-32 -translate-x-1/2 rounded-full bg-glow-accent/20 blur-3xl" />
-          </div>
-        </div>
+        </section>
       </AnimatedSection>
     </div>
   );
 }
-
-

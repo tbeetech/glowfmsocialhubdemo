@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 
 interface CountdownClockProps {
-  target: string;
+  targetDate?: Date;
+  target?: string;
   className?: string;
   labels?: {
     days?: string;
@@ -53,8 +54,12 @@ function CountdownSegment({ label, value }: { label: string; value: number }) {
   );
 }
 
-export function CountdownClock({ target, className, labels, timezoneLabel }: CountdownClockProps) {
-  const targetDate = useMemo(() => new Date(target), [target]);
+export function CountdownClock({ targetDate: targetDateProp, target, className, labels, timezoneLabel }: CountdownClockProps) {
+  const targetDate = useMemo(() => {
+    if (targetDateProp) return targetDateProp;
+    if (target) return new Date(target);
+    return new Date();
+  }, [targetDateProp, target]);
   const [remaining, setRemaining] = useState(() => calculateRemaining(targetDate));
 
   useEffect(() => {
