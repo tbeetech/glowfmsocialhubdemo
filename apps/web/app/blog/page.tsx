@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { GlowCard } from "@/components/ui/GlowCard";
 import { GlowButton } from "@/components/ui/GlowButton";
 
 interface FeaturedPost {
@@ -103,114 +102,128 @@ const newsroomNotes = [
 
 export default function BlogPage() {
   return (
-    <div className="space-y-16">
-      <AnimatedSection className="rounded-3xl bg-glow-hero p-6 text-white shadow-glow-emphasis sm:p-8">
-        <div className="space-y-5 sm:space-y-6">
-          <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/80 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-            Glow Newsroom
-          </span>
-          <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">Stories Amplifying the Glow Tribe</h1>
-          <p className="max-w-3xl text-sm text-white/80 sm:text-base md:text-lg">
-            Dive into the campaigns, campus moments, and advertiser wins shaping Glow 99.1 FM. Every feature below is ready
-            for press, social sharing, or executive summaries—no placeholders, just newsroom-grade copy.
-          </p>
-          <GlowButton asChild size="lg" variant="accent" className="uppercase tracking-[0.2em] sm:tracking-[0.3em]">
-            <Link href="/contact?interest=Editorial%20Spotlight">Pitch the editorial desk</Link>
-          </GlowButton>
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection className="space-y-8">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold">Featured Stories</h2>
-            <p className="text-sm text-[var(--foreground)]/70 dark:text-white/70">
-              Curated for sponsors, stakeholders, and superfans who need the latest Glow FM impact highlights.
+    <div className="min-h-screen bg-white text-gray-900">
+      <div className="space-y-16">
+        <AnimatedSection className="rounded-3xl bg-gradient-to-br from-orange-500 to-red-500 p-6 text-white shadow-xl sm:p-8">
+          <div className="space-y-5 sm:space-y-6">
+            <span className="inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/90 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
+              Glow Newsroom
+            </span>
+            <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">Stories Amplifying the Glow Tribe</h1>
+            <p className="max-w-3xl text-sm text-white/90 sm:text-base md:text-lg">
+              Dive into the campaigns, campus moments, and advertiser wins shaping Glow 99.1 FM. Every feature below is ready
+              for press, social sharing, or executive summaries—no placeholders, just newsroom-grade copy.
             </p>
+            <GlowButton asChild size="lg" variant="accent" className="uppercase tracking-[0.2em] sm:tracking-[0.3em]">
+              <Link href="/contact?interest=Editorial%20Spotlight">Pitch the editorial desk</Link>
+            </GlowButton>
           </div>
-          <GlowButton asChild variant="ghost" size="sm" className="uppercase tracking-[0.2em]">
-            <Link href="#newsroom-dossier">Download newsroom dossier</Link>
-          </GlowButton>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {featuredPosts.map((post) => (
-            <GlowCard
-              key={post.title}
-              title={post.title}
-              description={`${post.category} · ${post.readingTime}`}
-              className="shadow-glow-soft"
-              actions={
-                <GlowButton asChild size="sm" variant="accent" className="uppercase tracking-[0.2em]">
-                  <Link href={`#${post.slug}`}>Read summary</Link>
-                </GlowButton>
-              }
-            >
-              <div className="space-y-4 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-                <p>{post.excerpt}</p>
-                <p className="text-[11px] uppercase tracking-[0.24em] text-glow-secondary sm:text-xs sm:tracking-[0.3em]">
-                  By {post.author}
-                </p>
-              </div>
-            </GlowCard>
-          ))}
-        </div>
-      </AnimatedSection>
+        </AnimatedSection>
 
-      <AnimatedSection id="featured-dossiers" className="space-y-6">
-        {featuredPosts.map((post) => (
-          <GlowCard
-            key={post.slug}
-            title={post.title}
-            description={`${post.category} · ${post.readingTime}`}
-            className="shadow-glow-emphasis"
-          >
-            <div id={post.slug} className="space-y-4 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-              <p>{post.excerpt}</p>
-              <ul className="space-y-2 text-sm">
-                {post.highlights.map((point) => (
-                  <li key={point} className="flex gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-glow-accent/80" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-              <GlowButton asChild size="sm" variant="ghost" className="uppercase tracking-[0.2em]">
-                <Link href={post.ctaHref} target={post.ctaHref.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
-                  {post.ctaLabel}
-                </Link>
-              </GlowButton>
+        <AnimatedSection className="space-y-8">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="text-3xl font-semibold text-gray-900">Featured Stories</h2>
+              <p className="text-sm text-gray-600">
+                Curated for sponsors, stakeholders, and superfans who need the latest Glow FM impact highlights.
+              </p>
             </div>
-          </GlowCard>
-        ))}
-      </AnimatedSection>
-
-      <AnimatedSection className="space-y-8">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold">Newsroom Notes</h2>
-            <p className="text-sm text-[var(--foreground)]/70 dark:text-white/70">
-              Bite-size updates ready for newsletter embeds, social snippets, or board reports.
-            </p>
+            <GlowButton asChild variant="ghost" size="sm" className="uppercase tracking-[0.2em]">
+              <Link href="#newsroom-dossier">Download newsroom dossier</Link>
+            </GlowButton>
           </div>
-          <GlowButton asChild variant="secondary" size="sm" id="newsroom-dossier" className="uppercase tracking-[0.2em]">
-            <Link href="/advertisement">Partner media kit</Link>
-          </GlowButton>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2">
-          {newsroomNotes.map((note) => (
-            <GlowCard key={note.title} title={note.title} description={note.anchor} className="shadow-glow-soft">
-              <div className="space-y-3 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-                <p>{note.summary}</p>
-                <GlowButton asChild size="sm" variant="ghost" className="uppercase tracking-[0.2em]">
-                  <Link href={note.link} target="_blank" rel="noreferrer">
-                    {note.linkLabel}
-                  </Link>
-                </GlowButton>
+          <div className="grid gap-6 md:grid-cols-3">
+            {featuredPosts.map((post) => (
+              <div
+                key={post.title}
+                className="rounded-3xl bg-gray-50 p-6 shadow-lg"
+              >
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-bold text-gray-900">{post.title}</h3>
+                    <p className="text-sm text-orange-600 font-medium">{post.category} · {post.readingTime}</p>
+                  </div>
+                  <div className="space-y-4 text-sm text-gray-700">
+                    <p>{post.excerpt}</p>
+                    <p className="text-[11px] uppercase tracking-[0.24em] text-orange-600 sm:text-xs sm:tracking-[0.3em]">
+                      By {post.author}
+                    </p>
+                  </div>
+                  <GlowButton asChild size="sm" variant="accent" className="uppercase tracking-[0.2em]">
+                    <Link href={`#${post.slug}`}>Read summary</Link>
+                  </GlowButton>
+                </div>
               </div>
-            </GlowCard>
+            ))}
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection id="featured-dossiers" className="space-y-6">
+          {featuredPosts.map((post) => (
+            <div
+              key={post.slug}
+              className="rounded-3xl bg-gray-50 p-6 shadow-lg"
+            >
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold text-gray-900">{post.title}</h3>
+                  <p className="text-sm text-orange-600 font-medium">{post.category} · {post.readingTime}</p>
+                </div>
+                <div id={post.slug} className="space-y-4 text-sm text-gray-700">
+                  <p>{post.excerpt}</p>
+                  <ul className="space-y-2 text-sm">
+                    {post.highlights.map((point) => (
+                      <li key={point} className="flex gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-orange-500" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <GlowButton asChild size="sm" variant="ghost" className="uppercase tracking-[0.2em]">
+                    <Link href={post.ctaHref} target={post.ctaHref.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                      {post.ctaLabel}
+                    </Link>
+                  </GlowButton>
+                </div>
+              </div>
+            </div>
           ))}
-        </div>
-      </AnimatedSection>
+        </AnimatedSection>
+
+        <AnimatedSection className="space-y-8">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="text-3xl font-semibold text-gray-900">Newsroom Notes</h2>
+              <p className="text-sm text-gray-600">
+                Bite-size updates ready for newsletter embeds, social snippets, or board reports.
+              </p>
+            </div>
+            <GlowButton asChild variant="secondary" size="sm" id="newsroom-dossier" className="uppercase tracking-[0.2em]">
+              <Link href="/advertisement">Partner media kit</Link>
+            </GlowButton>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {newsroomNotes.map((note) => (
+              <div key={note.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-bold text-gray-900">{note.title}</h3>
+                    <p className="text-sm text-orange-600 font-medium">{note.anchor}</p>
+                  </div>
+                  <div className="space-y-3 text-sm text-gray-700">
+                    <p>{note.summary}</p>
+                    <GlowButton asChild size="sm" variant="ghost" className="uppercase tracking-[0.2em]">
+                      <Link href={note.link} target="_blank" rel="noreferrer">
+                        {note.linkLabel}
+                      </Link>
+                    </GlowButton>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
+      </div>
     </div>
   );
 }

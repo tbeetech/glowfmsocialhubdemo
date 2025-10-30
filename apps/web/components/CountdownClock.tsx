@@ -60,29 +60,18 @@ export function CountdownClock({ targetDate: targetDateProp, target, className, 
     if (target) return new Date(target);
     return new Date();
   }, [targetDateProp, target]);
-  const [remaining, setRemaining] = useState(() => calculateRemaining(targetDate));
+  
+  const [remaining, setRemaining] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    let timeoutId: number | undefined;
-    let frameId: number | undefined;
+    // Set initial state on the client
+    setRemaining(calculateRemaining(targetDate));
 
-    const scheduleTick = () => {
+    const intervalId = setInterval(() => {
       setRemaining(calculateRemaining(targetDate));
-      timeoutId = window.setTimeout(() => {
-        frameId = window.requestAnimationFrame(scheduleTick);
-      }, 1000);
-    };
+    }, 1000);
 
-    scheduleTick();
-
-    return () => {
-      if (typeof timeoutId === "number") {
-        window.clearTimeout(timeoutId);
-      }
-      if (typeof frameId === "number") {
-        window.cancelAnimationFrame(frameId);
-      }
-    };
+    return () => clearInterval(intervalId);
   }, [targetDate]);
 
   const segments: Array<{ unit: RemainingKey; label: string; value: number }> = [

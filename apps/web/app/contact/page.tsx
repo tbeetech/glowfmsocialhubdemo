@@ -1,5 +1,4 @@
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { GlowCard } from "@/components/ui/GlowCard";
 import { GlowButton } from "@/components/ui/GlowButton";
 
 const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
@@ -71,145 +70,156 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
   const interestMessage = interest ? `I would like more details about the ${interest} package and available slots.` : "";
 
   return (
-    <div className="space-y-16">
-      <AnimatedSection className="rounded-3xl bg-glow-hero p-6 text-white shadow-glow-emphasis sm:p-8">
-        <div className="space-y-5 sm:space-y-6">
-          <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/80 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-            Talk With Glow FM
-          </span>
-          <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">Contact and Submission Desk</h1>
-          <p className="max-w-3xl text-sm text-white/80 sm:text-base md:text-lg">
-            Reach the right Glow FM channel for shout-outs, story tips, advertising briefs, and Ember Challenge entries. The form below includes guided prompts and spelling checks to keep your submission crisp.
-          </p>
-        </div>
-      </AnimatedSection>
+    <div className="min-h-screen bg-white text-gray-900">
+      <div className="space-y-16">
+        <AnimatedSection className="rounded-3xl bg-gradient-to-br from-orange-500 to-red-500 p-6 text-white shadow-xl sm:p-8">
+          <div className="space-y-5 sm:space-y-6">
+            <span className="inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/90 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
+              Talk With Glow FM
+            </span>
+            <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">Contact and Submission Desk</h1>
+            <p className="max-w-3xl text-sm text-white/90 sm:text-base md:text-lg">
+              Reach the right Glow FM channel for shout-outs, story tips, advertising briefs, and Ember Challenge entries. The form below includes guided prompts and spelling checks to keep your submission crisp.
+            </p>
+          </div>
+        </AnimatedSection>
 
-      <AnimatedSection className="grid gap-6 lg:grid-cols-[1.3fr,1fr]">
-        <GlowCard title="Send Us a Message" description="All fields support spell check" headerClassName="bg-gradient-to-r from-glow-secondary to-glow-primary" className="shadow-glow-emphasis">
-          <form
-            className="space-y-5"
-            action="mailto:glow991fm@gmail.com,careers@glowfmradio.com,chairman@glowfmradio.com,marketing@glowfmradio.com?subject=Glow%20FM%20Contact%20Submission"
-            method="post"
-            encType="text/plain"
-            target="_blank"
-          >
-            {interest && <input type="hidden" name="campaignInterest" value={interest} />}
-            <div className="grid gap-4 md:grid-cols-2">
-              <label className="space-y-2 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-                <span>Full name</span>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  spellCheck={true}
-                  className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base text-white outline-none focus:border-glow-accent"
-                  placeholder="Enter your full name"
-                />
-              </label>
-              <label className="space-y-2 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-                <span>Email address</span>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base text-white outline-none focus:border-glow-accent"
-                  placeholder="example@glow991fm.com"
-                />
-              </label>
+        <AnimatedSection className="grid gap-6 lg:grid-cols-[1.3fr,1fr]">
+          <div className="rounded-3xl bg-gray-50 p-6 shadow-lg sm:p-8">
+            <div className="mb-6 space-y-2">
+              <h2 className="text-2xl font-bold text-gray-900">Send Us a Message</h2>
+              <p className="text-gray-600">All fields support spell check</p>
             </div>
-            <div className="grid gap-4 md:grid-cols-2">
-              <label className="space-y-2 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-                <span>Phone or WhatsApp number</span>
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base text-white outline-none focus:border-glow-accent"
-                  placeholder="Include country code"
-                />
-              </label>
-              <label className="space-y-2 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-                <span>Reason for contact</span>
-                <select
-                  name="reason"
-                  defaultValue={defaultReason}
-                  className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base text-white outline-none focus:border-glow-accent"
-                >
-                  {contactReasons.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            </div>
-            <label className="space-y-2 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-              <span>Message</span>
-              <textarea
-                name="message"
-                rows={6}
-                required
-                defaultValue={interestMessage}
-                spellCheck={true}
-                className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base text-white outline-none focus:border-glow-accent"
-                placeholder="Describe your request, include links, or paste your script."
-              />
-            </label>
-            <label className="space-y-2 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-              <span>Share supporting links (optional)</span>
-              <input
-                type="url"
-                name="links"
-                spellCheck={true}
-                className="w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3 text-base text-white outline-none focus:border-glow-accent"
-                placeholder="https://"
-              />
-            </label>
-            <GlowButton type="submit" size="lg" className="uppercase tracking-[0.22em] sm:tracking-[0.35em]">
-              Submit message
-            </GlowButton>
-          </form>
-        </GlowCard>
-
-        <GlowCard title="Reach Us Quickly" description="Direct channels" className="shadow-glow-soft">
-          <ul className="space-y-4 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-            {contactChannels.map((channel) => (
-              <li key={`${channel.label}-${channel.value}`} className="rounded-2xl border border-white/15 bg-white/5 p-4 dark:bg-white/5">
-                <p className="text-[11px] uppercase tracking-[0.24em] text-glow-secondary sm:text-xs sm:tracking-[0.35em]">
-                  {channel.label}
-                </p>
-                <a
-                  href={channel.href}
-                  className="mt-1 block text-lg font-semibold text-[var(--foreground)] hover:text-glow-accent dark:text-white"
-                >
-                  {channel.value}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-xs text-[var(--foreground)]/60 dark:text-white/60">
-            Tip: For quicker follow-up, mention the show title and preferred callback time in your message.
-          </p>
-        </GlowCard>
-      </AnimatedSection>
-
-      <AnimatedSection className="space-y-8">
-        <h2 className="text-3xl font-semibold">Pre-built Q&A Guides</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {faqSections.map((section) => (
-            <GlowCard key={section.title} title={section.title} className="shadow-glow-soft">
-              <div className="space-y-4 text-sm text-[var(--foreground)]/80 dark:text-white/80">
-                {section.qa.map((item) => (
-                  <div key={item.question}>
-                    <p className="font-semibold">{item.question}</p>
-                    <p className="mt-1 text-[var(--foreground)]/70 dark:text-white/70">{item.answer}</p>
-                  </div>
-                ))}
+            <form
+              className="space-y-5"
+              action="mailto:glow991fm@gmail.com,careers@glowfmradio.com,chairman@glowfmradio.com,marketing@glowfmradio.com?subject=Glow%20FM%20Contact%20Submission"
+              method="post"
+              encType="text/plain"
+              target="_blank"
+            >
+              {interest && <input type="hidden" name="campaignInterest" value={interest} />}
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="space-y-2 text-sm text-gray-700">
+                  <span>Full name</span>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    spellCheck={true}
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                    placeholder="Enter your full name"
+                  />
+                </label>
+                <label className="space-y-2 text-sm text-gray-700">
+                  <span>Email address</span>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                    placeholder="example@glow991fm.com"
+                  />
+                </label>
               </div>
-            </GlowCard>
-          ))}
-        </div>
-      </AnimatedSection>
+              <div className="grid gap-4 md:grid-cols-2">
+                <label className="space-y-2 text-sm text-gray-700">
+                  <span>Phone or WhatsApp number</span>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                    placeholder="Include country code"
+                  />
+                </label>
+                <label className="space-y-2 text-sm text-gray-700">
+                  <span>Reason for contact</span>
+                  <select
+                    name="reason"
+                    defaultValue={defaultReason}
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                  >
+                    {contactReasons.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+              <label className="space-y-2 text-sm text-gray-700">
+                <span>Message</span>
+                <textarea
+                  name="message"
+                  rows={6}
+                  required
+                  defaultValue={interestMessage}
+                  spellCheck={true}
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                  placeholder="Describe your request, include links, or paste your script."
+                />
+              </label>
+              <label className="space-y-2 text-sm text-gray-700">
+                <span>Share supporting links (optional)</span>
+                <input
+                  type="url"
+                  name="links"
+                  spellCheck={true}
+                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                  placeholder="https://"
+                />
+              </label>
+              <GlowButton type="submit" size="lg" className="uppercase tracking-[0.22em] sm:tracking-[0.35em]">
+                Submit message
+              </GlowButton>
+            </form>
+          </div>
+
+          <div className="rounded-3xl bg-gray-50 p-6 shadow-lg sm:p-8">
+            <div className="mb-6 space-y-2">
+              <h2 className="text-2xl font-bold text-gray-900">Reach Us Quickly</h2>
+              <p className="text-gray-600">Direct channels</p>
+            </div>
+            <ul className="space-y-4 text-sm text-gray-700">
+              {contactChannels.map((channel) => (
+                <li key={`${channel.label}-${channel.value}`} className="rounded-xl border border-gray-200 bg-white p-4">
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-orange-600 sm:text-xs sm:tracking-[0.35em]">
+                    {channel.label}
+                  </p>
+                  <a
+                    href={channel.href}
+                    className="mt-1 block text-lg font-semibold text-gray-900 hover:text-orange-600"
+                  >
+                    {channel.value}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-xs text-gray-500">
+              Tip: For quicker follow-up, mention the show title and preferred callback time in your message.
+            </p>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection className="space-y-8">
+          <h2 className="text-3xl font-semibold text-gray-900">Pre-built Q&A Guides</h2>
+          <div className="grid gap-6 md:grid-cols-3">
+            {faqSections.map((section) => (
+              <div key={section.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">{section.title}</h3>
+                <div className="space-y-4 text-sm text-gray-700">
+                  {section.qa.map((item) => (
+                    <div key={item.question}>
+                      <p className="font-semibold text-gray-900">{item.question}</p>
+                      <p className="mt-1 text-gray-600">{item.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
+      </div>
     </div>
   );
 }

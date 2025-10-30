@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Manrope, Inter } from "next/font/google";
+import { El_Messiri, Inter } from "next/font/google";
 import "./globals.css";
 import { GlowNav } from "@/components/ui/GlowNav";
 import { GlowFooter } from "@/components/ui/GlowFooter";
 
-const displayFont = Manrope({ subsets: ["latin"], variable: "--font-display" });
+const displayFont = El_Messiri({ subsets: ["latin"], variable: "--font-display" });
 const bodyFont = Inter({ subsets: ["latin"], variable: "--font-body" });
 
 const themeInitializer = `(() => {
@@ -59,13 +59,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`} id="top">
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)]" suppressHydrationWarning>
+      <body className="min-h-screen bg-white text-gray-900" suppressHydrationWarning>
         <Script id="theme-init" strategy="beforeInteractive">{themeInitializer}</Script>
         <GlowNav />
-        <main className="mx-auto max-w-6xl px-4 pb-24 pt-8 lg:pt-12">{children}</main>
+        <main className="bg-white">{children}</main>
         <a
           href="https://glow991fm.com/schedules/"
-          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/80 px-5 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-white shadow-lg"
+          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-indigo-900 text-white px-5 py-3 text-sm font-semibold shadow-lg hover:bg-indigo-800 transition-colors"
           aria-label="View Glow FM schedule"
         >
           <span className="hidden sm:inline">View Schedule</span>
