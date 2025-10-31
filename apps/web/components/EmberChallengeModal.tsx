@@ -107,12 +107,12 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
 
   return (
     <div 
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
+      className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md"
       style={{ animation: 'fadeIn 0.2s ease-out' }}
       onClick={handleBackdropClick}
     >
       <div 
-        className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] border border-white/20 max-w-md w-full overflow-hidden transform transition-all hover:scale-[1.01] hover:shadow-[0_25px_100px_rgba(99,102,241,0.4)]"
+        className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] border border-white/20 max-w-md w-full max-h-[90vh] overflow-y-auto overflow-hidden transform transition-all hover:scale-[1.01] hover:shadow-[0_25px_100px_rgba(99,102,241,0.4)]"
         style={{ animation: 'slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
       >
         {/* Header */}

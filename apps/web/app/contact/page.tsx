@@ -71,74 +71,91 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
   const interestMessage = interest ? `I would like more details about the ${interest} package and available slots.` : "";
 
   return (
-    <div className="min-h-screen">
-      <div className="space-y-16">
-        <AnimatedSection className="rounded-3xl bg-gradient-to-br from-orange-500 to-red-500 p-6 text-white shadow-xl sm:p-8 mx-4">
-          <div className="space-y-5 sm:space-y-6">
-            <span className="inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/90 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 relative">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-10 animate-pulse"></div>
+        <div className="absolute bottom-40 right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-10 animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-purple-400 to-blue-400 rounded-full opacity-10 animate-pulse" style={{animationDelay: '4s'}}></div>
+      </div>
+
+      <div className="space-y-16 relative z-10">
+        <AnimatedSection className="rounded-3xl bg-gradient-to-br from-orange-500 via-red-500 to-orange-600 p-8 text-white shadow-2xl mx-4 relative overflow-hidden">
+          {/* Hero background pattern */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white/10 to-transparent"></div>
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/20 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
+          </div>
+          
+          <div className="space-y-6 relative z-10">
+            <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs uppercase tracking-[0.3em] text-white/90 font-['El_Messiri'] font-bold shadow-lg">
               Talk With Glow FM
             </span>
-            <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">Contact and Submission Desk</h1>
-            <p className="max-w-3xl text-sm text-white/90 sm:text-base md:text-lg">
-              Reach the right Glow FM channel for shout-outs, story tips, advertising briefs, and Ember Challenge entries. The form below includes guided prompts and spelling checks to keep your submission crisp.
+            <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl font-['El_Messiri'] leading-tight">
+              Contact and Submission Desk
+            </h1>
+            <p className="max-w-4xl text-lg text-white/90 font-['El_Messiri'] leading-relaxed">
+              Reach the right Glow FM channel for shout-outs, story tips, advertising briefs, and Ember Challenge entries. 
+              The form below includes guided prompts and spelling checks to keep your submission crisp.
             </p>
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="grid gap-6 lg:grid-cols-[1.3fr,1fr] mx-4">
-          <div className="rounded-3xl bg-gray-50 p-6 shadow-lg sm:p-8">
-            <div className="mb-6 space-y-2">
-              <h2 className="text-2xl font-bold text-gray-900">Send Us a Message</h2>
-              <p className="text-gray-600">All fields support spell check</p>
+        <AnimatedSection className="grid gap-8 lg:grid-cols-[1.3fr,1fr] mx-4">
+          <div className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl border border-orange-100">
+            <div className="mb-8 space-y-3">
+              <h2 className="text-3xl font-bold text-gray-900 font-['El_Messiri']">Send Us a Message</h2>
+              <p className="text-gray-600 font-['El_Messiri'] text-lg">All fields support spell check</p>
             </div>
             <form
-              className="space-y-5"
+              className="space-y-6"
               action="mailto:marketing@glowfmradio.com?subject=Glow%20FM%20Contact%20Submission"
               method="post"
               encType="text/plain"
               target="_blank"
             >
               {interest && <input type="hidden" name="campaignInterest" value={interest} />}
-              <div className="grid gap-4 md:grid-cols-2">
-                <label className="space-y-2 text-sm text-gray-700">
-                  <span>Full name</span>
+              <div className="grid gap-6 md:grid-cols-2">
+                <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
+                  <span className="font-semibold">Full name</span>
                   <input
                     type="text"
                     name="name"
                     required
                     spellCheck={true}
-                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                    className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
                     placeholder="Enter your full name"
                   />
                 </label>
-                <label className="space-y-2 text-sm text-gray-700">
-                  <span>Email address</span>
+                <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
+                  <span className="font-semibold">Email address</span>
                   <input
                     type="email"
                     name="email"
                     required
-                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                    className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
                     placeholder="example@glow991fm.com"
                   />
                 </label>
               </div>
-              <div className="grid gap-4 md:grid-cols-2">
-                <label className="space-y-2 text-sm text-gray-700">
-                  <span>Phone or WhatsApp number</span>
+              <div className="grid gap-6 md:grid-cols-2">
+                <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
+                  <span className="font-semibold">Phone or WhatsApp number</span>
                   <input
                     type="tel"
                     name="phone"
                     required
-                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                    className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
                     placeholder="Include country code"
                   />
                 </label>
-                <label className="space-y-2 text-sm text-gray-700">
-                  <span>Reason for contact</span>
+                <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
+                  <span className="font-semibold">Reason for contact</span>
                   <select
                     name="reason"
                     defaultValue={defaultReason}
-                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                    className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
                   >
                     {contactReasons.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -148,71 +165,71 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
                   </select>
                 </label>
               </div>
-              <label className="space-y-2 text-sm text-gray-700">
-                <span>Message</span>
+              <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
+                <span className="font-semibold">Message</span>
                 <textarea
                   name="message"
                   rows={6}
                   required
                   defaultValue={interestMessage}
                   spellCheck={true}
-                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                  className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg resize-none"
                   placeholder="Describe your request, include links, or paste your script."
                 />
               </label>
-              <label className="space-y-2 text-sm text-gray-700">
-                <span>Share supporting links (optional)</span>
+              <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
+                <span className="font-semibold">Share supporting links (optional)</span>
                 <input
                   type="url"
                   name="links"
                   spellCheck={true}
-                  className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20"
+                  className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
                   placeholder="https://"
                 />
               </label>
-              <GlowButton type="submit" size="lg" className="uppercase tracking-[0.22em] sm:tracking-[0.35em]">
+              <GlowButton type="submit" size="lg" className="uppercase tracking-[0.22em] sm:tracking-[0.35em] font-['El_Messiri'] font-bold transform hover:scale-105 transition-all duration-300">
                 Submit message
               </GlowButton>
             </form>
           </div>
 
-          <div className="rounded-3xl bg-gray-50 p-6 shadow-lg sm:p-8">
-            <div className="mb-6 space-y-2">
-              <h2 className="text-2xl font-bold text-gray-900">Reach Us Quickly</h2>
-              <p className="text-gray-600">Direct channels</p>
+          <div className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl border border-orange-100">
+            <div className="mb-8 space-y-3">
+              <h2 className="text-3xl font-bold text-gray-900 font-['El_Messiri']">Reach Us Quickly</h2>
+              <p className="text-gray-600 font-['El_Messiri'] text-lg">Direct channels</p>
             </div>
             <ul className="space-y-4 text-sm text-gray-700">
               {contactChannels.map((channel) => (
-                <li key={`${channel.label}-${channel.value}`} className="rounded-xl border border-gray-200 bg-white p-4">
-                  <p className="text-[11px] uppercase tracking-[0.24em] text-orange-600 sm:text-xs sm:tracking-[0.35em]">
+                <li key={`${channel.label}-${channel.value}`} className="rounded-xl border border-orange-200 bg-gradient-to-r from-white to-orange-50 p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <p className="text-xs uppercase tracking-[0.24em] text-orange-600 font-['El_Messiri'] font-bold mb-2">
                     {channel.label}
                   </p>
                   <a
                     href={channel.href}
-                    className="mt-1 block text-lg font-semibold text-gray-900 hover:text-orange-600"
+                    className="block text-lg font-semibold text-gray-900 hover:text-orange-600 transition-colors duration-300 font-['El_Messiri']"
                   >
                     {channel.value}
                   </a>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-xs text-gray-500">
-              Tip: For quicker follow-up, mention the show title and preferred callback time in your message.
+            <p className="mt-8 text-sm text-gray-500 font-['El_Messiri'] bg-gray-50 p-4 rounded-xl">
+              <strong>Tip:</strong> For quicker follow-up, mention the show title and preferred callback time in your message.
             </p>
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="space-y-8 mx-4 pb-16">
-          <h2 className="text-3xl font-semibold text-gray-900">Pre-built Q&A Guides</h2>
-          <div className="grid gap-6 md:grid-cols-3">
+        <AnimatedSection className="space-y-10 mx-4 pb-16">
+          <h2 className="text-4xl font-bold text-gray-900 font-['El_Messiri'] text-center">Pre-built Q&A Guides</h2>
+          <div className="grid gap-8 md:grid-cols-3">
             {faqSections.map((section) => (
-              <div key={section.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">{section.title}</h3>
-                <div className="space-y-4 text-sm text-gray-700">
+              <div key={section.title} className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl border border-orange-100 hover:shadow-3xl transition-all duration-300 transform hover:scale-105">
+                <h3 className="text-2xl font-bold text-gray-900 mb-6 font-['El_Messiri'] text-center">{section.title}</h3>
+                <div className="space-y-6 text-sm text-gray-700">
                   {section.qa.map((item) => (
-                    <div key={item.question}>
-                      <p className="font-semibold text-gray-900">{item.question}</p>
-                      <p className="mt-1 text-gray-600">{item.answer}</p>
+                    <div key={item.question} className="bg-orange-50 p-4 rounded-xl">
+                      <p className="font-semibold text-gray-900 font-['El_Messiri'] mb-2">{item.question}</p>
+                      <p className="text-gray-600 font-['El_Messiri'] leading-relaxed">{item.answer}</p>
                     </div>
                   ))}
                 </div>
@@ -223,106 +240,145 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
 
         {/* Join the Social Media Team Section */}
         <AnimatedSection className="mx-4 pb-16">
-          <div className="rounded-3xl bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-600 p-6 text-white shadow-xl sm:p-8">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-8">
-                <span className="inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/90 sm:px-4 sm:text-xs sm:tracking-[0.3em] font-bold backdrop-blur-sm">
+          <div className="rounded-3xl bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-600 p-8 text-white shadow-2xl relative overflow-hidden">
+            {/* Background decorative elements */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute -top-20 -right-20 w-80 h-80 bg-white/20 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div className="max-w-6xl mx-auto relative z-10">
+              <div className="text-center mb-12">
+                <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-6 py-3 text-sm uppercase tracking-[0.3em] text-white/90 font-['El_Messiri'] font-bold shadow-lg">
                   Join Our Team
                 </span>
-                <h2 className="text-3xl font-bold sm:text-4xl md:text-5xl mt-4 font-['El_Messiri']">Join the Social Media Team</h2>
-                <p className="text-white/90 mt-4 text-lg font-semibold max-w-2xl mx-auto">
-                  Are you passionate about digital storytelling, content creation, and building online communities? Join our dynamic social media team!
+                <h2 className="text-4xl font-bold sm:text-5xl md:text-6xl mt-6 font-['El_Messiri'] leading-tight">
+                  Join the Social Media Team
+                </h2>
+                <p className="text-white/90 mt-6 text-xl font-semibold max-w-3xl mx-auto font-['El_Messiri'] leading-relaxed">
+                  Are you passionate about digital storytelling, content creation, and building online communities? 
+                  Join our dynamic social media team!
                 </p>
               </div>
               
-              <div className="grid lg:grid-cols-2 gap-8 items-start">
-                <div className="space-y-6">
-                  <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-md">
-                    <h3 className="text-xl font-bold text-white mb-4">What We&apos;re Looking For:</h3>
-                    <ul className="space-y-2 text-white/90">
-                      <li>• Creative content creators with fresh ideas</li>
-                      <li>• Social media enthusiasts with platform expertise</li>
-                      <li>• Graphic designers and video editors</li>
-                      <li>• Community managers and engagement specialists</li>
-                      <li>• Analytics experts and growth hackers</li>
+              <div className="grid lg:grid-cols-2 gap-12 items-start">
+                <div className="space-y-8">
+                  <div className="bg-white/10 rounded-2xl p-8 backdrop-blur-md shadow-xl">
+                    <h3 className="text-2xl font-bold text-white mb-6 font-['El_Messiri']">What We&apos;re Looking For:</h3>
+                    <ul className="space-y-3 text-white/90 font-['El_Messiri'] text-lg">
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Creative content creators with fresh ideas
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Social media enthusiasts with platform expertise
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Graphic designers and video editors
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Community managers and engagement specialists
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Analytics experts and growth hackers
+                      </li>
                     </ul>
                   </div>
-                  <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-md">
-                    <h3 className="text-xl font-bold text-white mb-4">What We Offer:</h3>
-                    <ul className="space-y-2 text-white/90">
-                      <li>• Real-world experience in radio and digital media</li>
-                      <li>• Portfolio building opportunities</li>
-                      <li>• Mentorship from industry professionals</li>
-                      <li>• Flexible working arrangements</li>
-                      <li>• Career development and networking</li>
+                  <div className="bg-white/10 rounded-2xl p-8 backdrop-blur-md shadow-xl">
+                    <h3 className="text-2xl font-bold text-white mb-6 font-['El_Messiri']">What We Offer:</h3>
+                    <ul className="space-y-3 text-white/90 font-['El_Messiri'] text-lg">
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Real-world experience in radio and digital media
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Portfolio building opportunities
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Mentorship from industry professionals
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Flexible working arrangements
+                      </li>
+                      <li className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                        Career development and networking
+                      </li>
                     </ul>
                   </div>
                 </div>
                 
-                <div className="bg-white/15 rounded-2xl p-6 backdrop-blur-md">
-                  <h3 className="text-xl font-bold text-white mb-6">Apply Now</h3>
+                <div className="bg-white/15 rounded-2xl p-8 backdrop-blur-md shadow-xl">
+                  <h3 className="text-2xl font-bold text-white mb-8 font-['El_Messiri']">Apply Now</h3>
                   <form
-                    className="space-y-4"
+                    className="space-y-6"
                     action="mailto:Careers@glowfmradio.com?subject=Social%20Media%20Team%20Application"
                     method="post"
                     encType="text/plain"
                     target="_blank"
                   >
                     <div>
-                      <label className="block text-white/90 text-sm font-semibold mb-2">
+                      <label className="block text-white/90 text-sm font-semibold mb-3 font-['El_Messiri']">
                         Full Name *
                       </label>
                       <input
                         type="text"
                         name="name"
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300"
+                        className="w-full px-4 py-4 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
                         placeholder="Enter your full name"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-white/90 text-sm font-semibold mb-2">
+                      <label className="block text-white/90 text-sm font-semibold mb-3 font-['El_Messiri']">
                         Email Address *
                       </label>
                       <input
                         type="email"
                         name="email"
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300"
+                        className="w-full px-4 py-4 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
                         placeholder="your.email@example.com"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-white/90 text-sm font-semibold mb-2">
+                      <label className="block text-white/90 text-sm font-semibold mb-3 font-['El_Messiri']">
                         Phone Number *
                       </label>
                       <input
                         type="tel"
                         name="phone"
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300"
+                        className="w-full px-4 py-4 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
                         placeholder="+234 800 000 0000"
                       />
                     </div>
                     
                     <div>
-                      <label className="block text-white/90 text-sm font-semibold mb-2">
+                      <label className="block text-white/90 text-sm font-semibold mb-3 font-['El_Messiri']">
                         Tell us about yourself and why you want to join our team *
                       </label>
                       <textarea
                         name="message"
                         rows={4}
                         required
-                        className="w-full px-4 py-3 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 resize-none"
+                        className="w-full px-4 py-4 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 resize-none font-['El_Messiri'] hover:shadow-lg"
                         placeholder="Share your experience, skills, and what excites you about social media and content creation..."
                       />
                     </div>
                     
                     <button
                       type="submit"
-                      className="w-full bg-white text-purple-700 font-bold py-3 px-6 rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                      className="w-full bg-white text-purple-700 font-bold py-4 px-6 rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl font-['El_Messiri'] text-lg"
                     >
                       Submit Application
                     </button>

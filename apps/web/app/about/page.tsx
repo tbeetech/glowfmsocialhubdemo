@@ -31,15 +31,6 @@ const pillars = [
   }
 ];
 
-const aboutNarrative = [
-  "Here, the Beat meets the Glow! Glow 99.1 FM is a household name in the region, entertaining and informing a wide audience of listeners.",
-  "Glow FM Akure is a vibrant and popular radio station broadcasting from the heart of Akure, Ondo State, Nigeria. With a frequency of 99.1 FM, the station has become a household name in the region, entertaining and informing a wide audience of listeners.",
-  "Since its inception, Glow FM Akure has been dedicated to providing high-quality programming that caters to the diverse tastes and interests of its listeners. The station's playlist is a carefully curated mix of music genres, including Afrobeats, hip-hop, R&B, and more, ensuring that there's always something for everyone.",
-  "Beyond music, Glow FM Akure is also committed to providing engaging and informative content, including news, current events, and talk shows. The station's team of experienced presenters and DJs bring a unique perspective and energy to their shows, making them a delight to listen to.",
-  "One of the standout features of Glow FM Akure is its strong focus on community programming. The station is deeply rooted in the local community and is dedicated to promoting and supporting local talent, events, and initiatives. From hosting live broadcasts and events to providing a platform for local artists and organizations, Glow FM Akure is a true champion of the community.",
-  "In conclusion, Glow FM Akure is a shining example of a radio station that truly understands its audience and community. With its diverse programming, engaging presenters, and commitment to local talent and initiatives, the station has become a beloved and trusted voice in the region. Whether you're a music lover, a news enthusiast, or simply looking for a sense of community, Glow FM Akure has something for everyone."
-];
-
 const teamHighlights = [
   { label: "12", text: "Producers and social editors shaping playlists and digital rollouts daily." },
   { label: "38", text: "Volunteer correspondents reporting from campuses across Ondo and beyond." },
@@ -48,120 +39,197 @@ const teamHighlights = [
 
 export default function AboutPage() {
   return (
-    <div className="space-y-16">
-      <AnimatedSection className="rounded-3xl bg-gradient-to-r from-orange-500 via-red-600 to-orange-500 p-6 text-white shadow-xl sm:p-8 mx-4">
-        <div className="grid gap-8 md:grid-cols-[1.4fr,1fr] md:items-center md:gap-10">
-          <div className="space-y-5 sm:space-y-6">
-            <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/80 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
-              Here, the Beat Meets the Glow
-            </span>
-            <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">Glow 99.1 FM - The Heartbeat of Akure</h1>
-            <p className="max-w-2xl text-sm text-white/80 sm:text-base md:text-lg">
-              Broadcasting from Akure, Ondo State, Glow FM is a vibrant station trusted by families, students, entrepreneurs, and community leaders. We blend music discovery, news, and storytelling with digital-first experiences that keep listeners plugged in on air, online, and on the go.
-            </p>
-            <GlowButton size="lg" className="bg-white text-orange-600 hover:bg-gray-100 uppercase tracking-[0.2em] sm:tracking-[0.3em]" asChild>
-              <Link href="/advertisement">Learn about our partnerships</Link>
-            </GlowButton>
-          </div>
-          <div className="relative hidden h-full min-h-[280px] rounded-3xl border border-white/15 bg-black/20 shadow-2xl md:block overflow-hidden">
-            <Image
-              src={getAsset("studioSample")}
-              alt="Glow FM studio and team"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection className="space-y-8 mx-4">
-        <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
-          <div className="bg-gradient-to-r from-orange-500 to-red-600 p-6">
-            <h2 className="text-2xl font-bold text-white">Our Story</h2>
-            <p className="text-white/90 mt-2">Glow FM Akure is a beloved voice for music, news, and community.</p>
-          </div>
-          <div className="p-6">
-            <div className="space-y-4 text-sm text-gray-600">
-              {aboutNarrative.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection className="space-y-8 mx-4">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-900">What Drives Us</h2>
-            <p className="text-sm text-gray-600">
-              Our pillars ensure every listener, partner, and community feels the Glow.
-            </p>
-          </div>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {pillars.map((pillar) => (
-            <div key={pillar.title} className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-              <div className="bg-gradient-to-r from-orange-500 to-red-600 p-4">
-                <h3 className="text-xl font-bold text-white">{pillar.title}</h3>
-              </div>
-              <div className="p-6 space-y-4">
-                <div className="relative h-36 overflow-hidden rounded-2xl border border-gray-100">
-                  <Image
-                    src={pillar.icon}
-                    alt={pillar.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width:768px) 100vw, 320px"
-                  />
-                </div>
-                <p className="text-sm text-gray-600">{pillar.description}</p>
-                <p className="text-xs text-gray-500">{pillar.detail}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection className="grid gap-6 lg:grid-cols-[1.2fr,1fr] mx-4 pb-16">
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-          <div className="bg-gradient-to-r from-orange-500 to-red-600 p-6">
-            <h3 className="text-2xl font-bold text-white">The Team Behind the Glow</h3>
-            <p className="text-white/90 mt-1">Cross-functional storytellers</p>
-          </div>
-          <div className="p-6">
-            <p className="text-sm text-gray-600">
-              Producers, presenters, graphic artists, and analysts collaborate daily to keep Glow FM buzzing online and on-air. We script campaigns,
-              design graphics, produce short-form video, and monitor dashboards around the clock.
-            </p>
-            <ul className="mt-4 space-y-3 text-sm">
-              {teamHighlights.map((item) => (
-                <li key={item.label} className="flex items-start gap-3">
-                  <span className="text-3xl font-semibold text-orange-500">{item.label}</span>
-                  <span className="text-gray-600">{item.text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50">
+      {/* Hero Section */}
+      <AnimatedSection className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-400 via-red-500 to-orange-600"></div>
+        <div className="absolute inset-0 opacity-40">
+          <div className="h-full w-full bg-white/10 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:30px_30px]"></div>
         </div>
         
-        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-          <div className="bg-gradient-to-r from-orange-500 to-red-600 p-6">
-            <h3 className="text-xl font-bold text-white">How to Collaborate</h3>
-            <p className="text-white/90 mt-1">Partner with Glow FM</p>
+        <div className="container mx-auto px-4 py-24 relative z-10">
+          <div className="grid gap-12 lg:grid-cols-[1.2fr,1fr] lg:items-center">
+            <div className="space-y-8 text-white">
+              <div className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-6 py-3 border border-white/30">
+                <span className="text-sm font-bold font-['El_Messiri'] uppercase tracking-[0.3em]">Here, the Beat Meets the Glow</span>
+              </div>
+              
+              <h1 className="text-5xl lg:text-7xl font-black font-['El_Messiri'] leading-tight">
+                Glow 99.1 FM
+                <span className="block text-3xl lg:text-5xl text-white/90 mt-2">The Heartbeat of Akure</span>
+              </h1>
+              
+              <p className="text-xl text-white/90 max-w-2xl leading-relaxed font-['El_Messiri']">
+                Broadcasting from Akure, Ondo State, Glow FM is a vibrant station trusted by families, students, entrepreneurs, and community leaders.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <GlowButton size="lg" variant="secondary" className="font-['El_Messiri'] font-bold" asChild>
+                  <Link href="/advertisement">Partnership Opportunities</Link>
+                </GlowButton>
+                <GlowButton size="lg" variant="ghost" className="font-['El_Messiri'] font-bold" asChild>
+                  <Link href="/contact">Get In Touch</Link>
+                </GlowButton>
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="relative h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm">
+                <Image
+                  src={getAsset("studioSample")}
+                  alt="Glow FM studio and team"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              </div>
+              
+              {/* Floating stats */}
+              <div className="absolute -bottom-8 -left-8 bg-white/95 backdrop-blur-xl rounded-2xl p-6 shadow-xl border border-white/50">
+                <div className="text-3xl font-black text-orange-500 font-['El_Messiri']">250K+</div>
+                <div className="text-sm text-gray-600 font-['El_Messiri'] font-bold">Weekly Listeners</div>
+              </div>
+            </div>
           </div>
-          <div className="p-6">
-            <p className="text-sm text-gray-600">
-              We partner with brands, student unions, NGOs, and creative collectives. Choose a promo slot, co-produce an event, or integrate your message into our digital campaigns.
+        </div>
+      </AnimatedSection>
+
+      {/* Our Story Section */}
+      <AnimatedSection className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl font-black text-gray-900 font-['El_Messiri'] mb-6">Our Story</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-orange-500 to-red-500 mx-auto rounded-full"></div>
+            </div>
+            
+            <div className="grid gap-8 lg:grid-cols-2">
+              <div className="space-y-6">
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-100">
+                  <h3 className="text-2xl font-bold text-gray-900 font-['El_Messiri'] mb-4">Here, the Beat meets the Glow!</h3>
+                  <p className="text-gray-600 leading-relaxed font-['El_Messiri']">
+                    Glow 99.1 FM is a household name in the region, entertaining and informing a wide audience of listeners from the heart of Akure, Ondo State, Nigeria.
+                  </p>
+                </div>
+                
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-100">
+                  <h3 className="text-2xl font-bold text-gray-900 font-['El_Messiri'] mb-4">Quality Programming</h3>
+                  <p className="text-gray-600 leading-relaxed font-['El_Messiri']">
+                    Our carefully curated mix includes Afrobeats, hip-hop, R&B, gospel, talk shows, and lifestyle content, ensuring there&apos;s always something for everyone.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-100">
+                  <h3 className="text-2xl font-bold text-gray-900 font-['El_Messiri'] mb-4">Engaging Content</h3>
+                  <p className="text-gray-600 leading-relaxed font-['El_Messiri']">
+                    Beyond music, we provide engaging news, current events, and talk shows with experienced presenters and DJs who bring unique energy to every broadcast.
+                  </p>
+                </div>
+                
+                <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg border border-gray-100">
+                  <h3 className="text-2xl font-bold text-gray-900 font-['El_Messiri'] mb-4">Community Focus</h3>
+                  <p className="text-gray-600 leading-relaxed font-['El_Messiri']">
+                    We&apos;re deeply rooted in the local community, promoting local talent, hosting live events, and supporting community initiatives across the region.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* What Drives Us Section */}
+      <AnimatedSection className="py-24 bg-gradient-to-r from-gray-50 to-gray-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-black text-gray-900 font-['El_Messiri'] mb-6">What Drives Us</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto font-['El_Messiri']">
+              Our pillars ensure every listener, partner, and community member feels the Glow.
             </p>
-            <ul className="mt-4 space-y-2 text-[11px] uppercase tracking-[0.24em] text-orange-600 sm:text-xs sm:tracking-[0.35em]">
-              <li>Influencer takeovers</li>
-              <li>Sponsored segment scripting</li>
-              <li>Performance reporting</li>
-            </ul>
-            <GlowButton size="sm" className="mt-6 bg-orange-500 hover:bg-orange-600" asChild>
-              <Link href="/advertisement">View advertising options</Link>
-            </GlowButton>
+          </div>
+          
+          <div className="grid gap-8 lg:grid-cols-3">
+            {pillars.map((pillar) => (
+              <div key={pillar.title} className="group">
+                <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                  <div className="relative h-64 overflow-hidden">
+                    <Image
+                      src={pillar.icon}
+                      alt={pillar.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-2xl font-bold text-white font-['El_Messiri']">{pillar.title}</h3>
+                    </div>
+                  </div>
+                  
+                  <div className="p-8 space-y-4">
+                    <p className="text-gray-600 leading-relaxed font-['El_Messiri']">{pillar.description}</p>
+                    <p className="text-sm text-gray-500 font-['El_Messiri']">{pillar.detail}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* Team Section */}
+      <AnimatedSection className="py-24">
+        <div className="container mx-auto px-4">
+          <div className="grid gap-12 lg:grid-cols-[1.2fr,1fr]">
+            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-orange-500 to-red-600 p-8">
+                <h3 className="text-3xl font-bold text-white font-['El_Messiri']">The Team Behind the Glow</h3>
+                <p className="text-white/90 mt-2 font-['El_Messiri']">Cross-functional storytellers</p>
+              </div>
+              <div className="p-8">
+                <p className="text-gray-600 leading-relaxed mb-8 font-['El_Messiri']">
+                  Producers, presenters, graphic artists, and analysts collaborate daily to keep Glow FM buzzing online and on-air.
+                </p>
+                <div className="space-y-6">
+                  {teamHighlights.map((item, index) => (
+                    <div key={index} className="flex items-center gap-6 p-4 bg-gray-50 rounded-2xl">
+                      <div className="text-4xl font-black text-orange-500 font-['El_Messiri'] min-w-0">{item.label}</div>
+                      <div className="text-gray-600 font-['El_Messiri']">{item.text}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-orange-500 to-red-600 p-8">
+                <h3 className="text-2xl font-bold text-white font-['El_Messiri']">How to Collaborate</h3>
+                <p className="text-white/90 mt-2 font-['El_Messiri']">Partner with Glow FM</p>
+              </div>
+              <div className="p-8">
+                <p className="text-gray-600 leading-relaxed mb-6 font-['El_Messiri']">
+                  We partner with brands, student unions, NGOs, and creative collectives. Choose a promo slot, co-produce an event, or integrate your message into our digital campaigns.
+                </p>
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600 font-['El_Messiri'] font-bold">Influencer takeovers</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600 font-['El_Messiri'] font-bold">Sponsored segment scripting</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-sm text-gray-600 font-['El_Messiri'] font-bold">Performance reporting</span>
+                  </div>
+                </div>
+                <GlowButton size="lg" variant="accent" className="w-full font-['El_Messiri'] font-bold" asChild>
+                  <Link href="/advertisement">View Advertising Options</Link>
+                </GlowButton>
+              </div>
+            </div>
           </div>
         </div>
       </AnimatedSection>

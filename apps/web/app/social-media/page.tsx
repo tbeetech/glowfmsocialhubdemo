@@ -9,22 +9,16 @@ import { FollowBar } from "@/components/FollowBar";
 
 const youtubeHighlights = [
   {
-    title: "Ember Challenge Cypher Warm-Up",
-    embedId: "S7VAYn4Zi1o",
-    description: "Behind-the-scenes prep with our top three finalists and the Glow creative coaches.",
-    stats: "Premiered last week"
+    title: "Concise Educational Trends",
+    embedId: "S7VAYn4Zi1o"
   },
   {
-    title: "Glow News Flash: Campus Innovation Day",
-    embedId: "0ASXKv2_0C4",
-    description: "Recap of the live broadcast featuring student founders and media influencers.",
-    stats: "12 minute highlight"
+    title: "GlowFm99.1 Business New Updates",
+    embedId: "0ASXKv2_0C4"
   },
   {
-    title: "Wellness Wednesdays Livestream",
-    embedId: "9h_lcRPbw8E",
-    description: "Interactive Q&A with the Women's World crew covering wellness routines and mental health tips.",
-    stats: "Recorded in studio"
+    title: "Latest Glow Moment Stream",
+    embedId: "9h_lcRPbw8E"
   }
 ];
 
@@ -176,10 +170,7 @@ export default function SocialMediaPage() {
             {youtubeHighlights.map((video) => (
               <div key={video.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg">
                 <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-bold text-gray-900">{video.title}</h3>
-                    <p className="text-sm text-orange-600 font-medium">{video.stats}</p>
-                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 font-['El_Messiri']">{video.title}</h3>
                   <div className="aspect-video overflow-hidden rounded-xl border border-gray-200 bg-gray-100">
                     <iframe
                       className="h-full w-full"
@@ -190,10 +181,16 @@ export default function SocialMediaPage() {
                       loading="lazy"
                     />
                   </div>
-                  <p className="text-sm text-gray-700">{video.description}</p>
-                  <p className="text-[11px] uppercase tracking-[0.24em] text-orange-600 sm:text-xs sm:tracking-[0.35em]">
-                    {video.stats}
-                  </p>
+                  <GlowButton
+                    asChild
+                    size="sm"
+                    variant="accent"
+                    className="w-full justify-center uppercase tracking-[0.2em] sm:tracking-[0.3em] text-white font-semibold"
+                  >
+                    <a href="https://www.youtube.com/@glow991fm/playlists" target="_blank" rel="noreferrer">
+                      Subscribe to YouTube
+                    </a>
+                  </GlowButton>
                 </div>
               </div>
             ))}

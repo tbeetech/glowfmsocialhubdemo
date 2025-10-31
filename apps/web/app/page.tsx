@@ -16,35 +16,40 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Hero Section with Animated Grid Background */}
       <AnimatedSection>
-        <section className="relative bg-white pt-4 pb-16 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-white via-orange-50 to-red-50 pt-4 pb-20 overflow-hidden">
           {/* Animated 4x4 Grid Background */}
-          <div className="absolute inset-0 opacity-70">
+          <div className="absolute inset-0 opacity-30">
             <div className="grid-background"></div>
           </div>
+          
+          {/* Floating decorative elements */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-40 right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-15 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
           
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               {/* Left Content */}
               <div className="space-y-8">
                 {/* Headline with Red "Fun" Badge */}
-                <h1 className="text-5xl lg:text-6xl font-display font-bold text-gray-900 leading-tight">
+                <h1 className="text-5xl lg:text-7xl font-display font-black text-gray-900 leading-tight font-['El_Messiri']">
                   Connect with the GlowFM:
                   <br />
                   Join & Engage In the
                   <br />
                   Community&apos;s{" "}
                   <span className="relative inline-block">
-                    <span className="relative z-10 text-white px-4 py-2 font-extrabold">Fun</span>
+                    <span className="relative z-10 text-white px-6 py-3 font-extrabold">Fun</span>
                     <span 
-                      className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-500 transform rotate-[-2deg] rounded-md shadow-xl"
+                      className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-500 transform rotate-[-2deg] rounded-xl shadow-2xl animate-pulse"
                       style={{ 
-                        boxShadow: '0 8px 16px rgba(220, 38, 38, 0.4), 0 4px 8px rgba(220, 38, 38, 0.2)'
+                        boxShadow: '0 12px 24px rgba(220, 38, 38, 0.4), 0 6px 12px rgba(220, 38, 38, 0.2)'
                       }}
                     ></span>
                   </span>
                 </h1>
                 
-                <p className="text-gray-700 text-lg max-w-xl leading-relaxed font-body">
+                <p className="text-gray-700 text-xl max-w-xl leading-relaxed font-body font-['El_Messiri']">
                   The most powerful element is the connection. Connect with the creators who are pouring their 
                   passion into shaping tomorrow&apos;s sound. Engage in real-time Q&A sessions, drop a comment 
                   during a live performance, or join a dedicated forum.
@@ -52,15 +57,15 @@ export default function HomePage() {
 
                 {/* Clean Email + Button Component */}
                 <div className="max-w-xl">
-                  <div className="flex items-center bg-gray-50 rounded-full shadow-lg border border-gray-200 p-2 hover:shadow-xl transition-all duration-300">
+                  <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-full shadow-2xl border-2 border-orange-200 p-2 hover:shadow-2xl hover:border-orange-300 transition-all duration-500 group">
                     <input
                       type="email"
                       placeholder="Email Address"
-                      className="flex-1 px-6 py-3 bg-transparent focus:outline-none text-gray-900 placeholder:text-gray-500 rounded-l-full font-body"
+                      className="flex-1 px-6 py-4 bg-transparent focus:outline-none text-gray-900 placeholder:text-gray-500 rounded-l-full font-body font-['El_Messiri'] font-semibold"
                     />
-                    <button className="bg-gradient-to-r from-indigo-900 to-indigo-800 text-white px-8 py-3 rounded-full hover:from-indigo-800 hover:to-indigo-700 transition-all duration-300 font-semibold shadow-lg whitespace-nowrap flex items-center gap-2 transform hover:scale-105">
+                    <button className="bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 text-white px-8 py-4 rounded-full hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-xl whitespace-nowrap flex items-center gap-3 transform hover:scale-105 font-['El_Messiri'] group-hover:shadow-2xl">
                       Join Glow Fm
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </button>
@@ -69,10 +74,10 @@ export default function HomePage() {
               </div>
 
               {/* Right Content - TILTED MICROPHONE IMAGE */}
-              <div className="relative lg:h-[600px] flex items-center justify-center">
+              <div className="relative lg:h-[700px] flex items-center justify-center">
                 <div className="relative w-full h-full max-w-lg">
                   <div 
-                    className="relative w-full h-full transform"
+                    className="relative w-full h-full transform transition-transform duration-1000 hover:rotate-[15deg]"
                     style={{ 
                       transform: 'rotate(12deg) translateX(20px)',
                       filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15))'
@@ -86,6 +91,10 @@ export default function HomePage() {
                       priority
                     />
                   </div>
+                  
+                  {/* Glowing ring animation */}
+                  <div className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-300/30 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
+                  <div className="absolute top-1/2 left-1/2 w-80 h-80 -translate-x-1/2 -translate-y-1/2 border border-red-300/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
                 </div>
               </div>
             </div>
@@ -139,20 +148,20 @@ export default function HomePage() {
             width: 100%;
             height: 100%;
             background-image: 
-              linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-            background-size: 100px 100px;
-            animation: gridMove 20s linear infinite;
+              linear-gradient(rgba(255, 107, 0, 0.08) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 107, 0, 0.08) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: gridMove 25s linear infinite, gridPulse 4s ease-in-out infinite;
           }
           
           .grid-background-nav {
             width: 100%;
             height: 100%;
             background-image: 
-              linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 25s linear infinite;
+              linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: gridMove 30s linear infinite;
           }
           
           @keyframes gridMove {
@@ -160,7 +169,43 @@ export default function HomePage() {
               transform: translate(0, 0);
             }
             100% {
-              transform: translate(100px, 100px);
+              transform: translate(80px, 80px);
+            }
+          }
+          
+          @keyframes gridPulse {
+            0%, 100% {
+              opacity: 0.3;
+            }
+            50% {
+              opacity: 0.6;
+            }
+          }
+          
+          @keyframes float {
+            0%, 100% {
+              transform: translateY(0px);
+            }
+            50% {
+              transform: translateY(-20px);
+            }
+          }
+          
+          @keyframes glow {
+            0%, 100% {
+              box-shadow: 0 0 20px rgba(255, 107, 0, 0.3);
+            }
+            50% {
+              box-shadow: 0 0 40px rgba(255, 107, 0, 0.6);
+            }
+          }
+          
+          @keyframes shimmer {
+            0% {
+              background-position: -1000px 0;
+            }
+            100% {
+              background-position: 1000px 0;
             }
           }
           
@@ -173,6 +218,20 @@ export default function HomePage() {
           section {
             position: relative;
             z-index: 20;
+          }
+          
+          .animate-float {
+            animation: float 6s ease-in-out infinite;
+          }
+          
+          .animate-glow {
+            animation: glow 3s ease-in-out infinite;
+          }
+          
+          .animate-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 1000px 100%;
+            animation: shimmer 2s infinite;
           }
         `
       }} />
@@ -408,19 +467,22 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Right Content - Phone Mockup */}
+              {/* Right Content - Phone with Radio App Interface */}
               <div className="relative flex items-center justify-center lg:justify-end">
                 <div className="relative w-full max-w-sm lg:max-w-md">
-                  {/* Phone Frame with App Interface */}
+                  {/* Phone Display Image */}
                   <div className="relative">
                     <Image
-                      src={getAsset("showcaseAppMockup")}
-                      alt="Glow 99.1FM Mobile App Interface"
+                      src="/phone_display.jpg"
+                      alt="Glow 99.1FM Mobile App Interface on Phone"
                       width={400}
                       height={600}
-                      className="w-full h-auto drop-shadow-2xl"
+                      className="w-full h-auto drop-shadow-2xl rounded-2xl"
                       priority
                     />
+                    
+                    {/* Subtle overlay to enhance the design */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-black/5 rounded-2xl pointer-events-none"></div>
                   </div>
                   
                   {/* Floating decoration elements */}

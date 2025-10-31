@@ -13,7 +13,7 @@ const variantStyles: Record<GlowButtonVariant, string> = {
   accent:
     "bg-[linear-gradient(135deg,#d72638_0%,#ff3f5f_100%)] text-white hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(215,38,56,0.6)] border border-white/30 hover:border-white/50 shadow-[0_10px_40px_-10px_rgba(215,38,56,0.4)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent before:-translate-x-full hover:before:translate-x-full before:transition-transform before:duration-700",
   ghost:
-    "border-2 border-glow-primary/40 bg-transparent backdrop-blur-xl text-[color:var(--foreground)] dark:text-glow-primary hover:-translate-y-1 hover:shadow-[0_12px_40px_-15px_rgba(255,107,0,0.5)] hover:bg-glow-primary/10 dark:hover:bg-glow-primary/15 hover:border-glow-primary/60 shadow-[0_4px_20px_rgba(255,107,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-glow-primary/10 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500"
+    "border-2 border-glow-primary/40 bg-transparent backdrop-blur-xl text-white hover:-translate-y-1 hover:shadow-[0_12px_40px_-15px_rgba(255,107,0,0.5)] hover:bg-glow-primary/10 hover:border-glow-primary/60 shadow-[0_4px_20px_rgba(255,107,0,0.1)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-transparent before:via-glow-primary/10 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500"
 };
 
 const sizeStyles: Record<GlowButtonSize, string> = {
