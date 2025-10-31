@@ -12,4 +12,4 @@ polls, quests, leaderboards, UGC intake, notifications, analytics, and workers f
 See `/apps/api/README.md` and `/apps/web/README.md` for details.
 
 
-## A Certified indigination of GlowFm media planes-
+## A Liscenced property of GLOW99.1FM
