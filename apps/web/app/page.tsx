@@ -369,7 +369,7 @@ export default function HomePage() {
             
             <div className="max-w-4xl mx-auto">
               <CountdownClock 
-                targetDate={new Date("2025-11-01T00:00:00")}
+                targetDate={new Date("2025-11-01T12:00:00")}
                 labels={{
                   days: "DAYS",
                   hours: "HOURS",

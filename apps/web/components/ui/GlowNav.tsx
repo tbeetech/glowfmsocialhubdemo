@@ -164,7 +164,7 @@ export function GlowNav() {
         </nav>
 
         <div className="hidden items-center md:flex">
-          <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300 shadow-lg hover:scale-105 backdrop-blur-sm">
+          <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-300 shadow-lg hover:scale-105 backdrop-blur-sm font-['El_Messiri']">
             Listen Now
           </button>
         </div>
@@ -218,7 +218,7 @@ export function GlowNav() {
                 )}
               </div>
               <div className="mt-6">
-                <button className="w-full bg-indigo-900 text-white rounded-full px-6 py-3 text-sm font-medium hover:bg-indigo-800 transition-all duration-300">
+                <button className="w-full bg-indigo-900 text-white rounded-full px-6 py-3 text-sm font-bold hover:bg-indigo-800 transition-all duration-300 font-['El_Messiri']">
                   Listen Now
                 </button>
               </div>
