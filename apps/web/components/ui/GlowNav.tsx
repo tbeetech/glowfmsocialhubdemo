@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { getAsset } from "@/lib/drive-assets";
 
 interface IconProps {
   className?: string;
@@ -49,7 +51,6 @@ function CloseIcon({ className }: IconProps) {
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Social Media", href: "/social-media" },
-  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "Advertisement", href: "/advertisement" }
@@ -58,13 +59,13 @@ const navLinks = [
 type NavItem = (typeof navLinks)[number];
 
 const baseLinkClasses =
-  "relative text-sm font-medium tracking-wide text-gray-800 transition-colors duration-200";
+  "relative text-sm font-medium tracking-wide text-gray-800 transition-all duration-300 font-['El_Messiri'] font-bold";
 
 const activeLinkClasses =
   "text-gray-900 font-semibold";
 
 const hoverLinkClasses =
-  "hover:text-gray-900";
+  "hover:text-gray-900 hover:border-b-2 hover:border-gradient-to-r hover:from-orange-500 hover:to-blue-500 pb-1";
 
 function renderLink(
   item: NavItem,
@@ -95,7 +96,14 @@ function renderLink(
   }
 
   return (
-    <Link key={href} href={href} className={classes} onClick={handleClick} prefetch aria-current={isActive ? "page" : undefined}>
+    <Link 
+      key={href} 
+      href={href} 
+      className={`${classes} hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-0.5 hover:after:bg-gradient-to-r hover:after:from-orange-500 hover:after:to-blue-500`} 
+      onClick={handleClick} 
+      prefetch 
+      aria-current={isActive ? "page" : undefined}
+    >
       {label}
     </Link>
   );
@@ -134,8 +142,17 @@ export function GlowNav() {
       </div>
       
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-6 relative z-10">
-        <Link href="/" className="flex items-center text-gray-900" prefetch>
-          <span className="font-display text-2xl font-bold tracking-wide">Glow FM</span>
+        <Link href="/" className="flex items-center text-gray-900 transition-transform duration-300 hover:scale-105" prefetch>
+          <div className="relative w-12 h-12 mr-3">
+            <Image
+              src={getAsset("glowFmStandardLogo")}
+              alt="Glow FM Logo"
+              fill
+              className="object-contain rounded-full"
+              sizes="48px"
+            />
+          </div>
+          <span className="text-xl font-bold tracking-wide font-['El_Messiri'] hidden sm:inline-block">Glow FM</span>
         </Link>
 
         <nav className="hidden items-center gap-12 md:flex">
@@ -147,7 +164,7 @@ export function GlowNav() {
         </nav>
 
         <div className="hidden items-center md:flex">
-          <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300 shadow-lg">
+          <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300 shadow-lg hover:scale-105 backdrop-blur-sm">
             Listen Now
           </button>
         </div>
@@ -177,7 +194,7 @@ export function GlowNav() {
             
             <div className="relative z-10">
               <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900 font-display">Navigate Glow FM</h2>
+                <h2 className="text-lg font-semibold text-gray-900 font-['El_Messiri']">Navigate Glow FM</h2>
                 <button
                   type="button"
                   className="inline-flex h-8 w-8 items-center justify-center text-gray-700 transition hover:text-gray-900"
@@ -193,7 +210,7 @@ export function GlowNav() {
                     link,
                     {
                       extra:
-                        "px-4 py-3 text-sm font-medium text-gray-800 hover:text-gray-900",
+                        "px-4 py-3 text-sm font-medium text-gray-800 hover:text-gray-900 font-['El_Messiri'] font-bold",
                       onClick: () => setOpen(false),
                       isActive: isActivePath(link.href)
                     }
@@ -201,7 +218,7 @@ export function GlowNav() {
                 )}
               </div>
               <div className="mt-6">
-                <button className="w-full bg-indigo-900 text-white rounded-full px-6 py-3 text-sm font-medium">
+                <button className="w-full bg-indigo-900 text-white rounded-full px-6 py-3 text-sm font-medium hover:bg-indigo-800 transition-all duration-300">
                   Listen Now
                 </button>
               </div>

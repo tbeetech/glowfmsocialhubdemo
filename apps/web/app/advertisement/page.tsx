@@ -177,15 +177,15 @@ export default function AdvertisementPage() {
   );
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen text-gray-900">
       <div className="space-y-16">
-        <AnimatedSection className="rounded-3xl bg-gradient-to-br from-orange-500 to-red-500 p-6 text-white shadow-xl sm:p-8">
+        <AnimatedSection className="rounded-3xl bg-gradient-to-br from-orange-500 to-red-500 p-6 text-white shadow-xl sm:p-8 mx-4">
           <div className="space-y-5 sm:space-y-6">
             <span className="inline-flex items-center rounded-full bg-white/20 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/90 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
               Grow With Glow FM
             </span>
-            <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl">Advertising and Sales Acceleration</h1>
-            <p className="max-w-3xl text-sm text-white/90 sm:text-base md:text-lg">
+            <h1 className="text-3xl font-bold sm:text-4xl md:text-5xl font-['El_Messiri']">Advertising and Sales Acceleration</h1>
+            <p className="max-w-3xl text-sm text-white/90 sm:text-base md:text-lg font-['El_Messiri'] font-semibold">
               Glow FM combines radio storytelling, social-first content, and data dashboards to drive measurable results for your business. Choose a package, plug into our creative team, and watch your numbers climb.
             </p>
             <div className="flex flex-wrap gap-3 sm:gap-4">
@@ -204,11 +204,11 @@ export default function AdvertisementPage() {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="space-y-8">
+        <AnimatedSection className="space-y-8 mx-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
-              <h2 className="text-3xl font-semibold text-gray-900">Choose a Glow FM Growth Package</h2>
-              <p className="text-sm text-gray-600">
+              <h2 className="text-3xl font-semibold text-gray-900 font-['El_Messiri']">Choose a Glow FM Growth Package</h2>
+              <p className="text-sm text-gray-600 font-['El_Messiri'] font-semibold">
                 Toggle currencies, review deliverables, and match the plan that fits your current campaign ambitions.
               </p>
             </div>
@@ -354,14 +354,14 @@ export default function AdvertisementPage() {
           </div>
           <p className="text-[11px] text-gray-500 sm:text-xs">
             Need a custom mix? Email{" "}
-            <a className="underline decoration-dotted text-orange-600" href="mailto:social@glow991fm.com">
-              social@glow991fm.com
+            <a className="underline decoration-dotted text-orange-600" href="mailto:marketing@glowfmradio.com">
+              marketing@glowfmradio.com
             </a>{" "}
             for bespoke media plans, bundle discounts, and multi-city roadshows.
           </p>
         </AnimatedSection>
 
-        <AnimatedSection className="space-y-8">
+        <AnimatedSection className="space-y-8 mx-4">
           <h2 className="text-3xl font-semibold text-gray-900">Why Advertisers Choose Glow FM</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {salesBoosters.map((item) => (
@@ -378,7 +378,7 @@ export default function AdvertisementPage() {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="space-y-8">
+        <AnimatedSection className="space-y-8 mx-4">
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-3xl font-semibold text-gray-900">Proof in Numbers</h2>
@@ -405,7 +405,7 @@ export default function AdvertisementPage() {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="grid gap-6 lg:grid-cols-[1.2fr,1fr]">
+        <AnimatedSection className="grid gap-6 lg:grid-cols-[1.2fr,1fr] mx-4 pb-16">
           <div className="rounded-3xl bg-gradient-to-r from-orange-500 to-red-500 p-6 text-white shadow-lg">
             <div className="space-y-4">
               <div className="space-y-2">
@@ -430,7 +430,7 @@ export default function AdvertisementPage() {
                 Need detailed rate cards, audience splits, and sample creative? Request the Glow FM media kit and we will deliver it straight to your inbox.
               </p>
               <GlowButton asChild size="sm" variant="ghost" className="mt-6 uppercase tracking-[0.2em] sm:tracking-[0.3em]">
-                <Link href="mailto:social@glow991fm.com?subject=Glow%20FM%20Media%20Kit%20Request">Email for media kit</Link>
+                <Link href="mailto:marketing@glowfmradio.com?subject=Glow%20FM%20Media%20Kit%20Request">Email for media kit</Link>
               </GlowButton>
             </div>
           </div>

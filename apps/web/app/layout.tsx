@@ -62,7 +62,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-screen bg-white text-gray-900" suppressHydrationWarning>
         <Script id="theme-init" strategy="beforeInteractive">{themeInitializer}</Script>
         <GlowNav />
-        <main className="bg-white">{children}</main>
+        <main className="bg-white pt-20">{children}</main>
         <a
           href="https://glow991fm.com/schedules/"
           className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-indigo-900 text-white px-5 py-3 text-sm font-semibold shadow-lg hover:bg-indigo-800 transition-colors"

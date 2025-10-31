@@ -25,7 +25,6 @@ const socialLinks = [
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Social Media", href: "/social-media" },
-  { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "Advertisement", href: "/advertisement" }
@@ -43,7 +42,8 @@ const contactDetails: ReadonlyArray<ContactDetail> = [
   { label: "Media House | Traffic", display: "0805 482 0000", href: "tel:+2348054820000" },
   { label: "Studio", display: "0805 551 1110", href: "tel:+2348055511110" },
   { label: "Studio", display: "0706 677 1822", href: "tel:+2347066771822" },
-  { label: "Email", display: "glow991fm@gmail.com", href: "mailto:glow991fm@gmail.com" },
+  { label: "Careers", display: "Careers@glowfmradio.com", href: "mailto:Careers@glowfmradio.com" },
+  { label: "Marketing", display: "marketing@glowfmradio.com", href: "mailto:marketing@glowfmradio.com" },
   { label: "Address", display: "1 Efon Alaye street Ijapo Estate, Akure, Akure, Nigeria." }
 ] as const;
 

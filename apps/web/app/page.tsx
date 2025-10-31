@@ -1,18 +1,24 @@
 "use client";
+import { useState } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { CountdownClock } from "@/components/CountdownClock";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { getAsset } from "@/lib/drive-assets";
 import Image from "next/image";
+import { ShowCarousel } from "@/components/ShowCarousel";
+import { EmberChallengeModal } from "@/components/EmberChallengeModal";
+import { ProgramReviewsSlider } from "@/components/ProgramReviewsSlider";
 
 export default function HomePage() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section with Animated Grid Background */}
       <AnimatedSection>
-        <section className="relative bg-white pt-24 pb-16 overflow-hidden">
+        <section className="relative bg-white pt-4 pb-16 overflow-hidden">
           {/* Animated 4x4 Grid Background */}
-          <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 opacity-70">
             <div className="grid-background"></div>
           </div>
           
@@ -172,264 +178,33 @@ export default function HomePage() {
       }} />
 
 
-      {/* Show Listings Section - Carousel with Navigation */}
+      {/* Show Listings Section - Carousel with Navigation and Enhanced Background */}
       <AnimatedSection>
-        <div className="py-16 bg-white text-center">
-          <h2 className="text-4xl font-display font-bold mb-2 text-gray-900">Show Listings</h2>
-          <p className="text-gray-600 mb-8 font-body max-w-2xl mx-auto">
-            Your Guide to Unearthing the Podcasts and Radio Programmes That Will Revolutionize Your Listening Routine
-          </p>
+        <div className="py-16 relative overflow-hidden">
+          {/* Blurry radiant gradient background with joyful colors */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-orange-50 to-red-50"></div>
+            <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full opacity-20 blur-3xl"></div>
+            <div className="absolute bottom-10 right-10 w-80 h-80 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-15 blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl"></div>
+            {/* Translucent white overlay for classic glow aesthetic */}
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
+          </div>
           
-          {/* Carousel Container */}
-          <div className="relative max-w-6xl mx-auto px-4">
-            {/* Left Arrow */}
-            <button className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all">
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
+          <div className="relative z-10 text-center">
+            <h2 className="text-4xl font-display font-bold mb-2 text-gray-900">Show Listings</h2>
+            <p className="text-gray-600 mb-8 font-body max-w-2xl mx-auto">
+              Your Guide to Unearthing the Podcasts and Radio Programmes That Will Revolutionize Your Listening Routine
+            </p>
             
-            {/* Right Arrow */}
-            <button className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all">
-              <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-            
-            {/* Shows Grid - All 9 Hot Shows */}
-            <div className="grid md:grid-cols-3 gap-8 px-12">
-              {/* IJI AYO */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showIjiAyo")}
-                    alt="IJI AYO"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">IJI AYO</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">Cultural & Entertainment</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">8:00am</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-
-              {/* Millionaires Mindset */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showMillionairesMindset")}
-                    alt="Millionaires Mindset"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">Millionaires Mindset</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">Business & Finance</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">10:00am</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-
-              {/* Glow Kiddies */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showGlowKiddies")}
-                    alt="Glow Kiddies"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">Glow Kiddies</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">Children & Family</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">2:00pm</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-
-              {/* LET's TALK */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showLetsTalk")}
-                    alt="LET's TALK"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">LET&apos;s TALK</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">Discussion & Talk</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">4:00pm</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-
-              {/* YOU AND THE LAW */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showYouAndTheLaw")}
-                    alt="YOU AND THE LAW"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">YOU AND THE LAW</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">Legal & Advice</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">6:00pm</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-
-              {/* Love Saturday */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showLoveSaturday")}
-                    alt="Love Saturday"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">Love Saturday</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">Music & Romance</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">12:00pm</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-
-              {/* Kayefi Nla */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showKayefiNla")}
-                    alt="Kayefi Nla"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">Kayefi Nla</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">Culture & Society</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">7:00pm</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-
-              {/* Women's World */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showWomensWorld")}
-                    alt="Women's World"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">Women&apos;s World</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">Women & Lifestyle</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">3:00pm</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-
-              {/* The News */}
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all">
-                <div className="relative h-48 w-full">
-                  <Image
-                    src={getAsset("showTheNews")}
-                    alt="The News"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-2">The News</h3>
-                  <p className="text-sm text-gray-600 mb-2 font-body">News & Current Affairs</p>
-                  <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="font-body">1:00pm</span>
-                  </div>
-                  <button className="bg-indigo-900 text-white py-2 px-6 rounded-full hover:bg-indigo-800 transition-colors font-body text-sm">
-                    See Now →
-                  </button>
-                </div>
-              </div>
-            </div>
+            <ShowCarousel />
           </div>
         </div>
       </AnimatedSection>
 
       {/* Glow Ember Challenge Section - With Confetti Background */}
       <AnimatedSection>
-        <div className="py-16 bg-[#f5f5f0] relative overflow-hidden">
+        <div className="pt-16 pb-0 bg-[#f5f5f0] relative overflow-hidden">
           {/* Confetti Background - Contained within section */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute inset-0">
@@ -454,8 +229,8 @@ export default function HomePage() {
             </div>
           </div>
           
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center relative z-10">
-            <div className="text-left space-y-4">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-end relative z-10">
+            <div className="text-left space-y-4 pb-16">
               <h2 className="text-5xl font-display font-bold text-gray-900 mb-2">
                 Glow Ember Challenge
               </h2>
@@ -473,15 +248,18 @@ export default function HomePage() {
               <p className="text-sm font-body text-gray-700 max-w-md">
                 Win Small prizes like tote bag, mini power bank, airtime, jotter
               </p>
-              <button className="bg-indigo-900 text-white px-8 py-3 rounded-full hover:bg-indigo-800 transition-colors font-body flex items-center gap-2 mt-4">
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="bg-indigo-900 text-white px-8 py-3 rounded-full hover:bg-indigo-800 transition-colors font-body flex items-center gap-2 mt-4"
+              >
                 Participate Now →
               </button>
             </div>
             
-            {/* Right side - Guy with Glasses */}
+            {/* Right side - Guy with Glasses - Flush to bottom */}
             <div className="relative h-[500px] flex items-end justify-center">
               {/* Glow FM Logo in top right corner */}
-              <div className="absolute top-8 right-8 w-32 h-32 z-20">
+              <div className="absolute top-0 right-8 w-32 h-32 z-20">
                 <div className="bg-white rounded-full p-4 shadow-lg flex items-center justify-center w-full h-full">
                   <div className="relative w-full h-full">
                     <Image
@@ -494,13 +272,14 @@ export default function HomePage() {
                 </div>
               </div>
               
-              {/* Guy with Glasses Image */}
-              <div className="relative w-full h-full max-w-md">
+              {/* Guy with Glasses Image - Flush to bottom with no margin/padding */}
+              <div className="relative w-full h-full max-w-md transform translate-y-2">
                 <Image
                   src={getAsset("heroHostSmileCutout")}
                   alt="Ember Challenge Winner"
                   fill
                   className="object-contain object-bottom"
+                  style={{ objectPosition: 'bottom center', marginBottom: 0, paddingBottom: 0 }}
                 />
               </div>
             </div>
@@ -508,227 +287,157 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* How to Get on Stage Section */}
+
+
+      {/* Countdown Section - Enhanced Styling */}
       <AnimatedSection>
-        <div className="py-16">
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-start">
-            <div className="space-y-6">
-              <h2 className="text-4xl font-bold">
-                How to Get on the
-                <br />
-                Ember Challenge Stage
+        <div className="py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(255,255,255,0.2),transparent_50%)]"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(255,140,0,0.15),transparent_50%)]"></div>
+          </div>
+          
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-12">
+              <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-4">
+                Ember Challenge Starts In
               </h2>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-4">
-                  <span className="bg-blue-200 text-blue-800 font-bold rounded-full h-8 w-8 flex items-center justify-center">
-                    1
-                  </span>
-                  <span>Follow all our Social Media Platforms</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="bg-blue-200 text-blue-800 font-bold rounded-full h-8 w-8 flex items-center justify-center">
-                    2
-                  </span>
-                  <span>Send a picture of your Ember Challenge Outfit</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="bg-blue-200 text-blue-800 font-bold rounded-full h-8 w-8 flex items-center justify-center">
-                    3
-                  </span>
-                  <span>
-                    Get ready for the biggest Event of the Month, check out for
-                    more details, you could be our next featured studio
-                  </span>
-                </li>
-              </ul>
-            </div>
-            <div className="bg-white p-8 rounded-lg shadow-lg">
-              <h3 className="font-bold text-lg mb-2">
-                Your weekly playbook for the 2026 good year
-              </h3>
-              <p className="text-gray-600 mb-4">
-                Your weekly playlist for the 2026 good year
+              <p className="text-xl font-body text-white/80 max-w-2xl mx-auto">
+                Get ready for the most exciting challenge of the year! Don&apos;t miss out.
               </p>
-              <div className="flex items-center gap-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  className="flex-grow px-4 py-3 border border-gray-300 rounded-md"
-                />
-                <GlowButton className="bg-black text-white px-6 py-3 rounded-md">
-                  Complete now
-                </GlowButton>
-              </div>
             </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* Countdown Section */}
-      <AnimatedSection>
-        <div className="py-16 text-center">
-          <h2 className="text-4xl font-bold mb-8">Countdown</h2>
-          <CountdownClock targetDate={new Date("2026-01-01T00:00:00")} />
-        </div>
-      </AnimatedSection>
-
-      {/* Prizes Section */}
-      <AnimatedSection>
-        <div className="py-16 bg-white">
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
-            <div className="relative h-96">
-              <Image
-                src={getAsset("toteBagWoodenTable")}
-                alt="Prizes"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className="space-y-6">
-              <h2 className="text-4xl font-bold">
-                Get a chance to win{" "}
-                <span className="text-blue-600">Prizes</span>
-              </h2>
-              <ul className="space-y-2">
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✔</span> Tote Bags
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✔</span> Swag Bags
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-green-500">✔</span> T-Shirts
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* Grand Prize Section */}
-      <AnimatedSection>
-        <div className="py-16 text-center relative">
-          <div className="absolute top-4 right-4 w-24 h-24">
-            <Image
-              src={getAsset("decorTestimonialQuotePlate")}
-              alt="Win Sticker"
-              fill
-              className="object-contain"
-            />
-          </div>
-          <h2 className="text-6xl font-extrabold">
-            Grand Prize
-            <br />
-            <span className="text-blue-600">Laptop</span>
-          </h2>
-          <p className="text-gray-600 my-4">
-            Take it for home! Win the Ultimate Prize!
-          </p>
-          <div className="relative h-[450px] mt-8">
-            <Image
-              src={getAsset("whiteScreenLaptopTilted")}
-              alt="Laptop Grand Prize"
-              fill
-              className="object-contain"
-            />
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* Carry the Glow Section */}
-      <AnimatedSection>
-        <div className="py-16 bg-white">
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl font-bold">
-                Carry the Glow wherever the day takes you.
-              </h2>
-              <p className="text-gray-600">
-                Download our mobile app and never miss a beat. Listen to your
-                favorite shows, participate in challenges, and stay connected
-                on the go!
-              </p>
-              <ul className="space-y-2">
-                <li>Talk suggestions from a large database</li>
-                <li>Listen to our talk shows</li>
-                <li>Join challenges and win prizes</li>
-              </ul>
-              <GlowButton className="bg-black text-white px-6 py-3 rounded-md">
-                Go to Google Play
-              </GlowButton>
-            </div>
-            <div className="relative h-96">
-              <Image
-                src={getAsset("notePadTabletBlackScreen")}
-                alt="GlowFM App"
-                fill
-                className="object-contain"
+            
+            <div className="max-w-4xl mx-auto">
+              <CountdownClock 
+                targetDate={new Date("2025-11-01T00:00:00")}
+                labels={{
+                  days: "DAYS",
+                  hours: "HOURS",
+                  minutes: "MINUTES",
+                  seconds: "SECONDS"
+                }}
               />
             </div>
           </div>
         </div>
       </AnimatedSection>
 
-      {/* About GlowFM Section */}
+      {/* Grand Prizes Image Section */}
       <AnimatedSection>
-        <div className="py-16">
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
-            <div className="relative h-96 rounded-lg overflow-hidden">
-              <Image
-                src={getAsset("caseStudyNotebookWorkspaceWarm")}
-                alt="About GlowFM"
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="space-y-4">
-              <h2 className="text-4xl font-bold">About GlowFm</h2>
-              <p className="text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                euismod, nisl nec ultricies lacinia, nisl nisl aliquet
-                aliquet, nec aliquam nisl nisl eu nisl.
-              </p>
-              <p className="text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                euismod, nisl nec ultricies lacinia, nisl nisl aliquet
-                aliquet, nec aliquam nisl nisl eu nisl.
-              </p>
-              <GlowButton className="bg-black text-white px-6 py-3 rounded-md">
-                Read More
-              </GlowButton>
-            </div>
-          </div>
+        <div className="w-full">
+          <Image
+            src="/grandprices.png"
+            alt="Grand Prizes - Win Tote Bags, Swag Bags, T-Shirts and Laptop"
+            width={1920}
+            height={1080}
+            className="w-full h-auto"
+            priority
+          />
         </div>
       </AnimatedSection>
 
-      {/* Reviews Section */}
+      {/* Google Play App Section - Enhanced Design */}
       <AnimatedSection>
-        <div className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center mb-8">
-              Our Programmes Reviews
-            </h2>
-            <div className="grid md:grid-cols-2 gap-16 items-center">
-              <div className="bg-gray-100 p-8 rounded-lg">
-                <p className="text-gray-600 mb-4">
-                  &quot;Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit. Sed euismod, nisl nec ultricies lacinia, nisl nisl
-                  aliquet aliquet, nec aliquam nisl nisl eu nisl.&quot;
+        <div className="py-20 bg-gradient-to-br from-orange-50 via-white to-red-50 relative overflow-hidden">
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-green-400 to-blue-400 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Content */}
+              <div className="space-y-8">
+                <h2 className="text-5xl lg:text-6xl font-display font-bold text-gray-900 leading-tight">
+                  Carry the Glow wherever 
+                  <br />
+                  the day takes you.
+                </h2>
+                
+                <p className="text-lg text-gray-600 font-body leading-relaxed max-w-lg">
+                  Download our mobile app and never miss a beat. Listen to your favorite shows, 
+                  participate in challenges, and stay connected on the go!
                 </p>
-                <div className="font-semibold">Sarah Tone</div>
-                <div className="text-gray-500">Glow Fm</div>
+
+                {/* Feature List with Icons */}
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-900 font-body">Sync notification reminders</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-900 font-body">Jump between music blocks</span>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
+                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-900 font-body">Talk segments from a single playback surface</span>
+                  </div>
+                </div>
+
+                {/* Google Play Button */}
+                <div className="pt-4">
+                  <GlowButton
+                    asChild
+                    className="inline-flex items-center gap-3 bg-white text-gray-900 border-2 border-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    <a href="https://play.google.com/store/apps" target="_blank" rel="noreferrer">
+                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                      </svg>
+                      Get In On Google play
+                    </a>
+                  </GlowButton>
+                </div>
               </div>
-              <div className="relative h-80 rounded-lg overflow-hidden">
-                <Image
-                  src={getAsset("heroHostSmileCutout")}
-                  alt="Reviewer"
-                  fill
-                  className="object-cover"
-                />
+
+              {/* Right Content - Phone Mockup */}
+              <div className="relative flex items-center justify-center lg:justify-end">
+                <div className="relative w-full max-w-sm lg:max-w-md">
+                  {/* Phone Frame with App Interface */}
+                  <div className="relative">
+                    <Image
+                      src={getAsset("showcaseAppMockup")}
+                      alt="Glow 99.1FM Mobile App Interface"
+                      width={400}
+                      height={600}
+                      className="w-full h-auto drop-shadow-2xl"
+                      priority
+                    />
+                  </div>
+                  
+                  {/* Floating decoration elements */}
+                  <div className="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 blur-xl"></div>
+                  <div className="absolute -bottom-12 -left-8 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-20 blur-xl"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      </AnimatedSection>
+
+
+
+      {/* Reviews Section with New Slider Design */}
+      <AnimatedSection>
+        <ProgramReviewsSlider />
       </AnimatedSection>
 
       {/* Social Wall Section */}
@@ -756,6 +465,12 @@ export default function HomePage() {
           </div>
         </div>
       </AnimatedSection>
+
+      {/* Ember Challenge Registration Modal */}
+      <EmberChallengeModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 }

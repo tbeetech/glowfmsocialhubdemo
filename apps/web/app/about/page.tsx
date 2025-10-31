@@ -48,8 +48,8 @@ const teamHighlights = [
 
 export default function AboutPage() {
   return (
-    <div className="space-y-16 bg-white">
-      <AnimatedSection className="rounded-3xl bg-gradient-to-r from-orange-500 via-red-600 to-orange-500 p-6 text-white shadow-xl sm:p-8">
+    <div className="space-y-16">
+      <AnimatedSection className="rounded-3xl bg-gradient-to-r from-orange-500 via-red-600 to-orange-500 p-6 text-white shadow-xl sm:p-8 mx-4">
         <div className="grid gap-8 md:grid-cols-[1.4fr,1fr] md:items-center md:gap-10">
           <div className="space-y-5 sm:space-y-6">
             <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[11px] uppercase tracking-[0.22em] text-white/80 sm:px-4 sm:text-xs sm:tracking-[0.3em]">
@@ -74,7 +74,7 @@ export default function AboutPage() {
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="space-y-8">
+      <AnimatedSection className="space-y-8 mx-4">
         <div className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden">
           <div className="bg-gradient-to-r from-orange-500 to-red-600 p-6">
             <h2 className="text-2xl font-bold text-white">Our Story</h2>
@@ -90,7 +90,7 @@ export default function AboutPage() {
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="space-y-8">
+      <AnimatedSection className="space-y-8 mx-4">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <h2 className="text-3xl font-semibold text-gray-900">What Drives Us</h2>
@@ -123,7 +123,7 @@ export default function AboutPage() {
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="grid gap-6 lg:grid-cols-[1.2fr,1fr]">
+      <AnimatedSection className="grid gap-6 lg:grid-cols-[1.2fr,1fr] mx-4 pb-16">
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
           <div className="bg-gradient-to-r from-orange-500 to-red-600 p-6">
             <h3 className="text-2xl font-bold text-white">The Team Behind the Glow</h3>
