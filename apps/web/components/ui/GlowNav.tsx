@@ -133,7 +133,7 @@ export function GlowNav() {
   };
 
   return (
-    <header className="fixed top-0 z-[100] w-full">
+  <header className="fixed top-0 z-[100] w-full">
       {/* Matching Grid Background */}
       <div className="absolute inset-0 bg-white/95 backdrop-blur-sm">
         <div className="absolute inset-0 opacity-5">
@@ -141,9 +141,9 @@ export function GlowNav() {
         </div>
       </div>
       
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-6 relative z-10">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-3 compact:px-4 phablet:px-5 lg:px-8 py-3 phablet:py-4 md:py-6 relative z-10">
         <Link href="/" className="flex items-center text-gray-900 transition-transform duration-300 hover:scale-105" prefetch>
-          <div className="relative w-12 h-12 mr-3">
+          <div className="relative w-10 h-10 compact:w-11 compact:h-11 md:w-12 md:h-12 mr-2 md:mr-3">
             <Image
               src={getAsset("glowFmStandardLogo")}
               alt="Glow FM Logo"
@@ -152,7 +152,7 @@ export function GlowNav() {
               sizes="48px"
             />
           </div>
-          <span className="text-xl font-bold tracking-wide font-['El_Messiri'] hidden sm:inline-block">Glow FM</span>
+          <span className="text-lg sp:text-xl font-bold tracking-wide font-['El_Messiri'] hidden sm:inline-block">Glow FM</span>
         </Link>
 
         <nav className="hidden items-center gap-12 md:flex">
@@ -164,7 +164,7 @@ export function GlowNav() {
         </nav>
 
         <div className="hidden items-center md:flex">
-          <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-6 py-2.5 text-sm font-bold transition-all duration-300 shadow-lg hover:scale-105 backdrop-blur-sm font-['El_Messiri']">
+          <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-5 mlaptop:px-6 py-2 text-sm font-bold transition-all duration-300 shadow-lg hover:scale-105 backdrop-blur-sm font-['El_Messiri']">
             Listen Now
           </button>
         </div>
@@ -185,7 +185,7 @@ export function GlowNav() {
           <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
           <div
             id="mobile-nav"
-            className="absolute inset-x-4 top-20 rounded-2xl bg-white/95 backdrop-blur-lg shadow-2xl p-6"
+            className="absolute inset-x-2 compact:inset-x-4 top-16 mp:top-20 rounded-2xl bg-white/95 backdrop-blur-lg shadow-2xl p-4 sp:p-5 mp:p-6"
           >
             {/* Matching Grid Background for Mobile Menu */}
             <div className="absolute inset-0 opacity-5 rounded-2xl overflow-hidden">
@@ -193,8 +193,8 @@ export function GlowNav() {
             </div>
             
             <div className="relative z-10">
-              <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-lg font-semibold text-gray-900 font-['El_Messiri']">Navigate Glow FM</h2>
+              <div className="mb-4 sp:mb-6 flex items-center justify-between">
+                <h2 className="text-base sp:text-lg font-semibold text-gray-900 font-['El_Messiri']">Navigate Glow FM</h2>
                 <button
                   type="button"
                   className="inline-flex h-8 w-8 items-center justify-center text-gray-700 transition hover:text-gray-900"
@@ -210,7 +210,7 @@ export function GlowNav() {
                     link,
                     {
                       extra:
-                        "px-4 py-3 text-sm font-medium text-gray-800 hover:text-gray-900 font-['El_Messiri'] font-bold",
+                        "px-3 py-2.5 sp:px-4 sp:py-3 text-sm font-medium text-gray-800 hover:text-gray-900 font-['El_Messiri'] font-bold",
                       onClick: () => setOpen(false),
                       isActive: isActivePath(link.href)
                     }
@@ -218,7 +218,7 @@ export function GlowNav() {
                 )}
               </div>
               <div className="mt-6">
-                <button className="w-full bg-indigo-900 text-white rounded-full px-6 py-3 text-sm font-bold hover:bg-indigo-800 transition-all duration-300 font-['El_Messiri']">
+                <button className="w-full bg-indigo-900 text-white rounded-full px-4 sp:px-6 py-2.5 sp:py-3 text-sm font-bold hover:bg-indigo-800 transition-all duration-300 font-['El_Messiri']">
                   Listen Now
                 </button>
               </div>

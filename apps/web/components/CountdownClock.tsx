@@ -45,9 +45,9 @@ function CountdownSegment({ label, value }: { label: string; value: number }) {
   const formatted = value.toString().padStart(2, "0");
 
   return (
-    <div className="rounded-2xl border border-white/15 bg-black/70 px-3 py-4 text-center text-white sm:px-4 sm:py-5">
-      <span className="block font-mono text-2xl font-semibold tabular-nums sm:text-3xl font-['El_Messiri']" suppressHydrationWarning>{formatted}</span>
-      <p className="mt-2 text-[11px] uppercase tracking-[0.24em] text-white/60 sm:text-xs sm:tracking-[0.35em] font-['El_Messiri'] font-bold">
+    <div className="rounded-xl compact:rounded-2xl border border-white/15 bg-black/70 px-2 compact:px-3 tablet:px-4 py-3 compact:py-4 tablet:py-5 text-center text-white">
+      <span className="block font-mono text-xl compact:text-2xl tablet:text-3xl font-semibold tabular-nums font-['El_Messiri']" suppressHydrationWarning>{formatted}</span>
+      <p className="mt-1 compact:mt-2 text-[10px] compact:text-[11px] tablet:text-xs uppercase tracking-[0.2em] compact:tracking-[0.24em] tablet:tracking-[0.35em] text-white/60 font-['El_Messiri'] font-bold">
         {label}
       </p>
     </div>
@@ -98,13 +98,13 @@ export function CountdownClock({ targetDate: targetDateProp, target, className, 
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(104,131,255,0.18),transparent_55%)] opacity-60"
           aria-hidden
         />
-        <div className="relative grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
+        <div className="relative grid grid-cols-2 gap-2 sp:gap-2.5 sm:grid-cols-4 sm:gap-3">
           {segments.map((segment) => (
             <CountdownSegment key={segment.unit} label={segment.label} value={segment.value} />
           ))}
         </div>
       </div>
-      <div className="mt-3 flex flex-col items-start gap-2 text-[11px] uppercase tracking-[0.22em] text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-xs sm:tracking-[0.3em] font-['El_Messiri'] font-bold">
+        <div className="mt-2.5 sp:mt-3 flex flex-col items-start gap-1.5 sp:gap-2 text-[10px] sp:text-[11px] uppercase tracking-[0.2em] sp:tracking-[0.22em] text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-xs sm:tracking-[0.3em] font-['El_Messiri'] font-bold">
         <span>
           {isComplete
             ? "Ember Challenge kickoff is live"

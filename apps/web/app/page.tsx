@@ -27,12 +27,12 @@ export default function HomePage() {
           <div className="absolute bottom-40 right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-15 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
           <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
           
-          <div className="container mx-auto px-4 lg:px-8 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="container mx-auto px-3 compact:px-4 lg:px-8 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-6 sp:gap-8 lg:gap-12 items-center">
               {/* Left Content */}
               <div className="space-y-8">
                 {/* Headline with Red "Fun" Badge */}
-                <h1 className="text-5xl lg:text-7xl font-display font-black text-gray-900 leading-tight font-['El_Messiri']">
+                <h1 className="text-3xl sp:text-4xl mp:text-5xl phablet:text-6xl lg:text-7xl font-display font-black text-gray-900 leading-tight font-['El_Messiri']">
                   Connect with the GlowFM:
                   <br />
                   Join & Engage In the
@@ -49,7 +49,7 @@ export default function HomePage() {
                   </span>
                 </h1>
                 
-                <p className="text-gray-700 text-xl max-w-xl leading-relaxed font-body font-['El_Messiri']">
+                <p className="text-gray-700 text-base sp:text-lg max-w-xl leading-relaxed font-body font-['El_Messiri']">
                   The most powerful element is the connection. Connect with the creators who are pouring their 
                   passion into shaping tomorrow&apos;s sound. Engage in real-time Q&A sessions, drop a comment 
                   during a live performance, or join a dedicated forum.
@@ -57,13 +57,13 @@ export default function HomePage() {
 
                 {/* Clean Email + Button Component */}
                 <div className="max-w-xl">
-                  <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-full shadow-2xl border-2 border-orange-200 p-2 hover:shadow-2xl hover:border-orange-300 transition-all duration-500 group">
+                  <div className="flex items-center bg-white/80 backdrop-blur-sm rounded-full shadow-2xl border-2 border-orange-200 p-1.5 sp:p-2 hover:shadow-2xl hover:border-orange-300 transition-all duration-500 group">
                     <input
                       type="email"
                       placeholder="Email Address"
-                      className="flex-1 px-6 py-4 bg-transparent focus:outline-none text-gray-900 placeholder:text-gray-500 rounded-l-full font-body font-['El_Messiri'] font-semibold"
+                      className="flex-1 px-4 sp:px-6 py-3 sp:py-4 bg-transparent focus:outline-none text-gray-900 placeholder:text-gray-500 rounded-l-full font-body font-['El_Messiri'] font-semibold"
                     />
-                    <button className="bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 text-white px-8 py-4 rounded-full hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-xl whitespace-nowrap flex items-center gap-3 transform hover:scale-105 font-['El_Messiri'] group-hover:shadow-2xl">
+                    <button className="bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 text-white px-5 sp:px-8 py-3 sp:py-4 rounded-full hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-xl whitespace-nowrap flex items-center gap-3 transform hover:scale-105 font-['El_Messiri'] group-hover:shadow-2xl">
                       Join Glow Fm
                       <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -75,7 +75,7 @@ export default function HomePage() {
 
               {/* Right Content - TILTED MICROPHONE IMAGE */}
               <div className="relative lg:h-[700px] flex items-center justify-center">
-                <div className="relative w-full h-full max-w-lg">
+                <div className="relative w-full h-full max-w-sm sp:max-w-md lg:max-w-lg">
                   <div 
                     className="relative w-full h-full transform transition-transform duration-1000 hover:rotate-[15deg]"
                     style={{ 
@@ -93,8 +93,8 @@ export default function HomePage() {
                   </div>
                   
                   {/* Glowing ring animation */}
-                  <div className="absolute top-1/2 left-1/2 w-96 h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-300/30 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
-                  <div className="absolute top-1/2 left-1/2 w-80 h-80 -translate-x-1/2 -translate-y-1/2 border border-red-300/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
+                  <div className="absolute top-1/2 left-1/2 w-64 sp:w-80 lg:w-96 h-64 sp:h-80 lg:h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-300/30 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
+                  <div className="absolute top-1/2 left-1/2 w-56 sp:w-72 lg:w-80 h-56 sp:h-72 lg:h-80 -translate-x-1/2 -translate-y-1/2 border border-red-300/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
                 </div>
               </div>
             </div>
@@ -104,24 +104,24 @@ export default function HomePage() {
 
       {/* Ticker Section */}
       <AnimatedSection>
-        <div className="relative bg-gradient-to-r from-indigo-900 via-blue-800 to-indigo-900 py-4 overflow-hidden">
+        <div className="relative bg-gradient-to-r from-indigo-900 via-blue-800 to-indigo-900 py-3 compact:py-4 overflow-hidden">
           <div className="animate-scroll whitespace-nowrap">
-            <span className="inline-block text-white text-lg font-semibold">
-              <span className="mx-6">Glow Ember Challenge</span>
-              <span className="mx-6 text-yellow-300">✦ is ✦</span>
-              <span className="mx-6">Here!!</span>
-              <span className="mx-6 text-yellow-300">✦</span>
-              <span className="mx-6">Don&apos;t miss out from the Fun!</span>
-              <span className="mx-6 text-yellow-300">✦</span>
-              <span className="mx-6">Participate Now</span>
-              <span className="mx-6 text-yellow-300">✦</span>
-              <span className="mx-6">Glow Ember Challenge</span>
-              <span className="mx-6 text-yellow-300">✦ is ✦</span>
-              <span className="mx-6">Here!!</span>
-              <span className="mx-6 text-yellow-300">✦</span>
-              <span className="mx-6">Don&apos;t miss out from the Fun!</span>
-              <span className="mx-6 text-yellow-300">✦</span>
-              <span className="mx-6">Participate Now</span>
+            <span className="inline-block text-white text-sm compact:text-base tablet:text-lg font-semibold">
+              <span className="mx-4 compact:mx-6">Glow Ember Challenge</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦ is ✦</span>
+              <span className="mx-4 compact:mx-6">Here!!</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Don&apos;t miss out from the Fun!</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Participate Now</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Glow Ember Challenge</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦ is ✦</span>
+              <span className="mx-4 compact:mx-6">Here!!</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Don&apos;t miss out from the Fun!</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Participate Now</span>
             </span>
           </div>
         </div>
