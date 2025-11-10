@@ -16,34 +16,32 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Hero Section with Animated Grid Background */}
       <AnimatedSection>
-        <section className="relative bg-gradient-to-br from-white via-orange-50 to-red-50 pt-20 compact:pt-24 tablet:pt-4 pb-12 compact:pb-16 tablet:pb-20 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-white via-orange-50 to-red-50 pt-4 pb-20 overflow-hidden">
           {/* Animated 4x4 Grid Background */}
           <div className="absolute inset-0 opacity-30">
             <div className="grid-background"></div>
           </div>
           
-          {/* Floating decorative elements - hidden on very small screens */}
-          <div className="hidden compact:block absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 blur-3xl animate-pulse"></div>
-          <div className="hidden sp:block absolute bottom-40 right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-15 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="hidden tablet:block absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          {/* Floating decorative elements */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-40 right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-15 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
           
-          <div className="container mx-auto px-4 compact:px-5 sp:px-6 tablet:px-8 relative z-10">
-            <div className="grid tablet:grid-cols-2 gap-8 compact:gap-10 tablet:gap-12 items-center">
+          <div className="container mx-auto px-3 mini:px-4 compact:px-5 lg:px-8 relative z-10">
+            <div className="grid lg:grid-cols-2 gap-6 sp:gap-8 lg:gap-12 items-center">
               {/* Left Content */}
-              <div className="space-y-4 compact:space-y-5 sp:space-y-6 tablet:space-y-8 order-2 tablet:order-1">
+              <div className="space-y-8 mini:space-y-6 compact:space-y-7 lg:space-y-8">
                 {/* Headline with Red "Fun" Badge */}
-                <h1 className="text-2xl compact:text-3xl sp:text-4xl mp:text-5xl phablet:text-6xl tablet:text-6xl laptop:text-7xl font-display font-black text-gray-900 leading-[1.15] compact:leading-tight font-['El_Messiri']">
+                <h1 className="text-7xl mini:text-3xl compact:text-4xl sp:text-5xl mp:text-5xl phablet:text-6xl lg:text-7xl font-display font-black text-gray-900 leading-tight font-['El_Messiri']">
                   Connect with the GlowFM:
-                  <br className="hidden compact:block" />
-                  <span className="compact:hidden"> </span>
+                  <br />
                   Join & Engage In the
-                  <br className="hidden compact:block" />
-                  <span className="compact:hidden"> </span>
+                  <br />
                   Community&apos;s{" "}
-                  <span className="relative inline-block mt-1 compact:mt-0">
-                    <span className="relative z-10 text-white px-3 compact:px-4 sp:px-5 mp:px-6 py-1.5 compact:py-2 sp:py-2.5 mp:py-3 font-extrabold text-xl compact:text-2xl sp:text-3xl mp:text-4xl phablet:text-5xl">Fun</span>
+                  <span className="relative inline-block">
+                    <span className="relative z-10 text-white px-6 py-3 font-extrabold mini:px-3 mini:py-2 compact:px-4 compact:py-2 lg:px-6 lg:py-3">Fun</span>
                     <span 
-                      className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-500 transform rotate-[-2deg] rounded-lg compact:rounded-xl shadow-2xl animate-pulse"
+                      className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-500 transform rotate-[-2deg] rounded-xl shadow-2xl animate-pulse"
                       style={{ 
                         boxShadow: '0 12px 24px rgba(220, 38, 38, 0.4), 0 6px 12px rgba(220, 38, 38, 0.2)'
                       }}
@@ -51,23 +49,23 @@ export default function HomePage() {
                   </span>
                 </h1>
                 
-                <p className="text-gray-700 text-sm compact:text-base sp:text-lg mp:text-xl max-w-xl leading-relaxed font-body font-['El_Messiri']">
+                <p className="text-gray-700 text-lg mini:text-sm compact:text-base sp:text-lg max-w-xl leading-relaxed font-body font-['El_Messiri']">
                   The most powerful element is the connection. Connect with the creators who are pouring their 
                   passion into shaping tomorrow&apos;s sound. Engage in real-time Q&A sessions, drop a comment 
                   during a live performance, or join a dedicated forum.
                 </p>
 
-                {/* Clean Email + Button Component - Stack on small screens */}
+                {/* Clean Email + Button Component */}
                 <div className="max-w-xl">
-                  <div className="flex flex-col compact:flex-row items-stretch compact:items-center bg-white/80 backdrop-blur-sm rounded-2xl compact:rounded-full shadow-2xl border-2 border-orange-200 p-2 compact:p-1.5 sp:p-2 hover:shadow-2xl hover:border-orange-300 transition-all duration-500 group gap-2 compact:gap-0">
+                  <div className="flex items-center mini:flex-col mini:items-stretch compact:flex-row compact:items-center bg-white/80 backdrop-blur-sm rounded-full mini:rounded-2xl compact:rounded-full shadow-2xl border-2 border-orange-200 p-2 mini:p-2 compact:p-1.5 sp:p-2 hover:shadow-2xl hover:border-orange-300 transition-all duration-500 group mini:gap-2 compact:gap-0">
                     <input
                       type="email"
                       placeholder="Email Address"
-                      className="flex-1 px-4 compact:px-5 sp:px-6 py-2.5 compact:py-3 sp:py-4 bg-transparent focus:outline-none text-gray-900 placeholder:text-gray-500 text-sm compact:text-base rounded-xl compact:rounded-l-full font-body font-['El_Messiri'] font-semibold"
+                      className="flex-1 px-6 py-4 mini:px-4 mini:py-2.5 compact:px-5 compact:py-3 sp:px-6 sp:py-4 bg-transparent focus:outline-none text-gray-900 placeholder:text-gray-500 rounded-l-full mini:rounded-xl compact:rounded-l-full font-body font-['El_Messiri'] font-semibold"
                     />
-                    <button className="bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 text-white px-5 compact:px-6 sp:px-8 py-2.5 compact:py-3 sp:py-4 rounded-xl compact:rounded-full hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-xl whitespace-nowrap flex items-center justify-center gap-2 compact:gap-3 transform hover:scale-105 font-['El_Messiri'] group-hover:shadow-2xl text-sm compact:text-base">
+                    <button className="bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 text-white px-8 py-4 mini:px-5 mini:py-2.5 compact:px-6 compact:py-3 sp:px-8 sp:py-4 rounded-full mini:rounded-xl compact:rounded-full hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-xl whitespace-nowrap flex items-center justify-center gap-3 mini:gap-2 compact:gap-3 transform hover:scale-105 font-['El_Messiri'] group-hover:shadow-2xl">
                       Join Glow Fm
-                      <svg className="w-4 h-4 compact:w-5 compact:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5 mini:w-4 mini:h-4 compact:w-5 compact:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </button>
@@ -76,13 +74,13 @@ export default function HomePage() {
               </div>
 
               {/* Right Content - TILTED MICROPHONE IMAGE */}
-              <div className="relative h-[300px] compact:h-[350px] sp:h-[400px] mp:h-[500px] phablet:h-[550px] tablet:h-[700px] flex items-center justify-center order-1 tablet:order-2">
-                <div className="relative w-full h-full max-w-[280px] compact:max-w-[320px] sp:max-w-sm mp:max-w-md tablet:max-w-lg">
+              <div className="relative lg:h-[700px] mini:h-[300px] compact:h-[400px] sp:h-[500px] mp:h-[600px] flex items-center justify-center">
+                <div className="relative w-full h-full max-w-lg mini:max-w-[280px] compact:max-w-sm sp:max-w-md mp:max-w-lg">
                   <div 
                     className="relative w-full h-full transform transition-transform duration-1000 hover:rotate-[15deg]"
                     style={{ 
-                      transform: 'rotate(12deg) translateX(10px)',
-                      filter: 'drop-shadow(0 15px 30px rgba(0, 0, 0, 0.12))'
+                      transform: 'rotate(12deg) translateX(20px)',
+                      filter: 'drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15))'
                     }}
                   >
                     <Image
@@ -91,13 +89,13 @@ export default function HomePage() {
                       fill
                       className="object-contain"
                       priority
-                      sizes="(max-width: 320px) 280px, (max-width: 360px) 320px, (max-width: 768px) 400px, 500px"
+                      sizes="(max-width: 320px) 280px, (max-width: 640px) 400px, (max-width: 1024px) 500px, 600px"
                     />
                   </div>
                   
-                  {/* Glowing ring animation - scaled for mobile */}
-                  <div className="absolute top-1/2 left-1/2 w-48 compact:w-56 sp:w-64 mp:w-80 tablet:w-96 h-48 compact:h-56 sp:h-64 mp:h-80 tablet:h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-300/30 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
-                  <div className="absolute top-1/2 left-1/2 w-40 compact:w-48 sp:w-56 mp:w-72 tablet:w-80 h-40 compact:h-48 sp:h-56 mp:h-72 tablet:h-80 -translate-x-1/2 -translate-y-1/2 border border-red-300/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
+                  {/* Glowing ring animation */}
+                  <div className="absolute top-1/2 left-1/2 w-96 mini:w-48 compact:w-64 sp:w-80 lg:w-96 h-96 mini:h-48 compact:h-64 sp:h-80 lg:h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-300/30 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
+                  <div className="absolute top-1/2 left-1/2 w-80 mini:w-40 compact:w-56 sp:w-72 lg:w-80 h-80 mini:h-40 compact:h-56 sp:h-72 lg:h-80 -translate-x-1/2 -translate-y-1/2 border border-red-300/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
                 </div>
               </div>
             </div>
