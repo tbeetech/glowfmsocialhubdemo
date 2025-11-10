@@ -49,11 +49,11 @@ function CloseIcon({ className }: IconProps) {
 }
 
 const navLinks = [
-  { label: "Home", href: "/" },
-  { label: "Social Media", href: "/social-media" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-  { label: "Advertisement", href: "/advertisement" }
+  { label: "Home", href: "/", disabled: false },
+  { label: "Social Media", href: "/social-media", disabled: false },
+  { label: "About", href: "/about", disabled: true },
+  { label: "Contact", href: "/contact", disabled: true },
+  { label: "Advertisement", href: "/advertisement", disabled: true }
 ] as const;
 
 type NavItem = (typeof navLinks)[number];
@@ -75,23 +75,39 @@ function renderLink(
     isActive
   }: { extra?: string; onClick?: () => void; isActive?: boolean }
 ) {
-  const { href, label } = item;
+  const { href, label, disabled } = item;
+  
+  // Grey out disabled links
+  const disabledClasses = disabled 
+    ? "opacity-40 cursor-not-allowed pointer-events-none text-gray-400" 
+    : "";
+  
   const classes = [
     baseLinkClasses, 
-    hoverLinkClasses, 
-    isActive && activeLinkClasses, 
+    !disabled && hoverLinkClasses, 
+    isActive && !disabled && activeLinkClasses, 
+    disabledClasses,
     extra
   ].filter(Boolean).join(' ');
   
   const handleClick = () => {
+    if (disabled) return;
     onClick?.();
   };
 
   if (href.startsWith("#")) {
     return (
-      <a key={href} href={href} className={classes} onClick={handleClick}>
+      <a key={href} href={disabled ? undefined : href} className={classes} onClick={handleClick}>
         {label}
       </a>
+    );
+  }
+
+  if (disabled) {
+    return (
+      <span key={href} className={classes}>
+        {label}
+      </span>
     );
   }
 

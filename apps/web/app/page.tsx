@@ -7,10 +7,12 @@ import { getAsset } from "@/lib/drive-assets";
 import Image from "next/image";
 import { ShowCarousel } from "@/components/ShowCarousel";
 import { EmberChallengeModal } from "@/components/EmberChallengeModal";
+import { PrizesModal } from "@/components/PrizesModal";
 import { ProgramReviewsSlider } from "@/components/ProgramReviewsSlider";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPrizesModalOpen, setIsPrizesModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white">
@@ -433,6 +435,7 @@ export default function HomePage() {
 
                   {/* Learn More Button */}
                   <button 
+                    onClick={() => setIsPrizesModalOpen(true)}
                     className="group bg-white/20 backdrop-blur-sm border-2 border-white/50 text-white px-8 compact:px-10 py-4 compact:py-5 rounded-full font-bold text-base compact:text-lg hover:bg-white/30 transition-all duration-300 font-['El_Messiri'] w-full compact:w-auto"
                   >
                     <span className="flex items-center justify-center gap-2">
@@ -479,9 +482,9 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* Google Play App Section - Enhanced Design */}
+      {/* Google Play App Section - Enhanced Compact Design */}
       <AnimatedSection>
-        <div className="py-20 bg-gradient-to-br from-orange-50 via-white to-red-50 relative overflow-hidden">
+        <div className="py-12 mini:py-10 compact:py-12 tablet:py-16 lg:py-20 bg-gradient-to-br from-orange-50 via-white to-red-50 relative overflow-hidden">
           {/* Background decorative elements */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full blur-3xl"></div>
@@ -489,88 +492,93 @@ export default function HomePage() {
             <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-green-400 to-blue-400 rounded-full blur-3xl"></div>
           </div>
 
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left Content */}
-              <div className="space-y-8">
-                <h2 className="text-5xl lg:text-6xl font-display font-bold text-gray-900 leading-tight">
-                  Carry the Glow wherever 
-                  <br />
-                  the day takes you.
-                </h2>
-                
-                <p className="text-lg text-gray-600 font-body leading-relaxed max-w-lg">
-                  Download our mobile app and never miss a beat. Listen to your favorite shows, 
-                  participate in challenges, and stay connected on the go!
-                </p>
-
-                {/* Feature List with Icons */}
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <span className="text-gray-900 font-body">Sync notification reminders</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <span className="text-gray-900 font-body">Jump between music blocks</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-3">
-                    <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <span className="text-gray-900 font-body">Talk segments from a single playback surface</span>
-                  </div>
-                </div>
-
-                {/* Google Play Button */}
-                <div className="pt-4">
-                  <GlowButton
-                    asChild
-                    className="inline-flex items-center gap-3 bg-white text-gray-900 border-2 border-gray-900 hover:bg-gray-900 hover:text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-                  >
-                    <a href="https://play.google.com/store/apps" target="_blank" rel="noreferrer">
-                      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
-                      </svg>
-                      Get In On Google play
-                    </a>
-                  </GlowButton>
-                </div>
-              </div>
-
-              {/* Right Content - Phone with Radio App Interface */}
-              <div className="relative flex items-center justify-center lg:justify-end">
-                <div className="relative w-full max-w-sm lg:max-w-md">
-                  {/* Phone Display Image */}
-                  <div className="relative">
-                    <Image
-                      src="/phone_display.jpg"
-                      alt="Glow 99.1FM Mobile App Interface on Phone"
-                      width={400}
-                      height={600}
-                      className="w-full h-auto drop-shadow-2xl rounded-2xl"
-                      priority
-                    />
+          <div className="container mx-auto px-4 mini:px-3 compact:px-4 tablet:px-6 lg:px-8 relative z-10">
+            <div className="max-w-6xl mx-auto">
+              {/* Main Content Container with Side-by-Side Layout */}
+              <div className="bg-white/60 backdrop-blur-xl rounded-3xl mini:rounded-2xl compact:rounded-3xl shadow-2xl border border-white/40 overflow-hidden">
+                <div className="flex flex-col lg:flex-row items-stretch">
+                  {/* Left Content - Text and Button */}
+                  <div className="flex-1 p-8 mini:p-5 compact:p-6 sp:p-7 tablet:p-10 lg:p-12 space-y-6 mini:space-y-4 compact:space-y-5 tablet:space-y-6">
+                    <h2 className="text-4xl mini:text-2xl compact:text-3xl sp:text-4xl tablet:text-5xl lg:text-5xl font-display font-bold text-gray-900 leading-tight font-['El_Messiri']">
+                      Carry the Glow wherever 
+                      <br />
+                      the day takes you.
+                    </h2>
                     
-                    {/* Subtle overlay to enhance the design */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-black/5 rounded-2xl pointer-events-none"></div>
+                    <p className="text-base mini:text-sm compact:text-base tablet:text-lg text-gray-600 font-body leading-relaxed font-['El_Messiri']">
+                      Download our mobile app and never miss a beat. Listen to your favorite shows, 
+                      participate in challenges, and stay connected on the go!
+                    </p>
+
+                    {/* Feature List with Icons */}
+                    <div className="space-y-3 mini:space-y-2 compact:space-y-3">
+                      <div className="flex items-center gap-3 mini:gap-2 compact:gap-3">
+                        <div className="w-6 h-6 mini:w-5 mini:h-5 compact:w-6 compact:h-6 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                          <svg className="w-3 h-3 mini:w-2.5 mini:h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <span className="text-gray-900 font-body mini:text-sm compact:text-base font-['El_Messiri']">Sync notification reminders</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-3 mini:gap-2 compact:gap-3">
+                        <div className="w-6 h-6 mini:w-5 mini:h-5 compact:w-6 compact:h-6 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                          <svg className="w-3 h-3 mini:w-2.5 mini:h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <span className="text-gray-900 font-body mini:text-sm compact:text-base font-['El_Messiri']">Jump between music blocks</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-3 mini:gap-2 compact:gap-3">
+                        <div className="w-6 h-6 mini:w-5 mini:h-5 compact:w-6 compact:h-6 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0">
+                          <svg className="w-3 h-3 mini:w-2.5 mini:h-2.5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                          </svg>
+                        </div>
+                        <span className="text-gray-900 font-body mini:text-sm compact:text-base font-['El_Messiri']">Talk segments from a single playback surface</span>
+                      </div>
+                    </div>
+
+                    {/* Google Play Button */}
+                    <div className="pt-2 mini:pt-1 compact:pt-2">
+                      <GlowButton
+                        asChild
+                        className="inline-flex items-center gap-3 mini:gap-2 compact:gap-3 bg-white text-gray-900 border-2 border-gray-900 hover:bg-gray-900 hover:text-white px-6 mini:px-4 compact:px-5 sp:px-6 py-3 mini:py-2 compact:py-2.5 sp:py-3 rounded-full font-semibold text-base mini:text-sm compact:text-base transition-all duration-300 shadow-lg hover:shadow-xl font-['El_Messiri']"
+                      >
+                        <a href="https://play.google.com/store/apps" target="_blank" rel="noreferrer">
+                          <svg className="w-5 h-5 mini:w-4 mini:h-4 compact:w-5 compact:h-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                          </svg>
+                          Get In On Google play
+                        </a>
+                      </GlowButton>
+                    </div>
                   </div>
-                  
-                  {/* Floating decoration elements */}
-                  <div className="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 blur-xl"></div>
-                  <div className="absolute -bottom-12 -left-8 w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-20 blur-xl"></div>
+
+                  {/* Right Content - Compact Phone Image */}
+                  <div className="relative flex items-center justify-center lg:w-80 xl:w-96 bg-gradient-to-br from-orange-100/50 to-red-100/50 p-6 mini:p-4 compact:p-5 lg:p-8">
+                    <div className="relative w-48 mini:w-36 compact:w-40 sp:w-44 lg:w-52">
+                      {/* Phone Display Image - Compact */}
+                      <div className="relative">
+                        <Image
+                          src="/phone_display.jpg"
+                          alt="Glow 99.1FM Mobile App Interface on Phone"
+                          width={300}
+                          height={450}
+                          className="w-full h-auto drop-shadow-2xl rounded-2xl mini:rounded-xl compact:rounded-2xl transform hover:scale-105 transition-transform duration-500"
+                          priority
+                        />
+                        
+                        {/* Subtle overlay to enhance the design */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-black/5 rounded-2xl mini:rounded-xl compact:rounded-2xl pointer-events-none"></div>
+                      </div>
+                      
+                      {/* Compact Floating decoration elements */}
+                      <div className="absolute -top-4 -right-4 w-12 h-12 mini:w-8 mini:h-8 compact:w-10 compact:h-10 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-30 blur-xl animate-pulse"></div>
+                      <div className="absolute -bottom-4 -left-4 w-16 h-16 mini:w-10 mini:h-10 compact:w-12 compact:h-12 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-30 blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -611,11 +619,9 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* Ember Challenge Registration Modal */}
-      <EmberChallengeModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
+      {/* Modals */}
+      <EmberChallengeModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <PrizesModal isOpen={isPrizesModalOpen} onClose={() => setIsPrizesModalOpen(false)} />
     </div>
   );
 }
