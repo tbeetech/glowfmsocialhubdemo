@@ -387,13 +387,31 @@ export default function HomePage() {
                 Ember Challenge
                 <br />
                 <span className="bg-gradient-to-r from-yellow-300 via-orange-200 to-yellow-300 bg-clip-text text-transparent animate-pulse">
-                  Has Commenced!
+                  Final Hours!
                 </span>
               </h2>
               
-              <p className="text-base compact:text-lg sp:text-xl tablet:text-2xl font-body text-white/95 max-w-3xl mx-auto leading-relaxed font-['El_Messiri'] drop-shadow-lg">
-                The most exciting challenge of the year is underway! Join now and compete for amazing prizes.
+              <p className="text-base compact:text-lg sp:text-xl tablet:text-2xl font-body text-white/95 max-w-3xl mx-auto leading-relaxed font-['El_Messiri'] drop-shadow-lg mb-8 compact:mb-10">
+                The most exciting challenge of the year is coming to an end. Don&apos;t miss your chance to participate!
               </p>
+
+              {/* Countdown Timer */}
+              <div className="mb-8 compact:mb-10">
+                <h3 className="text-xl compact:text-2xl tablet:text-3xl font-bold text-white/90 mb-4 compact:mb-6 font-['El_Messiri']">
+                  Challenge Closes In:
+                </h3>
+                <div className="max-w-3xl mx-auto">
+                  <CountdownClock 
+                    targetDate={new Date("2025-12-01T23:59:59")}
+                    labels={{
+                      days: "DAYS",
+                      hours: "HOURS",
+                      minutes: "MINUTES",
+                      seconds: "SECONDS"
+                    }}
+                  />
+                </div>
+              </div>
             </div>
             
             {/* CTA Section */}

@@ -45,11 +45,51 @@ function CountdownSegment({ label, value }: { label: string; value: number }) {
   const formatted = value.toString().padStart(2, "0");
 
   return (
-    <div className="rounded-xl compact:rounded-2xl border border-white/15 bg-black/70 px-2 compact:px-3 tablet:px-4 py-3 compact:py-4 tablet:py-5 text-center text-white">
-      <span className="block font-mono text-xl compact:text-2xl tablet:text-3xl font-semibold tabular-nums font-['El_Messiri']" suppressHydrationWarning>{formatted}</span>
-      <p className="mt-1 compact:mt-2 text-[10px] compact:text-[11px] tablet:text-xs uppercase tracking-[0.2em] compact:tracking-[0.24em] tablet:tracking-[0.35em] text-white/60 font-['El_Messiri'] font-bold">
-        {label}
-      </p>
+    <div className="group relative">
+      {/* Mindmap Connection Lines */}
+      <div className="absolute -top-8 left-1/2 w-0.5 h-8 bg-gradient-to-b from-transparent via-cyan-400/50 to-orange-500/50 hidden tablet:block"></div>
+      
+      {/* Glassy Container with Royal Border */}
+      <div className="relative rounded-2xl compact:rounded-3xl border-2 border-orange-400/30 bg-gradient-to-br from-white/5 via-cyan-500/10 to-orange-500/5 backdrop-blur-xl px-3 compact:px-4 tablet:px-6 py-4 compact:py-5 tablet:py-7 text-center shadow-2xl overflow-hidden group-hover:border-orange-400/60 transition-all duration-500">
+        {/* Inner Glow Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 via-transparent to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        {/* Corner Accents */}
+        <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-cyan-400/60"></div>
+        <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-orange-400/60"></div>
+        <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-orange-400/60"></div>
+        <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-cyan-400/60"></div>
+        
+        {/* Digital Display Value with Glow */}
+        <div className="relative z-10">
+          <span 
+            className="block font-mono text-3xl compact:text-4xl sp:text-5xl tablet:text-6xl laptop:text-7xl font-black tabular-nums font-['El_Messiri'] bg-gradient-to-br from-orange-400 via-orange-300 to-cyan-300 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(251,146,60,0.8)] group-hover:drop-shadow-[0_0_35px_rgba(251,146,60,1)] transition-all duration-500" 
+            suppressHydrationWarning
+            style={{
+              textShadow: '0 0 30px rgba(251,146,60,0.6), 0 0 60px rgba(34,211,238,0.4)'
+            }}
+          >
+            {formatted}
+          </span>
+          
+          {/* Decimal Points (Design Accent) */}
+          <div className="flex justify-center gap-1 mt-1 compact:mt-2">
+            <div className="w-1 h-1 compact:w-1.5 compact:h-1.5 rounded-full bg-cyan-400 animate-pulse"></div>
+            <div className="w-1 h-1 compact:w-1.5 compact:h-1.5 rounded-full bg-orange-400 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+          </div>
+          
+          {/* Label with Royal Typography */}
+          <p className="mt-2 compact:mt-3 tablet:mt-4 text-xs compact:text-sm tablet:text-base uppercase tracking-[0.3em] compact:tracking-[0.35em] tablet:tracking-[0.4em] font-['El_Messiri'] font-bold bg-gradient-to-r from-cyan-300 via-white to-orange-300 bg-clip-text text-transparent">
+            {label}
+          </p>
+        </div>
+        
+        {/* Animated Particle Effect */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/4 left-1/4 w-1 h-1 bg-cyan-400 rounded-full animate-ping"></div>
+          <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-orange-400 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -93,29 +133,76 @@ export function CountdownClock({ targetDate: targetDateProp, target, className, 
       aria-live={isComplete ? "assertive" : "polite"}
       aria-label={isComplete ? "Countdown complete" : `Counting down to ${targetLabel}`}
     >
-      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/80 p-4 sm:p-5">
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(104,131,255,0.18),transparent_55%)] opacity-60"
-          aria-hidden
-        />
-        <div className="relative grid grid-cols-2 gap-2 sp:gap-2.5 sm:grid-cols-4 sm:gap-3">
+      {/* Royal Glassy Container with Mindmap Design */}
+      <div className="relative overflow-hidden rounded-3xl compact:rounded-[2rem] tablet:rounded-[3rem] border-4 border-gradient-to-r from-cyan-400/40 via-purple-500/40 to-orange-400/40 bg-gradient-to-br from-slate-900/80 via-indigo-950/90 to-slate-900/80 backdrop-blur-2xl p-6 compact:p-8 tablet:p-12 shadow-[0_0_80px_rgba(34,211,238,0.3),0_0_120px_rgba(251,146,60,0.2)]">
+        
+        {/* Animated Circuit Board Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-full h-full" style={{
+            backgroundImage: `
+              linear-gradient(90deg, rgba(34,211,238,0.3) 1px, transparent 1px),
+              linear-gradient(rgba(251,146,60,0.3) 1px, transparent 1px)
+            `,
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+        
+        {/* Radial Glow Effects */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-3xl"></div>
+        </div>
+
+        {/* Central Mindmap Node */}
+        <div className="absolute top-6 left-1/2 -translate-x-1/2 w-16 h-16 compact:w-20 compact:h-20 rounded-full border-3 border-cyan-400/60 bg-gradient-to-br from-cyan-500/30 to-orange-500/30 backdrop-blur-xl hidden tablet:flex items-center justify-center shadow-[0_0_30px_rgba(34,211,238,0.6)]">
+          <div className="w-8 h-8 compact:w-10 compact:h-10 rounded-full bg-gradient-to-br from-orange-400 to-cyan-400 animate-pulse"></div>
+        </div>
+        
+        {/* Countdown Grid with Mindmap Layout */}
+        <div className="relative grid grid-cols-2 gap-4 sp:gap-5 compact:gap-6 tablet:grid-cols-4 tablet:gap-8 mt-0 tablet:mt-12">
           {segments.map((segment) => (
             <CountdownSegment key={segment.unit} label={segment.label} value={segment.value} />
           ))}
         </div>
+
+        {/* Digital Circuit Lines Between Segments */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none hidden tablet:block" style={{ zIndex: 5 }}>
+          <defs>
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style={{ stopColor: 'rgb(34, 211, 238)', stopOpacity: 0.6 }} />
+              <stop offset="50%" style={{ stopColor: 'rgb(168, 85, 247)', stopOpacity: 0.4 }} />
+              <stop offset="100%" style={{ stopColor: 'rgb(251, 146, 60)', stopOpacity: 0.6 }} />
+            </linearGradient>
+          </defs>
+          <path d="M 25% 50% L 37.5% 50%" stroke="url(#lineGradient)" strokeWidth="2" fill="none" opacity="0.5" />
+          <path d="M 50% 50% L 62.5% 50%" stroke="url(#lineGradient)" strokeWidth="2" fill="none" opacity="0.5" />
+          <path d="M 75% 50% L 87.5% 50%" stroke="url(#lineGradient)" strokeWidth="2" fill="none" opacity="0.5" />
+        </svg>
+
+        {/* Decorative Corner Elements */}
+        <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2 border-cyan-400/80 rounded-tl-lg"></div>
+        <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2 border-orange-400/80 rounded-tr-lg"></div>
+        <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2 border-orange-400/80 rounded-bl-lg"></div>
+        <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2 border-cyan-400/80 rounded-br-lg"></div>
       </div>
-        <div className="mt-2.5 sp:mt-3 flex flex-col items-start gap-1.5 sp:gap-2 text-[10px] sp:text-[11px] uppercase tracking-[0.2em] sp:tracking-[0.22em] text-white/60 sm:flex-row sm:items-center sm:justify-between sm:text-xs sm:tracking-[0.3em] font-['El_Messiri'] font-bold">
-        <span>
+
+      {/* Enhanced Status Text */}
+      <div className="mt-4 compact:mt-5 tablet:mt-6 flex flex-col items-center gap-2 compact:gap-3 text-xs compact:text-sm tablet:text-base uppercase tracking-[0.3em] compact:tracking-[0.35em] tablet:tracking-[0.4em] font-['El_Messiri'] font-bold">
+        <span className="bg-gradient-to-r from-cyan-300 via-purple-300 to-orange-300 bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]">
           {isComplete
-            ? "Ember Challenge kickoff is live"
-            : `Counting down to ${targetDate.toLocaleDateString(undefined, {
+            ? "🔥 Ember Challenge is Live!"
+            : `⏰ Final Countdown to ${targetDate.toLocaleDateString(undefined, {
                 month: "long",
                 day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit"
+                year: "numeric"
               })}`}
         </span>
-        {!isComplete && <span>{targetLabel}</span>}
+        {!isComplete && (
+          <span className="text-cyan-400/80 text-[10px] compact:text-xs tracking-wider">
+            {targetLabel}
+          </span>
+        )}
       </div>
     </div>
   );
