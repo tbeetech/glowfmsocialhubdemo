@@ -164,9 +164,11 @@ export function GlowNav() {
         </nav>
 
         <div className="hidden items-center md:flex">
-          <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-5 mlaptop:px-6 py-2 text-sm font-bold transition-all duration-300 shadow-lg hover:scale-105 backdrop-blur-sm font-['El_Messiri']">
-            Listen Now
-          </button>
+          <Link href="https://glow991fm.com/schedules/" target="_blank" rel="noopener noreferrer">
+            <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-5 mlaptop:px-6 py-2 text-sm font-bold transition-all duration-300 shadow-lg hover:scale-105 backdrop-blur-sm font-['El_Messiri']">
+              Listen Now
+            </button>
+          </Link>
         </div>
 
         <button
@@ -218,9 +220,11 @@ export function GlowNav() {
                 )}
               </div>
               <div className="mt-6">
-                <button className="w-full bg-indigo-900 text-white rounded-full px-4 sp:px-6 py-2.5 sp:py-3 text-sm font-bold hover:bg-indigo-800 transition-all duration-300 font-['El_Messiri']">
-                  Listen Now
-                </button>
+                <Link href="https://glow991fm.com/schedules/" target="_blank" rel="noopener noreferrer">
+                  <button className="w-full bg-indigo-900 text-white rounded-full px-4 sp:px-6 py-2.5 sp:py-3 text-sm font-bold hover:bg-indigo-800 transition-all duration-300 font-['El_Messiri']">
+                    Listen Now
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

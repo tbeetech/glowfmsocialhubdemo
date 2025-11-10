@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { getAsset } from "@/lib/drive-assets";
 
@@ -25,13 +25,32 @@ const shows: Show[] = [
 
 export function ShowCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  // Check screen size for responsive behavior
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  const itemsPerPage = isDesktop ? 3 : 1;
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 3 >= shows.length ? 0 : prev + 3));
+    setCurrentIndex((prev) => 
+      (prev + itemsPerPage >= shows.length ? 0 : prev + itemsPerPage)
+    );
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 3 < 0 ? Math.max(shows.length - 3, 0) : prev - 3));
+    setCurrentIndex((prev) => 
+      (prev - itemsPerPage < 0 ? Math.max(shows.length - itemsPerPage, 0) : prev - itemsPerPage)
+    );
   };
 
   const handleSeeNow = (showName: string) => {
@@ -48,34 +67,58 @@ export function ShowCarousel() {
     window.open(url, "_blank");
   };
 
-  const visibleShows = shows.slice(currentIndex, currentIndex + 3);
+  const visibleShows = shows.slice(currentIndex, currentIndex + itemsPerPage);
 
   return (
     <div className="relative max-w-7xl mx-auto px-4">
-      {/* Left Arrow */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-white hover:scale-110 transition-all"
-        aria-label="Previous shows"
-      >
-        <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
+      {/* DVD-Style Control Bar */}
+      <div className="flex items-center justify-center gap-4 mb-8">
+        {/* Previous Button - DVD Style */}
+        <button
+          onClick={prevSlide}
+          disabled={currentIndex === 0}
+          className="group relative bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white rounded-lg px-6 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_6px_30px_rgba(99,102,241,0.5)] transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border border-gray-700 hover:border-indigo-500"
+          aria-label="Previous shows"
+        >
+          <div className="flex items-center gap-2">
+            {/* DVD Previous Icon */}
+            <svg className="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18 7l-5 5 5 5V7zm-6 5l-5 5V7l5 5z"/>
+            </svg>
+            <span className="font-['El_Messiri'] font-bold text-sm tracking-wider hidden md:inline">PREV</span>
+          </div>
+          {/* LED Indicator */}
+          <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.8)] group-disabled:bg-red-500 group-disabled:shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
+        </button>
 
-      {/* Right Arrow */}
-      <button
-        onClick={nextSlide}
-        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-white hover:scale-110 transition-all"
-        aria-label="Next shows"
-      >
-        <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+        {/* Position Indicator - DVD Display Style */}
+        <div className="bg-gradient-to-br from-gray-900 to-black text-green-400 px-6 py-3 rounded-lg border border-gray-700 shadow-inner font-mono text-sm tracking-widest font-bold">
+          <span className="text-green-500 drop-shadow-[0_0_8px_rgba(34,197,94,0.8)]">
+            {String(Math.floor(currentIndex / itemsPerPage) + 1).padStart(2, '0')} / {String(Math.ceil(shows.length / itemsPerPage)).padStart(2, '0')}
+          </span>
+        </div>
+
+        {/* Next Button - DVD Style */}
+        <button
+          onClick={nextSlide}
+          disabled={currentIndex + itemsPerPage >= shows.length}
+          className="group relative bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white rounded-lg px-6 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_6px_30px_rgba(99,102,241,0.5)] transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)] border border-gray-700 hover:border-indigo-500"
+          aria-label="Next shows"
+        >
+          <div className="flex items-center gap-2">
+            <span className="font-['El_Messiri'] font-bold text-sm tracking-wider hidden md:inline">NEXT</span>
+            {/* DVD Next Icon */}
+            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M6 7v10l5-5-5-5zm6 0v10l5-5-5-5z"/>
+            </svg>
+          </div>
+          {/* LED Indicator */}
+          <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full shadow-[0_0_10px_rgba(34,197,94,0.8)] group-disabled:bg-red-500 group-disabled:shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>
+        </button>
+      </div>
 
       {/* Shows Container with updated layout */}
-      <div className="px-16 py-4">
+      <div className="py-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {visibleShows.map((show) => (
             <div
@@ -123,19 +166,31 @@ export function ShowCarousel() {
         </div>
       </div>
 
-      {/* Pagination Dots */}
-      <div className="flex justify-center gap-2 mt-6">
-        {Array.from({ length: Math.ceil(shows.length / 3) }).map((_, index) => (
+      {/* Pagination Dots - DVD Style */}
+      <div className="flex justify-center gap-3 mt-8">
+        {Array.from({ length: Math.ceil(shows.length / itemsPerPage) }).map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentIndex(index * 3)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${
-              Math.floor(currentIndex / 3) === index
-                ? "bg-indigo-900 w-8"
-                : "bg-gray-300 hover:bg-gray-400"
+            onClick={() => setCurrentIndex(index * itemsPerPage)}
+            className={`relative transition-all ${
+              Math.floor(currentIndex / itemsPerPage) === index
+                ? "w-10 h-3"
+                : "w-3 h-3 hover:w-4"
             }`}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            {/* Outer Ring */}
+            <div className={`absolute inset-0 rounded-full border-2 transition-all ${
+              Math.floor(currentIndex / itemsPerPage) === index
+                ? "border-indigo-600 bg-gradient-to-r from-indigo-600 to-purple-600 shadow-[0_0_15px_rgba(99,102,241,0.6)]"
+                : "border-gray-300 bg-gray-200 hover:border-gray-400"
+            }`}>
+              {/* LED Glow Effect for Active */}
+              {Math.floor(currentIndex / itemsPerPage) === index && (
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-400 to-purple-400 animate-pulse opacity-50"></div>
+              )}
+            </div>
+          </button>
         ))}
       </div>
     </div>

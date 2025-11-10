@@ -28,6 +28,8 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
     phone: '',
     email: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   if (!isOpen) return null;
 
@@ -63,32 +65,58 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
     return !newErrors.name && !newErrors.phone && !newErrors.email;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
       return;
     }
 
-    // Generate unique registration ID
-    const registrationId = generateRegistrationId();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-    // Format the email content
-    const subject = `Registration for Ember challenge ${registrationId}`;
-    const body = `'${formData.name}' with the phone no: "${formData.phone}" is registering for Ember challenge`;
+    try {
+      // Generate unique registration ID
+      const registrationId = generateRegistrationId();
 
-    // Create mailto link
-    const mailtoLink = `mailto:glowfmglowmediastation@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      // Send registration to API
+      const response = await fetch('/api/send-registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          registrationId,
+        }),
+      });
 
-    // Open email client
-    window.location.href = mailtoLink;
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
 
-    // Close modal after a short delay
-    setTimeout(() => {
-      onClose();
-      setFormData({ name: '', phone: '', email: '' });
-      setErrors({ name: '', phone: '', email: '' });
-    }, 500);
+      const result = await response.json();
+      console.log('Registration successful:', result);
+
+      // Show success state
+      setSubmitStatus('success');
+
+      // Close modal after showing success
+      setTimeout(() => {
+        onClose();
+        setFormData({ name: '', phone: '', email: '' });
+        setErrors({ name: '', phone: '', email: '' });
+        setSubmitStatus('idle');
+      }, 2000);
+
+    } catch (error) {
+      console.error('Registration error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -201,15 +229,53 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl font-semibold text-lg hover:from-indigo-700 hover:to-purple-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-[0_10px_40px_rgba(99,102,241,0.3)] hover:shadow-[0_15px_60px_rgba(99,102,241,0.5)] backdrop-blur-sm border border-white/10 font-body relative overflow-hidden group"
+            disabled={isSubmitting}
+            className={`w-full py-4 rounded-xl font-semibold text-lg transition-all transform shadow-[0_10px_40px_rgba(99,102,241,0.3)] backdrop-blur-sm border border-white/10 font-body relative overflow-hidden group ${
+              isSubmitting 
+                ? 'bg-gray-400 cursor-not-allowed' 
+                : submitStatus === 'success'
+                ? 'bg-gradient-to-r from-green-600 to-emerald-600'
+                : submitStatus === 'error'
+                ? 'bg-gradient-to-r from-red-600 to-rose-600'
+                : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_15px_60px_rgba(99,102,241,0.5)]'
+            }`}
           >
-            <span className="relative z-10">Register for Challenge</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              {isSubmitting && (
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+              )}
+              {isSubmitting 
+                ? 'Submitting...' 
+                : submitStatus === 'success' 
+                ? '✓ Registered Successfully!' 
+                : submitStatus === 'error'
+                ? '✗ Registration Failed'
+                : 'Register for Challenge'
+              }
+            </span>
+            {!isSubmitting && submitStatus === 'idle' && (
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            )}
           </button>
 
-          <p className="text-center text-sm text-gray-500 font-body">
-            Your email client will open to complete registration
-          </p>
+          {submitStatus === 'success' && (
+            <p className="text-center text-sm text-green-600 font-body font-semibold animate-pulse">
+              ✓ Registration sent to glowfmglowmediastation@gmail.com
+            </p>
+          )}
+          {submitStatus === 'error' && (
+            <p className="text-center text-sm text-red-600 font-body">
+              Failed to submit. Please try again or contact us directly.
+            </p>
+          )}
+          {submitStatus === 'idle' && !isSubmitting && (
+            <p className="text-center text-sm text-gray-500 font-body">
+              Registration will be sent to glowfmglowmediastation@gmail.com
+            </p>
+          )}
         </form>
       </div>
     </div>
