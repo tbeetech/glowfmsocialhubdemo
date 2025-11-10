@@ -1,0 +1,44 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          script: |
+            echo "=== Starting Deployment ==="
+            cd /var/www/glowfmsocialhubdemo || exit 1
+            
+            echo "1. Pulling latest changes..."
+            git fetch origin main
+            git reset --hard origin/main
+            
+            echo "2. Installing dependencies..."
+            export PNPM_HOME="/root/.local/share/pnpm"
+            export PATH="$PNPM_HOME:$PATH"
+            pnpm install --frozen-lockfile
+            
+            echo "3. Building application..."
+            pnpm run build
+            
+            echo "4. Restarting PM2..."
+            pm2 restart all
+            
+            echo "5. Checking status..."
+            pm2 status
+            pm2 logs --lines 20 --nostream
+            
+            echo "=== Deployment Completed Successfully ==="
