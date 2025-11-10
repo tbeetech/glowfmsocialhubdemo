@@ -13,30 +13,49 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          clean: true
+          fetch-depth: 1
       
       - name: Deploy Application
         run: |
           echo "=== Starting Deployment ==="
           echo "Runner: Self-hosted on VPS"
-          echo "User: $(whoami)"
-          echo "Directory: $(pwd)"
+          echo "Commit: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo ""
           
           # Navigate to project directory
           cd /var/www/glowfmsocialhubdemo || {
             echo "ERROR: Project directory not found!"
+            echo "Please create it first with: sudo mkdir -p /var/www/glowfmsocialhubdemo"
             exit 1
           }
           
-          echo ""
-          echo "1. Pulling latest changes..."
+          echo "1. Syncing with GitHub (pulling latest changes)..."
+          echo "   Discarding any local changes to avoid conflicts..."
+          
+          # Ensure git is initialized
+          if [ ! -d .git ]; then
+            echo "   Initializing git repository..."
+            git init
+            git remote add origin https://github.com/tbeetech/glowfmsocialhubdemo.git
+          fi
+          
+          # Fetch and hard reset to match GitHub exactly
           git fetch origin main || {
             echo "ERROR: Git fetch failed!"
             exit 1
           }
-          git reset --hard origin/main
-          echo "✓ Code updated to latest commit"
           
+          # Force sync with GitHub - discard any local changes
+          git reset --hard origin/main
+          git clean -fd  # Remove any untracked files
+          
+          echo "   ✓ Code synced with GitHub (all local changes discarded)"
+          echo "   Latest commit: $(git log -1 --oneline)"
           echo ""
+          
           echo "2. Installing dependencies..."
           export PNPM_HOME="$HOME/.local/share/pnpm"
           export PATH="$PNPM_HOME:$PATH"
@@ -45,29 +64,40 @@ jobs:
             echo "ERROR: Dependency installation failed!"
             exit 1
           }
-          echo "✓ Dependencies installed"
-          
+          echo "   ✓ Dependencies installed"
           echo ""
+          
           echo "3. Building application..."
           pnpm run build || {
             echo "ERROR: Build failed!"
             exit 1
           }
-          echo "✓ Build completed successfully"
-          
+          echo "   ✓ Build completed successfully"
           echo ""
-          echo "4. Restarting services with PM2..."
-          pm2 restart all || pm2 start ecosystem.config.js || {
-            echo "WARNING: PM2 restart had issues, but continuing..."
-          }
-          echo "✓ Services restarted"
           
+          echo "4. Managing PM2 processes..."
+          
+          # Check if PM2 processes exist
+          if pm2 list | grep -q "glowfm"; then
+            echo "   Reloading existing PM2 processes..."
+            pm2 reload ecosystem.config.js --update-env
+          else
+            echo "   Starting PM2 processes for the first time..."
+            pm2 start ecosystem.config.js
+          fi
+          
+          # Save PM2 configuration
+          pm2 save --force
+          
+          echo "   ✓ Services managed by PM2"
           echo ""
+          
           echo "5. Deployment Status:"
           pm2 status
-          
           echo ""
+          
           echo "=== ✓ Deployment Completed Successfully ==="
           echo "Deployed at: $(date)"
+          echo "All changes are from GitHub - VPS has no local modifications"
 
 

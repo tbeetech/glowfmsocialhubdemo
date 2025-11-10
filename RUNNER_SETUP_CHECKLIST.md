@@ -1,10 +1,50 @@
 # Self-Hosted Runner Setup Checklist
 
+**Important:** All configuration is managed through Git. Never edit files directly on the VPS to avoid merge conflicts.
+
 Follow these steps in order:
 
 ---
 
-## ☑️ **Step 1: Get GitHub Token**
+## ☑️ **Step 1: Create Project Directory on VPS**
+
+Access your VPS and create the project directory (this is the ONLY manual step needed):
+
+```bash
+# SSH into VPS
+ssh root@178.79.187.252
+
+# Create project directory
+sudo mkdir -p /var/www/glowfmsocialhubdemo
+cd /var/www/glowfmsocialhubdemo
+
+# Initialize git and pull code from GitHub
+git init
+git remote add origin https://github.com/tbeetech/glowfmsocialhubdemo.git
+git fetch origin main
+git reset --hard origin/main
+
+# Install pnpm if not installed
+npm install -g pnpm
+
+# Install PM2 if not installed
+npm install -g pm2
+
+# Initial build
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+pnpm install --frozen-lockfile
+pnpm run build
+
+# Start PM2 (will use ecosystem.config.js from Git)
+pm2 start ecosystem.config.js
+pm2 save
+pm2 startup  # Follow the command it gives you
+```
+
+---
+
+## ☑️ **Step 2: Get GitHub Token**
 
 1. Open: https://github.com/tbeetech/glowfmsocialhubdemo/settings/actions/runners/new
 2. Select **Linux**
@@ -13,22 +53,9 @@ Follow these steps in order:
 
 ---
 
-## ☑️ **Step 2: Access Your VPS**
+## ☑️ **Step 3: Install GitHub Actions Runner on VPS**
 
-Use any method that works:
-- Control panel console (Linode, DigitalOcean, etc.)
-- SSH from a working location
-- VPN + SSH
-
-```bash
-ssh root@178.79.187.252
-```
-
----
-
-## ☑️ **Step 3: Run Setup Script**
-
-Copy and paste these commands on your VPS:
+Still on your VPS, run these commands:
 
 ```bash
 cd /opt
@@ -40,7 +67,7 @@ curl -o actions-runner-linux-x64-2.311.0.tar.gz -L https://github.com/actions/ru
 # Extract
 tar xzf ./actions-runner-linux-x64-2.311.0.tar.gz
 
-# Configure (replace YOUR_TOKEN_HERE with actual token from Step 1)
+# Configure (replace YOUR_TOKEN_HERE with actual token from Step 2)
 ./config.sh --url https://github.com/tbeetech/glowfmsocialhubdemo --token YOUR_TOKEN_HERE
 
 # Press Enter for all prompts (accept defaults)
@@ -48,7 +75,7 @@ tar xzf ./actions-runner-linux-x64-2.311.0.tar.gz
 
 ---
 
-## ☑️ **Step 4: Install as Service**
+## ☑️ **Step 4: Install Runner as Service**
 
 ```bash
 # Install service
@@ -72,14 +99,14 @@ You should see: **Active: active (running)**
 
 ---
 
-## ☑️ **Step 6: Commit Workflow Changes**
+## ☑️ **Step 6: Test Deployment**
 
-The workflow is already updated to use self-hosted runner. Just commit and push:
+Workflow is already configured. Just push any change:
 
 ```powershell
 # Run on your local Windows machine
 git add .
-git commit -m "Setup self-hosted runner deployment"
+git commit -m "Test self-hosted runner deployment"
 git push origin main
 ```
 
@@ -98,34 +125,71 @@ git push origin main
 - ✓ Runner shows "Idle" with green dot in GitHub
 - ✓ Workflow runs on "self-hosted" runner
 - ✓ Deployment completes successfully
-- ✓ PM2 shows services running
+- ✓ PM2 shows services running: `glowfm-web`, `glowfm-api`, `glowfm-workers`
 - ✓ Website is live and updated
 
 ---
 
-## 🔧 **Quick Commands**
+## 🎯 **Git-First Workflow (Important!)**
+
+**NEVER edit files directly on the VPS!** Always:
+
+1. ✅ Make changes in your local repo
+2. ✅ Commit to Git: `git commit -m "your message"`
+3. ✅ Push to GitHub: `git push origin main`
+4. ✅ GitHub Actions automatically deploys to VPS
+5. ✅ VPS pulls code from GitHub (no local modifications)
+
+**Benefits:**
+- No merge conflicts
+- Single source of truth (GitHub)
+- Full version history
+- Easy rollbacks
+- Consistent deployments
+
+---
+
+## 🔧 **Quick Commands (On VPS)**
 
 ```bash
 # Check runner status
 sudo /opt/actions-runner/svc.sh status
 
-# View logs
+# View runner logs
 sudo journalctl -u actions.runner.* -f
 
-# Restart runner
-sudo /opt/actions-runner/svc.sh stop
-sudo /opt/actions-runner/svc.sh start
-
-# Check PM2
+# Check PM2 services
 pm2 status
+pm2 logs
 
-# Manual deployment test
+# Manual sync with GitHub (if needed)
 cd /var/www/glowfmsocialhubdemo
-git pull origin main
+git fetch origin main
+git reset --hard origin/main  # Discards any local changes
+git clean -fd  # Removes untracked files
 pnpm install
 pnpm run build
-pm2 restart all
+pm2 reload ecosystem.config.js
+
+# View latest commit
+cd /var/www/glowfmsocialhubdemo
+git log -1 --oneline
 ```
+
+---
+
+## 📖 **Configuration Files (All in Git)**
+
+All configuration is version-controlled:
+- ✅ `ecosystem.config.js` - PM2 configuration
+- ✅ `.github/workflows/deploy.yml` - Deployment workflow
+- ✅ `package.json` - Dependencies
+- ✅ All app configuration files
+
+**To modify any config:**
+1. Edit locally
+2. Commit and push
+3. GitHub Actions deploys automatically
 
 ---
 
@@ -135,6 +199,8 @@ See `SETUP_SELF_HOSTED_RUNNER.md` for complete details, troubleshooting, and adv
 
 ---
 
-**Estimated Time:** 5-10 minutes
+**Estimated Setup Time:** 10-15 minutes (one-time setup)
+
+**Estimated Deploy Time:** 2-5 minutes (automatic on every push)
 
 **Last Updated:** November 10, 2025
