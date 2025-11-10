@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
       - name: Deploy to VPS
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -18,27 +21,67 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: 22
+          timeout: 60s
+          command_timeout: 15m
           script: |
             echo "=== Starting Deployment ==="
-            cd /var/www/glowfmsocialhubdemo || exit 1
+            echo "Current user: $(whoami)"
+            echo "Current directory: $(pwd)"
             
-            echo "1. Pulling latest changes..."
-            git fetch origin main
+            # Navigate to project directory
+            cd /var/www/glowfmsocialhubdemo || {
+              echo "ERROR: Project directory not found!"
+              exit 1
+            }
+            
+            echo "1. Configuring Git and pulling latest changes..."
+            # Check if git remote exists
+            if ! git remote get-url origin &>/dev/null; then
+              echo "Setting up git remote..."
+              git remote add origin https://github.com/tbeetech/glowfmsocialhubdemo.git
+            fi
+            
+            # Pull latest changes (using HTTPS to avoid SSH key issues)
+            git fetch origin main || {
+              echo "ERROR: Git fetch failed!"
+              exit 1
+            }
             git reset --hard origin/main
             
             echo "2. Installing dependencies..."
-            export PNPM_HOME="/root/.local/share/pnpm"
+            export PNPM_HOME="$HOME/.local/share/pnpm"
             export PATH="$PNPM_HOME:$PATH"
-            pnpm install --frozen-lockfile
+            
+            # Check if pnpm is installed
+            if ! command -v pnpm &>/dev/null; then
+              echo "Installing pnpm..."
+              npm install -g pnpm
+            fi
+            
+            pnpm install --frozen-lockfile || {
+              echo "ERROR: Dependency installation failed!"
+              exit 1
+            }
             
             echo "3. Building application..."
-            pnpm run build
+            pnpm run build || {
+              echo "ERROR: Build failed!"
+              exit 1
+            }
             
-            echo "4. Restarting PM2..."
-            pm2 restart all
+            echo "4. Restarting services with PM2..."
+            # Check if PM2 is installed
+            if ! command -v pm2 &>/dev/null; then
+              echo "Installing PM2..."
+              npm install -g pm2
+            fi
+            
+            # Restart or start the application
+            pm2 restart all || pm2 start ecosystem.config.js || echo "PM2 restart attempted"
             
             echo "5. Checking status..."
             pm2 status
-            pm2 logs --lines 20 --nostream
+            pm2 logs --lines 20 --nostream || true
             
             echo "=== Deployment Completed Successfully ==="
+
