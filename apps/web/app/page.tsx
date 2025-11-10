@@ -351,35 +351,99 @@ export default function HomePage() {
 
 
 
-      {/* Countdown Section - Enhanced Styling */}
+      {/* Ember Challenge Has Commenced Section */}
       <AnimatedSection>
-        <div className="py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800 relative overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,_rgba(255,255,255,0.2),transparent_50%)]"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,_rgba(255,140,0,0.15),transparent_50%)]"></div>
+        <div className="py-16 compact:py-20 tablet:py-24 bg-gradient-to-br from-orange-600 via-red-600 to-pink-600 relative overflow-hidden">
+          {/* Animated Background Particles */}
+          <div className="absolute inset-0">
+            <div className="absolute top-10 left-10 w-32 h-32 bg-yellow-400/30 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute top-1/4 right-20 w-40 h-40 bg-orange-300/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+            <div className="absolute bottom-20 left-1/3 w-48 h-48 bg-red-400/25 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+            <div className="absolute top-1/2 right-1/4 w-36 h-36 bg-pink-300/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          </div>
+
+          {/* Diagonal Stripes Pattern */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute inset-0" style={{
+              backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.1) 35px, rgba(255,255,255,0.1) 70px)'
+            }}></div>
           </div>
           
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-12">
-              <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-4">
-                Ember Challenge Starts In
+          <div className="container mx-auto px-4 compact:px-6 tablet:px-8 relative z-10">
+            {/* Main Announcement */}
+            <div className="text-center mb-8 compact:mb-10 tablet:mb-12">
+              {/* Animated "LIVE" Badge */}
+              <div className="flex items-center justify-center gap-3 mb-6 compact:mb-8">
+                <div className="relative">
+                  <span className="inline-flex items-center gap-2 bg-white/95 backdrop-blur-sm text-red-600 px-4 compact:px-6 py-2 compact:py-3 rounded-full font-bold text-sm compact:text-base tablet:text-lg shadow-2xl animate-pulse">
+                    <span className="w-2 h-2 compact:w-3 compact:h-3 bg-red-600 rounded-full animate-ping"></span>
+                    <span className="w-2 h-2 compact:w-3 compact:h-3 bg-red-600 rounded-full absolute"></span>
+                    LIVE NOW
+                  </span>
+                </div>
+              </div>
+
+              {/* Main Headline */}
+              <h2 className="text-3xl compact:text-4xl sp:text-5xl mp:text-6xl tablet:text-7xl laptop:text-8xl font-display font-black text-white mb-4 compact:mb-6 leading-tight font-['El_Messiri'] drop-shadow-2xl">
+                Ember Challenge
+                <br />
+                <span className="bg-gradient-to-r from-yellow-300 via-orange-200 to-yellow-300 bg-clip-text text-transparent animate-pulse">
+                  Has Commenced!
+                </span>
               </h2>
-              <p className="text-xl font-body text-white/80 max-w-2xl mx-auto">
-                Get ready for the most exciting challenge of the year! Don&apos;t miss out.
+              
+              <p className="text-base compact:text-lg sp:text-xl tablet:text-2xl font-body text-white/95 max-w-3xl mx-auto leading-relaxed font-['El_Messiri'] drop-shadow-lg">
+                The most exciting challenge of the year is underway! Join now and compete for amazing prizes.
               </p>
             </div>
             
-            <div className="max-w-4xl mx-auto">
-              <CountdownClock 
-                targetDate={new Date("2025-11-01T12:00:00")}
-                labels={{
-                  days: "DAYS",
-                  hours: "HOURS",
-                  minutes: "MINUTES",
-                  seconds: "SECONDS"
-                }}
-              />
+            {/* CTA Section */}
+            <div className="max-w-2xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-lg border-2 border-white/30 rounded-3xl p-6 compact:p-8 tablet:p-10 shadow-2xl">
+                <div className="flex flex-col compact:flex-row items-center justify-center gap-4 compact:gap-6">
+                  {/* Participate Button */}
+                  <button 
+                    onClick={() => setIsModalOpen(true)}
+                    className="group relative bg-white text-red-600 px-8 compact:px-10 tablet:px-12 py-4 compact:py-5 rounded-full font-bold text-base compact:text-lg tablet:text-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 font-['El_Messiri'] w-full compact:w-auto overflow-hidden"
+                  >
+                    <span className="relative z-10 flex items-center justify-center gap-3">
+                      🔥 Participate Now
+                      <svg className="w-5 h-5 compact:w-6 compact:h-6 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
+                  </button>
+
+                  {/* Learn More Button */}
+                  <button 
+                    className="group bg-white/20 backdrop-blur-sm border-2 border-white/50 text-white px-8 compact:px-10 py-4 compact:py-5 rounded-full font-bold text-base compact:text-lg hover:bg-white/30 transition-all duration-300 font-['El_Messiri'] w-full compact:w-auto"
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      View Prizes
+                      <svg className="w-5 h-5 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                      </svg>
+                    </span>
+                  </button>
+                </div>
+
+                {/* Stats Bar */}
+                <div className="grid grid-cols-3 gap-4 mt-6 compact:mt-8 pt-6 compact:pt-8 border-t border-white/30">
+                  <div className="text-center">
+                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-white font-['El_Messiri']">500+</div>
+                    <div className="text-xs compact:text-sm text-white/80 mt-1 font-['El_Messiri']">Participants</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-white font-['El_Messiri']">10+</div>
+                    <div className="text-xs compact:text-sm text-white/80 mt-1 font-['El_Messiri']">Prizes</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-yellow-300 font-['El_Messiri']">LIVE</div>
+                    <div className="text-xs compact:text-sm text-white/80 mt-1 font-['El_Messiri']">Status</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
