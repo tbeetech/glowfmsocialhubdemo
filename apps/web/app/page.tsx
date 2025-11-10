@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { CountdownClock } from "@/components/CountdownClock";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { getAsset } from "@/lib/drive-assets";
 import Image from "next/image";
