@@ -167,7 +167,7 @@ export function CountdownClock({ targetDate: targetDateProp, target, className, 
         </div>
 
         {/* Digital Circuit Lines Between Segments */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none hidden tablet:block" style={{ zIndex: 5 }}>
+        <svg className="absolute inset-0 w-full h-full pointer-events-none hidden tablet:block" style={{ zIndex: 5 }} viewBox="0 0 100 100" preserveAspectRatio="none">
           <defs>
             <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" style={{ stopColor: 'rgb(34, 211, 238)', stopOpacity: 0.6 }} />
@@ -175,9 +175,9 @@ export function CountdownClock({ targetDate: targetDateProp, target, className, 
               <stop offset="100%" style={{ stopColor: 'rgb(251, 146, 60)', stopOpacity: 0.6 }} />
             </linearGradient>
           </defs>
-          <path d="M 25% 50% L 37.5% 50%" stroke="url(#lineGradient)" strokeWidth="2" fill="none" opacity="0.5" />
-          <path d="M 50% 50% L 62.5% 50%" stroke="url(#lineGradient)" strokeWidth="2" fill="none" opacity="0.5" />
-          <path d="M 75% 50% L 87.5% 50%" stroke="url(#lineGradient)" strokeWidth="2" fill="none" opacity="0.5" />
+          <path d="M 25 50 L 37.5 50" stroke="url(#lineGradient)" strokeWidth="0.2" fill="none" opacity="0.5" />
+          <path d="M 50 50 L 62.5 50" stroke="url(#lineGradient)" strokeWidth="0.2" fill="none" opacity="0.5" />
+          <path d="M 75 50 L 87.5 50" stroke="url(#lineGradient)" strokeWidth="0.2" fill="none" opacity="0.5" />
         </svg>
 
         {/* Decorative Corner Elements */}

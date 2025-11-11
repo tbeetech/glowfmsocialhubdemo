@@ -49,23 +49,23 @@ function CloseIcon({ className }: IconProps) {
 }
 
 const navLinks = [
-  { label: "Home", href: "/", disabled: false },
-  { label: "Social Media", href: "/social-media", disabled: false },
-  { label: "About", href: "/about", disabled: true },
-  { label: "Contact", href: "/contact", disabled: true },
-  { label: "Advertisement", href: "/advertisement", disabled: true }
+  { label: "Home", href: "/" },
+  { label: "Social Media", href: "/social-media" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+  { label: "Advertisement", href: "/advertisement" }
 ] as const;
 
 type NavItem = (typeof navLinks)[number];
 
 const baseLinkClasses =
-  "relative text-sm font-medium tracking-wide text-gray-800 transition-all duration-300 font-['El_Messiri'] font-bold";
+  "relative text-sm font-medium tracking-wide transition-all duration-300 font-['El_Messiri'] font-bold text-white/80 hover:text-white";
 
 const activeLinkClasses =
-  "text-gray-900 font-semibold";
+  "text-white font-extrabold after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-orange-500 after:via-cyan-400 after:to-purple-500 after:shadow-[0_0_15px_rgba(251,146,60,0.8)]";
 
 const hoverLinkClasses =
-  "hover:text-gray-900 hover:border-b-2 hover:border-gradient-to-r hover:from-orange-500 hover:to-blue-500 pb-1";
+  "hover:drop-shadow-[0_0_10px_rgba(251,146,60,0.6)] hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-0.5 hover:after:bg-gradient-to-r hover:after:from-orange-400/50 hover:after:to-cyan-400/50";
 
 function renderLink(
   item: NavItem,
@@ -75,39 +75,23 @@ function renderLink(
     isActive
   }: { extra?: string; onClick?: () => void; isActive?: boolean }
 ) {
-  const { href, label, disabled } = item;
-  
-  // Grey out disabled links
-  const disabledClasses = disabled 
-    ? "opacity-40 cursor-not-allowed pointer-events-none text-gray-400" 
-    : "";
-  
+  const { href, label } = item;
   const classes = [
     baseLinkClasses, 
-    !disabled && hoverLinkClasses, 
-    isActive && !disabled && activeLinkClasses, 
-    disabledClasses,
+    hoverLinkClasses, 
+    isActive && activeLinkClasses, 
     extra
   ].filter(Boolean).join(' ');
   
   const handleClick = () => {
-    if (disabled) return;
     onClick?.();
   };
 
   if (href.startsWith("#")) {
     return (
-      <a key={href} href={disabled ? undefined : href} className={classes} onClick={handleClick}>
+      <a key={href} href={href} className={classes} onClick={handleClick}>
         {label}
       </a>
-    );
-  }
-
-  if (disabled) {
-    return (
-      <span key={href} className={classes}>
-        {label}
-      </span>
     );
   }
 
@@ -115,7 +99,7 @@ function renderLink(
     <Link 
       key={href} 
       href={href} 
-      className={`${classes} hover:after:content-[''] hover:after:absolute hover:after:bottom-0 hover:after:left-0 hover:after:w-full hover:after:h-0.5 hover:after:bg-gradient-to-r hover:after:from-orange-500 hover:after:to-blue-500`} 
+      className={classes} 
       onClick={handleClick} 
       prefetch 
       aria-current={isActive ? "page" : undefined}
@@ -150,25 +134,43 @@ export function GlowNav() {
 
   return (
   <header className="fixed top-0 z-[100] w-full">
-      {/* Matching Grid Background */}
-      <div className="absolute inset-0 bg-white/95 backdrop-blur-sm">
-        <div className="absolute inset-0 opacity-5">
-          <div className="grid-background-nav"></div>
+      {/* Royal Glassy Liquid Crystal Background */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-indigo-950/95 to-slate-950/95 backdrop-blur-xl border-b-2 border-white/10">
+        {/* Liquid Crystal Waves */}
+        <div className="absolute inset-0 overflow-hidden opacity-30">
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent animate-pulse"></div>
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
         </div>
+        
+        {/* Circuit Pattern */}
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: `
+            linear-gradient(90deg, rgba(251,146,60,0.1) 1px, transparent 1px),
+            linear-gradient(rgba(251,146,60,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px'
+        }}></div>
+        
+        {/* Floating Glow Particles */}
+        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
       
       <div className="mx-auto flex max-w-7xl items-center justify-between px-3 compact:px-4 phablet:px-5 lg:px-8 py-3 phablet:py-4 md:py-6 relative z-10">
-        <Link href="/" className="flex items-center text-gray-900 transition-transform duration-300 hover:scale-105" prefetch>
+        <Link href="/" className="flex items-center text-white transition-transform duration-300 hover:scale-105 group" prefetch>
           <div className="relative w-10 h-10 compact:w-11 compact:h-11 md:w-12 md:h-12 mr-2 md:mr-3">
+            {/* Glowing Border */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-orange-400 via-cyan-400 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
             <Image
               src={getAsset("glowFmStandardLogo")}
               alt="Glow FM Logo"
               fill
-              className="object-contain rounded-full"
+              className="object-contain rounded-full relative z-10"
               sizes="48px"
             />
           </div>
-          <span className="text-lg sp:text-xl font-bold tracking-wide font-['El_Messiri'] hidden sm:inline-block">Glow FM</span>
+          <span className="text-lg sp:text-xl font-bold tracking-wide font-['El_Messiri'] hidden sm:inline-block bg-gradient-to-r from-orange-400 via-orange-300 to-cyan-300 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(251,146,60,0.6)]">Glow FM</span>
         </Link>
 
         <nav className="hidden items-center gap-12 md:flex">
@@ -180,16 +182,21 @@ export function GlowNav() {
         </nav>
 
         <div className="hidden items-center md:flex">
-          <Link href="https://glow991fm.com/schedules/" target="_blank" rel="noopener noreferrer">
-            <button className="bg-indigo-900 text-white hover:bg-indigo-800 rounded-full px-5 mlaptop:px-6 py-2 text-sm font-bold transition-all duration-300 shadow-lg hover:scale-105 backdrop-blur-sm font-['El_Messiri']">
-              Listen Now
-            </button>
-          </Link>
+          <a 
+            href="https://glow991fm.com/schedules/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="relative group bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 text-slate-950 hover:from-orange-400 hover:via-yellow-400 hover:to-orange-400 rounded-full px-5 mlaptop:px-6 py-2 text-sm font-bold transition-all duration-300 shadow-[0_0_30px_rgba(251,146,60,0.6)] hover:shadow-[0_0_45px_rgba(251,146,60,0.9)] hover:scale-105 font-['El_Messiri'] overflow-hidden"
+          >
+            {/* Electronic Shimmer */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+            <span className="relative z-10">Listen Now</span>
+          </a>
         </div>
 
         <button
           type="button"
-          className="flex h-8 w-8 items-center justify-center text-gray-800 md:hidden"
+          className="flex h-8 w-8 items-center justify-center text-white/90 hover:text-white md:hidden transition-colors duration-300 hover:drop-shadow-[0_0_10px_rgba(251,146,60,0.8)]"
           onClick={() => setOpen(true)}
           aria-expanded={open}
           aria-controls="mobile-nav"
@@ -200,22 +207,40 @@ export function GlowNav() {
 
       {open && (
         <div className="fixed inset-0 z-[110] md:hidden" role="dialog" aria-modal="true">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setOpen(false)} />
           <div
             id="mobile-nav"
-            className="absolute inset-x-2 compact:inset-x-4 top-16 mp:top-20 rounded-2xl bg-white/95 backdrop-blur-lg shadow-2xl p-4 sp:p-5 mp:p-6"
+            className="absolute inset-x-2 compact:inset-x-4 top-16 mp:top-20 rounded-2xl shadow-2xl p-4 sp:p-5 mp:p-6 overflow-hidden"
           >
-            {/* Matching Grid Background for Mobile Menu */}
-            <div className="absolute inset-0 opacity-5 rounded-2xl overflow-hidden">
-              <div className="grid-background-nav"></div>
+            {/* Royal Glassy Mobile Menu Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-950/98 via-indigo-950/98 to-slate-950/98 backdrop-blur-xl border-2 border-white/10 rounded-2xl">
+              {/* Liquid Crystal Effect */}
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 via-transparent to-cyan-500/20 animate-pulse"></div>
+              </div>
+              
+              {/* Circuit Grid */}
+              <div className="absolute inset-0 opacity-10" style={{
+                backgroundImage: `
+                  linear-gradient(90deg, rgba(251,146,60,0.2) 1px, transparent 1px),
+                  linear-gradient(rgba(251,146,60,0.2) 1px, transparent 1px)
+                `,
+                backgroundSize: '30px 30px'
+              }}></div>
+              
+              {/* Corner Accents */}
+              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-orange-400/50 rounded-tl-2xl"></div>
+              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-400/50 rounded-tr-2xl"></div>
+              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-purple-500/50 rounded-bl-2xl"></div>
+              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-orange-400/50 rounded-br-2xl"></div>
             </div>
             
             <div className="relative z-10">
               <div className="mb-4 sp:mb-6 flex items-center justify-between">
-                <h2 className="text-base sp:text-lg font-semibold text-gray-900 font-['El_Messiri']">Navigate Glow FM</h2>
+                <h2 className="text-base sp:text-lg font-semibold font-['El_Messiri'] bg-gradient-to-r from-orange-400 via-orange-300 to-cyan-300 text-transparent bg-clip-text drop-shadow-[0_0_15px_rgba(251,146,60,0.6)]">Navigate Glow FM</h2>
                 <button
                   type="button"
-                  className="inline-flex h-8 w-8 items-center justify-center text-gray-700 transition hover:text-gray-900"
+                  className="inline-flex h-8 w-8 items-center justify-center text-white/80 hover:text-white transition-all duration-300 hover:rotate-90 hover:drop-shadow-[0_0_15px_rgba(251,146,60,0.8)]"
                   onClick={() => setOpen(false)}
                   aria-label="Close menu"
                 >
@@ -228,7 +253,7 @@ export function GlowNav() {
                     link,
                     {
                       extra:
-                        "px-3 py-2.5 sp:px-4 sp:py-3 text-sm font-medium text-gray-800 hover:text-gray-900 font-['El_Messiri'] font-bold",
+                        "px-3 py-2.5 sp:px-4 sp:py-3 text-sm font-medium text-white/80 hover:text-white font-['El_Messiri'] font-bold rounded-lg hover:bg-white/5 transition-all duration-300",
                       onClick: () => setOpen(false),
                       isActive: isActivePath(link.href)
                     }
@@ -236,11 +261,16 @@ export function GlowNav() {
                 )}
               </div>
               <div className="mt-6">
-                <Link href="https://glow991fm.com/schedules/" target="_blank" rel="noopener noreferrer">
-                  <button className="w-full bg-indigo-900 text-white rounded-full px-4 sp:px-6 py-2.5 sp:py-3 text-sm font-bold hover:bg-indigo-800 transition-all duration-300 font-['El_Messiri']">
-                    Listen Now
-                  </button>
-                </Link>
+                <a 
+                  href="https://glow991fm.com/schedules/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="relative group w-full bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 text-slate-950 rounded-full px-4 sp:px-6 py-2.5 sp:py-3 text-sm font-bold hover:from-orange-400 hover:via-yellow-400 hover:to-orange-400 transition-all duration-300 font-['El_Messiri'] block text-center shadow-[0_0_30px_rgba(251,146,60,0.6)] hover:shadow-[0_0_45px_rgba(251,146,60,0.9)] overflow-hidden"
+                >
+                  {/* Electronic Shimmer */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                  <span className="relative z-10">Listen Now</span>
+                </a>
               </div>
             </div>
           </div>

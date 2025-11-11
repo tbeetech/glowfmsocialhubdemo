@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import { getAsset } from "@/lib/drive-assets";
 
 interface EmberChallengeModalProps {
   isOpen: boolean;
@@ -28,8 +30,6 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
     phone: '',
     email: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   if (!isOpen) return null;
 
@@ -65,58 +65,32 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
     return !newErrors.name && !newErrors.phone && !newErrors.email;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
       return;
     }
 
-    setIsSubmitting(true);
-    setSubmitStatus('idle');
+    // Generate unique registration ID
+    const registrationId = generateRegistrationId();
 
-    try {
-      // Generate unique registration ID
-      const registrationId = generateRegistrationId();
+    // Format the email content
+    const subject = `Registration for Ember challenge ${registrationId}`;
+    const body = `'${formData.name}' with the phone no: "${formData.phone}" is registering for Ember challenge`;
 
-      // Send registration to API
-      const response = await fetch('/api/send-registration', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          phone: formData.phone,
-          email: formData.email,
-          registrationId,
-        }),
-      });
+    // Create mailto link
+    const mailtoLink = `mailto:glowfmglowmediastation@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      if (!response.ok) {
-        throw new Error('Registration failed');
-      }
+    // Open email client
+    window.location.href = mailtoLink;
 
-      const result = await response.json();
-      console.log('Registration successful:', result);
-
-      // Show success state
-      setSubmitStatus('success');
-
-      // Close modal after showing success
-      setTimeout(() => {
-        onClose();
-        setFormData({ name: '', phone: '', email: '' });
-        setErrors({ name: '', phone: '', email: '' });
-        setSubmitStatus('idle');
-      }, 2000);
-
-    } catch (error) {
-      console.error('Registration error:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Close modal after a short delay
+    setTimeout(() => {
+      onClose();
+      setFormData({ name: '', phone: '', email: '' });
+      setErrors({ name: '', phone: '', email: '' });
+    }, 500);
   };
 
   const handleChange = (field: keyof typeof formData) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,9 +102,16 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
   };
 
   const handleBackdropClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (e.target === e.currentTarget) {
       onClose();
     }
+  };
+
+  const handleCloseClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
   };
 
   return (
@@ -139,22 +120,130 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
       style={{ animation: 'fadeIn 0.2s ease-out' }}
       onClick={handleBackdropClick}
     >
+      {/* Triangular Wave Currents Background Animation */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Primary Triangular Wave */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-20">
+          <svg className="absolute w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="waveGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style={{ stopColor: 'rgb(251,191,36)', stopOpacity: 0.8 }} />
+                <stop offset="50%" style={{ stopColor: 'rgb(147,51,234)', stopOpacity: 0.6 }} />
+                <stop offset="100%" style={{ stopColor: 'rgb(236,72,153)', stopOpacity: 0.8 }} />
+              </linearGradient>
+            </defs>
+            <path d="M0,400 L100,300 L200,400 L300,300 L400,400 L500,300 L600,400 L700,300 L800,400 L900,300 L1000,400 L1100,300 L1200,400 L1200,800 L0,800 Z" 
+                  fill="url(#waveGradient1)" 
+                  style={{ animation: 'waveMove 4s ease-in-out infinite' }}>
+              <animate attributeName="d" 
+                       dur="4s" 
+                       repeatCount="indefinite"
+                       values="
+                         M0,400 L100,300 L200,400 L300,300 L400,400 L500,300 L600,400 L700,300 L800,400 L900,300 L1000,400 L1100,300 L1200,400 L1200,800 L0,800 Z;
+                         M0,300 L100,400 L200,300 L300,400 L400,300 L500,400 L600,300 L700,400 L800,300 L900,400 L1000,300 L1100,400 L1200,300 L1200,800 L0,800 Z;
+                         M0,400 L100,300 L200,400 L300,300 L400,400 L500,300 L600,400 L700,300 L800,400 L900,300 L1000,400 L1100,300 L1200,400 L1200,800 L0,800 Z
+                       " />
+            </path>
+          </svg>
+        </div>
+
+        {/* Secondary Triangular Wave - Inverted */}
+        <div className="absolute bottom-0 left-0 w-full h-full opacity-15">
+          <svg className="absolute w-full h-full" viewBox="0 0 1200 800" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="waveGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style={{ stopColor: 'rgb(147,51,234)', stopOpacity: 0.7 }} />
+                <stop offset="50%" style={{ stopColor: 'rgb(251,191,36)', stopOpacity: 0.5 }} />
+                <stop offset="100%" style={{ stopColor: 'rgb(59,130,246)', stopOpacity: 0.7 }} />
+              </linearGradient>
+            </defs>
+            <path d="M0,0 L0,400 L100,500 L200,400 L300,500 L400,400 L500,500 L600,400 L700,500 L800,400 L900,500 L1000,400 L1100,500 L1200,400 L1200,0 Z" 
+                  fill="url(#waveGradient2)">
+              <animate attributeName="d" 
+                       dur="5s" 
+                       repeatCount="indefinite"
+                       values="
+                         M0,0 L0,400 L100,500 L200,400 L300,500 L400,400 L500,500 L600,400 L700,500 L800,400 L900,500 L1000,400 L1100,500 L1200,400 L1200,0 Z;
+                         M0,0 L0,500 L100,400 L200,500 L300,400 L400,500 L500,400 L600,500 L700,400 L800,500 L900,400 L1000,500 L1100,400 L1200,500 L1200,0 Z;
+                         M0,0 L0,400 L100,500 L200,400 L300,500 L400,400 L500,500 L600,400 L700,500 L800,400 L900,500 L1000,400 L1100,500 L1200,400 L1200,0 Z
+                       " />
+            </path>
+          </svg>
+        </div>
+
+        {/* Alternative Current Waves - Circular Ripples */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-64 h-64 border-4 border-amber-400/30 rounded-full animate-ping" style={{ animationDuration: '3s' }}></div>
+          <div className="absolute top-1/3 right-1/3 w-80 h-80 border-4 border-purple-400/30 rounded-full animate-ping" style={{ animationDuration: '4s', animationDelay: '1s' }}></div>
+          <div className="absolute bottom-1/4 left-1/2 w-72 h-72 border-4 border-pink-400/30 rounded-full animate-ping" style={{ animationDuration: '3.5s', animationDelay: '0.5s' }}></div>
+        </div>
+
+        {/* Zigzag Current Lines */}
+        <div className="absolute inset-0 opacity-10">
+          <svg className="w-full h-full" viewBox="0 0 800 600">
+            <path d="M0,100 L50,50 L100,100 L150,50 L200,100 L250,50 L300,100 L350,50 L400,100" 
+                  stroke="rgb(251,191,36)" 
+                  strokeWidth="3" 
+                  fill="none"
+                  strokeLinecap="round">
+              <animate attributeName="stroke-dashoffset" from="0" to="400" dur="2s" repeatCount="indefinite" />
+            </path>
+            <path d="M0,300 L50,350 L100,300 L150,350 L200,300 L250,350 L300,300 L350,350 L400,300" 
+                  stroke="rgb(147,51,234)" 
+                  strokeWidth="3" 
+                  fill="none"
+                  strokeLinecap="round">
+              <animate attributeName="stroke-dashoffset" from="0" to="400" dur="2.5s" repeatCount="indefinite" />
+            </path>
+            <path d="M400,200 L450,250 L500,200 L550,250 L600,200 L650,250 L700,200 L750,250 L800,200" 
+                  stroke="rgb(236,72,153)" 
+                  strokeWidth="3" 
+                  fill="none"
+                  strokeLinecap="round">
+              <animate attributeName="stroke-dashoffset" from="0" to="400" dur="3s" repeatCount="indefinite" />
+            </path>
+          </svg>
+        </div>
+
+        {/* Floating Triangular Particles */}
+        <div className="absolute top-[15%] left-[20%] w-0 h-0 border-l-[12px] border-l-transparent border-r-[12px] border-r-transparent border-b-[20px] border-b-amber-400/40 animate-bounce" style={{ animationDuration: '3s' }}></div>
+        <div className="absolute top-[60%] right-[25%] w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-b-[16px] border-b-purple-400/40 animate-bounce" style={{ animationDuration: '4s', animationDelay: '0.5s' }}></div>
+        <div className="absolute bottom-[20%] left-[30%] w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-b-[22px] border-b-pink-400/40 animate-bounce" style={{ animationDuration: '3.5s', animationDelay: '1s' }}></div>
+      </div>
+
       <div 
-        className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] border border-white/20 max-w-md w-full max-h-[90vh] overflow-y-auto overflow-hidden transform transition-all hover:scale-[1.01] hover:shadow-[0_25px_100px_rgba(99,102,241,0.4)]"
+        className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_80px_rgba(0,0,0,0.3)] border border-white/20 max-w-md w-full max-h-[90vh] overflow-y-auto overflow-hidden transform transition-all hover:scale-[1.01] hover:shadow-[0_25px_100px_rgba(99,102,241,0.4)] relative z-10"
         style={{ animation: 'slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 p-8 text-white relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-12 -mb-12 blur-2xl"></div>
           
+          {/* Logo in Top Left Corner */}
+          <div className="absolute top-4 left-4 w-16 h-16 z-20">
+            <div className="bg-white rounded-full p-2 shadow-lg flex items-center justify-center w-full h-full">
+              <div className="relative w-full h-full">
+                <Image
+                  src={getAsset("glowFmStandardLogo")}
+                  alt="Glow FM Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Close Button - Force Click Handler */}
           <button 
-            onClick={onClose}
-            className="absolute top-4 right-4 text-white/80 hover:text-white transition-all hover:rotate-90 duration-300 backdrop-blur-sm bg-white/10 rounded-full p-1.5"
+            onClick={handleCloseClick}
+            type="button"
+            className="absolute top-4 right-4 z-30 text-white/90 hover:text-white transition-all hover:rotate-90 duration-300 backdrop-blur-sm bg-white/20 hover:bg-white/30 rounded-full p-2 shadow-lg cursor-pointer"
             aria-label="Close modal"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
           
@@ -229,53 +318,15 @@ export function EmberChallengeModal({ isOpen, onClose }: EmberChallengeModalProp
           {/* Submit Button */}
           <button
             type="submit"
-            disabled={isSubmitting}
-            className={`w-full py-4 rounded-xl font-semibold text-lg transition-all transform shadow-[0_10px_40px_rgba(99,102,241,0.3)] backdrop-blur-sm border border-white/10 font-body relative overflow-hidden group ${
-              isSubmitting 
-                ? 'bg-gray-400 cursor-not-allowed' 
-                : submitStatus === 'success'
-                ? 'bg-gradient-to-r from-green-600 to-emerald-600'
-                : submitStatus === 'error'
-                ? 'bg-gradient-to-r from-red-600 to-rose-600'
-                : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_15px_60px_rgba(99,102,241,0.5)]'
-            }`}
+            className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 rounded-xl font-semibold text-lg hover:from-indigo-700 hover:to-purple-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-[0_10px_40px_rgba(99,102,241,0.3)] hover:shadow-[0_15px_60px_rgba(99,102,241,0.5)] backdrop-blur-sm border border-white/10 font-body relative overflow-hidden group"
           >
-            <span className="relative z-10 flex items-center justify-center gap-2">
-              {isSubmitting && (
-                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-              )}
-              {isSubmitting 
-                ? 'Submitting...' 
-                : submitStatus === 'success' 
-                ? '✓ Registered Successfully!' 
-                : submitStatus === 'error'
-                ? '✗ Registration Failed'
-                : 'Register for Challenge'
-              }
-            </span>
-            {!isSubmitting && submitStatus === 'idle' && (
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            )}
+            <span className="relative z-10">Register for Challenge</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </button>
 
-          {submitStatus === 'success' && (
-            <p className="text-center text-sm text-green-600 font-body font-semibold animate-pulse">
-              ✓ Registration sent to glowfmglowmediastation@gmail.com
-            </p>
-          )}
-          {submitStatus === 'error' && (
-            <p className="text-center text-sm text-red-600 font-body">
-              Failed to submit. Please try again or contact us directly.
-            </p>
-          )}
-          {submitStatus === 'idle' && !isSubmitting && (
-            <p className="text-center text-sm text-gray-500 font-body">
-              Registration will be sent to glowfmglowmediastation@gmail.com
-            </p>
-          )}
+          <p className="text-center text-sm text-gray-500 font-body">
+            Your email client will open to complete registration
+          </p>
         </form>
       </div>
     </div>

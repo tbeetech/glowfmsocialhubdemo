@@ -128,7 +128,7 @@ export function GlowFooter() {
           rel="noreferrer"
           className="font-semibold text-glow-accent underline-offset-4 transition hover:text-white"
         >
-          Built by toseytech
+          Built by tobseytech
         </a>
         <span className="mx-1 text-white/40">|</span>
         <a

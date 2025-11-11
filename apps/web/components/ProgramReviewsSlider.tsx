@@ -73,8 +73,8 @@ export function ProgramReviewsSlider() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          {/* Left side - Mobile-shaped testimonial slider */}
+        <div className="max-w-6xl mx-auto">
+          {/* Mobile-shaped testimonial slider */}
           <div className="relative">
             {/* Mobile Frame Container */}
             <div className="relative mx-auto max-w-sm">
@@ -170,23 +170,6 @@ export function ProgramReviewsSlider() {
                   </svg>
                 </button>
               </div>
-            </div>
-          </div>
-
-          {/* Right side - Female figure image */}
-          <div className="relative h-[600px] flex items-center justify-center">
-            <div className="relative w-full h-full max-w-md">
-              <Image
-                src={getAsset("heroHostSmileCutout")}
-                alt="Professional Woman - Programme Reviews"
-                fill
-                className="object-contain object-center"
-                sizes="(max-width: 768px) 100vw, 400px"
-              />
-              
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full opacity-20 blur-xl animate-pulse"></div>
-              <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-gradient-to-br from-indigo-400 to-purple-400 rounded-full opacity-15 blur-2xl animate-pulse"></div>
             </div>
           </div>
         </div>
