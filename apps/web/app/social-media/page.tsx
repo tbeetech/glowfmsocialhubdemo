@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { FollowBar } from "@/components/FollowBar";
+import { SocialMediaCarousel } from "@/components/SocialMediaCarousel";
 
 const youtubeHighlights = [
   {
@@ -166,9 +167,11 @@ export default function SocialMediaPage() {
               </Link>
             </GlowButton>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          
+          {/* YouTube Carousel */}
+          <SocialMediaCarousel itemsPerView={1}>
             {youtubeHighlights.map((video) => (
-              <div key={video.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg">
+              <div key={video.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg mx-auto max-w-2xl">
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-gray-900 font-['El_Messiri']">{video.title}</h3>
                   <div className="aspect-video overflow-hidden rounded-xl border border-gray-200 bg-gray-100">
@@ -194,7 +197,7 @@ export default function SocialMediaPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </SocialMediaCarousel>
         </AnimatedSection>
 
         <AnimatedSection id="tiktok" delay={0.1} className="space-y-6 mx-4">
@@ -211,33 +214,33 @@ export default function SocialMediaPage() {
               </Link>
             </GlowButton>
           </div>
-          <div className="overflow-x-auto">
-            <div className="flex gap-6 pb-4">
-              {tiktokReels.map((reel) => (
-                <div key={reel.title} className="w-72 flex-shrink-0 rounded-3xl bg-gray-50 p-4 shadow-lg">
-                  <div className="aspect-[9/16] overflow-hidden rounded-2xl border border-gray-200 bg-gray-100">
-                    <iframe
-                      className="h-full w-full"
-                      src={reel.embedUrl}
-                      title={reel.title}
-                      allow="encrypted-media; clipboard-write"
-                      allowFullScreen
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="mt-4 space-y-2 text-sm text-gray-700">
-                    <p className="font-semibold text-gray-900">{reel.title}</p>
-                    <p className="text-[11px] uppercase tracking-[0.24em] text-orange-600 sm:text-xs sm:tracking-[0.35em]">
-                      {reel.metric}
-                    </p>
-                    <p className="text-[11px] text-gray-500 sm:text-xs">
-                      Tap the share icon to remix or embed directly in your recap.
-                    </p>
-                  </div>
+          
+          {/* TikTok Carousel with Swipe */}
+          <SocialMediaCarousel itemsPerView={1}>
+            {tiktokReels.map((reel) => (
+              <div key={reel.title} className="rounded-3xl bg-gray-50 p-4 shadow-lg mx-auto" style={{ maxWidth: '400px' }}>
+                <div className="aspect-[9/16] overflow-hidden rounded-2xl border border-gray-200 bg-gray-100">
+                  <iframe
+                    className="h-full w-full"
+                    src={reel.embedUrl}
+                    title={reel.title}
+                    allow="encrypted-media; clipboard-write"
+                    allowFullScreen
+                    loading="lazy"
+                  />
                 </div>
-              ))}
-            </div>
-          </div>
+                <div className="mt-4 space-y-2 text-sm text-gray-700">
+                  <p className="font-semibold text-gray-900 text-center">{reel.title}</p>
+                  <p className="text-[11px] uppercase tracking-[0.24em] text-orange-600 sm:text-xs sm:tracking-[0.35em] text-center">
+                    {reel.metric}
+                  </p>
+                  <p className="text-[11px] text-gray-500 sm:text-xs text-center">
+                    Tap the share icon to remix or embed directly in your recap.
+                  </p>
+                </div>
+              </div>
+            ))}
+          </SocialMediaCarousel>
         </AnimatedSection>
 
         <AnimatedSection id="instagram" delay={0.15} className="space-y-6 mx-4">
@@ -254,9 +257,11 @@ export default function SocialMediaPage() {
               </Link>
             </GlowButton>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          
+          {/* Instagram Carousel */}
+          <SocialMediaCarousel itemsPerView={1}>
             {instagramSpotlight.map((item) => (
-              <div key={item.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg">
+              <div key={item.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg mx-auto max-w-2xl">
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-gray-900">{item.title}</h3>
                   <div className="aspect-[16/9] relative overflow-hidden rounded-2xl border border-gray-200">
@@ -265,11 +270,11 @@ export default function SocialMediaPage() {
                       alt={item.title}
                       fill
                       className="object-cover"
-                      sizes="(max-width:768px) 100vw, 320px"
+                      sizes="(max-width:768px) 100vw, 800px"
                     />
                   </div>
                   <p className="text-sm text-gray-700 font-semibold">{item.caption}</p>
-                  <GlowButton asChild size="sm" className="uppercase tracking-[0.2em] sm:tracking-[0.3em]">
+                  <GlowButton asChild size="sm" className="uppercase tracking-[0.2em] sm:tracking-[0.3em] w-full justify-center">
                     <a href={item.href} target="_blank" rel="noreferrer">
                       View on Instagram
                     </a>
@@ -277,7 +282,7 @@ export default function SocialMediaPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </SocialMediaCarousel>
         </AnimatedSection>
 
         <AnimatedSection id="facebook-spotlight" delay={0.2} className="space-y-6 mx-4 pb-16">
@@ -294,9 +299,11 @@ export default function SocialMediaPage() {
               </Link>
             </GlowButton>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          
+          {/* Facebook Carousel */}
+          <SocialMediaCarousel itemsPerView={1}>
             {facebookStreams.map((stream) => (
-              <div key={stream.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg">
+              <div key={stream.title} className="rounded-3xl bg-gray-50 p-6 shadow-lg mx-auto max-w-2xl">
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-gray-900">{stream.title}</h3>
                   <div className="aspect-video overflow-hidden rounded-xl border border-gray-200 bg-white">
@@ -320,7 +327,7 @@ export default function SocialMediaPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </SocialMediaCarousel>
         </AnimatedSection>
       </div>
     </div>
