@@ -8,7 +8,8 @@ import Image from "next/image";
 import { ShowCarousel } from "@/components/ShowCarousel";
 import { EmberChallengeModal } from "@/components/EmberChallengeModal";
 import { ProgramReviewsSlider } from "@/components/ProgramReviewsSlider";
-import { RadioPlayer } from "@/components/RadioPlayer";
+import { AudioReactivePlayer } from "@/components/AudioReactivePlayer";
+import { FuturisticBackground } from "@/components/FuturisticBackground";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -107,28 +108,41 @@ export default function HomePage() {
         </section>
       </AnimatedSection>
 
-      {/* Radio Player Section - Listen Live */}
+      {/* Radio Player Section - Listen Live with Futuristic Audio Visualizer */}
       <AnimatedSection>
-        <div className="relative bg-gradient-to-br from-orange-50 via-white to-cyan-50 py-12 compact:py-16 sp:py-20 overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-10 left-10 w-40 h-40 bg-gradient-to-br from-orange-400 to-red-400 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute bottom-10 right-10 w-40 h-40 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          </div>
+        <div className="relative bg-gradient-to-br from-[#0A0A0A] via-[#001F3F] to-[#0A0A0A] py-16 compact:py-20 sp:py-24 overflow-hidden">
+          {/* Futuristic Animated Background */}
+          <FuturisticBackground />
           
           <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-8 compact:mb-10 sp:mb-12">
-              <h2 className="text-3xl compact:text-4xl sp:text-5xl font-display font-bold text-gray-900 mb-3 compact:mb-4 font-['El_Messiri']">
-                Listen <span className="bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 text-transparent bg-clip-text">Live</span>
+            <div className="text-center mb-10 compact:mb-12 sp:mb-16">
+              <h2 className="text-4xl compact:text-5xl sp:text-6xl font-display font-black mb-4 compact:mb-5 font-['El_Messiri']">
+                <span className="bg-gradient-to-r from-[#FF6600] via-[#00FFD5] to-[#FF6600] text-transparent bg-clip-text">
+                  Live Audio Experience
+                </span>
               </h2>
-              <p className="text-sm compact:text-base sp:text-lg text-gray-600 font-['El_Messiri']">
-                Tune in now and experience the glow
+              <p className="text-base compact:text-lg sp:text-xl text-[#00FFD5]/80 font-['El_Messiri'] font-semibold">
+                Tune in now • Audio-reactive visualizer • 99.1 FM
               </p>
             </div>
             
-            {/* Radio Player Component */}
+            {/* Audio-Reactive 3D Player Component */}
             <div className="flex justify-center">
-              <RadioPlayer />
+              <AudioReactivePlayer />
+            </div>
+            
+            {/* Feature badges */}
+            <div className="flex flex-wrap justify-center gap-4 mt-10 compact:mt-12">
+              {['Real-time Frequency Visualization', 'Beat-Synced Animations', '3D Vinyl Interface'].map((feature) => (
+                <div
+                  key={feature}
+                  className="px-4 py-2 rounded-full bg-[#001F3F]/50 border border-[#FF6600]/30 backdrop-blur-sm"
+                >
+                  <span className="text-[#00FFD5] text-xs compact:text-sm font-['El_Messiri'] font-bold">
+                    {feature}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

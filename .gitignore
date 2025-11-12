@@ -17,12 +17,3 @@ glowfm-drive-assets-*.json
 
 # Large asset files
 *.zip
-
-# PM2 Logs - Generated on VPS
-logs/
-*.log
-.pm2/
-
-# GitHub Actions Runner - VPS only
-actions-runner/
-

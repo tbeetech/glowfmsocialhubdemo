@@ -18,8 +18,22 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'lh3.googleusercontent.com',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'drive.usercontent.google.com',
+        pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'glow991fm.com',
+        pathname: '/**'
       }
-    ]
+    ],
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: false,
+    minimumCacheTTL: 60,
   },
   experimental: {
     optimizePackageImports: ['lucide-react']

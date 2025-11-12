@@ -1,13 +1,15 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { El_Messiri, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { GlowNav } from "@/components/ui/GlowNav";
 import { GlowFooter } from "@/components/ui/GlowFooter";
+import { TreeFormGlobalCompression } from "@/components/providers/TreeFormGlobalCompression";
 
-const displayFont = El_Messiri({ subsets: ["latin"], variable: "--font-display" });
-const bodyFont = Inter({ subsets: ["latin"], variable: "--font-body" });
+// Use fallback for El_Messiri since Google Fonts is having issues
+const bodyFont = Inter({ subsets: ["latin"], variable: "--font-body", fallback: ['sans-serif'] });
+const displayFont = Inter({ subsets: ["latin"], variable: "--font-display", weight: ["700", "800", "900"], fallback: ['sans-serif'] });
 
 const themeInitializer = `(() => {
   try {
@@ -62,6 +64,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-screen bg-white text-gray-900 overflow-x-hidden" suppressHydrationWarning>
         <Script id="theme-init" strategy="beforeInteractive">{themeInitializer}</Script>
         <GlowNav />
+        <TreeFormGlobalCompression />
         <main className="bg-white pt-20 overflow-x-hidden">{children}</main>
         <a
           href="https://glow991fm.com/schedules/"

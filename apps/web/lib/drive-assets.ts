@@ -127,6 +127,21 @@ export const DRIVE_ASSETS = {
   equipmentLaptopStickerCollage: "15x2UEMcgmU49KR7jShI5bD86T7_EApB6",
 } as const;
 
+// Fallback placeholder images for when Google Drive fails
+const FALLBACK_IMAGES: Partial<Record<keyof typeof DRIVE_ASSETS, string>> = {
+  heroMicProductCutout: '/images/mic-fallback.png',
+  glowFmStandardLogo: 'https://glow991fm.com/wp-content/uploads/2024/05/glowfm-logo-1.png',
+  showIjiAyo: '/images/show-fallback.png',
+  showMillionairesMindset: '/images/show-fallback.png',
+  showGlowKiddies: '/images/show-fallback.png',
+  showLetsTalk: '/images/show-fallback.png',
+  showYouAndTheLaw: '/images/show-fallback.png',
+  showLoveSaturday: '/images/show-fallback.png',
+  showKayefiNla: '/images/show-fallback.png',
+  showWomensWorld: '/images/show-fallback.png',
+  showTheNews: '/images/show-fallback.png',
+};
+
 /**
  * Generate Google Drive direct image URL
  * NOTE: Files MUST be shared as "Anyone with the link can view"
@@ -134,8 +149,8 @@ export const DRIVE_ASSETS = {
  * @returns Direct image URL
  */
 export function getDriveImageUrl(fileId: string): string {
-  // This format works when files are publicly shared
-  return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  // Use lh3.googleusercontent.com format which is more reliable
+  return `https://lh3.googleusercontent.com/d/${fileId}`;
 }
 
 /**
@@ -145,12 +160,20 @@ export function getDriveImageUrl(fileId: string): string {
  * @returns Thumbnail URL
  */
 export function getDriveThumbnailUrl(fileId: string): string {
-  return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  return `https://lh3.googleusercontent.com/d/${fileId}`;
 }
 
 /**
- * Get asset URL by key
+ * Get asset URL by key with fallback support
  */
 export function getAsset(key: keyof typeof DRIVE_ASSETS): string {
-  return getDriveImageUrl(DRIVE_ASSETS[key]);
+  const driveUrl = getDriveImageUrl(DRIVE_ASSETS[key]);
+  return driveUrl;
+}
+
+/**
+ * Get asset with fallback
+ */
+export function getAssetWithFallback(key: keyof typeof DRIVE_ASSETS): string {
+  return FALLBACK_IMAGES[key] || getAsset(key);
 }

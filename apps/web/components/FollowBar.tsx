@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { GlowButton } from "@/components/ui/GlowButton";
 
 const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
 
@@ -12,25 +11,22 @@ const links = [
   { label: "WhatsApp", href: WHATSAPP_BROADCAST_LINK }
 ];
 
+const chipClass =
+  "inline-flex items-center justify-center rounded-full border border-gray-900 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-gray-900 shadow-sm transition hover:bg-gray-900 hover:text-white";
+
 export function FollowBar() {
   return (
     <div className="flex flex-wrap gap-2 sm:gap-3">
       {links.map(({ label, href }) => (
-        <GlowButton
-          key={label}
-          asChild
-          size="sm"
-          variant={label === "WhatsApp" ? "accent" : "ghost"}
-          className="uppercase tracking-[0.14em] sm:tracking-[0.2em]"
-        >
-          {href.startsWith("/") ? (
-            <Link href={href}>{label}</Link>
-          ) : (
-            <a href={href} target="_blank" rel="noreferrer">
-              {label}
-            </a>
-          )}
-        </GlowButton>
+        href.startsWith("/") ? (
+          <Link key={label} href={href} className={chipClass}>
+            {label}
+          </Link>
+        ) : (
+          <a key={label} href={href} target="_blank" rel="noreferrer" className={chipClass}>
+            {label}
+          </a>
+        )
       ))}
     </div>
   );
