@@ -1,15 +1,18 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Inter } from "next/font/google";
+import { El_Messiri } from "next/font/google";
 import "./globals.css";
 import { GlowNav } from "@/components/ui/GlowNav";
 import { GlowFooter } from "@/components/ui/GlowFooter";
 import { TreeFormGlobalCompression } from "@/components/providers/TreeFormGlobalCompression";
 
-// Use fallback for El_Messiri since Google Fonts is having issues
-const bodyFont = Inter({ subsets: ["latin"], variable: "--font-body", fallback: ['sans-serif'] });
-const displayFont = Inter({ subsets: ["latin"], variable: "--font-display", weight: ["700", "800", "900"], fallback: ['sans-serif'] });
+const elMessiri = El_Messiri({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-el-messiri"
+});
 
 const themeInitializer = `(() => {
   try {
@@ -60,21 +63,29 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`} id="top" suppressHydrationWarning>
-      <body className="min-h-screen bg-white text-gray-900 overflow-x-hidden" suppressHydrationWarning>
+    <html lang="en" id="top" suppressHydrationWarning className={elMessiri.variable}>
+      <body className={`${elMessiri.className} global-glass-body overflow-x-hidden text-gray-100`} suppressHydrationWarning>
         <Script id="theme-init" strategy="beforeInteractive">{themeInitializer}</Script>
-        <GlowNav />
-        <TreeFormGlobalCompression />
-        <main className="bg-white pt-20 overflow-x-hidden">{children}</main>
-        <a
-          href="https://glow991fm.com/schedules/"
-          className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-indigo-900 text-white px-5 py-3 text-sm font-semibold shadow-lg hover:bg-indigo-800 transition-colors"
-          aria-label="View Glow FM schedule"
-        >
-          <span className="hidden sm:inline">View Schedule</span>
-          <span className="sm:hidden">Schedule</span>
-        </a>
-        <GlowFooter />
+        <div className="global-glass-canvas" aria-hidden="true">
+          <span className="global-glass-canvas__pane global-glass-canvas__pane--primary" />
+          <span className="global-glass-canvas__pane global-glass-canvas__pane--secondary" />
+          <span className="global-glass-canvas__ripple" />
+          <span className="global-glass-canvas__grid" />
+        </div>
+        <div className="global-glass-content">
+          <GlowNav />
+          <TreeFormGlobalCompression />
+          <main className="relative z-10 pt-20 overflow-x-hidden">{children}</main>
+          <a
+            href="https://glow991fm.com/schedules/"
+            className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-white/15 px-5 py-3 text-sm font-semibold text-white shadow-2xl backdrop-blur-md transition hover:bg-white/25"
+            aria-label="View Glow FM schedule"
+          >
+            <span className="hidden sm:inline">View Schedule</span>
+            <span className="sm:hidden">Schedule</span>
+          </a>
+          <GlowFooter />
+        </div>
       </body>
     </html>
   );

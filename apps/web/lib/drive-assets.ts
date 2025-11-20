@@ -41,6 +41,8 @@ export const DRIVE_ASSETS = {
   decorSignalCluster: "1I4GvvB2fF1cAreTzTbkIFb0JEYH_UZsk",
   confetti01: "1T9vhktjwtofN0-2H0ANPGP0KqGkJHcCA",
   confetti02Transparent: "1UB8NLzY41K4vY03kpEiVW-1kcexfOvcC",
+  emberChallengeHowPoster: "1OxkyeqUKZtIertTyp10utZdBTbVYZ52Z",
+  emberChallengeWeekPoster: "1qtJat_tf_vXizwRxONlibxR3_U6teUEN",
   
   // Get on the Ember Challenge Stage
   galleryRunwayPoseCutout: "1OMeH5I7i39NxzRczM_u5ds9G-SAB2xme",

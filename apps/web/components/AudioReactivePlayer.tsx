@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AudioVisualizer, generateAudioCSS, type FrequencyData } from "@/lib/audio-visualizer";
 import { MOTION_CONFIG } from "@/lib/motion-config";
+import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 /**
  * 3D Audio Player with Vinyl Disc & Audio-Reactive Visualizer
@@ -14,6 +15,7 @@ export function AudioReactivePlayer() {
   const [audioData, setAudioData] = useState<FrequencyData | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const visualizerRef = useRef<AudioVisualizer | null>(null);
+  const { allowMotion } = usePerformanceMode();
 
   useEffect(() => {
     if (audioRef.current) {
@@ -32,6 +34,13 @@ export function AudioReactivePlayer() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!allowMotion) {
+      visualizerRef.current?.stopVisualization();
+      setAudioData(null);
+    }
+  }, [allowMotion]);
+
   const togglePlay = async () => {
     if (!audioRef.current) return;
     
@@ -47,10 +56,13 @@ export function AudioReactivePlayer() {
         
         await audioRef.current.play();
         
-        // Start audio visualization
-        visualizerRef.current?.startVisualization((data) => {
-          setAudioData(data);
-        });
+        if (allowMotion) {
+          visualizerRef.current?.startVisualization((data) => {
+            setAudioData(data);
+          });
+        } else {
+          setAudioData(null);
+        }
       }
       setIsPlaying(!isPlaying);
     } catch (error) {
@@ -65,25 +77,29 @@ export function AudioReactivePlayer() {
 
   // Calculate rotation based on BPM (120 BPM = 2 rotations per second)
   const vinylRotationSpeed = MOTION_CONFIG.masterBPM / 60; // rotations per second
+  const enableVisualizer = allowMotion && isPlaying;
+  const barCount = allowMotion ? 8 : 4;
 
   return (
     <div className="relative w-full max-w-md mx-auto font-['El_Messiri']">
       <motion.div
-        className="relative rounded-[28px] overflow-hidden shadow-[0_0_60px_rgba(255,102,0,0.4)] border-2 border-[#FF6600]/30"
+        className="relative rounded-[28px] overflow-hidden shadow-[0_0_40px_rgba(255,102,0,0.35)] border-2 border-[#FF6600]/30"
         style={{
           background: 'linear-gradient(-225deg, #001F3F 0%, #0A0A0A 100%)',
-          ...(audioData ? generateAudioCSS(audioData) : {}),
+          ...(allowMotion && audioData ? generateAudioCSS(audioData) : {}),
         }}
-        animate={{
-          boxShadow: audioData?.beat 
-            ? '0 0 80px rgba(255, 102, 0, 0.8)' 
-            : '0 0 60px rgba(255, 102, 0, 0.4)',
-        }}
-        transition={{ duration: 0.1 }}
+        animate={
+          allowMotion && audioData?.beat
+            ? {
+                boxShadow: '0 0 80px rgba(255, 102, 0, 0.8)',
+              }
+            : undefined
+        }
+        transition={allowMotion ? { duration: 0.1 } : undefined}
       >
         {/* Audio waveform edge illumination */}
         <div className="absolute inset-0 pointer-events-none">
-          {audioData && (
+          {allowMotion && audioData && (
             <>
               <motion.div
                 className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF6600] to-transparent"
@@ -107,12 +123,16 @@ export function AudioReactivePlayer() {
             {/* Rotating vinyl disc */}
             <motion.div
               className="absolute inset-0 rounded-full overflow-hidden"
-              animate={isPlaying ? { rotate: 360 } : {}}
-              transition={{
-                duration: 1 / vinylRotationSpeed,
-                repeat: isPlaying ? Infinity : 0,
-                ease: "linear",
-              }}
+              animate={enableVisualizer ? { rotate: 360 } : undefined}
+              transition={
+                enableVisualizer
+                  ? {
+                      duration: 1 / vinylRotationSpeed,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }
+                  : undefined
+              }
               style={{
                 background: 'radial-gradient(circle, #0A0A0A 30%, #FF6600 31%, #0A0A0A 32%, #0A0A0A 100%)',
                 boxShadow: '0 0 40px rgba(255, 102, 0, 0.6), inset 0 0 40px rgba(0, 0, 0, 0.8)',
@@ -159,23 +179,31 @@ export function AudioReactivePlayer() {
           <div className="text-center mb-4">
             <motion.h3
               className="text-xl font-black text-[#FFFFFF] mb-1"
-              animate={isPlaying ? {
-                textShadow: [
-                  '0 0 10px rgba(255, 102, 0, 0.8)',
-                  '0 0 20px rgba(255, 102, 0, 1)',
-                  '0 0 10px rgba(255, 102, 0, 0.8)',
-                ],
-              } : {}}
-              transition={{
-                duration: 0.5,
-                repeat: Infinity,
-              }}
+              animate={
+                allowMotion && isPlaying
+                  ? {
+                      textShadow: [
+                        '0 0 10px rgba(255, 102, 0, 0.8)',
+                        '0 0 20px rgba(255, 102, 0, 1)',
+                        '0 0 10px rgba(255, 102, 0, 0.8)',
+                      ],
+                    }
+                  : undefined
+              }
+              transition={
+                allowMotion
+                  ? {
+                      duration: 0.5,
+                      repeat: Infinity,
+                    }
+                  : undefined
+              }
             >
               Glow 99.1 FM
             </motion.h3>
             
             <AnimatePresence mode="wait">
-              {isPlaying && (
+              {allowMotion && isPlaying && (
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -212,27 +240,34 @@ export function AudioReactivePlayer() {
 
           {/* Equalizer bars */}
           <div className="flex items-end justify-center gap-1 h-16 mb-6">
-            {[...Array(12)].map((_, i) => {
+            {Array.from({ length: barCount }).map((_, i) => {
               const intensity = audioData?.raw?.[i * 2] || 0;
-              const heightPercent = isPlaying ? (intensity / 255) * 100 : 10;
-              
+              const heightPercent = enableVisualizer ? Math.max(12, (intensity / 255) * 100) : 18 + i * 4;
+              const style = {
+                height: `${heightPercent}%`,
+                background:
+                  i % 2 === 0
+                    ? 'linear-gradient(to top, #FF6600, #00FFD5)'
+                    : 'linear-gradient(to top, #00FFD5, #FF6600)',
+                boxShadow: `0 0 8px ${i % 2 === 0 ? 'rgba(255, 102, 0, 0.45)' : 'rgba(0, 255, 213, 0.45)'}`,
+              };
+
+              if (!allowMotion) {
+                return <div key={i} className="w-2 rounded-full opacity-70" style={style} />;
+              }
+
               return (
                 <motion.div
                   key={i}
                   className="w-2 rounded-full"
-                  style={{
-                    height: `${heightPercent}%`,
-                    background: i % 3 === 0 
-                      ? 'linear-gradient(to top, #FF6600, #00FFD5)' 
-                      : 'linear-gradient(to top, #00FFD5, #FF6600)',
-                    boxShadow: `0 0 10px ${i % 3 === 0 ? 'rgba(255, 102, 0, 0.6)' : 'rgba(0, 255, 213, 0.6)'}`,
-                  }}
+                  style={style}
                   animate={{
-                    opacity: isPlaying ? [0.7, 1, 0.7] : 0.3,
+                    opacity: enableVisualizer ? [0.7, 1, 0.7] : 0.5,
                   }}
                   transition={{
-                    duration: 0.3,
+                    duration: 0.35,
                     delay: i * 0.05,
+                    repeat: enableVisualizer ? Infinity : 0,
                   }}
                 />
               );
@@ -264,7 +299,7 @@ export function AudioReactivePlayer() {
               
               {/* Ripple effect on beat */}
               <AnimatePresence>
-                {audioData?.beat && (
+                {allowMotion && audioData?.beat && (
                   <motion.div
                     className="absolute inset-0 rounded-full border-2 border-[#FF6600]"
                     initial={{ scale: 1, opacity: 1 }}
@@ -289,7 +324,7 @@ export function AudioReactivePlayer() {
                 style={{
                   width: `${volume}%`,
                   background: 'linear-gradient(90deg, #FF6600, #00FFD5)',
-                  boxShadow: '0 0 10px rgba(255, 102, 0, 0.8)',
+                  boxShadow: '0 0 6px rgba(255, 102, 0, 0.6)',
                 }}
               />
               

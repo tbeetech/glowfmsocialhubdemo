@@ -3,6 +3,7 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
+import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 interface AnimatedSectionProps extends ComponentPropsWithoutRef<"section"> {
   children: ReactNode;
@@ -14,6 +15,7 @@ export function AnimatedSection({ children, className, delay = 0, ...rest }: Ani
   const sectionRef = useRef<HTMLElement | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const { allowMotion } = usePerformanceMode();
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) {
@@ -58,7 +60,7 @@ export function AnimatedSection({ children, className, delay = 0, ...rest }: Ani
           }
         });
       },
-      prefersReducedMotion
+      (prefersReducedMotion || !allowMotion)
         ? { threshold: 0 }
         : {
             threshold: 0.12,
@@ -73,17 +75,19 @@ export function AnimatedSection({ children, className, delay = 0, ...rest }: Ani
       observer.disconnect();
       window.clearTimeout(fallbackId);
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, allowMotion]);
 
   return (
     <section
       ref={sectionRef}
       className={cn(
-        "transform-gpu transition-all duration-700 ease-out will-change-transform will-change-opacity",
-        prefersReducedMotion ? "opacity-100" : isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
-        className
+        allowMotion && !prefersReducedMotion
+          ? "transform-gpu transition-all duration-700 ease-out will-change-transform will-change-opacity"
+          : "",
+        !allowMotion || prefersReducedMotion ? "opacity-100" : isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+      className
       )}
-      style={{ transitionDelay: `${delay}s` }}
+      style={allowMotion ? { transitionDelay: `${delay}s` } : undefined}
       {...rest}
     >
       {children}

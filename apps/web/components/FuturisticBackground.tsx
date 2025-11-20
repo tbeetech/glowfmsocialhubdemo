@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 /**
  * Futuristic Animated Grid Background
@@ -9,8 +10,13 @@ import { motion } from "framer-motion";
  */
 export function FuturisticBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { allowMotion } = usePerformanceMode();
   
   useEffect(() => {
+    if (!allowMotion) {
+      return;
+    }
+
     const canvasElement = canvasRef.current;
     if (!canvasElement) return;
     
@@ -91,7 +97,25 @@ export function FuturisticBackground() {
       window.removeEventListener('resize', setSize);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [allowMotion]);
+
+  if (!allowMotion) {
+    return (
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#001F3F] via-[#050a1a] to-[#0b0f1c] opacity-80" />
+        <div
+          className="absolute inset-0 opacity-10"
+          style={{
+            backgroundImage: `
+              linear-gradient(90deg, rgba(255, 102, 0, 0.15) 1px, transparent 1px),
+              linear-gradient(rgba(0, 255, 213, 0.15) 1px, transparent 1px)
+            `,
+            backgroundSize: '80px 80px',
+          }}
+        />
+      </div>
+    );
+  }
   
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -123,7 +147,7 @@ export function FuturisticBackground() {
       
       {/* Floating frequency lines */}
       <div className="absolute inset-0">
-        {[...Array(5)].map((_, i) => (
+        {[...Array(3)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute h-px bg-gradient-to-r from-transparent via-[#FF6600] to-transparent"

@@ -10,9 +10,40 @@ import { EmberChallengeModal } from "@/components/EmberChallengeModal";
 import { ProgramReviewsSlider } from "@/components/ProgramReviewsSlider";
 import { AudioReactivePlayer } from "@/components/AudioReactivePlayer";
 import { FuturisticBackground } from "@/components/FuturisticBackground";
+import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { allowMotion } = usePerformanceMode();
+  const onboardingChecklist = [
+    {
+      title: "Introduce yourself to the producers",
+      detail: "Share your name, show concept, and the city you're representing so the MC can hype you properly."
+    },
+    {
+      title: "Show us the Ember-ready vibe",
+      detail: "Upload a 45-second vocal, reel, or dance clip that proves you can hold the stage energy when the beat drops."
+    },
+    {
+      title: "Lock in your contact & availability",
+      detail: "Drop your phone, socials, and preferred week so our bookers can schedule rehearsals without any back-and-forth."
+    }
+  ];
+
+  const weekPulseHighlights = [
+    {
+      title: "Week 1 Game: Ember Warmup Freestyle",
+      detail: "Record a 30-second freestyle or DJ flip using the Ember loop and publish it with #GlowEmberChallenge."
+    },
+    {
+      title: "Squad Boost Missions",
+      detail: "Tag three Glow Family members in the comments of the sponsored post to unlock bonus votes from their regions."
+    },
+    {
+      title: "Friday Stage Check-In",
+      detail: "Join the IG + Facebook Live recap to learn who advanced, see highlights, and hear the next creative brief."
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
@@ -25,14 +56,18 @@ export default function HomePage() {
           </div>
           
           {/* Floating decorative elements - hidden on very small screens */}
-          <div className="hidden compact:block absolute top-20 left-4 compact:left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 blur-3xl animate-pulse"></div>
-          <div className="hidden sp:block absolute bottom-40 right-4 sp:right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-15 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="hidden tablet:block absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          {allowMotion && (
+            <>
+              <div className="hidden compact:block absolute top-20 left-4 compact:left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+              <div className="hidden sp:block absolute bottom-40 right-4 sp:right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-15 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+              <div className="hidden tablet:block absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+            </>
+          )}
           
           <div className="container mx-auto px-4 compact:px-5 sp:px-6 tablet:px-8 relative z-10">
             <div className="grid grid-cols-2 gap-2 compact:gap-3 sp:gap-5 mp:gap-6 tablet:gap-12 items-center">
               {/* Left Content */}
-              <div className="space-y-1.5 compact:space-y-2 sp:space-y-3 mp:space-y-4 tablet:space-y-8 order-1">
+              <div className="space-y-1.5 compact:space-y-2 sp:space-y-3 mp:space-y-4 tablet:space-y-8 order-1 text-gray-900">
                 {/* Headline with Red "Fun" Badge */}
                 <h1 className="text-sm compact:text-base sp:text-xl mp:text-2xl phablet:text-4xl tablet:text-5xl laptop:text-7xl font-display font-black text-gray-900 leading-[1.1] compact:leading-tight font-['El_Messiri']">
                   Connect with the GlowFM:
@@ -53,7 +88,7 @@ export default function HomePage() {
                   </span>
                 </h1>
                 
-                <p className="text-[10px] compact:text-xs sp:text-sm mp:text-base phablet:text-lg max-w-xl leading-tight compact:leading-relaxed font-body font-['El_Messiri']">
+                <p className="text-[10px] compact:text-xs sp:text-sm mp:text-base phablet:text-lg max-w-xl leading-tight compact:leading-relaxed text-gray-700 font-body font-['El_Messiri']">
                   The most powerful element is the connection. Connect with the creators who are pouring their 
                   passion into shaping tomorrow&apos;s sound. Engage in real-time Q&A sessions, drop a comment 
                   during a live performance, or join a dedicated forum.
@@ -99,8 +134,12 @@ export default function HomePage() {
                   </div>
                   
                   {/* Glowing ring animation - scaled for mobile */}
-                  <div className="absolute top-1/2 left-1/2 w-40 compact:w-48 sp:w-56 mp:w-72 phablet:w-80 tablet:w-96 h-40 compact:h-48 sp:h-56 mp:h-72 phablet:h-80 tablet:h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-300/30 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
-                  <div className="absolute top-1/2 left-1/2 w-32 compact:w-40 sp:w-48 mp:w-64 phablet:w-72 tablet:w-80 h-32 compact:h-40 sp:h-48 mp:h-64 phablet:h-72 tablet:h-80 -translate-x-1/2 -translate-y-1/2 border border-red-300/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
+                  {allowMotion && (
+                    <>
+                      <div className="absolute top-1/2 left-1/2 w-40 compact:w-48 sp:w-56 mp:w-72 phablet:w-80 tablet:w-96 h-40 compact:h-48 sp:h-56 mp:h-72 phablet:h-80 tablet:h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-300/30 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
+                      <div className="absolute top-1/2 left-1/2 w-32 compact:w-40 sp:w-48 mp:w-64 phablet:w-72 tablet:w-80 h-32 compact:h-40 sp:h-48 mp:h-64 phablet:h-72 tablet:h-80 -translate-x-1/2 -translate-y-1/2 border border-red-300/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -299,7 +338,7 @@ export default function HomePage() {
 
       {/* Glow Ember Challenge Section - With Advanced CSS Digital Background */}
       <AnimatedSection>
-        <div className="pt-16 pb-0 bg-gradient-to-br from-slate-50 via-purple-50 to-amber-50 relative overflow-hidden">
+        <div id="ember-challenge" className="pt-16 pb-0 bg-gradient-to-br from-slate-50 via-purple-50 to-amber-50 relative overflow-hidden">
           {/* Corner Borders - Matching Countdown Style */}
           <div className="absolute top-4 left-4 w-12 h-12 border-t-4 border-l-4 border-amber-500/80 rounded-tl-2xl z-20"></div>
           <div className="absolute top-4 right-4 w-12 h-12 border-t-4 border-r-4 border-purple-500/80 rounded-tr-2xl z-20"></div>
@@ -321,58 +360,22 @@ export default function HomePage() {
           </div>
 
           {/* Advanced CSS Digital Background - Replacing Confetti Images */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Animated Gradient Mesh */}
-            <div className="absolute inset-0 opacity-30">
-              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,rgba(251,191,36,0.3),transparent_50%)] animate-pulse"></div>
-              <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(147,51,234,0.3),transparent_50%)] animate-pulse" style={{ animationDelay: '1s' }}></div>
-              <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,rgba(236,72,153,0.25),transparent_50%)] animate-pulse" style={{ animationDelay: '2s' }}></div>
-              <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,rgba(59,130,246,0.25),transparent_50%)] animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+          {allowMotion && (
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute inset-0 opacity-25">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(251,191,36,0.35),transparent_60%)] animate-pulse"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(147,51,234,0.25),transparent_65%)] animate-pulse" style={{ animationDelay: '1.2s' }}></div>
+              </div>
+              <div className="absolute inset-0">
+                <div className="absolute top-[18%] left-[18%] w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 opacity-50 animate-ping"></div>
+                <div className="absolute bottom-[22%] right-[18%] w-14 h-14 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 opacity-40 animate-ping" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute inset-0 opacity-30">
+                  <div className="absolute -left-24 top-1/3 w-2/3 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent rotate-6 animate-pulse"></div>
+                  <div className="absolute right-0 bottom-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent -rotate-6 animate-pulse" style={{ animationDelay: '1.6s' }}></div>
+                </div>
+              </div>
             </div>
-
-            {/* Floating Geometric Shapes */}
-            <div className="absolute inset-0">
-              {/* Circles */}
-              <div className="absolute top-[10%] left-[15%] w-4 h-4 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full opacity-60 animate-bounce" style={{ animationDuration: '3s', animationDelay: '0s' }}></div>
-              <div className="absolute top-[25%] right-[20%] w-6 h-6 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full opacity-50 animate-bounce" style={{ animationDuration: '4s', animationDelay: '0.5s' }}></div>
-              <div className="absolute top-[45%] left-[25%] w-3 h-3 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full opacity-70 animate-bounce" style={{ animationDuration: '3.5s', animationDelay: '1s' }}></div>
-              <div className="absolute top-[60%] right-[30%] w-5 h-5 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full opacity-55 animate-bounce" style={{ animationDuration: '4.5s', animationDelay: '1.5s' }}></div>
-              <div className="absolute bottom-[20%] left-[35%] w-4 h-4 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full opacity-65 animate-bounce" style={{ animationDuration: '3.8s', animationDelay: '0.8s' }}></div>
-              
-              {/* Rectangles */}
-              <div className="absolute top-[15%] right-[35%] w-8 h-3 bg-gradient-to-r from-yellow-400 to-amber-500 opacity-60 animate-spin" style={{ animationDuration: '8s', animationDelay: '0.3s' }}></div>
-              <div className="absolute top-[35%] left-[40%] w-6 h-2 bg-gradient-to-r from-violet-400 to-purple-500 opacity-50 animate-spin" style={{ animationDuration: '10s', animationDelay: '1.2s' }}></div>
-              <div className="absolute bottom-[30%] right-[25%] w-7 h-2.5 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-55 animate-spin" style={{ animationDuration: '9s', animationDelay: '0.7s' }}></div>
-              <div className="absolute bottom-[45%] left-[20%] w-5 h-2 bg-gradient-to-r from-orange-400 to-red-500 opacity-70 animate-spin" style={{ animationDuration: '7.5s', animationDelay: '1.8s' }}></div>
-              
-              {/* Triangles (Using CSS shapes) */}
-              <div className="absolute top-[20%] left-[50%] w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[14px] border-b-pink-500/60 opacity-70 animate-pulse" style={{ animationDuration: '2.5s' }}></div>
-              <div className="absolute top-[50%] right-[15%] w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-purple-500/50 opacity-60 animate-pulse" style={{ animationDuration: '3s', animationDelay: '0.6s' }}></div>
-              <div className="absolute bottom-[35%] left-[45%] w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-b-[12px] border-b-amber-500/65 opacity-75 animate-pulse" style={{ animationDuration: '2.8s', animationDelay: '1.3s' }}></div>
-            </div>
-
-            {/* Diagonal Streaks */}
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute top-1/4 -left-20 w-96 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent rotate-45 animate-pulse"></div>
-              <div className="absolute top-1/2 right-20 w-80 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent -rotate-45 animate-pulse" style={{ animationDelay: '1s' }}></div>
-              <div className="absolute bottom-1/3 left-40 w-72 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent rotate-12 animate-pulse" style={{ animationDelay: '2s' }}></div>
-            </div>
-
-            {/* Grid Pattern Overlay */}
-            <div className="absolute inset-0 opacity-5" style={{
-              backgroundImage: `
-                linear-gradient(rgba(147,51,234,0.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(251,191,36,0.3) 1px, transparent 1px)
-              `,
-              backgroundSize: '50px 50px'
-            }}></div>
-
-            {/* Floating Particles */}
-            <div className="absolute top-[30%] left-[10%] w-2 h-2 bg-amber-400 rounded-full opacity-80 animate-ping shadow-[0_0_10px_rgba(251,191,36,0.8)]"></div>
-            <div className="absolute top-[40%] right-[40%] w-2 h-2 bg-purple-400 rounded-full opacity-70 animate-ping shadow-[0_0_10px_rgba(147,51,234,0.8)]" style={{ animationDelay: '0.5s' }}></div>
-            <div className="absolute bottom-[25%] left-[30%] w-2 h-2 bg-pink-400 rounded-full opacity-75 animate-ping shadow-[0_0_10px_rgba(236,72,153,0.8)]" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute bottom-[40%] right-[20%] w-2 h-2 bg-blue-400 rounded-full opacity-65 animate-ping shadow-[0_0_10px_rgba(59,130,246,0.8)]" style={{ animationDelay: '1.5s' }}></div>
-          </div>
+          )}
           
           <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-end relative z-10">
             <div className="text-left space-y-4 pb-16">
@@ -418,52 +421,121 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-
+      {/* Ember Challenge Visual Briefings */}
+      <AnimatedSection>
+        <section className="relative overflow-hidden bg-gradient-to-br from-white via-amber-50 to-purple-50 py-16 compact:py-20">
+          <div className="absolute inset-0 pointer-events-none opacity-40">
+            <div className="absolute -top-16 -left-10 h-56 w-56 rounded-full bg-orange-200 blur-3xl"></div>
+            <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-purple-200 blur-3xl"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(251,191,36,0.25),transparent_60%)]"></div>
+          </div>
+          <div className="container relative z-10 mx-auto px-4 compact:px-6 tablet:px-10">
+            <div className="mx-auto mb-12 max-w-3xl text-center">
+              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-amber-600">Ember challenge briefings</p>
+              <h3 className="mt-3 text-3xl font-display font-bold text-gray-900">How the contest works & what is live this week</h3>
+              <p className="mt-4 text-base text-gray-600">
+                These cards only carry performer-facing updates so contestants, listeners, and sponsors can track the show plan without any
+                production jargon.
+              </p>
+            </div>
+            <div className="grid gap-8 lg:grid-cols-2">
+              <article className="relative overflow-hidden rounded-[32px] border border-orange-100 bg-white/80 p-6 shadow-[0_20px_60px_rgba(244,114,182,0.15)] backdrop-blur-xl">
+                <div className="absolute inset-0 opacity-40">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.2),transparent_60%)]"></div>
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(14,165,233,0.15),transparent_60%)]"></div>
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-600">playbook</p>
+                  <h4 className="text-2xl font-display font-bold text-gray-900">How to get on the Ember Challenge stage</h4>
+                  <p className="text-sm text-gray-600">
+                    Share these quick steps directly with contestants or on-air mentions so everyone knows exactly how to secure a slot on stage.
+                  </p>
+                  <div className="relative w-full overflow-hidden rounded-[22px] border border-white/60 bg-white/95 p-5 shadow-inner shadow-amber-200/50">
+                    <ul className="space-y-4">
+                      {onboardingChecklist.map((item) => (
+                        <li key={item.title} className="flex gap-3">
+                          <span className="mt-1 h-2.5 w-2.5 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
+                          <div>
+                            <p className="text-base font-semibold text-gray-900">{item.title}</p>
+                            <p className="text-sm text-gray-600">{item.detail}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <a
+                    href="https://web.facebook.com/share/r/1Cfmvgvdwy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-2 text-sm font-semibold text-white transition hover:bg-gray-800"
+                  >
+                    View Onboarding Instructions
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </div>
+              </article>
+              <article className="relative overflow-hidden rounded-[32px] border border-purple-100 bg-white/80 p-6 shadow-[0_20px_60px_rgba(129,140,248,0.15)] backdrop-blur-xl">
+                <div className="absolute inset-0 opacity-40">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(129,140,248,0.2),transparent_60%)]"></div>
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(236,72,153,0.15),transparent_60%)]"></div>
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-purple-600">week drop</p>
+                  <h4 className="text-2xl font-display font-bold text-gray-900">Weekly Ember Challenge pulse</h4>
+                  <p className="text-sm text-gray-600">
+                    Point contestants and superfans to this weekly pulse so they know the active challenge, bonus missions, and where to watch live reveals.
+                  </p>
+                  <div className="relative w-full overflow-hidden rounded-[22px] border border-white/60 bg-white/95 p-5 shadow-inner shadow-purple-200/50">
+                    <ul className="space-y-4">
+                      {weekPulseHighlights.map((item) => (
+                        <li key={item.title} className="flex gap-3">
+                          <span className="mt-1 h-2.5 w-2.5 rounded-full bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.6)]" />
+                          <div>
+                            <p className="text-base font-semibold text-gray-900">{item.title}</p>
+                            <p className="text-sm text-gray-600">{item.detail}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <a
+                    href="https://web.facebook.com/share/p/17gF3ezUxT/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-gray-900/20 px-6 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-900 hover:text-gray-900"
+                  >
+                    CHECK WEEK 1 GAME
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
 
       {/* Ember Challenge Has Commenced Section */}
       <AnimatedSection>
         <div className="py-16 compact:py-20 tablet:py-24 bg-gradient-to-br from-amber-950 via-purple-950 to-amber-900 relative overflow-hidden">
           {/* Ultra Violet Blooming Rays */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Radial Burning Ray Effects */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%]">
-              {/* Primary Golden-Purple Rays */}
-              <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(217,119,6,0.4)_10deg,transparent_20deg,transparent_40deg,rgba(126,34,206,0.5)_50deg,transparent_60deg,transparent_80deg,rgba(180,83,9,0.4)_90deg,transparent_100deg)] animate-spin" style={{ animationDuration: '30s' }}></div>
-              
-              {/* Secondary Brown-Gold Rays */}
-              <div className="absolute inset-0 bg-[conic-gradient(from_45deg,transparent_0deg,rgba(120,53,15,0.5)_15deg,transparent_30deg,transparent_60deg,rgba(251,191,36,0.4)_75deg,transparent_90deg,transparent_120deg,rgba(109,40,217,0.5)_135deg,transparent_150deg)] animate-spin" style={{ animationDuration: '40s', animationDirection: 'reverse' }}></div>
-              
-              {/* Tertiary Violet Burning Rays */}
-              <div className="absolute inset-0 bg-[conic-gradient(from_90deg,transparent_0deg,rgba(147,51,234,0.6)_12deg,transparent_24deg,transparent_48deg,rgba(161,98,7,0.5)_60deg,transparent_72deg,transparent_96deg,rgba(88,28,135,0.5)_108deg,transparent_120deg)] animate-spin" style={{ animationDuration: '25s' }}></div>
+          {allowMotion && (
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%]">
+                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(217,119,6,0.4)_12deg,transparent_25deg,rgba(126,34,206,0.45)_50deg,transparent_75deg)] animate-spin" style={{ animationDuration: '32s' }}></div>
+                <div className="absolute inset-0 bg-[conic-gradient(from_60deg,transparent_0deg,rgba(147,51,234,0.5)_18deg,transparent_40deg,rgba(251,191,36,0.35)_70deg,transparent_100deg)] animate-spin" style={{ animationDuration: '42s', animationDirection: 'reverse' }}></div>
+              </div>
+              <div className="absolute top-8 left-6 w-48 h-48 bg-gradient-radial from-amber-500/40 via-purple-600/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-6 right-8 w-64 h-64 bg-gradient-radial from-purple-600/35 via-amber-500/20 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.2s' }}></div>
+              <div className="absolute inset-0 opacity-25">
+                <div className="absolute left-10 top-1/3 w-1/2 h-px bg-gradient-to-r from-transparent via-amber-300 to-transparent animate-pulse"></div>
+                <div className="absolute right-12 bottom-1/3 w-2/5 h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent animate-pulse" style={{ animationDelay: '1.4s' }}></div>
+              </div>
             </div>
-
-            {/* Fidgeting Burning Orbs */}
-            <div className="absolute top-10 left-4 compact:left-10 w-48 h-48 bg-gradient-radial from-amber-500/40 via-purple-600/30 to-transparent rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute top-1/4 right-4 compact:right-16 w-64 h-64 bg-gradient-radial from-purple-700/50 via-amber-600/30 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute bottom-20 left-1/3 w-72 h-72 bg-gradient-radial from-amber-700/40 via-purple-800/35 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-            <div className="absolute top-1/2 right-1/4 w-56 h-56 bg-gradient-radial from-purple-600/45 via-amber-500/30 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-            <div className="absolute bottom-1/3 left-1/4 w-60 h-60 bg-gradient-radial from-amber-600/50 via-purple-700/35 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2.5s' }}></div>
-          </div>
-
-          {/* Burning Ember Particles */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {/* Floating Embers */}
-            <div className="absolute top-[10%] left-[15%] w-3 h-3 bg-amber-400 rounded-full blur-sm animate-ping shadow-[0_0_20px_rgba(251,191,36,0.8)]"></div>
-            <div className="absolute top-[25%] right-[20%] w-2.5 h-2.5 bg-purple-400 rounded-full blur-sm animate-ping shadow-[0_0_20px_rgba(168,85,247,0.8)]" style={{ animationDelay: '0.5s' }}></div>
-            <div className="absolute top-[40%] left-[30%] w-4 h-4 bg-amber-500 rounded-full blur-sm animate-ping shadow-[0_0_25px_rgba(245,158,11,0.9)]" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute top-[60%] right-[25%] w-3.5 h-3.5 bg-purple-500 rounded-full blur-sm animate-ping shadow-[0_0_22px_rgba(147,51,234,0.8)]" style={{ animationDelay: '1.5s' }}></div>
-            <div className="absolute bottom-[20%] left-[40%] w-2 h-2 bg-amber-600 rounded-full blur-sm animate-ping shadow-[0_0_18px_rgba(217,119,6,0.8)]" style={{ animationDelay: '2s' }}></div>
-            <div className="absolute bottom-[35%] right-[35%] w-3 h-3 bg-purple-600 rounded-full blur-sm animate-ping shadow-[0_0_20px_rgba(126,34,206,0.8)]" style={{ animationDelay: '2.5s' }}></div>
-            <div className="absolute top-[15%] right-[40%] w-2.5 h-2.5 bg-amber-300 rounded-full blur-sm animate-ping shadow-[0_0_20px_rgba(252,211,77,0.8)]" style={{ animationDelay: '0.3s' }}></div>
-            <div className="absolute bottom-[45%] left-[20%] w-3 h-3 bg-purple-400 rounded-full blur-sm animate-ping shadow-[0_0_20px_rgba(192,132,252,0.8)]" style={{ animationDelay: '1.8s' }}></div>
-          </div>
-
-          {/* Blooming Wave Effects */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_30%,rgba(251,191,36,0.6),transparent_40%)] animate-pulse"></div>
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_80%_70%,rgba(147,51,234,0.6),transparent_40%)] animate-pulse" style={{ animationDelay: '1s' }}></div>
-            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(217,119,6,0.5),transparent_45%)] animate-pulse" style={{ animationDelay: '2s' }}></div>
-          </div>
+          )}
 
           {/* Diagonal Burning Pattern */}
           <div className="absolute inset-0 opacity-10">

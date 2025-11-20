@@ -71,8 +71,9 @@ const config: Config = {
         "2xl": "2rem"
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"],
-        sans: ["var(--font-body)", "sans-serif"]
+        display: ['var(--font-el-messiri)', '"El Messiri"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['var(--font-el-messiri)', '"El Messiri"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        body: ['var(--font-el-messiri)', '"El Messiri"', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
       }
     }
   },

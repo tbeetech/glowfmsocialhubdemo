@@ -1,0 +1,60 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
+interface NavigatorDeviceMemory extends Navigator {
+  deviceMemory?: number;
+}
+
+const MIN_WIDTH_QUERY = "(min-width: 1280px)";
+const MOTION_REDUCE_QUERY = "(prefers-reduced-motion: reduce)";
+const MIN_MEMORY_GB = 8;
+const MIN_CORES = 6;
+
+export function usePerformanceMode() {
+  const [allowMotion, setAllowMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const motionQuery = window.matchMedia(MOTION_REDUCE_QUERY);
+    const widthQuery = window.matchMedia(MIN_WIDTH_QUERY);
+
+    const update = () => {
+      const navigatorWithMemory = window.navigator as NavigatorDeviceMemory & { hardwareConcurrency?: number };
+      const deviceMemory = navigatorWithMemory.deviceMemory;
+      const hardwareConcurrency = navigatorWithMemory.hardwareConcurrency ?? 0;
+      const hasAdequateMemory = typeof deviceMemory === "number" ? deviceMemory >= MIN_MEMORY_GB : false;
+      const hasAdequateCores = hardwareConcurrency >= MIN_CORES;
+      const reduceMotion = motionQuery.matches;
+      const hasViewportBudget = widthQuery.matches;
+
+      setAllowMotion(!reduceMotion && hasViewportBudget && hasAdequateMemory && hasAdequateCores);
+    };
+
+    update();
+
+    motionQuery.addEventListener("change", update);
+    widthQuery.addEventListener("change", update);
+    window.addEventListener("orientationchange", update);
+    window.addEventListener("resize", update);
+
+    return () => {
+      motionQuery.removeEventListener("change", update);
+      widthQuery.removeEventListener("change", update);
+      window.removeEventListener("orientationchange", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return;
+    }
+    document.body.classList.toggle("performance-ease-mode", !allowMotion);
+  }, [allowMotion]);
+
+  return useMemo(() => ({ allowMotion }), [allowMotion]);
+}
