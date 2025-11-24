@@ -74,6 +74,24 @@ body.performance-ease-mode::after {
   animation: none !important;
 }
 
+.performance-ease-mode .grid-background,
+.performance-ease-mode .grid-background-nav,
+.performance-ease-mode .animate-scroll,
+.performance-ease-mode .film-grain,
+.performance-ease-mode .ambient-particles,
+.performance-ease-mode .global-glass-canvas,
+.performance-ease-mode .global-glass-canvas__grid {
+  animation: none !important;
+  background-position: initial !important;
+}
+
+body.performance-ease-mode::before,
+body.performance-ease-mode::after {
+  background: #03050B !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
 body.global-glass-body {
   min-height: 100vh;
   color: var(--foreground);

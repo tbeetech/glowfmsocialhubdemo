@@ -52,7 +52,7 @@ export default function HomePage() {
         <section className="relative bg-gradient-to-br from-white via-orange-50 to-red-50 pt-20 compact:pt-24 tablet:pt-4 pb-12 compact:pb-16 tablet:pb-20 overflow-hidden">
           {/* Animated 4x4 Grid Background */}
           <div className="absolute inset-0 opacity-30">
-            <div className="grid-background"></div>
+            <div className="grid-background" style={!allowMotion ? { animation: "none" } : undefined}></div>
           </div>
           
           {/* Floating decorative elements - hidden on very small screens */}
@@ -190,7 +190,7 @@ export default function HomePage() {
       {/* Ticker Section */}
       <AnimatedSection>
         <div className="relative bg-gradient-to-r from-indigo-900 via-blue-800 to-indigo-900 py-3 compact:py-4 overflow-hidden">
-          <div className="animate-scroll whitespace-nowrap">
+          <div className={allowMotion ? "animate-scroll whitespace-nowrap" : "whitespace-nowrap"} style={!allowMotion ? { animation: "none" } : undefined}>
             <span className="inline-block text-white text-sm compact:text-base tablet:text-lg font-semibold">
               <span className="mx-4 compact:mx-6">Glow Ember Challenge</span>
               <span className="mx-4 compact:mx-6 text-yellow-300">✦ is ✦</span>

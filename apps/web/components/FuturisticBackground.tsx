@@ -74,7 +74,8 @@ export function FuturisticBackground() {
     }
     
     const particles: Particle[] = [];
-    for (let i = 0; i < 50; i++) {
+    const particleBudget = Math.min(30, Math.max(18, Math.floor(window.innerWidth / 60)));
+    for (let i = 0; i < particleBudget; i++) {
       particles.push(new Particle(canvasElement, ctx));
     }
     

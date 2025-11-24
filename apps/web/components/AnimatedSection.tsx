@@ -82,10 +82,10 @@ export function AnimatedSection({ children, className, delay = 0, ...rest }: Ani
       ref={sectionRef}
       className={cn(
         allowMotion && !prefersReducedMotion
-          ? "transform-gpu transition-all duration-700 ease-out will-change-transform will-change-opacity"
+          ? "transform-gpu transition-all duration-500 ease-out will-change-transform will-change-opacity"
           : "",
         !allowMotion || prefersReducedMotion ? "opacity-100" : isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
-      className
+        className
       )}
       style={allowMotion ? { transitionDelay: `${delay}s` } : undefined}
       {...rest}

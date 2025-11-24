@@ -10,6 +10,8 @@ interface IconProps {
   className?: string;
 }
 
+const ABOUT_URL = "https://glow991fm.com/about-us";
+
 function MenuIcon({ className }: IconProps) {
   return (
     <svg
@@ -51,7 +53,7 @@ function CloseIcon({ className }: IconProps) {
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Social Media", href: "/social-media" },
-  { label: "About", href: "/about" },
+  { label: "About", href: ABOUT_URL },
   { label: "Contact", href: "/contact" },
   { label: "Advertisement", href: "/advertisement" }
 ] as const;
@@ -76,6 +78,7 @@ function renderLink(
   }: { extra?: string; onClick?: () => void; isActive?: boolean }
 ) {
   const { href, label } = item;
+  const isExternal = href.startsWith("http");
   const classes = [
     baseLinkClasses, 
     hoverLinkClasses, 
@@ -90,6 +93,20 @@ function renderLink(
   if (href.startsWith("#")) {
     return (
       <a key={href} href={href} className={classes} onClick={handleClick}>
+        {label}
+      </a>
+    );
+  }
+
+  if (isExternal) {
+    return (
+      <a
+        key={href}
+        href={href}
+        className={classes}
+        onClick={handleClick}
+        rel="noreferrer"
+      >
         {label}
       </a>
     );
@@ -134,28 +151,7 @@ export function GlowNav() {
 
   return (
   <header className="fixed top-0 z-[100] w-full">
-      {/* Royal Glassy Liquid Crystal Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-indigo-950/95 to-slate-950/95 backdrop-blur-xl border-b-2 border-white/10">
-        {/* Liquid Crystal Waves */}
-        <div className="absolute inset-0 overflow-hidden opacity-30">
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent animate-pulse"></div>
-          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
-        </div>
-        
-        {/* Circuit Pattern */}
-        <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: `
-            linear-gradient(90deg, rgba(251,146,60,0.1) 1px, transparent 1px),
-            linear-gradient(rgba(251,146,60,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '40px 40px'
-        }}></div>
-        
-        {/* Floating Glow Particles */}
-        <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 right-1/4 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
+      <div className="absolute inset-0 bg-[#03050B]/95 border-b border-white/10 backdrop-blur-md"></div>
       
       <div className="mx-auto flex max-w-7xl items-center justify-between px-3 compact:px-4 phablet:px-5 lg:px-8 py-3 phablet:py-4 md:py-6 relative z-10">
         <Link href="/" className="flex items-center text-white transition-transform duration-300 hover:scale-105 group" prefetch>
@@ -212,28 +208,7 @@ export function GlowNav() {
             id="mobile-nav"
             className="absolute inset-x-2 compact:inset-x-4 top-16 mp:top-20 rounded-2xl shadow-2xl p-4 sp:p-5 mp:p-6 overflow-hidden"
           >
-            {/* Royal Glassy Mobile Menu Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-slate-950/98 via-indigo-950/98 to-slate-950/98 backdrop-blur-xl border-2 border-white/10 rounded-2xl">
-              {/* Liquid Crystal Effect */}
-              <div className="absolute inset-0 opacity-20">
-                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 via-transparent to-cyan-500/20 animate-pulse"></div>
-              </div>
-              
-              {/* Circuit Grid */}
-              <div className="absolute inset-0 opacity-10" style={{
-                backgroundImage: `
-                  linear-gradient(90deg, rgba(251,146,60,0.2) 1px, transparent 1px),
-                  linear-gradient(rgba(251,146,60,0.2) 1px, transparent 1px)
-                `,
-                backgroundSize: '30px 30px'
-              }}></div>
-              
-              {/* Corner Accents */}
-              <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-orange-400/50 rounded-tl-2xl"></div>
-              <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-400/50 rounded-tr-2xl"></div>
-              <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-purple-500/50 rounded-bl-2xl"></div>
-              <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-orange-400/50 rounded-br-2xl"></div>
-            </div>
+            <div className="absolute inset-0 rounded-2xl bg-[#03050B] border border-white/10 shadow-lg"></div>
             
             <div className="relative z-10">
               <div className="mb-4 sp:mb-6 flex items-center justify-between">

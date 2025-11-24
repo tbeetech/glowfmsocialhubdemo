@@ -4,6 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 
 interface NavigatorDeviceMemory extends Navigator {
   deviceMemory?: number;
+  hardwareConcurrency?: number;
+  connection?: {
+    saveData?: boolean;
+    effectiveType?: string;
+  };
 }
 
 const MIN_WIDTH_QUERY = "(min-width: 1280px)";
@@ -23,15 +28,26 @@ export function usePerformanceMode() {
     const widthQuery = window.matchMedia(MIN_WIDTH_QUERY);
 
     const update = () => {
-      const navigatorWithMemory = window.navigator as NavigatorDeviceMemory & { hardwareConcurrency?: number };
+      const navigatorWithMemory = window.navigator as NavigatorDeviceMemory;
       const deviceMemory = navigatorWithMemory.deviceMemory;
       const hardwareConcurrency = navigatorWithMemory.hardwareConcurrency ?? 0;
+      const connection = navigatorWithMemory.connection;
+      const saveData = connection?.saveData ?? false;
+      const effectiveType = connection?.effectiveType ?? "";
+      const isSlowConnection = ["slow-2g", "2g", "3g"].includes(effectiveType);
       const hasAdequateMemory = typeof deviceMemory === "number" ? deviceMemory >= MIN_MEMORY_GB : false;
       const hasAdequateCores = hardwareConcurrency >= MIN_CORES;
       const reduceMotion = motionQuery.matches;
       const hasViewportBudget = widthQuery.matches;
 
-      setAllowMotion(!reduceMotion && hasViewportBudget && hasAdequateMemory && hasAdequateCores);
+      setAllowMotion(
+        !reduceMotion &&
+          hasViewportBudget &&
+          hasAdequateMemory &&
+          hasAdequateCores &&
+          !saveData &&
+          !isSlowConnection
+      );
     };
 
     update();

@@ -78,6 +78,8 @@ export function AudioReactivePlayer() {
   // Calculate rotation based on BPM (120 BPM = 2 rotations per second)
   const vinylRotationSpeed = MOTION_CONFIG.masterBPM / 60; // rotations per second
   const enableVisualizer = allowMotion && isPlaying;
+  const shouldSpin = isPlaying;
+  const spinDuration = allowMotion ? 1 / vinylRotationSpeed : 8;
   const barCount = allowMotion ? 8 : 4;
 
   return (
@@ -123,11 +125,11 @@ export function AudioReactivePlayer() {
             {/* Rotating vinyl disc */}
             <motion.div
               className="absolute inset-0 rounded-full overflow-hidden"
-              animate={enableVisualizer ? { rotate: 360 } : undefined}
+              animate={shouldSpin ? { rotate: 360 } : undefined}
               transition={
-                enableVisualizer
+                shouldSpin
                   ? {
-                      duration: 1 / vinylRotationSpeed,
+                      duration: spinDuration,
                       repeat: Infinity,
                       ease: "linear",
                     }

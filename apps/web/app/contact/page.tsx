@@ -2,6 +2,8 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
 
 const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
+const MAP_EMBED_SRC =
+  "https://www.google.com/maps?q=No%201%20Efon%20Alaye%20Street%20Ijapo%2C%20Akure%2C%20Ondo%20State%2C%20Nigeria&output=embed";
 
 const contactChannels = [
   { label: "Media House | Traffic", value: "0805 482 0000", href: "tel:+2348054820000" },
@@ -216,6 +218,34 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
             <p className="mt-8 text-sm text-gray-500 font-['El_Messiri'] bg-gray-50 p-4 rounded-xl">
               <strong>Tip:</strong> For quicker follow-up, mention the show title and preferred callback time in your message.
             </p>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection className="mx-4">
+          <div className="rounded-3xl bg-white/85 backdrop-blur-lg p-8 shadow-2xl border border-orange-100">
+            <div className="grid gap-8 lg:grid-cols-[1fr,1.4fr] items-center">
+              <div className="space-y-4">
+                <h2 className="text-3xl font-bold text-gray-900 font-['El_Messiri']">Find Us</h2>
+                <p className="text-gray-600 font-['El_Messiri'] text-lg">
+                  No 1 Efon Alaye Street, Ijapo, Akure, Ondo State, Nigeria.
+                </p>
+                <p className="text-gray-600 font-['El_Messiri'] text-base">
+                  The embed below always points to our studio. Zoom and pan stay responsive on mobile or desktop.
+                </p>
+              </div>
+              <div className="w-full rounded-2xl overflow-hidden border border-orange-200 shadow-lg">
+                <div className="relative pb-[56.25%] h-0">
+                  <iframe
+                    title="Glow FM Location"
+                    src={MAP_EMBED_SRC}
+                    loading="lazy"
+                    allowFullScreen
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0 h-full w-full border-0"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </AnimatedSection>
 

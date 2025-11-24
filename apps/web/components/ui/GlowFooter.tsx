@@ -6,6 +6,8 @@ import { GlowButton } from "@/components/ui/GlowButton";
 
 interface GlyphProps extends SVGProps<SVGSVGElement> {}
 
+const ABOUT_URL = "https://glow991fm.com/about-us";
+
 function TikTokIcon(props: GlyphProps) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false" {...props}>
@@ -25,7 +27,7 @@ const socialLinks = [
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Social Media", href: "/social-media" },
-  { label: "About", href: "/about" },
+  { label: "About", href: ABOUT_URL },
   { label: "Contact", href: "/contact" },
   { label: "Advertisement", href: "/advertisement" }
 ] as const;
@@ -74,13 +76,22 @@ export function GlowFooter() {
           <div>
             <h4 className="font-display text-sm uppercase tracking-[0.3em] text-white/60">Quick Links</h4>
             <ul className="mt-4 space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
-                  <Link className="text-white/80 transition hover:text-glow-primary" href={link.href} prefetch>
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {quickLinks.map((link) => {
+                const isExternal = link.href.startsWith("http");
+                return (
+                  <li key={link.label}>
+                    {isExternal ? (
+                      <a className="text-white/80 transition hover:text-glow-primary" href={link.href} rel="noreferrer">
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link className="text-white/80 transition hover:text-glow-primary" href={link.href} prefetch>
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div>
