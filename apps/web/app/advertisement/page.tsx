@@ -164,7 +164,7 @@ export default function AdvertisementPage() {
             Amplify Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Brand Signal</span>
           </h1>
           <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-300 font-['El_Messiri'] leading-relaxed">
-            From high-rotation jingles to immersive product placements, we deliver your message across the airwaves and digital streams of Akure's #1 station.
+            From high-rotation jingles to immersive product placements, we deliver your message across the airwaves and digital streams of Akure&apos;s #1 station.
           </p>
           
           <div className="mt-10 flex flex-wrap justify-center gap-4">
