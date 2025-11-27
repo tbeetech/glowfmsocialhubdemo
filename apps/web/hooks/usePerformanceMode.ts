@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-interface NavigatorDeviceMemory extends Navigator {
+interface NavigatorDeviceMemory {
   deviceMemory?: number;
   hardwareConcurrency?: number;
   connection?: {

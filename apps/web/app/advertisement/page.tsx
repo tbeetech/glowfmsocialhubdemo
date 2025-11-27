@@ -1,161 +1,128 @@
-﻿'use client';
+﻿"use client";
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
+import { FaMusic, FaBroadcastTower, FaGift, FaPercentage, FaScroll, FaVideo } from "react-icons/fa";
+
 type Currency = "NGN" | "USD";
 
-interface PackageTier {
+interface AdPackage {
+  id: string;
   name: string;
-  headline: string;
-  price: Record<Currency, number>;
-  benefits: string[];
-  gaps: string[];
-  deliverables: string;
+  duration: string;
+  description: string;
+  icon: React.ElementType;
+  specialOffer?: {
+    label: string;
+    endDate?: string;
+    type: "seasonal" | "discount";
+  };
+  features: string[];
+  ctaText: string;
+  price?: { NGN: number; USD: number };
 }
 
-const adPackages: PackageTier[] = [
+const advertisingPackages: AdPackage[] = [
   {
-    name: "Jingle Amplifier",
-    headline: "Powerful radio jingles with production, scheduling, and frequency boosts.",
-    deliverables: "Studio scripting, voice talent, 30/45 sec masters, 6x daily run on peak belts.",
-    price: { NGN: 250_000, USD: 325 },
-    benefits: [
-      "Dedicated creative producer and sound engineer on every spot.",
-      "Strategic placement in drive time, campus rush hour, and weekend primetime.",
-      "Weekly performance recap with call-in volume tracking."
+    id: "jingles",
+    name: "Jingles Package",
+    duration: "1-2 Minutes",
+    description: "High-rotation musical ads designed for brand promotion, intros, and announcements. Perfect for building sonic identity.",
+    icon: FaMusic,
+    features: [
+      "Professional audio production",
+      "High-frequency rotation",
+      "Scripting assistance",
+      "Prime time placement options"
     ],
-    gaps: [
-      "Limited digital touchpoints - upgrade if you need social retargeting.",
-      "Does not include influencer cameos or podcast mentions."
-    ]
+    ctaText: "Book Jingle Slot",
+    price: { NGN: 150000, USD: 200 }
   },
   {
-    name: "Social Pulse",
-    headline: "Always-on social media promotions synced with on-air shout-outs.",
-    deliverables: "Instagram reels, TikTok duet challenges, X thread recaps, WhatsApp broadcast copy.",
-    price: { NGN: 420_000, USD: 545 },
-    benefits: [
-      "Content calendar mapped to your launch milestones and CTAs.",
-      "Glow creator collaborations for authentic campus storytelling.",
-      "Audience polls, sticker prompts, and contest mechanics managed end-to-end."
+    id: "general",
+    name: "General Ad Packages",
+    duration: "4 Minutes+",
+    description: "Extended slots for storytelling, product highlights, or detailed promotions. Ideal for complex messages.",
+    icon: FaBroadcastTower,
+    features: [
+      "Deep-dive storytelling",
+      "Interview-style options",
+      "Flexible scheduling",
+      "Podcast syndication available"
     ],
-    gaps: [
-      "Live events and field activations billed separately.",
-      "Organic reach only - add paid boosts if you want guaranteed impressions."
-    ]
+    ctaText: "Start Campaign",
+    price: { NGN: 300000, USD: 400 }
   },
   {
-    name: "Branded Experience",
-    headline: "Full-spectrum branding with experiential takeovers and merch.",
-    deliverables: "Pop-up studio, OB van presence, branded show segments, custom microsite + jingles.",
-    price: { NGN: 950_000, USD: 1_230 },
-    benefits: [
-      "Hybrid campaign spanning radio, socials, campus activations, and newsletters.",
-      "On-site data capture kiosks and QR flows for lead generation.",
-      "Real-time analytics dashboard with redemption and survey insights."
+    id: "oju-oja",
+    name: '"Oju Oja" Special Yuletide Bonanza',
+    duration: "2 Minutes",
+    description: "A seasonal power-package designed for business owners to promote products/services during the festive rush.",
+    icon: FaGift,
+    specialOffer: {
+      label: "Valid until Jan 3rd, 2026",
+      endDate: "2026-01-03",
+      type: "seasonal"
+    },
+    features: [
+      "Festive sound design",
+      "Priority placement during holiday shows",
+      "Social media shout-out included",
+      "Business owner spotlight"
     ],
-    gaps: [
-      "Requires four-week lead time for fabrication and permits.",
-      "Pricing excludes logistics outside Ondo/Ekiti axis."
-    ]
-  }
-];
-
-const PLAN_NAMES = ["Jingle Amplifier", "Social Pulse", "Branded Experience"] as const;
-
-const planComparison: Array<{
-  feature: string;
-  availability: Record<string, string>;
-  helper?: string;
-}> = [
+    ctaText: "Claim Holiday Spot",
+    price: { NGN: 100000, USD: 130 }
+  },
   {
-    feature: "Studio scripting & premium mastering",
-    availability: {
-      "Jingle Amplifier": "included",
-      "Social Pulse": "addon",
-      "Branded Experience": "included"
+    id: "promo-offer",
+    name: "Buy 3 Ads, Get 1 Free",
+    duration: "Various Formats",
+    description: "Maximize your budget with our limited-time bulk offer. Applies across selected ad categories.",
+    icon: FaPercentage,
+    specialOffer: {
+      label: "Offer Ends Dec 31st",
+      endDate: "2025-12-31",
+      type: "discount"
     },
-    helper: "Voice talent, edit suite and sonic branding assets."
+    features: [
+      "Mix and match eligible slots",
+      "Extended campaign duration",
+      "Volume discount applied",
+      "Account manager support"
+    ],
+    ctaText: "Get Free Ad",
   },
   {
-    feature: "Always-on social media campaign management",
-    availability: {
-      "Jingle Amplifier": "no",
-      "Social Pulse": "included",
-      "Branded Experience": "included"
-    },
-    helper: "Calendar planning, reels, threads, WhatsApp prompts."
+    id: "scroll-bar",
+    name: "Scroll Bar Ads",
+    duration: "Continuous Loop",
+    description: "High-visibility scrolling text advertisements displayed repeatedly on screen during live shows.",
+    icon: FaScroll,
+    features: [
+      "Non-intrusive visual presence",
+      "High frequency visibility",
+      "Clickable links on digital streams",
+      "Real-time updates allowed"
+    ],
+    ctaText: "Start Scrolling",
+    price: { NGN: 50000, USD: 65 }
   },
   {
-    feature: "On-air mentions, bumpers & live shout-outs",
-    availability: {
-      "Jingle Amplifier": "included",
-      "Social Pulse": "included",
-      "Branded Experience": "premium"
-    }
-  },
-  {
-    feature: "Influencer & creator collaborations",
-    availability: {
-      "Jingle Amplifier": "addon",
-      "Social Pulse": "included",
-      "Branded Experience": "premium"
-    }
-  },
-  {
-    feature: "Experiential activations & OB van coverage",
-    availability: {
-      "Jingle Amplifier": "no",
-      "Social Pulse": "addon",
-      "Branded Experience": "premium"
-    }
-  },
-  {
-    feature: "Real-time analytics dashboard & reporting",
-    availability: {
-      "Jingle Amplifier": "addon",
-      "Social Pulse": "addon",
-      "Branded Experience": "included"
-    },
-    helper: "Reach, impressions, redemptions, and call-in metrics."
-  }
-];
-
-const salesBoosters = [
-  {
-    title: "Multi-Platform Launch",
-    summary: "Bundle on-air mentions with synchronized Facebook Live crawlers and Instagram story polls to capture leads while the conversation is hot.",
-    impact: "Average 38% uplift in store visits during promo weekends."
-  },
-  {
-    title: "Creator Collab Series",
-    summary: "Tap Glow ambassadors to co-host TikTok and YouTube segments, giving your product an authentic campus voice.",
-    impact: "Campaigns have generated 2.3x more saves and shares compared to standard display ads."
-  },
-  {
-    title: "Data-Driven Retargeting",
-    summary: "We segment your audience by interest, retargeting them with newsletter snippets, WhatsApp reminders, and call-in prompts.",
-    impact: "50% increase in repeat purchases tracked via promo codes."
-  }
-];
-
-const caseStudies = [
-  {
-    brand: "Campus Tech Hub",
-    result: "Sold out 40 laptops in three weeks using Glow FM livestream demos and discount codes announced on air.",
-    channel: "Facebook Live + TikTok Reels"
-  },
-  {
-    brand: "Glow Bites Cafe",
-    result: "Expanded lunchtime delivery radius after a viral Instagram carousel and promo jingles during Glow FM Connect.",
-    channel: "Instagram + On-air jingles"
-  },
-  {
-    brand: "City Fitness Studio",
-    result: "Hit membership targets ahead of schedule with Women's World wellness takeovers and X threads featuring trainers.",
-    channel: "Women's World + X threads"
+    id: "product-placement",
+    name: "Product Placement",
+    duration: "In-Stream Integration",
+    description: "Seamlessly integrate your brand images, logos, or physical products into our livestreams and video podcasts.",
+    icon: FaVideo,
+    features: [
+      "Visual brand immersion",
+      "Host interaction/endorsement",
+      "Logo overlays",
+      "Set dressing integration"
+    ],
+    ctaText: "Integrate Brand",
+    price: { NGN: 200000, USD: 260 }
   }
 ];
 
@@ -177,298 +144,182 @@ export default function AdvertisementPage() {
   );
 
   return (
-    <div className="min-h-screen text-gray-900 bg-gradient-to-br from-orange-50 via-white to-red-50 relative">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-10 animate-pulse"></div>
-        <div className="absolute bottom-40 right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-10 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-purple-400 to-blue-400 rounded-full opacity-10 animate-pulse" style={{animationDelay: '4s'}}></div>
+    <div className="min-h-screen text-gray-900 bg-[#030511] relative overflow-x-hidden">
+      {/* Futuristic Background Elements */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-600/20 rounded-full blur-[120px] animate-pulse-slow"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-red-600/20 rounded-full blur-[120px] animate-pulse-slow delay-1000"></div>
+        <div className="absolute top-[40%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] bg-blue-900/10 rounded-full blur-[150px]"></div>
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.03]"></div>
       </div>
 
-      <div className="space-y-16 relative z-10">
-        <AnimatedSection className="rounded-3xl bg-gradient-to-br from-orange-500 via-red-500 to-orange-600 p-8 text-white shadow-2xl mx-4 relative overflow-hidden">
-          {/* Hero background pattern */}
-          <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-white/10 to-transparent"></div>
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/20 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
+      <div className="relative z-10 space-y-20 pb-20">
+        {/* Hero Section */}
+        <AnimatedSection className="relative pt-32 pb-16 px-4 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-orange-400 backdrop-blur-md mb-8">
+            <span className="mr-2 h-2 w-2 rounded-full bg-orange-500 animate-pulse"></span>
+            Glow FM Media Kit
           </div>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-white font-['El_Messiri'] tracking-tight mb-6 leading-tight">
+            Amplify Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Brand Signal</span>
+          </h1>
+          <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-300 font-['El_Messiri'] leading-relaxed">
+            From high-rotation jingles to immersive product placements, we deliver your message across the airwaves and digital streams of Akure's #1 station.
+          </p>
           
-          <div className="space-y-6 relative z-10">
-            <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-2 text-xs uppercase tracking-[0.3em] text-white/90 font-['El_Messiri'] font-bold shadow-lg">
-              Grow With Glow FM
-            </span>
-            <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl font-['El_Messiri'] leading-tight">
-              Advertising and Sales Acceleration
-            </h1>
-            <p className="max-w-4xl text-lg text-white/90 font-['El_Messiri'] leading-relaxed font-semibold">
-              Glow FM combines radio storytelling, social-first content, and data dashboards to drive measurable results for your business. 
-              Choose a package, plug into our creative team, and watch your numbers climb.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <GlowButton asChild size="lg" variant="accent" className="uppercase tracking-[0.3em] font-['El_Messiri'] font-bold transform hover:scale-105 transition-all duration-300">
-                <Link href="/contact">Book a strategy call</Link>
-              </GlowButton>
-              <GlowButton
-                asChild
-                size="lg"
-                variant="ghost"
-                className="border-white/30 text-white uppercase tracking-[0.3em] font-['El_Messiri'] font-bold transform hover:scale-105 transition-all duration-300"
-              >
-                <Link href="/social-media">Preview social inventory</Link>
-              </GlowButton>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
+            <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1 pr-4 backdrop-blur-md">
+              <div className="flex gap-1">
+                <button
+                  onClick={() => setCurrency("NGN")}
+                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
+                    currency === "NGN" ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25" : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  NGN (₦)
+                </button>
+                <button
+                  onClick={() => setCurrency("USD")}
+                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
+                    currency === "USD" ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25" : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  USD ($)
+                </button>
+              </div>
+              <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">Select Currency</span>
             </div>
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="space-y-10 mx-4">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 font-['El_Messiri']">Choose a Glow FM Growth Package</h2>
-              <p className="text-lg text-gray-600 font-['El_Messiri'] font-semibold mt-2">
-                Toggle currencies, review deliverables, and match the plan that fits your current campaign ambitions.
-              </p>
-            </div>
-            <div className="flex gap-2 rounded-full border border-orange-300 bg-white/80 backdrop-blur-sm p-2 text-xs uppercase tracking-[0.35em] shadow-lg">
-              <GlowButton variant={currency === "NGN" ? "accent" : "ghost"} size="sm" onClick={() => setCurrency("NGN")} className="font-['El_Messiri'] font-bold">
-                {currency === "NGN" ? "Billing in ₦" : "Bill in ₦"}
-              </GlowButton>
-              <GlowButton variant={currency === "USD" ? "accent" : "ghost"} size="sm" onClick={() => setCurrency("USD")} className="font-['El_Messiri'] font-bold">
-                {currency === "USD" ? "Billing in $" : "Bill in $"}
-              </GlowButton>
-            </div>
+        {/* Packages Grid */}
+        <AnimatedSection className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white font-['El_Messiri'] mb-4">Advertising Packages</h2>
+            <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-red-500 mx-auto rounded-full"></div>
           </div>
-          <div className="space-y-8">
-            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-              {adPackages.map((pkg) => (
-                <div
-                  key={pkg.name}
-                  className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border border-orange-100"
-                >
-                  <div className="space-y-6">
-                    <div className="space-y-3">
-                      <h3 className="text-3xl font-bold text-gray-900 font-['El_Messiri']">{pkg.name}</h3>
-                      <p className="text-base text-gray-600 font-['El_Messiri'] leading-relaxed">{pkg.deliverables}</p>
-                    </div>
-                    <p className="text-lg font-semibold text-gray-700 font-['El_Messiri']">{pkg.headline}</p>
-                    <div className="rounded-2xl border border-orange-200 bg-gradient-to-br from-orange-50 to-red-50 p-6 shadow-inner">
-                      <p className="text-4xl font-bold text-orange-600 font-['El_Messiri']">
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {advertisingPackages.map((pkg) => (
+              <div
+                key={pkg.id}
+                className={`group relative flex flex-col rounded-[2rem] border p-8 transition-all duration-500 hover:-translate-y-2 ${
+                  pkg.specialOffer
+                    ? "border-orange-500/50 bg-gradient-to-b from-orange-900/20 to-black/40 shadow-[0_0_40px_-10px_rgba(249,115,22,0.3)]"
+                    : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]"
+                } backdrop-blur-xl`}
+              >
+                {pkg.specialOffer && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-widest text-white shadow-lg shadow-orange-500/40">
+                      <FaGift className="text-xs" />
+                      {pkg.specialOffer.label}
+                    </span>
+                  </div>
+                )}
+
+                <div className="mb-6 flex items-start justify-between">
+                  <div className={`rounded-2xl p-3 ${pkg.specialOffer ? "bg-orange-500/20 text-orange-400" : "bg-white/10 text-white"}`}>
+                    <pkg.icon className="h-6 w-6" />
+                  </div>
+                  {pkg.price && (
+                    <div className="text-right">
+                      <p className="text-2xl font-bold text-white font-['El_Messiri']">
                         {currencySymbol[currency]}
                         {formatter.format(pkg.price[currency])}
                       </p>
-                      <p className="mt-2 text-xs uppercase tracking-[0.35em] text-gray-500 font-['El_Messiri'] font-bold">
-                        per 4-week burst
-                      </p>
+                      <p className="text-[0.65rem] uppercase tracking-wider text-slate-400">Starting from</p>
                     </div>
-                    <div className="space-y-4">
-                      <p className="text-xs uppercase tracking-[0.35em] text-orange-600 font-['El_Messiri'] font-bold">
-                        What you gain
-                      </p>
-                      <ul className="space-y-3 text-base text-gray-700 font-['El_Messiri']">
-                        {pkg.benefits.map((benefit) => (
-                          <li key={benefit} className="flex items-start gap-3">
-                            <span className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-orange-500" />
-                            <span className="leading-relaxed">{benefit}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="space-y-4">
-                      <p className="text-xs uppercase tracking-[0.35em] text-gray-500 font-['El_Messiri'] font-bold">
-                        Mind the gaps
-                      </p>
-                      <ul className="space-y-3 text-base text-gray-600 font-['El_Messiri']">
-                        {pkg.gaps.map((gap) => (
-                          <li key={gap} className="flex items-start gap-3">
-                            <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-gray-400" />
-                            <span className="leading-relaxed">{gap}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <GlowButton
-                      asChild
-                      size="lg"
-                      variant="accent"
-                      className="w-full justify-center uppercase tracking-[0.3em] font-['El_Messiri'] font-bold transform hover:scale-105 transition-all duration-300"
-                    >
-                      <Link href={`/contact?interest=${encodeURIComponent(pkg.name)}`}>Reserve this package</Link>
-                    </GlowButton>
-                  </div>
+                  )}
                 </div>
-              ))}
-            </div>
-            <div className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl border border-orange-100">
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <h3 className="text-3xl font-bold text-gray-900 font-['El_Messiri']">Compare packages at a glance</h3>
-                  <p className="text-gray-600 font-['El_Messiri'] text-lg">See what&apos;s bundled and where upgrades apply.</p>
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full min-w-[560px] border-collapse text-left text-base text-gray-700">
-                    <thead>
-                      <tr className="text-sm uppercase tracking-[0.35em] text-gray-500 font-['El_Messiri'] font-bold">
-                        <th scope="col" className="pb-6 pr-6 font-normal">
-                          Deliverables
-                        </th>
-                        {PLAN_NAMES.map((plan) => (
-                          <th key={plan} scope="col" className="pb-6 pr-6 font-normal text-right sm:text-center">
-                            {plan}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-                    <tbody className="divide-y divide-gray-200">
-                      {planComparison.map((row) => (
-                        <tr key={row.feature} className="align-top">
-                          <th scope="row" className="py-6 pr-6 text-left font-semibold text-gray-900 font-['El_Messiri']">
-                            <span>{row.feature}</span>
-                            {row.helper && (
-                              <span className="mt-2 block text-sm text-gray-500 font-['El_Messiri'] font-normal">
-                                {row.helper}
-                              </span>
-                            )}
-                          </th>
-                          {PLAN_NAMES.map((plan) => {
-                            const inclusion = row.availability[plan];
-                            let className = "";
-                            let label = "";
-                            
-                            if (inclusion === "included") {
-                              className = "bg-green-100 text-green-700 border-green-300";
-                              label = "Included";
-                            } else if (inclusion === "premium") {
-                              className = "bg-orange-100 text-orange-700 border-orange-300";
-                              label = "Full suite";
-                            } else if (inclusion === "addon") {
-                              className = "bg-gray-100 text-gray-600 border-gray-300";
-                              label = "Add-on";
-                            } else {
-                              className = "border-gray-200 bg-transparent text-gray-400";
-                              label = "—";
-                            }
-                            
-                            return (
-                              <td key={plan} className="py-6 pr-6 text-right sm:text-center">
-                                <span
-                                  className={`inline-flex min-w-[120px] justify-center rounded-full border px-4 py-2 text-sm font-bold uppercase tracking-[0.35em] font-['El_Messiri'] ${className}`}
-                                >
-                                  {label}
-                                </span>
-                              </td>
-                            );
-                          })}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <p className="mt-6 text-sm text-gray-500 font-['El_Messiri']">
-                  Upgrade any plan with add-ons, or snap in premium experiential elements from Branded Experience.
-                </p>
-              </div>
-            </div>
-          </div>
-          <p className="text-sm text-gray-500 font-['El_Messiri'] text-center bg-white/80 backdrop-blur-sm p-4 rounded-xl">
-            Need a custom mix? Email{" "}
-            <a className="underline decoration-dotted text-orange-600 font-semibold" href="mailto:marketing@glowfmradio.com">
-              marketing@glowfmradio.com
-            </a>{" "}
-            for bespoke media plans, bundle discounts, and multi-city roadshows.
-          </p>
-        </AnimatedSection>
 
-        <AnimatedSection className="space-y-10 mx-4">
-          <h2 className="text-4xl font-bold text-gray-900 font-['El_Messiri'] text-center">Why Advertisers Choose Glow FM</h2>
-          <div className="grid gap-8 md:grid-cols-3">
-            {salesBoosters.map((item) => (
-              <div key={item.title} className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border border-orange-100">
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-bold text-gray-900 font-['El_Messiri']">{item.title}</h3>
-                  <p className="text-lg text-gray-700 font-['El_Messiri'] leading-relaxed">{item.summary}</p>
-                  <p className="text-sm uppercase tracking-[0.35em] text-orange-600 font-['El_Messiri'] font-bold bg-orange-50 p-4 rounded-xl">
-                    {item.impact}
+                <div className="mb-6 space-y-2">
+                  <h3 className="text-2xl font-bold text-white font-['El_Messiri'] group-hover:text-orange-400 transition-colors">
+                    {pkg.name}
+                  </h3>
+                  <div className="inline-flex items-center rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-medium text-slate-300">
+                    {pkg.duration}
+                  </div>
+                  <p className="text-sm leading-relaxed text-slate-400">
+                    {pkg.description}
                   </p>
                 </div>
+
+                <div className="mb-8 flex-grow">
+                  <ul className="space-y-3">
+                    {pkg.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-3 text-sm text-slate-300">
+                        <span className={`mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full ${pkg.specialOffer ? "bg-orange-500" : "bg-slate-500"}`} />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <GlowButton
+                  asChild
+                  variant={pkg.specialOffer ? "accent" : "secondary"}
+                  className="w-full justify-center uppercase tracking-[0.2em] font-bold"
+                >
+                  <Link href={`/contact?package=${pkg.id}`}>
+                    {pkg.ctaText}
+                  </Link>
+                </GlowButton>
               </div>
             ))}
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="space-y-10 mx-4">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 font-['El_Messiri']">Proof in Numbers</h2>
-              <p className="text-lg text-gray-600 font-['El_Messiri'] mt-2">
-                Plug in your brand and adapt these case notes with fresh metrics after each campaign.
-              </p>
-            </div>
-            <GlowButton asChild variant="secondary" size="lg" className="font-['El_Messiri'] font-bold transform hover:scale-105 transition-all duration-300">
-              <Link href="/blog">Read campaign breakdowns</Link>
-            </GlowButton>
-          </div>
-          <div className="grid gap-8 md:grid-cols-3">
-            {caseStudies.map((study) => (
-              <div key={study.brand} className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 border border-orange-100">
+        {/* Why Choose Us Section */}
+        <AnimatedSection className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+          <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.02] p-8 sm:p-12 backdrop-blur-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]"></div>
+            
+            <div className="relative z-10 grid gap-12 lg:grid-cols-2 items-center">
+              <div className="space-y-8">
+                <h2 className="text-3xl sm:text-4xl font-bold text-white font-['El_Messiri']">
+                  Why Partner with <span className="text-orange-500">Glow FM?</span>
+                </h2>
                 <div className="space-y-6">
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-bold text-gray-900 font-['El_Messiri']">{study.brand}</h3>
-                    <p className="text-base text-orange-600 font-semibold font-['El_Messiri'] bg-orange-50 px-4 py-2 rounded-lg">{study.channel}</p>
-                  </div>
-                  <p className="text-lg text-gray-700 font-['El_Messiri'] leading-relaxed">{study.result}</p>
+                  {[
+                    { title: "Massive Reach", desc: "Broadcasting to millions across Akure and neighboring states." },
+                    { title: "Digital Integration", desc: "Seamlessly blend on-air ads with our social media & web platforms." },
+                    { title: "Creative Excellence", desc: "Our in-house production team crafts jingles that stick." }
+                  ].map((item, i) => (
+                    <div key={i} className="flex gap-4">
+                      <div className="flex-shrink-0 h-12 w-1 bg-gradient-to-b from-orange-500 to-transparent rounded-full"></div>
+                      <div>
+                        <h3 className="text-xl font-bold text-white mb-1">{item.title}</h3>
+                        <p className="text-slate-400">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
+              
+              <div className="relative aspect-square lg:aspect-auto lg:h-full min-h-[300px] rounded-2xl overflow-hidden border border-white/10 bg-black/20">
+                 {/* Placeholder for a studio image or abstract graphic */}
+                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-blue-500/20"></div>
+                 <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center space-y-2">
+                        <p className="text-5xl font-black text-white font-['El_Messiri']">2.5M+</p>
+                        <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Daily Listeners</p>
+                    </div>
+                 </div>
+              </div>
+            </div>
           </div>
         </AnimatedSection>
 
-        <AnimatedSection className="grid gap-8 lg:grid-cols-2 mx-4 pb-16">
-          <div className="rounded-3xl bg-gradient-to-br from-orange-500 via-red-500 to-orange-600 p-8 text-white shadow-2xl relative overflow-hidden">
-            {/* Background decorative elements */}
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/20 rounded-full blur-3xl"></div>
-              <div className="absolute -bottom-10 -left-10 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
-            </div>
-            
-            <div className="space-y-6 relative z-10">
-              <div className="space-y-3">
-                <h3 className="text-3xl font-bold text-white font-['El_Messiri']">Campaign Blueprint</h3>
-                <p className="text-white/90 font-['El_Messiri'] text-lg">Your onboarding checklist</p>
-              </div>
-              <ol className="space-y-4 text-lg text-white/90 font-['El_Messiri']">
-                <li className="flex items-start gap-3">
-                  <span className="bg-white/20 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">1</span>
-                  Share your campaign objectives, audience profile, and preferred platforms.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="bg-white/20 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">2</span>
-                  Approve the content calendar including scripts, carousel copy, and reel concepts.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="bg-white/20 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">3</span>
-                  Launch with synchronized on-air mentions, livestream cues, and social teasers.
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="bg-white/20 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">4</span>
-                  Review analytics with our team and plan the next burst.
-                </li>
-              </ol>
-            </div>
-          </div>
-          <div className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl border border-orange-100">
-            <div className="space-y-6">
-              <div className="space-y-3">
-                <h3 className="text-3xl font-bold text-gray-900 font-['El_Messiri']">Media Kit Download</h3>
-                <p className="text-gray-600 font-['El_Messiri'] text-lg">Get pricing and specs</p>
-              </div>
-              <p className="text-lg text-gray-700 font-['El_Messiri'] leading-relaxed">
-                Need detailed rate cards, audience splits, and sample creative? Request the Glow FM media kit and we will deliver it straight to your inbox.
-              </p>
-              <GlowButton asChild size="lg" variant="accent" className="mt-8 uppercase tracking-[0.3em] font-['El_Messiri'] font-bold transform hover:scale-105 transition-all duration-300">
-                <Link href="mailto:marketing@glowfmradio.com?subject=Glow%20FM%20Media%20Kit%20Request">Email for media kit</Link>
-              </GlowButton>
-            </div>
-          </div>
+        {/* CTA Section */}
+        <AnimatedSection className="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center pb-16">
+          <h2 className="text-3xl font-bold text-white font-['El_Messiri'] mb-6">Ready to be Heard?</h2>
+          <p className="text-lg text-slate-300 mb-8">
+            Contact our sales team today to customize a package that fits your budget and goals.
+          </p>
+          <GlowButton asChild size="lg" variant="accent" className="uppercase tracking-[0.25em] font-bold px-12">
+            <Link href="/contact">Get Started Now</Link>
+          </GlowButton>
         </AnimatedSection>
       </div>
     </div>
