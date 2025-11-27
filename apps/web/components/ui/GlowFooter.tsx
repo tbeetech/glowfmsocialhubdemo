@@ -25,7 +25,7 @@ const socialLinks = [
 ] as const;
 
 const quickLinks = [
-  { label: "Home", href: "/" },
+  { label: "Home", href: "https://glow991fm.com" },
   { label: "Social Media", href: "/social-media" },
   { label: "About", href: ABOUT_URL },
   { label: "Contact", href: "/contact" },
