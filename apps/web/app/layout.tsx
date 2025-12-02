@@ -1,18 +1,10 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 import Script from "next/script";
-import { El_Messiri } from "next/font/google";
 import "./globals.css";
 import { GlowNav } from "@/components/ui/GlowNav";
 import { GlowFooter } from "@/components/ui/GlowFooter";
 import { TreeFormGlobalCompression } from "@/components/providers/TreeFormGlobalCompression";
-
-const elMessiri = El_Messiri({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-el-messiri"
-});
 
 const themeInitializer = `(() => {
   try {
@@ -63,8 +55,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" id="top" suppressHydrationWarning className={elMessiri.variable}>
-      <body className={`${elMessiri.className} global-glass-body overflow-x-hidden text-gray-100`} suppressHydrationWarning>
+    <html lang="en" id="top" suppressHydrationWarning>
+      <body className="global-glass-body overflow-x-hidden text-gray-100" suppressHydrationWarning>
         <Script id="theme-init" strategy="beforeInteractive">{themeInitializer}</Script>
         <div className="global-glass-canvas" aria-hidden="true">
           <span className="global-glass-canvas__pane global-glass-canvas__pane--primary" />

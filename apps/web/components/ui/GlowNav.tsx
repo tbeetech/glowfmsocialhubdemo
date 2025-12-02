@@ -10,8 +10,6 @@ interface IconProps {
   className?: string;
 }
 
-const ABOUT_URL = "https://glow991fm.com/about-us";
-
 function MenuIcon({ className }: IconProps) {
   return (
     <svg
@@ -53,7 +51,7 @@ function CloseIcon({ className }: IconProps) {
 const navLinks = [
   { label: "Home", href: "https://glow991fm.com" },
   { label: "Social Media", href: "/social-media" },
-  { label: "About", href: ABOUT_URL },
+  { label: "About", href: "https://glow991fm.com/about-us" },
   { label: "Contact", href: "/contact" },
   { label: "Advertisement", href: "/advertisement" }
 ] as const;
