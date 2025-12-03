@@ -243,10 +243,7 @@ export default function AdvertisementPage() {
                  {/* Placeholder for a studio image or abstract graphic */}
                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-blue-500/20"></div>
                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center space-y-2">
-                        <p className="text-5xl font-black text-white font-['El_Messiri']">2.5M+</p>
-                        <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Daily Listeners</p>
-                    </div>
+                    {/* Content removed as requested */}
                  </div>
               </div>
             </div>

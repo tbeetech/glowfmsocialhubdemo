@@ -1,5 +1,6 @@
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { GlowButton } from "@/components/ui/GlowButton";
+import { ContactForm } from "@/components/ContactForm";
+import { CareerForm } from "@/components/CareerForm";
 
 const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
 const MAP_EMBED_SRC =
@@ -98,8 +99,7 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
               Contact and Submission Desk
             </h1>
             <p className="max-w-4xl text-lg text-white/90 font-['El_Messiri'] leading-relaxed">
-              Reach the right Glow FM channel for shout-outs, story tips, advertising briefs, and Ember Challenge entries. 
-              The form below includes guided prompts and spelling checks to keep your submission crisp.
+              Reach the right Glow FM channel for shout-outs, story tips, advertising briefs, and Ember Challenge entries.
             </p>
           </div>
         </AnimatedSection>
@@ -108,91 +108,13 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
           <div className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl border border-orange-100">
             <div className="mb-8 space-y-3">
               <h2 className="text-3xl font-bold text-gray-900 font-['El_Messiri']">Send Us a Message</h2>
-              <p className="text-gray-600 font-['El_Messiri'] text-lg">All fields support spell check</p>
             </div>
-            <form
-              className="space-y-6"
-              action="mailto:marketing@glowfmradio.com?subject=Glow%20FM%20Contact%20Submission"
-              method="post"
-              encType="text/plain"
-              target="_blank"
-            >
-              {interest && <input type="hidden" name="campaignInterest" value={interest} />}
-              <div className="grid gap-6 md:grid-cols-2">
-                <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
-                  <span className="font-semibold">Full name</span>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    spellCheck={true}
-                    className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
-                    placeholder="Enter your full name"
-                  />
-                </label>
-                <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
-                  <span className="font-semibold">Email address</span>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
-                    placeholder="example@glow991fm.com"
-                  />
-                </label>
-              </div>
-              <div className="grid gap-6 md:grid-cols-2">
-                <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
-                  <span className="font-semibold">Phone or WhatsApp number</span>
-                  <input
-                    type="tel"
-                    name="phone"
-                    required
-                    className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
-                    placeholder="Include country code"
-                  />
-                </label>
-                <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
-                  <span className="font-semibold">Reason for contact</span>
-                  <select
-                    name="reason"
-                    defaultValue={defaultReason}
-                    className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
-                  >
-                    {contactReasons.map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
-                <span className="font-semibold">Message</span>
-                <textarea
-                  name="message"
-                  rows={6}
-                  required
-                  defaultValue={interestMessage}
-                  spellCheck={true}
-                  className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg resize-none"
-                  placeholder="Describe your request, include links, or paste your script."
-                />
-              </label>
-              <label className="space-y-3 text-sm text-gray-700 font-['El_Messiri']">
-                <span className="font-semibold">Share supporting links (optional)</span>
-                <input
-                  type="url"
-                  name="links"
-                  spellCheck={true}
-                  className="w-full rounded-xl border border-gray-200 bg-white/90 px-4 py-4 text-base text-gray-900 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
-                  placeholder="https://"
-                />
-              </label>
-              <GlowButton type="submit" size="lg" className="uppercase tracking-[0.22em] sm:tracking-[0.35em] font-['El_Messiri'] font-bold transform hover:scale-105 transition-all duration-300">
-                Submit message
-              </GlowButton>
-            </form>
+            <ContactForm 
+              interest={interest}
+              defaultReason={defaultReason}
+              interestMessage={interestMessage}
+              contactReasons={contactReasons}
+            />
           </div>
 
           <div className="rounded-3xl bg-white/80 backdrop-blur-lg p-8 shadow-2xl border border-orange-100">
@@ -228,9 +150,6 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
                 <h2 className="text-3xl font-bold text-gray-900 font-['El_Messiri']">Find Us</h2>
                 <p className="text-gray-600 font-['El_Messiri'] text-lg">
                   No 1 Efon Alaye Street, Ijapo, Akure, Ondo State, Nigeria.
-                </p>
-                <p className="text-gray-600 font-['El_Messiri'] text-base">
-                  The embed below always points to our studio. Zoom and pan stay responsive on mobile or desktop.
                 </p>
               </div>
               <div className="w-full rounded-2xl overflow-hidden border border-orange-200 shadow-lg">
@@ -347,72 +266,7 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
                 
                 <div className="bg-white/15 rounded-2xl p-8 backdrop-blur-md shadow-xl">
                   <h3 className="text-2xl font-bold text-white mb-8 font-['El_Messiri']">Apply Now</h3>
-                  <form
-                    className="space-y-6"
-                    action="mailto:Careers@glowfmradio.com?subject=Social%20Media%20Team%20Application"
-                    method="post"
-                    encType="text/plain"
-                    target="_blank"
-                  >
-                    <div>
-                      <label className="block text-white/90 text-sm font-semibold mb-3 font-['El_Messiri']">
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        className="w-full px-4 py-4 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
-                        placeholder="Enter your full name"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-white/90 text-sm font-semibold mb-3 font-['El_Messiri']">
-                        Email Address *
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        className="w-full px-4 py-4 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-white/90 text-sm font-semibold mb-3 font-['El_Messiri']">
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        required
-                        className="w-full px-4 py-4 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 font-['El_Messiri'] hover:shadow-lg"
-                        placeholder="+234 800 000 0000"
-                      />
-                    </div>
-                    
-                    <div>
-                      <label className="block text-white/90 text-sm font-semibold mb-3 font-['El_Messiri']">
-                        Tell us about yourself and why you want to join our team *
-                      </label>
-                      <textarea
-                        name="message"
-                        rows={4}
-                        required
-                        className="w-full px-4 py-4 rounded-xl border border-white/30 bg-white/20 backdrop-blur-sm text-white placeholder:text-white/70 focus:border-white/50 focus:bg-white/30 focus:outline-none transition-all duration-300 resize-none font-['El_Messiri'] hover:shadow-lg"
-                        placeholder="Share your experience, skills, and what excites you about social media and content creation..."
-                      />
-                    </div>
-                    
-                    <button
-                      type="submit"
-                      className="w-full bg-white text-purple-700 font-bold py-4 px-6 rounded-xl hover:bg-white/90 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl font-['El_Messiri'] text-lg"
-                    >
-                      Submit Application
-                    </button>
-                  </form>
+                  <CareerForm />
                 </div>
               </div>
             </div>

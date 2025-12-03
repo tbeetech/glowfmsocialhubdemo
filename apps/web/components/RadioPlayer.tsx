@@ -42,6 +42,13 @@ export function RadioPlayer() {
           .radio-status-dot {
             animation: radio-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
           }
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          .vinyl-spin {
+            animation: spin 3s linear infinite;
+          }
         `
       }} />
 
@@ -55,7 +62,7 @@ export function RadioPlayer() {
         <div className="flex items-center gap-3 p-4">
           <img 
             src="https://glow991fm.com/wp-content/uploads/2024/05/glowfm-logo-1.png" 
-            className="w-[60px] h-[60px] rounded-lg object-cover" 
+            className={`w-[60px] h-[60px] rounded-full object-cover ${isPlaying ? 'vinyl-spin' : ''}`}
             alt="Glow 99.1 FM"
           />
           <div className="flex-1">

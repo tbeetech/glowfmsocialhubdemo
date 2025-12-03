@@ -49,34 +49,19 @@ const instagramSpotlight = [
 
 const facebookStreams = [
   { 
-    title: "Glow FM Page", 
-    summary: "Follow our official page for updates.", 
+    title: "Glow FM Timeline", 
+    summary: "Latest updates from our official page.", 
     embedUrl: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fglow991fm&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
   },
   { 
-    title: "SPORTAINMENT", 
-    summary: "Sports highlights and entertainment...", 
-    embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1336479327938034%2F&show_text=false&width=560" 
+    title: "Glow FM Events", 
+    summary: "Upcoming shows and community events.", 
+    embedUrl: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fglow991fm&tabs=events&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
   },
   { 
-    title: "GLOW MOMENT", 
-    summary: "The heart of our live shows...", 
-    embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1731270387563481%2F&show_text=false&width=560" 
-  },
-  { 
-    title: "FIRE WITHIN", 
-    summary: "Motivational content...", 
-    embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F4321651394780791%2F&show_text=false&width=560" 
-  },
-  { 
-    title: "Morning Drive", 
-    summary: "Start your day with energy.", 
-    embedUrl: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fposts%2F10153231379946729&width=500" 
-  },
-  { 
-    title: "Sunday Special", 
-    summary: "Relaxing tunes for your Sunday.", 
-    embedUrl: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fposts%2F10153231379946729&width=500" 
+    title: "Glow FM Messages", 
+    summary: "Send us a message directly.", 
+    embedUrl: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fglow991fm&tabs=messages&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
   }
 ];
 
@@ -100,19 +85,33 @@ export default function SocialMediaPage() {
         >
           <Carousel>
             {youtubeHighlights.map((highlight, idx) => (
-              <div key={idx} className="group relative flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/40 p-4 transition-colors hover:bg-white/5 h-full">
-                <div className="aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-black/80 shadow-inner">
-                  <iframe
-                    title={highlight.title}
-                    src={`https://www.youtube.com/embed/${highlight.embedId}`}
-                    className="h-full w-full"
-                    loading="lazy"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
+              <div key={idx} className="group relative flex flex-col h-full">
+                {/* TV Frame Design */}
+                <div className="relative rounded-3xl border-4 border-gray-800 bg-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
+                  {/* Screen Glare */}
+                  <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
+                  
+                  <div className="aspect-video w-full bg-black relative z-10">
+                    <iframe
+                      title={highlight.title}
+                      src={`https://www.youtube.com/embed/${highlight.embedId}`}
+                      className="h-full w-full"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      style={{ border: 'none' }}
+                    />
+                  </div>
+                  
+                  {/* TV Chin */}
+                  <div className="h-8 bg-gray-900 border-t border-white/5 flex items-center justify-center gap-2">
+                    <div className="w-1 h-1 rounded-full bg-red-500 animate-pulse"></div>
+                    <div className="w-12 h-0.5 bg-white/10 rounded-full"></div>
+                  </div>
                 </div>
-                <div className="flex flex-col justify-between gap-2">
-                  <h3 className="line-clamp-2 text-lg font-bold text-white group-hover:text-orange-400 transition-colors">{highlight.title}</h3>
+
+                <div className="mt-4 flex flex-col justify-between gap-2 px-2">
+                  <h3 className="line-clamp-2 text-lg font-bold text-white group-hover:text-orange-400 transition-colors font-['El_Messiri']">{highlight.title}</h3>
                   <span className="w-fit inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-slate-400 font-bold border border-white/5">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
                     Studio relay
@@ -133,15 +132,30 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.tiktok.com/@glow991fm"
           viewMoreText="View TikTok"
         >
-          <Carousel>
+          <Carousel itemClassName="min-w-[325px] max-w-[325px]">
             {tiktokReels.map((reel, idx) => (
-              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.02] p-4 transition-colors hover:bg-white/5 h-full">
-                <div className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/50">
-                  <iframe title={reel.title} src={reel.embedUrl} className="h-full w-full" loading="lazy" allowFullScreen />
+              <div key={idx} className="group relative flex flex-col h-full">
+                {/* TV Frame Design */}
+                <div className="relative rounded-[2.5rem] border-8 border-gray-900 bg-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/10">
+                  {/* Screen Glare/Reflection */}
+                  <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none rounded-[2rem]"></div>
+                  
+                  <div className="aspect-[9/16] w-full bg-black relative z-10">
+                    <iframe 
+                      title={reel.title} 
+                      src={reel.embedUrl} 
+                      className="h-full w-full" 
+                      loading="lazy" 
+                      allowFullScreen 
+                      style={{ border: 'none' }}
+                    />
+                  </div>
                 </div>
-                <div className="text-center">
-                  <h3 className="line-clamp-1 text-lg font-bold text-white group-hover:text-pink-400 transition-colors">{reel.title}</h3>
-                  <span className="mt-2 inline-block rounded-full bg-white/5 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-slate-400 font-bold border border-white/5">
+                
+                {/* TV Stand / Label */}
+                <div className="mt-4 text-center px-4">
+                  <h3 className="line-clamp-1 text-lg font-bold text-white group-hover:text-pink-400 transition-colors font-['El_Messiri']">{reel.title}</h3>
+                  <span className="mt-1 inline-block rounded-full bg-white/5 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-slate-400 font-bold border border-white/5">
                     {reel.metric}
                   </span>
                 </div>
@@ -162,21 +176,28 @@ export default function SocialMediaPage() {
         >
           <Carousel>
             {instagramSpotlight.map((item, idx) => (
-              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 transition-colors hover:bg-white/5 h-full">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/30">
-                  <Image
-                    src={item.thumbnail ?? fallbackInstagramThumbnail}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <p className="text-sm text-white font-medium line-clamp-3">{item.caption}</p>
+              <div key={idx} className="group relative flex flex-col h-full">
+                {/* TV Frame Design */}
+                <div className="relative rounded-[2rem] border-4 border-gray-800 bg-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
+                  {/* Screen Glare */}
+                  <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
+                  
+                  <div className="relative aspect-[4/5] w-full bg-black z-10">
+                    <Image
+                      src={item.thumbnail ?? fallbackInstagramThumbnail}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                      <p className="text-sm text-white font-medium line-clamp-3 font-['El_Messiri']">{item.caption}</p>
+                    </div>
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <h3 className="line-clamp-1 text-lg font-bold text-white group-hover:text-purple-400 transition-colors">{item.title}</h3>
-                  <Link href={item.href} target="_blank" rel="noreferrer" className="text-xs text-slate-400 hover:text-white flex items-center gap-1 uppercase tracking-wider font-bold">
+
+                <div className="mt-4 space-y-2 px-2">
+                  <h3 className="line-clamp-1 text-lg font-bold text-white group-hover:text-purple-400 transition-colors font-['El_Messiri']">{item.title}</h3>
+                  <Link href={item.href} target="_blank" rel="noreferrer" className="text-xs text-slate-400 hover:text-white flex items-center gap-1 uppercase tracking-wider font-bold font-['El_Messiri']">
                     View Post <FaExternalLinkAlt className="text-[0.6rem]" />
                   </Link>
                 </div>

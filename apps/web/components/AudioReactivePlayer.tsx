@@ -74,11 +74,20 @@ export function AudioReactivePlayer() {
   };
 
   const enableVisualizer = allowMotion && isPlaying;
-  const shouldSpin = isPlaying && allowMotion;
+  // Spin regardless of motion settings if playing
+  const shouldSpin = isPlaying;
   const barCount = allowMotion ? 8 : 4;
 
   return (
     <div className="relative w-full max-w-md mx-auto font-['El_Messiri']">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          @keyframes vinyl-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+        `
+      }} />
       <div
         className="relative rounded-[28px] overflow-hidden shadow-[0_0_40px_rgba(255,102,0,0.15)] border-2 border-[#FF6600]/30"
         style={{
@@ -90,11 +99,11 @@ export function AudioReactivePlayer() {
           <div className="relative w-48 h-48 mx-auto mb-6">
             {/* Rotating vinyl disc */}
             <div
-              className={`absolute inset-0 rounded-full overflow-hidden ${shouldSpin ? 'animate-spin' : ''}`}
+              className="absolute inset-0 rounded-full overflow-hidden"
               style={{
                 background: 'radial-gradient(circle, #0A0A0A 30%, #FF6600 31%, #0A0A0A 32%, #0A0A0A 100%)',
                 boxShadow: '0 0 20px rgba(255, 102, 0, 0.3), inset 0 0 40px rgba(0, 0, 0, 0.8)',
-                animationDuration: '3s'
+                animation: shouldSpin ? 'vinyl-spin 3s linear infinite' : 'none'
               }}
             >
               {/* Vinyl grooves */}

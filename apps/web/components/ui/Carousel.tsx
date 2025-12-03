@@ -6,9 +6,10 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 interface CarouselProps {
   children: React.ReactNode;
   className?: string;
+  itemClassName?: string;
 }
 
-export function Carousel({ children, className = "" }: CarouselProps) {
+export function Carousel({ children, className = "", itemClassName = "min-w-[85%] sm:min-w-[45%] lg:min-w-[30%]" }: CarouselProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftArrow, setShowLeftArrow] = useState(false);
   const [showRightArrow, setShowRightArrow] = useState(true);
@@ -67,7 +68,7 @@ export function Carousel({ children, className = "" }: CarouselProps) {
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {React.Children.map(children, (child) => (
-          <div className="min-w-[85%] sm:min-w-[45%] lg:min-w-[30%] snap-center shrink-0">
+          <div className={`${itemClassName} snap-center shrink-0`}>
             {child}
           </div>
         ))}

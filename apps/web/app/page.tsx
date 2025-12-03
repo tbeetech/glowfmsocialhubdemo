@@ -161,20 +161,6 @@ export default function HomePage() {
             <div className="flex justify-center">
               <AudioReactivePlayer />
             </div>
-            
-            {/* Feature badges */}
-            <div className="flex flex-wrap justify-center gap-4 mt-10 compact:mt-12">
-              {['Real-time Frequency Visualization', 'Beat-Synced Animations', '3D Vinyl Interface'].map((feature) => (
-                <div
-                  key={feature}
-                  className="px-4 py-2 rounded-full bg-[#001F3F]/50 border border-[#FF6600]/30 backdrop-blur-sm"
-                >
-                  <span className="text-[#00FFD5] text-xs compact:text-sm font-['El_Messiri'] font-bold">
-                    {feature}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </AnimatedSection>

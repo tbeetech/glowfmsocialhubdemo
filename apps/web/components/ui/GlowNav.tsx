@@ -49,7 +49,7 @@ function CloseIcon({ className }: IconProps) {
 }
 
 const navLinks = [
-  { label: "Home", href: "https://glow991fm.com" },
+  { label: "Home", href: "/" },
   { label: "Social Media", href: "/social-media" },
   { label: "About", href: "https://glow991fm.com/about-us" },
   { label: "Contact", href: "/contact" },
