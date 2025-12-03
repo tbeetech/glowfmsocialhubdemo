@@ -9,7 +9,6 @@ import { ShowCarousel } from "@/components/ShowCarousel";
 import { EmberChallengeModal } from "@/components/EmberChallengeModal";
 import { ProgramReviewsSlider } from "@/components/ProgramReviewsSlider";
 import { AudioReactivePlayer } from "@/components/AudioReactivePlayer";
-import { FuturisticBackground } from "@/components/FuturisticBackground";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 export default function HomePage() {
@@ -50,19 +49,12 @@ export default function HomePage() {
       {/* Hero Section with Animated Grid Background */}
       <AnimatedSection>
         <section className="relative bg-gradient-to-br from-white via-orange-50 to-red-50 pt-20 compact:pt-24 tablet:pt-4 pb-12 compact:pb-16 tablet:pb-20 overflow-hidden">
-          {/* Animated 4x4 Grid Background */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="grid-background" style={!allowMotion ? { animation: "none" } : undefined}></div>
+          {/* Static Grid Background */}
+          <div className="absolute inset-0 opacity-10">
+             <div className="w-full h-full bg-[linear-gradient(rgba(255,107,0,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,107,0,0.08)_1px,transparent_1px)] bg-[size:80px_80px]"></div>
           </div>
           
-          {/* Floating decorative elements - hidden on very small screens */}
-          {allowMotion && (
-            <>
-              <div className="hidden compact:block absolute top-20 left-4 compact:left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-20 blur-3xl animate-pulse"></div>
-              <div className="hidden sp:block absolute bottom-40 right-4 sp:right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full opacity-15 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-              <div className="hidden tablet:block absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-            </>
-          )}
+          {/* Floating decorative elements removed for performance */}
           
           <div className="container mx-auto px-4 compact:px-5 sp:px-6 tablet:px-8 relative z-10">
             <div className="grid grid-cols-2 gap-2 compact:gap-3 sp:gap-5 mp:gap-6 tablet:gap-12 items-center">
@@ -80,7 +72,7 @@ export default function HomePage() {
                   <span className="relative inline-block mt-0.5 compact:mt-1">
                     <span className="relative z-10 text-white px-2 compact:px-3 sp:px-4 mp:px-5 py-1 compact:py-1.5 sp:py-2 mp:py-2.5 font-extrabold text-xs compact:text-sm sp:text-xl mp:text-2xl phablet:text-4xl">Fun</span>
                     <span 
-                      className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-500 transform rotate-[-2deg] rounded-md compact:rounded-lg shadow-2xl animate-pulse"
+                      className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-500 transform rotate-[-2deg] rounded-md compact:rounded-lg shadow-2xl"
                       style={{ 
                         boxShadow: '0 12px 24px rgba(220, 38, 38, 0.4), 0 6px 12px rgba(220, 38, 38, 0.2)'
                       }}
@@ -150,8 +142,8 @@ export default function HomePage() {
       {/* Radio Player Section - Listen Live with Futuristic Audio Visualizer */}
       <AnimatedSection>
         <div className="relative bg-gradient-to-br from-[#0A0A0A] via-[#001F3F] to-[#0A0A0A] py-16 compact:py-20 sp:py-24 overflow-hidden">
-          {/* Futuristic Animated Background */}
-          <FuturisticBackground />
+          {/* Futuristic Background (Static) */}
+          <div className="absolute inset-0 bg-[#001F3F]"></div>
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-10 compact:mb-12 sp:mb-16">
@@ -359,23 +351,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Advanced CSS Digital Background - Replacing Confetti Images */}
-          {allowMotion && (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Static Background Elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute inset-0 opacity-25">
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(251,191,36,0.35),transparent_60%)] animate-pulse"></div>
-                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(147,51,234,0.25),transparent_65%)] animate-pulse" style={{ animationDelay: '1.2s' }}></div>
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(251,191,36,0.35),transparent_60%)]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(147,51,234,0.25),transparent_65%)]"></div>
               </div>
-              <div className="absolute inset-0">
-                <div className="absolute top-[18%] left-[18%] w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 opacity-50 animate-ping"></div>
-                <div className="absolute bottom-[22%] right-[18%] w-14 h-14 rounded-full bg-gradient-to-br from-purple-400 to-pink-500 opacity-40 animate-ping" style={{ animationDelay: '1s' }}></div>
-                <div className="absolute inset-0 opacity-30">
-                  <div className="absolute -left-24 top-1/3 w-2/3 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent rotate-6 animate-pulse"></div>
-                  <div className="absolute right-0 bottom-1/4 w-1/2 h-px bg-gradient-to-r from-transparent via-purple-400 to-transparent -rotate-6 animate-pulse" style={{ animationDelay: '1.6s' }}></div>
-                </div>
-              </div>
-            </div>
-          )}
+          </div>
           
           <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-end relative z-10">
             <div className="text-left space-y-4 pb-16">
@@ -521,21 +503,12 @@ export default function HomePage() {
       {/* Ember Challenge Has Commenced Section */}
       <AnimatedSection>
         <div className="py-16 compact:py-20 tablet:py-24 bg-gradient-to-br from-amber-950 via-purple-950 to-amber-900 relative overflow-hidden">
-          {/* Ultra Violet Blooming Rays */}
-          {allowMotion && (
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Static Background Rays */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%]">
-                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(217,119,6,0.4)_12deg,transparent_25deg,rgba(126,34,206,0.45)_50deg,transparent_75deg)] animate-spin" style={{ animationDuration: '32s' }}></div>
-                <div className="absolute inset-0 bg-[conic-gradient(from_60deg,transparent_0deg,rgba(147,51,234,0.5)_18deg,transparent_40deg,rgba(251,191,36,0.35)_70deg,transparent_100deg)] animate-spin" style={{ animationDuration: '42s', animationDirection: 'reverse' }}></div>
+                <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent_0deg,rgba(217,119,6,0.4)_12deg,transparent_25deg,rgba(126,34,206,0.45)_50deg,transparent_75deg)]"></div>
               </div>
-              <div className="absolute top-8 left-6 w-48 h-48 bg-gradient-radial from-amber-500/40 via-purple-600/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-6 right-8 w-64 h-64 bg-gradient-radial from-purple-600/35 via-amber-500/20 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.2s' }}></div>
-              <div className="absolute inset-0 opacity-25">
-                <div className="absolute left-10 top-1/3 w-1/2 h-px bg-gradient-to-r from-transparent via-amber-300 to-transparent animate-pulse"></div>
-                <div className="absolute right-12 bottom-1/3 w-2/5 h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent animate-pulse" style={{ animationDelay: '1.4s' }}></div>
-              </div>
-            </div>
-          )}
+          </div>
 
           {/* Diagonal Burning Pattern */}
           <div className="absolute inset-0 opacity-10">

@@ -1,9 +1,7 @@
 ﻿"use client";
 
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
-import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 interface AnimatedSectionProps extends ComponentPropsWithoutRef<"section"> {
   children: ReactNode;
@@ -11,83 +9,17 @@ interface AnimatedSectionProps extends ComponentPropsWithoutRef<"section"> {
   delay?: number;
 }
 
-export function AnimatedSection({ children, className, delay = 0, ...rest }: AnimatedSectionProps) {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-  const { allowMotion } = usePerformanceMode();
-
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) {
-      return;
-    }
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handleChange = () => setPrefersReducedMotion(mediaQuery.matches);
-    handleChange();
-
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", handleChange);
-    } else {
-      mediaQuery.addListener(handleChange);
-    }
-
-    return () => {
-      if (mediaQuery.removeEventListener) {
-        mediaQuery.removeEventListener("change", handleChange);
-      } else {
-        mediaQuery.removeListener(handleChange);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) {
-      return;
-    }
-
-    if (typeof IntersectionObserver === "undefined") {
-      setIsVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-            observer.disconnect();
-          }
-        });
-      },
-      (prefersReducedMotion || !allowMotion)
-        ? { threshold: 0 }
-        : {
-            threshold: 0.12,
-            rootMargin: "0px 0px -15% 0px"
-          }
-    );
-
-    observer.observe(node);
-    const fallbackId = window.setTimeout(() => setIsVisible(true), prefersReducedMotion ? 0 : 1600);
-
-    return () => {
-      observer.disconnect();
-      window.clearTimeout(fallbackId);
-    };
-  }, [prefersReducedMotion, allowMotion]);
+export function AnimatedSection({ children, className, delay, ...rest }: AnimatedSectionProps) {
+  // Optimized: Always visible, no intersection observer overhead
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _ = delay; // Keep prop to avoid React warning about unknown prop on DOM element
 
   return (
     <section
-      ref={sectionRef}
       className={cn(
-        allowMotion && !prefersReducedMotion
-          ? "transform-gpu transition-all duration-500 ease-out will-change-transform will-change-opacity"
-          : "",
-        !allowMotion || prefersReducedMotion ? "opacity-100" : isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+        "opacity-100", // Always visible
         className
       )}
-      style={allowMotion ? { transitionDelay: `${delay}s` } : undefined}
       {...rest}
     >
       {children}

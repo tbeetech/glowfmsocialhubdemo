@@ -2,26 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatedSection } from "@/components/AnimatedSection";
 import { FollowBar } from "@/components/FollowBar";
-import { AnimatedWordReveal } from "@/components/social/SocialEffects";
-import { FaYoutube, FaTiktok, FaInstagram, FaFacebook, FaSatellite, FaPlay, FaExternalLinkAlt } from "react-icons/fa";
+import { Carousel } from "@/components/ui/Carousel";
+import { FaYoutube, FaTiktok, FaInstagram, FaFacebook, FaExternalLinkAlt } from "react-icons/fa";
 
+// Simplified classes for better performance
 const buttonClass =
-  "inline-flex items-center justify-center rounded-full border border-white/15 bg-white/10 px-6 py-3 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-slate-100 transition-all duration-300 hover:border-orange-500/50 hover:bg-orange-500/20 hover:shadow-[0_0_20px_rgba(255,102,0,0.3)] sm:text-xs sm:tracking-[0.35em] font-['El_Messiri']";
+  "inline-flex items-center justify-center rounded-full border border-white/15 bg-white/10 px-6 py-3 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-slate-100 transition-colors duration-200 hover:bg-orange-500/20 sm:text-xs sm:tracking-[0.35em] font-['El_Messiri']";
 
 const ghostButtonClass =
-  "inline-flex items-center justify-center rounded-full border border-white/10 px-6 py-3 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-slate-300 transition-all duration-300 hover:border-white/30 hover:text-white hover:bg-white/5 sm:text-xs sm:tracking-[0.35em] font-['El_Messiri']";
+  "inline-flex items-center justify-center rounded-full border border-white/10 px-6 py-3 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-slate-300 transition-colors duration-200 hover:bg-white/5 sm:text-xs sm:tracking-[0.35em] font-['El_Messiri']";
 
+// Removed backdrop-blur and complex shadows for performance
 const glassPanel =
-  "rounded-[2.5rem] border border-white/10 bg-white/[0.03] p-6 shadow-[0_25px_80px_rgba(0,0,0,0.5)] backdrop-blur-2xl sm:p-10 relative overflow-hidden group transition-all duration-500 hover:bg-white/[0.05] hover:border-white/20";
-
-const heroStats = [
-  { label: "Cross-platform followers", value: "482K", detail: "radio + socials synced" },
-  { label: "Weekly mentions", value: "2.1K", detail: "audience + partners" },
-  { label: "Active collaborations", value: "128", detail: "brands + creators" },
-  { label: "Average watch minutes", value: "64K", detail: "live & VOD" }
-];
+  "rounded-[2.5rem] border border-white/10 bg-[#0a0a0a] p-6 sm:p-10 relative overflow-hidden";
 
 // Expanded Data (6 items each)
 const youtubeHighlights = [
@@ -54,62 +48,45 @@ const instagramSpotlight = [
 ];
 
 const facebookStreams = [
-  { title: "SPORTAINMENT", summary: "Sports highlights and entertainment...", videoUrl: "https://www.facebook.com/Glowfm/videos/1336479327938034/", blocked: true },
-  { title: "GLOW MOMENT", summary: "The heart of our live shows...", videoUrl: "https://www.facebook.com/Glowfm/videos/1731270387563481/", blocked: true },
-  { title: "FIRE WITHIN", summary: "Motivational content...", videoUrl: "https://www.facebook.com/Glowfm/videos/4321651394780791/", blocked: true },
-  { title: "Morning Drive", summary: "Start your day with energy.", videoUrl: "https://www.facebook.com/Glowfm/", blocked: true },
-  { title: "Late Night Talks", summary: "Deep conversations after dark.", videoUrl: "https://www.facebook.com/Glowfm/", blocked: true },
-  { title: "Sunday Special", summary: "Relaxing tunes for your Sunday.", videoUrl: "https://www.facebook.com/Glowfm/", blocked: true }
+  { 
+    title: "Glow FM Page", 
+    summary: "Follow our official page for updates.", 
+    embedUrl: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fglow991fm&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+  },
+  { 
+    title: "SPORTAINMENT", 
+    summary: "Sports highlights and entertainment...", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1336479327938034%2F&show_text=false&width=560" 
+  },
+  { 
+    title: "GLOW MOMENT", 
+    summary: "The heart of our live shows...", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1731270387563481%2F&show_text=false&width=560" 
+  },
+  { 
+    title: "FIRE WITHIN", 
+    summary: "Motivational content...", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F4321651394780791%2F&show_text=false&width=560" 
+  },
+  { 
+    title: "Morning Drive", 
+    summary: "Start your day with energy.", 
+    embedUrl: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fposts%2F10153231379946729&width=500" 
+  },
+  { 
+    title: "Sunday Special", 
+    summary: "Relaxing tunes for your Sunday.", 
+    embedUrl: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fposts%2F10153231379946729&width=500" 
+  }
 ];
 
 export default function SocialMediaPage() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#030511] text-slate-100 font-['El_Messiri']">
-      <SpaceStationBackdrop />
-
-      <div className="relative z-10 mx-auto max-w-7xl space-y-16 px-4 pb-24 pt-16 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <AnimatedSection className={`${glassPanel} space-y-10`}>
-           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
-          
-          <div className="flex flex-wrap items-center gap-4 text-[0.65rem] uppercase tracking-[0.35em] text-slate-300/90">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-bold text-white/90 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-              <FaSatellite className="text-orange-500 animate-pulse" />
-              Orbit Console
-            </span>
-            <span className="font-bold text-slate-400">Glow 99.1 FM / Social Broadcast</span>
-          </div>
-          
-          <div className="space-y-6 relative">
-            <AnimatedWordReveal
-              text="A sharp multidimensional console for every Glow 99.1 FM signal."
-              className="text-4xl font-black leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl tracking-tight"
-            />
-            <p className="max-w-3xl text-lg text-slate-300 leading-relaxed font-medium">
-              No neon noise—just a classic transparent glass deck animated with the Space Station satellite effect. Every clip, stream, and fan reaction
-              sits on the same multi-plane grid so teams can redeploy assets without reformatting.
-            </p>
-          </div>
-          
-          <div className="flex flex-col gap-4 sm:flex-row pt-4">
-            <Link href="https://www.instagram.com/glow991fm" target="_blank" rel="noreferrer" className={`${buttonClass} w-full sm:w-auto`}>
-              <FaInstagram className="mr-2 text-lg" /> Follow @glow991fm
-            </Link>
-            <Link href="/advertisement" className={`${ghostButtonClass} w-full sm:w-auto`}>
-              Book Social Slot
-            </Link>
-          </div>
-          
-          <div className="grid gap-6 min-[480px]:grid-cols-2 lg:grid-cols-4 pt-8 border-t border-white/5">
-            {heroStats.map((stat) => (
-              <div key={stat.label} className="group/stat flex flex-col gap-2 rounded-[2rem] border border-white/5 bg-white/[0.02] p-6 transition-all duration-300 hover:bg-white/[0.05] hover:border-white/10">
-                <p className="text-3xl sm:text-4xl font-black text-white group-hover/stat:text-orange-400 transition-colors">{stat.value}</p>
-                <p className="text-[0.65rem] uppercase tracking-[0.25em] text-slate-400 font-bold">{stat.label}</p>
-                <p className="text-xs text-slate-500 font-medium">{stat.detail}</p>
-              </div>
-            ))}
-          </div>
-        </AnimatedSection>
+      {/* Removed SpaceStationBackdrop for performance */}
+      
+      <div className="relative z-10 mx-auto max-w-7xl space-y-16 px-4 pb-24 pt-8 sm:px-6 lg:px-8">
+        {/* Hero Section Removed as requested */}
 
         {/* YouTube Section */}
         <SocialSection
@@ -121,9 +98,9 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.youtube.com/@glow991fm"
           viewMoreText="Launch YouTube"
         >
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Carousel>
             {youtubeHighlights.map((highlight, idx) => (
-              <div key={idx} className="group relative flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/40 p-4 backdrop-blur-xl transition-all hover:border-white/20 hover:bg-white/5">
+              <div key={idx} className="group relative flex flex-col gap-4 rounded-3xl border border-white/10 bg-black/40 p-4 transition-colors hover:bg-white/5 h-full">
                 <div className="aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-black/80 shadow-inner">
                   <iframe
                     title={highlight.title}
@@ -137,13 +114,13 @@ export default function SocialMediaPage() {
                 <div className="flex flex-col justify-between gap-2">
                   <h3 className="line-clamp-2 text-lg font-bold text-white group-hover:text-orange-400 transition-colors">{highlight.title}</h3>
                   <span className="w-fit inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-slate-400 font-bold border border-white/5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
                     Studio relay
                   </span>
                 </div>
               </div>
             ))}
-          </div>
+          </Carousel>
         </SocialSection>
 
         {/* TikTok Section */}
@@ -156,9 +133,9 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.tiktok.com/@glow991fm"
           viewMoreText="View TikTok"
         >
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Carousel>
             {tiktokReels.map((reel, idx) => (
-              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.02] p-4 backdrop-blur-xl transition-all hover:border-white/20 hover:bg-white/5">
+              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.02] p-4 transition-colors hover:bg-white/5 h-full">
                 <div className="aspect-[9/16] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/50">
                   <iframe title={reel.title} src={reel.embedUrl} className="h-full w-full" loading="lazy" allowFullScreen />
                 </div>
@@ -170,7 +147,7 @@ export default function SocialMediaPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Carousel>
         </SocialSection>
 
         {/* Instagram Section */}
@@ -183,9 +160,9 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.instagram.com/glow991fm/"
           viewMoreText="View Instagram"
         >
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Carousel>
             {instagramSpotlight.map((item, idx) => (
-              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 backdrop-blur-xl transition-all hover:border-white/20 hover:bg-white/5">
+              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.03] p-4 transition-colors hover:bg-white/5 h-full">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-white/10 bg-black/30">
                   <Image
                     src={item.thumbnail ?? fallbackInstagramThumbnail}
@@ -205,7 +182,7 @@ export default function SocialMediaPage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Carousel>
         </SocialSection>
 
         {/* Facebook Section */}
@@ -218,37 +195,32 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.facebook.com/Glowfm/"
           viewMoreText="Follow on Facebook"
         >
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Carousel>
             {facebookStreams.map((stream, idx) => (
-              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.02] p-4 backdrop-blur-xl transition-all hover:border-white/20 hover:bg-white/5">
-                <div className="aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black/40 relative">
-                  {stream.blocked ? (
-                    <div className="flex h-full flex-col items-center justify-center px-4 text-center space-y-2 bg-black/60">
-                      <FaFacebook className="text-3xl text-blue-500 opacity-50" />
-                      <p className="text-xs text-slate-300">
-                        Content protected. Watch on Facebook.
-                      </p>
-                    </div>
-                  ) : (
+              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.02] p-4 transition-colors hover:bg-white/5 h-full">
+                <div className="aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-white relative">
                     <iframe
                       title={stream.title}
-                      src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(stream.videoUrl)}&show_text=false&width=560`}
+                      src={stream.embedUrl}
                       className="h-full w-full"
                       allowFullScreen
                       loading="lazy"
+                      style={{ border: 'none', overflow: 'hidden' }}
+                      scrolling="no" 
+                      frameBorder="0" 
+                      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                     />
-                  )}
                 </div>
                 <div className="flex flex-col gap-2">
                   <h3 className="line-clamp-1 text-lg font-bold text-white group-hover:text-blue-400 transition-colors">{stream.title}</h3>
                   <p className="text-xs text-slate-400 line-clamp-2">{stream.summary}</p>
-                  <Link href={stream.videoUrl} target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[0.6rem] font-bold uppercase tracking-widest text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all">
-                    Watch <FaPlay className="ml-2 text-[0.5rem]" />
+                  <Link href="https://www.facebook.com/Glowfm/" target="_blank" rel="noreferrer" className="mt-2 inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[0.6rem] font-bold uppercase tracking-widest text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all">
+                    View on Facebook <FaExternalLinkAlt className="ml-2 text-[0.5rem]" />
                   </Link>
                 </div>
               </div>
             ))}
-          </div>
+          </Carousel>
         </SocialSection>
 
         <FollowBar />
@@ -277,15 +249,17 @@ function SocialSection({
   children: React.ReactNode;
 }) {
   return (
-    <AnimatedSection id={id} className="space-y-8">
-      <section className={`${glassPanel} space-y-8`}>
+    // Replaced AnimatedSection with simple section for performance
+    <section id={id} className="space-y-8">
+      <div className={`${glassPanel} space-y-8`}>
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-white/5 pb-6">
           <div className="space-y-2">
             <div className="flex items-center gap-3 mb-2">
               <div className={`p-2 rounded-xl ${iconColorClass}`}>
                 {icon}
               </div>
-              <AnimatedWordReveal text={title} className="text-2xl sm:text-3xl font-bold text-white" />
+              {/* Replaced AnimatedWordReveal with simple text */}
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">{title}</h2>
             </div>
             <p className="max-w-2xl text-sm sm:text-base text-slate-300 font-medium">
               {description}
@@ -301,21 +275,7 @@ function SocialSection({
             View All {title}
           </Link>
         </div>
-      </section>
-    </AnimatedSection>
-  );
-}
-
-function SpaceStationBackdrop() {
-  return (
-    <div aria-hidden="true" className="space-backdrop">
-      <div className="space-backdrop__halo" />
-      <div className="space-backdrop__grid" />
-      <span className="space-backdrop__particle space-backdrop__particle--one" />
-      <span className="space-backdrop__particle space-backdrop__particle--two" />
-      <span className="space-backdrop__particle space-backdrop__particle--three" />
-      <span className="space-backdrop__satellite space-backdrop__satellite--alpha" />
-      <span className="space-backdrop__satellite space-backdrop__satellite--beta" />
-    </div>
+      </div>
+    </section>
   );
 }

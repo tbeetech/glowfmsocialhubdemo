@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 /**
@@ -48,8 +47,8 @@ export function FuturisticBackground() {
         this.ctx = context;
         this.x = Math.random() * this.canvas.width;
         this.y = Math.random() * this.canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.5;
-        this.vy = (Math.random() - 0.5) * 0.5;
+        this.vx = (Math.random() - 0.5) * 0.3; // Slower for performance
+        this.vy = (Math.random() - 0.5) * 0.3;
         this.size = Math.random() * 2 + 1;
         this.color = Math.random() > 0.5 ? '#FF6600' : '#00FFD5';
         this.alpha = Math.random() * 0.5 + 0.3;
@@ -74,7 +73,8 @@ export function FuturisticBackground() {
     }
     
     const particles: Particle[] = [];
-    const particleBudget = Math.min(30, Math.max(18, Math.floor(window.innerWidth / 60)));
+    // Reduced particle budget for performance
+    const particleBudget = Math.min(20, Math.max(10, Math.floor(window.innerWidth / 100)));
     for (let i = 0; i < particleBudget; i++) {
       particles.push(new Particle(canvasElement, ctx));
     }
@@ -120,24 +120,8 @@ export function FuturisticBackground() {
   
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Gradient cloud layers with parallax */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{
-          background: [
-            'radial-gradient(circle at 20% 30%, rgba(255, 102, 0, 0.15) 0%, transparent 50%)',
-            'radial-gradient(circle at 80% 70%, rgba(0, 255, 213, 0.15) 0%, transparent 50%)',
-            'radial-gradient(circle at 50% 50%, rgba(0, 31, 63, 0.2) 0%, transparent 50%)',
-          ],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
-        }}
-        style={{ mixBlendMode: 'screen' }}
-      />
+      {/* Simplified background without heavy framer-motion gradients */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#001F3F] via-[#050a1a] to-[#0b0f1c] opacity-60" />
       
       {/* Particle canvas */}
       <canvas
@@ -145,30 +129,6 @@ export function FuturisticBackground() {
         className="absolute inset-0 opacity-60"
         style={{ mixBlendMode: 'screen' }}
       />
-      
-      {/* Floating frequency lines */}
-      <div className="absolute inset-0">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute h-px bg-gradient-to-r from-transparent via-[#FF6600] to-transparent"
-            style={{
-              width: '100%',
-              top: `${20 + i * 15}%`,
-            }}
-            animate={{
-              opacity: [0.1, 0.4, 0.1],
-              x: ['-100%', '100%'],
-            }}
-            transition={{
-              duration: 6 + i,
-              repeat: Infinity,
-              ease: "linear",
-              delay: i * 0.8,
-            }}
-          />
-        ))}
-      </div>
       
       {/* Neon grid overlay */}
       <div 

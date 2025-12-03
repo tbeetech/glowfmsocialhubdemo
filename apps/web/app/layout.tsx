@@ -58,12 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" id="top" suppressHydrationWarning>
       <body className="global-glass-body overflow-x-hidden text-gray-100" suppressHydrationWarning>
         <Script id="theme-init" strategy="beforeInteractive">{themeInitializer}</Script>
-        <div className="global-glass-canvas" aria-hidden="true">
-          <span className="global-glass-canvas__pane global-glass-canvas__pane--primary" />
-          <span className="global-glass-canvas__pane global-glass-canvas__pane--secondary" />
-          <span className="global-glass-canvas__ripple" />
-          <span className="global-glass-canvas__grid" />
-        </div>
+        {/* Optimized: Removed heavy glass canvas DOM elements */}
         <div className="global-glass-content">
           <GlowNav />
           <TreeFormGlobalCompression />

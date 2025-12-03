@@ -1,12 +1,9 @@
 ﻿"use client";
 
-import { useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { FaMusic, FaBroadcastTower, FaGift, FaPercentage, FaScroll, FaVideo } from "react-icons/fa";
-
-type Currency = "NGN" | "USD";
 
 interface AdPackage {
   id: string;
@@ -21,7 +18,6 @@ interface AdPackage {
   };
   features: string[];
   ctaText: string;
-  price?: { NGN: number; USD: number };
 }
 
 const advertisingPackages: AdPackage[] = [
@@ -38,7 +34,6 @@ const advertisingPackages: AdPackage[] = [
       "Prime time placement options"
     ],
     ctaText: "Book Jingle Slot",
-    price: { NGN: 150000, USD: 200 }
   },
   {
     id: "general",
@@ -53,7 +48,6 @@ const advertisingPackages: AdPackage[] = [
       "Podcast syndication available"
     ],
     ctaText: "Start Campaign",
-    price: { NGN: 300000, USD: 400 }
   },
   {
     id: "oju-oja",
@@ -73,7 +67,6 @@ const advertisingPackages: AdPackage[] = [
       "Business owner spotlight"
     ],
     ctaText: "Claim Holiday Spot",
-    price: { NGN: 100000, USD: 130 }
   },
   {
     id: "promo-offer",
@@ -107,7 +100,6 @@ const advertisingPackages: AdPackage[] = [
       "Real-time updates allowed"
     ],
     ctaText: "Start Scrolling",
-    price: { NGN: 50000, USD: 65 }
   },
   {
     id: "product-placement",
@@ -122,27 +114,10 @@ const advertisingPackages: AdPackage[] = [
       "Set dressing integration"
     ],
     ctaText: "Integrate Brand",
-    price: { NGN: 200000, USD: 260 }
   }
 ];
 
-const currencySymbol: Record<Currency, string> = {
-  NGN: "\u20A6",
-  USD: "$"
-};
-
 export default function AdvertisementPage() {
-  const [currency, setCurrency] = useState<Currency>("NGN");
-
-  const formatter = useMemo(
-    () =>
-      new Intl.NumberFormat(currency === "NGN" ? "en-NG" : "en-US", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-      }),
-    [currency]
-  );
-
   return (
     <div className="min-h-screen text-gray-900 bg-[#030511] relative overflow-x-hidden">
       {/* Futuristic Background Elements */}
@@ -166,30 +141,6 @@ export default function AdvertisementPage() {
           <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-300 font-['El_Messiri'] leading-relaxed">
             From high-rotation jingles to immersive product placements, we deliver your message across the airwaves and digital streams of Akure&apos;s #1 station.
           </p>
-          
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 p-1 pr-4 backdrop-blur-md">
-              <div className="flex gap-1">
-                <button
-                  onClick={() => setCurrency("NGN")}
-                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
-                    currency === "NGN" ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25" : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  NGN (₦)
-                </button>
-                <button
-                  onClick={() => setCurrency("USD")}
-                  className={`rounded-full px-4 py-2 text-xs font-bold transition-all duration-300 ${
-                    currency === "USD" ? "bg-orange-500 text-white shadow-lg shadow-orange-500/25" : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  USD ($)
-                </button>
-              </div>
-              <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">Select Currency</span>
-            </div>
-          </div>
         </AnimatedSection>
 
         {/* Packages Grid */}
@@ -222,15 +173,6 @@ export default function AdvertisementPage() {
                   <div className={`rounded-2xl p-3 ${pkg.specialOffer ? "bg-orange-500/20 text-orange-400" : "bg-white/10 text-white"}`}>
                     <pkg.icon className="h-6 w-6" />
                   </div>
-                  {pkg.price && (
-                    <div className="text-right">
-                      <p className="text-2xl font-bold text-white font-['El_Messiri']">
-                        {currencySymbol[currency]}
-                        {formatter.format(pkg.price[currency])}
-                      </p>
-                      <p className="text-[0.65rem] uppercase tracking-wider text-slate-400">Starting from</p>
-                    </div>
-                  )}
                 </div>
 
                 <div className="mb-6 space-y-2">
