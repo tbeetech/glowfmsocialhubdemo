@@ -217,34 +217,26 @@ export default function AdvertisementPage() {
           <div className="rounded-[2.5rem] border border-white/10 bg-white/[0.02] p-8 sm:p-12 backdrop-blur-xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]"></div>
             
-            <div className="relative z-10 grid gap-12 lg:grid-cols-2 items-center">
-              <div className="space-y-8">
+            <div className="relative z-10">
+              <div className="space-y-8 max-w-3xl mx-auto text-center">
                 <h2 className="text-3xl sm:text-4xl font-bold text-white font-['El_Messiri']">
                   Why Partner with <span className="text-orange-500">Glow FM?</span>
                 </h2>
-                <div className="space-y-6">
+                <div className="grid gap-8 md:grid-cols-3 text-left">
                   {[
                     { title: "Massive Reach", desc: "Broadcasting to millions across Akure and neighboring states." },
                     { title: "Digital Integration", desc: "Seamlessly blend on-air ads with our social media & web platforms." },
                     { title: "Creative Excellence", desc: "Our in-house production team crafts jingles that stick." }
                   ].map((item, i) => (
-                    <div key={i} className="flex gap-4">
-                      <div className="flex-shrink-0 h-12 w-1 bg-gradient-to-b from-orange-500 to-transparent rounded-full"></div>
+                    <div key={i} className="flex flex-col gap-3 p-4 rounded-2xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                      <div className="h-1 w-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full"></div>
                       <div>
-                        <h3 className="text-xl font-bold text-white mb-1">{item.title}</h3>
-                        <p className="text-slate-400">{item.desc}</p>
+                        <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                        <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
-              
-              <div className="relative aspect-square lg:aspect-auto lg:h-full min-h-[300px] rounded-2xl overflow-hidden border border-white/10 bg-black/20">
-                 {/* Placeholder for a studio image or abstract graphic */}
-                 <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-blue-500/20"></div>
-                 <div className="absolute inset-0 flex items-center justify-center">
-                    {/* Content removed as requested */}
-                 </div>
               </div>
             </div>
           </div>

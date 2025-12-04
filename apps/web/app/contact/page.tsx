@@ -4,7 +4,7 @@ import { CareerForm } from "@/components/CareerForm";
 
 const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
 const MAP_EMBED_SRC =
-  "https://www.google.com/maps?q=No%201%20Efon%20Alaye%20Street%20Ijapo%2C%20Akure%2C%20Ondo%20State%2C%20Nigeria&output=embed";
+  "https://maps.google.com/maps?q=Glow%2099.1%20FM%2C%201%20Efon%20Alaye%20St%2C%20Ijapo%20Estate%2C%20Akure%2C%20Nigeria&t=&z=15&ie=UTF8&iwloc=&output=embed";
 
 const contactChannels = [
   { label: "Media House | Traffic", value: "0805 482 0000", href: "tel:+2348054820000" },

@@ -13,9 +13,11 @@ const buttonClass =
 const ghostButtonClass =
   "inline-flex items-center justify-center rounded-full border border-white/10 px-6 py-3 text-[0.7rem] font-bold uppercase tracking-[0.25em] text-slate-300 transition-colors duration-200 hover:bg-white/5 sm:text-xs sm:tracking-[0.35em] font-['El_Messiri']";
 
+const compactCarouselItemClass = "min-w-[70%] sm:min-w-[40%] md:min-w-[30%] lg:min-w-[22%] xl:min-w-[18%]";
+
 // Removed backdrop-blur and complex shadows for performance
 const glassPanel =
-  "rounded-[2.5rem] border border-white/10 bg-[#0a0a0a] p-6 sm:p-10 relative overflow-hidden";
+  "rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 sm:p-8 relative overflow-hidden";
 
 // Expanded Data (6 items each)
 const youtubeHighlights = [
@@ -83,11 +85,11 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.youtube.com/@glow991fm"
           viewMoreText="Launch YouTube"
         >
-          <Carousel>
+          <Carousel itemClassName={compactCarouselItemClass}>
             {youtubeHighlights.map((highlight, idx) => (
               <div key={idx} className="group relative flex flex-col h-full">
                 {/* TV Frame Design */}
-                <div className="relative rounded-3xl border-4 border-gray-800 bg-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
+                <div className="relative rounded-xl border-2 border-gray-800 bg-gray-900 shadow-xl overflow-hidden ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
                   {/* Screen Glare */}
                   <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
                   
@@ -132,13 +134,13 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.tiktok.com/@glow991fm"
           viewMoreText="View TikTok"
         >
-          <Carousel itemClassName="min-w-[325px] max-w-[325px]">
+          <Carousel itemClassName="min-w-[260px] max-w-[260px]">
             {tiktokReels.map((reel, idx) => (
               <div key={idx} className="group relative flex flex-col h-full">
                 {/* TV Frame Design */}
-                <div className="relative rounded-[2.5rem] border-8 border-gray-900 bg-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/10">
+                <div className="relative rounded-xl border-4 border-gray-900 bg-gray-900 shadow-xl overflow-hidden ring-1 ring-white/10">
                   {/* Screen Glare/Reflection */}
-                  <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none rounded-[2rem]"></div>
+                  <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none rounded-xl"></div>
                   
                   <div className="aspect-[9/16] w-full bg-black relative z-10">
                     <iframe 
@@ -174,11 +176,11 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.instagram.com/glow991fm/"
           viewMoreText="View Instagram"
         >
-          <Carousel>
+          <Carousel itemClassName={compactCarouselItemClass}>
             {instagramSpotlight.map((item, idx) => (
               <div key={idx} className="group relative flex flex-col h-full">
                 {/* TV Frame Design */}
-                <div className="relative rounded-[2rem] border-4 border-gray-800 bg-gray-900 shadow-2xl overflow-hidden ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
+                <div className="relative rounded-xl border-2 border-gray-800 bg-gray-900 shadow-xl overflow-hidden ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
                   {/* Screen Glare */}
                   <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
                   
@@ -216,10 +218,10 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.facebook.com/Glowfm/"
           viewMoreText="Follow on Facebook"
         >
-          <Carousel>
+          <Carousel itemClassName={compactCarouselItemClass}>
             {facebookStreams.map((stream, idx) => (
-              <div key={idx} className="group relative flex flex-col gap-4 rounded-[2rem] border border-white/10 bg-white/[0.02] p-4 transition-colors hover:bg-white/5 h-full">
-                <div className="aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-white relative">
+              <div key={idx} className="group relative flex flex-col gap-4 rounded-xl border border-white/10 bg-white/[0.02] p-4 transition-colors hover:bg-white/5 h-full">
+                <div className="aspect-video w-full overflow-hidden rounded-lg border border-white/10 bg-white relative">
                     <iframe
                       title={stream.title}
                       src={stream.embedUrl}
