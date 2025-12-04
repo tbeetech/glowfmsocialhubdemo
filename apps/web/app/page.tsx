@@ -14,35 +14,7 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { allowMotion } = usePerformanceMode();
-  const onboardingChecklist = [
-    {
-      title: "Introduce yourself to the producers",
-      detail: "Share your name, show concept, and the city you're representing so the MC can hype you properly."
-    },
-    {
-      title: "Show us the Ember-ready vibe",
-      detail: "Upload a 45-second vocal, reel, or dance clip that proves you can hold the stage energy when the beat drops."
-    },
-    {
-      title: "Lock in your contact & availability",
-      detail: "Drop your phone, socials, and preferred week so our bookers can schedule rehearsals without any back-and-forth."
-    }
-  ];
 
-  const weekPulseHighlights = [
-    {
-      title: "Week 1 Game: Ember Warmup Freestyle",
-      detail: "Record a 30-second freestyle or DJ flip using the Ember loop and publish it with #GlowEmberChallenge."
-    },
-    {
-      title: "Squad Boost Missions",
-      detail: "Tag three Glow Family members in the comments of the sponsored post to unlock bonus votes from their regions."
-    },
-    {
-      title: "Friday Stage Check-In",
-      detail: "Join the IG + Facebook Live recap to learn who advanced, see highlights, and hear the next creative brief."
-    }
-  ];
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
@@ -389,102 +361,7 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* Ember Challenge Visual Briefings */}
-      <AnimatedSection>
-        <section className="relative overflow-hidden bg-gradient-to-br from-white via-amber-50 to-purple-50 py-16 compact:py-20">
-          <div className="absolute inset-0 pointer-events-none opacity-40">
-            <div className="absolute -top-16 -left-10 h-56 w-56 rounded-full bg-orange-200 blur-3xl"></div>
-            <div className="absolute bottom-0 right-0 h-72 w-72 rounded-full bg-purple-200 blur-3xl"></div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(251,191,36,0.25),transparent_60%)]"></div>
-          </div>
-          <div className="container relative z-10 mx-auto px-4 compact:px-6 tablet:px-10">
-            <div className="mx-auto mb-12 max-w-3xl text-center">
-              <p className="text-xs font-semibold uppercase tracking-[0.4em] text-amber-600">Ember challenge briefings</p>
-              <h3 className="mt-3 text-3xl font-display font-bold text-gray-900">How the contest works & what is live this week</h3>
-              <p className="mt-4 text-base text-gray-600">
-                These cards only carry performer-facing updates so contestants, listeners, and sponsors can track the show plan without any
-                production jargon.
-              </p>
-            </div>
-            <div className="grid gap-8 lg:grid-cols-2">
-              <article className="relative overflow-hidden rounded-[32px] border border-orange-100 bg-white/80 p-6 shadow-[0_20px_60px_rgba(244,114,182,0.15)] backdrop-blur-xl">
-                <div className="absolute inset-0 opacity-40">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(249,115,22,0.2),transparent_60%)]"></div>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(14,165,233,0.15),transparent_60%)]"></div>
-                </div>
-                <div className="relative z-10 space-y-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-amber-600">playbook</p>
-                  <h4 className="text-2xl font-display font-bold text-gray-900">How to get on the Ember Challenge stage</h4>
-                  <p className="text-sm text-gray-600">
-                    Share these quick steps directly with contestants or on-air mentions so everyone knows exactly how to secure a slot on stage.
-                  </p>
-                  <div className="relative w-full overflow-hidden rounded-[22px] border border-white/60 bg-white/95 p-5 shadow-inner shadow-amber-200/50">
-                    <ul className="space-y-4">
-                      {onboardingChecklist.map((item) => (
-                        <li key={item.title} className="flex gap-3">
-                          <span className="mt-1 h-2.5 w-2.5 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(251,191,36,0.6)]" />
-                          <div>
-                            <p className="text-base font-semibold text-gray-900">{item.title}</p>
-                            <p className="text-sm text-gray-600">{item.detail}</p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <a
-                    href="https://web.facebook.com/share/r/1Cfmvgvdwy/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-gray-900 px-6 py-2 text-sm font-semibold text-white transition hover:bg-gray-800"
-                  >
-                    View Onboarding Instructions
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </a>
-                </div>
-              </article>
-              <article className="relative overflow-hidden rounded-[32px] border border-purple-100 bg-white/80 p-6 shadow-[0_20px_60px_rgba(129,140,248,0.15)] backdrop-blur-xl">
-                <div className="absolute inset-0 opacity-40">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(129,140,248,0.2),transparent_60%)]"></div>
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,rgba(236,72,153,0.15),transparent_60%)]"></div>
-                </div>
-                <div className="relative z-10 space-y-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-purple-600">week drop</p>
-                  <h4 className="text-2xl font-display font-bold text-gray-900">Weekly Ember Challenge pulse</h4>
-                  <p className="text-sm text-gray-600">
-                    Point contestants and superfans to this weekly pulse so they know the active challenge, bonus missions, and where to watch live reveals.
-                  </p>
-                  <div className="relative w-full overflow-hidden rounded-[22px] border border-white/60 bg-white/95 p-5 shadow-inner shadow-purple-200/50">
-                    <ul className="space-y-4">
-                      {weekPulseHighlights.map((item) => (
-                        <li key={item.title} className="flex gap-3">
-                          <span className="mt-1 h-2.5 w-2.5 rounded-full bg-purple-500 shadow-[0_0_12px_rgba(168,85,247,0.6)]" />
-                          <div>
-                            <p className="text-base font-semibold text-gray-900">{item.title}</p>
-                            <p className="text-sm text-gray-600">{item.detail}</p>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <a
-                    href="https://web.facebook.com/share/p/17gF3ezUxT/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-gray-900/20 px-6 py-2 text-sm font-semibold text-gray-900 transition hover:border-gray-900 hover:text-gray-900"
-                  >
-                    CHECK WEEK 1 GAME
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </a>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-      </AnimatedSection>
+
 
       {/* Ember Challenge Has Commenced Section */}
       <AnimatedSection>
