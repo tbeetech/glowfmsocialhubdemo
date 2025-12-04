@@ -1,37 +1,32 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import { getAsset } from "@/lib/drive-assets";
+import { FaUserCircle } from "react-icons/fa";
 
 const testimonials = [
   {
     id: 1,
     quote: "Working with Glow FM was a fantastic experience. They were professional, responsive, and truly understood our needs. The final product exceeded our expectations, and we couldn't be happier with the results. We highly recommend them!",
     author: "Adebayo Williams",
-    role: "CEO, Blue Cross Oil",
-    avatar: getAsset("listenerProfile01")
+    role: "CEO, Blue Cross Oil"
   },
   {
     id: 2,
     quote: "The Glow FM team delivered exceptional service from start to finish. Their creativity and attention to detail made our campaign a huge success. We've seen tremendous growth in brand awareness since partnering with them.",
     author: "Funmi Adebayo",
-    role: "Marketing Director, Tech Innovate",
-    avatar: getAsset("listenerProfile02")
+    role: "Marketing Director, Tech Innovate"
   },
   {
     id: 3,
     quote: "Outstanding professionalism and creativity! Glow FM brought our vision to life and exceeded all expectations. The entire process was seamless, and the results speak for themselves. Absolutely phenomenal work!",
     author: "Michael Thompson",
-    role: "Founder, Creative Solutions",
-    avatar: getAsset("listenerProfile03")
+    role: "Founder, Creative Solutions"
   },
   {
     id: 4,
     quote: "Glow FM's innovative approach to broadcasting and digital marketing is truly impressive. They helped us reach our target audience effectively and increased our engagement rates significantly.",
     author: "Sarah Johnson",
-    role: "Brand Manager, Future Foods",
-    avatar: getAsset("happyBlackManOrangeShirt")
+    role: "Brand Manager, Future Foods"
   }
 ];
 
@@ -81,7 +76,7 @@ export function ProgramReviewsSlider() {
               {/* Mobile Device Frame */}
               <div className="relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-[2.5rem] p-3 shadow-2xl">
                 {/* Screen */}
-                <div className="bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 rounded-[2rem] p-8 min-h-[500px] relative overflow-hidden">
+                <div className="bg-gradient-to-br from-orange-500 via-purple-600 to-orange-400 rounded-[2rem] p-8 min-h-[500px] relative overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] border border-white/10">
                   {/* Background Pattern */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
                   <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
@@ -105,14 +100,8 @@ export function ProgramReviewsSlider() {
                     
                     <div className="text-center">
                       {/* Avatar */}
-                      <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white/30">
-                        <Image
-                          src={testimonials[currentIndex].avatar}
-                          alt={testimonials[currentIndex].author}
-                          width={64}
-                          height={64}
-                          className="w-full h-full object-cover"
-                        />
+                      <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white/30 flex items-center justify-center bg-white/10 backdrop-blur-sm">
+                        <FaUserCircle className="w-full h-full text-white/90" />
                       </div>
                       
                       {/* Author Info */}

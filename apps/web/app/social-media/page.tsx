@@ -46,19 +46,19 @@ const instagramSpotlight = [
 
 const facebookStreams = [
   { 
-    title: "Glow FM Timeline", 
-    summary: "Latest updates from our official page.", 
-    embedUrl: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fglow991fm&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+    title: "Ale alariwo", 
+    summary: "Watch the latest episode of Ale alariwo on Glow FM.", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1967965624152476%2F&show_text=false&width=560&t=0" 
   },
   { 
-    title: "Glow FM Events", 
-    summary: "Upcoming shows and community events.", 
-    embedUrl: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fglow991fm&tabs=events&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+    title: "Sportainment", 
+    summary: "Catch up with the latest sports entertainment news.", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1804264817076500%2F&show_text=false&width=560&t=0" 
   },
   { 
-    title: "Glow FM Messages", 
-    summary: "Send us a message directly.", 
-    embedUrl: "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fglow991fm&tabs=messages&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" 
+    title: "Isues in the dialies", 
+    summary: "Discussing the pressing issues in the dailies.", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1898416690751080%2F&show_text=false&width=560&t=0" 
   }
 ];
 
@@ -205,7 +205,7 @@ export default function SocialMediaPage() {
         {/* Facebook Section */}
         <SocialSection
           id="facebook-spotlight"
-          title="Legacy streams"
+          title="Facebook Shows Showcase"
           icon={<FaFacebook className="text-2xl" />}
           iconColorClass="bg-blue-600/20 text-blue-500"
           description="Follow our official page for community news, events, and live discussions."
