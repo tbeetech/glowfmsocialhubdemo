@@ -1,18 +1,15 @@
 "use client";
-import { useState } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { CountdownClock } from "@/components/CountdownClock";
 import { getAsset } from "@/lib/drive-assets";
 import Image from "next/image";
 import { ShowCarousel } from "@/components/ShowCarousel";
-import { EmberChallengeModal } from "@/components/EmberChallengeModal";
 import { ProgramReviewsSlider } from "@/components/ProgramReviewsSlider";
 import { AudioReactivePlayer } from "@/components/AudioReactivePlayer";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 export default function HomePage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { allowMotion } = usePerformanceMode();
 
 
@@ -140,7 +137,24 @@ export default function HomePage() {
       {/* Ticker Section */}
       <AnimatedSection>
         <div className="relative bg-gradient-to-r from-indigo-900 via-blue-800 to-indigo-900 py-3 compact:py-4 overflow-hidden">
-          <div className={allowMotion ? "animate-scroll whitespace-nowrap" : "whitespace-nowrap"} style={!allowMotion ? { animation: "none" } : undefined}>
+          <div className="animate-scroll whitespace-nowrap">
+            <span className="inline-block text-white text-sm compact:text-base tablet:text-lg font-semibold">
+              <span className="mx-4 compact:mx-6">Glow Ember Challenge</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦ is ✦</span>
+              <span className="mx-4 compact:mx-6">Here!!</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Don&apos;t miss out from the Fun!</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Participate Now</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Glow Ember Challenge</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦ is ✦</span>
+              <span className="mx-4 compact:mx-6">Here!!</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Don&apos;t miss out from the Fun!</span>
+              <span className="mx-4 compact:mx-6 text-yellow-300">✦</span>
+              <span className="mx-4 compact:mx-6">Participate Now</span>
+            </span>
             <span className="inline-block text-white text-sm compact:text-base tablet:text-lg font-semibold">
               <span className="mx-4 compact:mx-6">Glow Ember Challenge</span>
               <span className="mx-4 compact:mx-6 text-yellow-300">✦ is ✦</span>
@@ -233,6 +247,13 @@ export default function HomePage() {
               background-position: 1000px 0;
             }
           }
+
+          @keyframes digital-float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+          }
           
           /* Ensure proper layering */
           main {
@@ -295,6 +316,32 @@ export default function HomePage() {
           <div className="absolute bottom-4 left-4 w-12 h-12 border-b-4 border-l-4 border-purple-500/80 rounded-bl-2xl z-20"></div>
           <div className="absolute bottom-4 right-4 w-12 h-12 border-b-4 border-r-4 border-amber-500/80 rounded-br-2xl z-20"></div>
 
+          {/* Digital Confetti Scatterings */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+             {/* Top Left Cluster */}
+             <div className="absolute top-[10%] left-[10%] w-3 h-3 bg-amber-400/60 animate-[digital-float_8s_infinite_linear]" style={{ animationDelay: '0s' }}></div>
+             <div className="absolute top-[15%] left-[20%] w-2 h-2 bg-purple-500/60 animate-[digital-float_12s_infinite_linear]" style={{ animationDelay: '-2s' }}></div>
+             <div className="absolute top-[25%] left-[15%] w-4 h-4 bg-red-400/40 rounded-full animate-[digital-float_10s_infinite_linear]" style={{ animationDelay: '-5s' }}></div>
+             
+             {/* Top Right Cluster */}
+             <div className="absolute top-[12%] right-[15%] w-3 h-3 bg-blue-400/60 rotate-45 animate-[digital-float_9s_infinite_linear]" style={{ animationDelay: '-1s' }}></div>
+             <div className="absolute top-[20%] right-[25%] w-2 h-2 bg-amber-500/60 rounded-full animate-[digital-float_11s_infinite_linear]" style={{ animationDelay: '-3s' }}></div>
+             
+             {/* Center Area */}
+             <div className="absolute top-[40%] left-[40%] w-2 h-2 bg-purple-400/50 animate-[digital-float_15s_infinite_linear]" style={{ animationDelay: '-7s' }}></div>
+             <div className="absolute top-[35%] right-[40%] w-3 h-3 bg-orange-400/50 rotate-12 animate-[digital-float_13s_infinite_linear]" style={{ animationDelay: '-4s' }}></div>
+             
+             {/* Bottom Area */}
+             <div className="absolute bottom-[30%] left-[25%] w-4 h-4 bg-indigo-400/40 rounded-full animate-[digital-float_14s_infinite_linear]" style={{ animationDelay: '-6s' }}></div>
+             <div className="absolute bottom-[40%] right-[20%] w-2 h-2 bg-pink-400/60 animate-[digital-float_10s_infinite_linear]" style={{ animationDelay: '-2s' }}></div>
+             <div className="absolute bottom-[20%] right-[35%] w-3 h-3 bg-amber-300/50 rotate-90 animate-[digital-float_16s_infinite_linear]" style={{ animationDelay: '-8s' }}></div>
+             
+             {/* Scattered Small Bits */}
+             <div className="absolute top-[50%] left-[10%] w-1.5 h-1.5 bg-red-500/40 animate-[digital-float_7s_infinite_linear]" style={{ animationDelay: '-1s' }}></div>
+             <div className="absolute top-[60%] right-[10%] w-1.5 h-1.5 bg-blue-500/40 animate-[digital-float_9s_infinite_linear]" style={{ animationDelay: '-5s' }}></div>
+             <div className="absolute bottom-[15%] left-[50%] w-1.5 h-1.5 bg-green-400/40 animate-[digital-float_11s_infinite_linear]" style={{ animationDelay: '-3s' }}></div>
+          </div>
+
           {/* Glow FM Logo - Top Right Position */}
           <div className="absolute top-8 right-8 w-24 compact:w-28 tablet:w-32 h-24 compact:h-28 tablet:h-32 z-30">
             <div className="bg-white rounded-full p-3 compact:p-4 shadow-[0_0_30px_rgba(251,191,36,0.4),0_0_50px_rgba(147,51,234,0.3)] border-4 border-amber-400/50 flex items-center justify-center w-full h-full hover:scale-110 transition-transform duration-300">
@@ -336,12 +383,14 @@ export default function HomePage() {
               <p className="text-sm font-body text-gray-700 max-w-md">
                 Win Small prizes like tote bag, mini power bank, airtime, jotter
               </p>
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="bg-indigo-900 text-white px-8 py-3 rounded-full hover:bg-indigo-800 transition-colors font-body flex items-center gap-2 mt-4"
+              <a 
+                href="https://www.facebook.com/share/r/14WpEP5taiv/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-indigo-900 text-white px-8 py-3 rounded-full hover:bg-indigo-800 transition-colors font-body inline-flex items-center gap-2 mt-4"
               >
                 Participate Now →
-              </button>
+              </a>
             </div>
             
             {/* Right side - Guy with Glasses - Flush to bottom */}
@@ -414,7 +463,7 @@ export default function HomePage() {
                 </h3>
                 <div className="max-w-3xl mx-auto">
                   <CountdownClock 
-                    targetDate={new Date("2025-12-01T23:59:59")}
+                    targetDate={new Date("2025-12-22T23:59:59")}
                     labels={{
                       days: "DAYS",
                       hours: "HOURS",
@@ -431,9 +480,11 @@ export default function HomePage() {
               <div className="bg-gradient-to-br from-amber-900/40 via-purple-900/40 to-amber-900/40 backdrop-blur-xl border-2 border-amber-500/40 rounded-3xl p-6 compact:p-8 tablet:p-10 shadow-[0_0_50px_rgba(251,191,36,0.4),0_0_80px_rgba(147,51,234,0.3)]">
                 <div className="flex flex-col compact:flex-row items-center justify-center gap-4 compact:gap-6">
                   {/* Participate Button */}
-                  <button 
-                    onClick={() => setIsModalOpen(true)}
-                    className="group relative bg-gradient-to-r from-amber-400 via-purple-400 to-amber-400 text-amber-950 px-8 compact:px-10 tablet:px-12 py-4 compact:py-5 rounded-full font-bold text-base compact:text-lg tablet:text-xl shadow-[0_0_40px_rgba(251,191,36,0.8)] hover:shadow-[0_0_60px_rgba(251,191,36,1),0_0_80px_rgba(147,51,234,0.8)] transform hover:scale-105 transition-all duration-300 font-['El_Messiri'] w-full compact:w-auto overflow-hidden border-2 border-purple-400/50"
+                  <a 
+                    href="https://www.facebook.com/share/r/14WpEP5taiv/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative bg-gradient-to-r from-amber-400 via-purple-400 to-amber-400 text-amber-950 px-8 compact:px-10 tablet:px-12 py-4 compact:py-5 rounded-full font-bold text-base compact:text-lg tablet:text-xl shadow-[0_0_40px_rgba(251,191,36,0.8)] hover:shadow-[0_0_60px_rgba(251,191,36,1),0_0_80px_rgba(147,51,234,0.8)] transform hover:scale-105 transition-all duration-300 font-['El_Messiri'] w-full compact:w-auto overflow-hidden border-2 border-purple-400/50 inline-block text-center"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-3">
                       🔥 Participate Now
@@ -442,7 +493,7 @@ export default function HomePage() {
                       </svg>
                     </span>
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-300 to-amber-300 opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
-                  </button>
+                  </a>
 
                   {/* Learn More Button */}
                   <button 
@@ -460,7 +511,7 @@ export default function HomePage() {
                 {/* Stats Bar */}
                 <div className="grid grid-cols-3 gap-4 mt-6 compact:mt-8 pt-6 compact:pt-8 border-t border-amber-500/30">
                   <div className="text-center">
-                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-amber-300 font-['El_Messiri'] drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]">500+</div>
+                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-amber-300 font-['El_Messiri'] drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]">29</div>
                     <div className="text-xs compact:text-sm text-amber-200/80 mt-1 font-['El_Messiri']">Participants</div>
                   </div>
                   <div className="text-center">
@@ -695,11 +746,6 @@ export default function HomePage() {
         </div>
       </AnimatedSection>
 
-      {/* Ember Challenge Registration Modal */}
-      <EmberChallengeModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
     </div>
   );
 }
