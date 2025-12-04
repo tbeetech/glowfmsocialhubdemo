@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { FollowBar } from "@/components/FollowBar";
 import { Carousel } from "@/components/ui/Carousel";
@@ -38,15 +37,11 @@ const tiktokReels = [
   { title: "Behind The Scenes", embedUrl: "https://www.tiktok.com/embed/v2/7555841229204851986", metric: "19K plays" }
 ];
 
-const fallbackInstagramThumbnail = "/images/Retro-Futuristic%20Glow%2099.1%20FM.png";
-
 const instagramSpotlight = [
-  { title: "Ember Countdown Reels", thumbnail: fallbackInstagramThumbnail, caption: "Daily Ember Challenge teasers...", href: "https://www.instagram.com/reel/DPBV0b7gP_f/" },
-  { title: "Glow Kiddies Fan Reactions", thumbnail: fallbackInstagramThumbnail, caption: "Audience shout-outs...", href: "https://www.instagram.com/reel/DPLg4ihCuqw/" },
-  { title: "Women's World Backstage", thumbnail: fallbackInstagramThumbnail, caption: "Highlights from our sisterhood panels...", href: "https://www.instagram.com/reel/DO6ReQPDQJp/" },
-  { title: "Studio Guest: DJ X", thumbnail: fallbackInstagramThumbnail, caption: "Live mix session highlights.", href: "https://www.instagram.com/glow991fm" },
-  { title: "Street Vox Pop", thumbnail: fallbackInstagramThumbnail, caption: "What's your favorite track?", href: "https://www.instagram.com/glow991fm" },
-  { title: "Weekend Vibes", thumbnail: fallbackInstagramThumbnail, caption: "Getting ready for the weekend show.", href: "https://www.instagram.com/glow991fm" }
+  { title: "Ember Countdown Reels", embedId: "DRy8tBLDI8b", href: "https://www.instagram.com/reel/DRy8tBLDI8b/" },
+  { title: "Glow Kiddies Fan Reactions", embedId: "DRuDlH5DE6c", href: "https://www.instagram.com/reel/DRuDlH5DE6c/" },
+  { title: "Women's World Backstage", embedId: "DRhA0ylAkWq", href: "https://www.instagram.com/reel/DRhA0ylAkWq/" },
+  { title: "Studio Guest: DJ X", embedId: "DRMnKO6jBJh", href: "https://www.instagram.com/reel/DRMnKO6jBJh/" }
 ];
 
 const facebookStreams = [
@@ -81,9 +76,9 @@ export default function SocialMediaPage() {
           title="Mission feeds"
           icon={<FaYoutube className="text-2xl" />}
           iconColorClass="bg-red-600/20 text-red-500"
-          description="Biffting after fleet effects wash over each embed, keeping our studio captures cohesive across newsletters, decks, and live monitor walls."
+          description="Catch up on our latest studio sessions, exclusive interviews, and live broadcasts."
           viewMoreLink="https://www.youtube.com/@glow991fm"
-          viewMoreText="Launch YouTube"
+          viewMoreText={<><FaYoutube className="mr-2 text-lg" /> Launch YouTube</>}
         >
           <Carousel itemClassName={compactCarouselItemClass}>
             {youtubeHighlights.map((highlight, idx) => (
@@ -130,9 +125,9 @@ export default function SocialMediaPage() {
           title="Shortwave reels"
           icon={<FaTiktok className="text-2xl" />}
           iconColorClass="bg-pink-600/20 text-pink-500"
-          description="A particlelated lane for TikTok drops with measured metrics and mirrored typography for fast quoting."
+          description="Watch trending moments, funny clips, and challenges from the Glow FM team."
           viewMoreLink="https://www.tiktok.com/@glow991fm"
-          viewMoreText="View TikTok"
+          viewMoreText={<><FaTiktok className="mr-2 text-lg" /> View TikTok</>}
         >
           <Carousel itemClassName="min-w-[260px] max-w-[260px]">
             {tiktokReels.map((reel, idx) => (
@@ -172,11 +167,11 @@ export default function SocialMediaPage() {
           title="Signal boards"
           icon={<FaInstagram className="text-2xl" />}
           iconColorClass="bg-purple-600/20 text-purple-500"
-          description="Classic transparent fabrication keeps fan shots, studio stills, and vertical cuts aligned for reporters and partners."
+          description="See behind-the-scenes photos, presenter stories, and daily updates."
           viewMoreLink="https://www.instagram.com/glow991fm/"
-          viewMoreText="View Instagram"
+          viewMoreText={<><FaInstagram className="mr-2 text-lg" /> View Instagram</>}
         >
-          <Carousel itemClassName={compactCarouselItemClass}>
+          <Carousel itemClassName="min-w-[300px] max-w-[300px]">
             {instagramSpotlight.map((item, idx) => (
               <div key={idx} className="group relative flex flex-col h-full">
                 {/* TV Frame Design */}
@@ -184,16 +179,15 @@ export default function SocialMediaPage() {
                   {/* Screen Glare */}
                   <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
                   
-                  <div className="relative aspect-[4/5] w-full bg-black z-10">
-                    <Image
-                      src={item.thumbnail ?? fallbackInstagramThumbnail}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  <div className="relative aspect-[9/16] w-full bg-black z-10">
+                    <iframe
+                      src={`https://www.instagram.com/reel/${item.embedId}/embed`}
+                      className="h-full w-full"
+                      frameBorder="0"
+                      scrolling="no"
+                      allowFullScreen
+                      style={{ border: 'none', overflow: 'hidden' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                      <p className="text-sm text-white font-medium line-clamp-3 font-['El_Messiri']">{item.caption}</p>
-                    </div>
                   </div>
                 </div>
 
@@ -214,9 +208,9 @@ export default function SocialMediaPage() {
           title="Legacy streams"
           icon={<FaFacebook className="text-2xl" />}
           iconColorClass="bg-blue-600/20 text-blue-500"
-          description="Embedded cards fall back elegantly whenever Meta protects a stream. The cards stay aligned with the rest of the multi-plane deck."
+          description="Follow our official page for community news, events, and live discussions."
           viewMoreLink="https://www.facebook.com/Glowfm/"
-          viewMoreText="Follow on Facebook"
+          viewMoreText={<><FaFacebook className="mr-2 text-lg" /> Follow on Facebook</>}
         >
           <Carousel itemClassName={compactCarouselItemClass}>
             {facebookStreams.map((stream, idx) => (
@@ -268,7 +262,7 @@ function SocialSection({
   iconColorClass: string;
   description: string;
   viewMoreLink: string;
-  viewMoreText: string;
+  viewMoreText: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
@@ -295,7 +289,7 @@ function SocialSection({
         {children}
         <div className="flex justify-center pt-4 sm:hidden">
            <Link href={viewMoreLink} target="_blank" rel="noreferrer" className={`${buttonClass} w-full`}>
-            View All {title}
+            {viewMoreText}
           </Link>
         </div>
       </div>
