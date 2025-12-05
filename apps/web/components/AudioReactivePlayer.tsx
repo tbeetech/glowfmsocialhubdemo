@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { AudioVisualizer, type FrequencyData } from "@/lib/audio-visualizer";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
@@ -14,6 +15,25 @@ export function AudioReactivePlayer() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const visualizerRef = useRef<AudioVisualizer | null>(null);
   const { allowMotion } = usePerformanceMode();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const shouldPlay = searchParams.get("play") === "true";
+    if (shouldPlay && !isPlaying) {
+      togglePlay();
+    }
+
+    const handlePlayEvent = () => {
+      if (!isPlaying) {
+        togglePlay();
+      }
+    };
+
+    window.addEventListener("glow-play-stream", handlePlayEvent);
+    return () => {
+      window.removeEventListener("glow-play-stream", handlePlayEvent);
+    };
+  }, [searchParams]);
 
   useEffect(() => {
     if (audioRef.current) {

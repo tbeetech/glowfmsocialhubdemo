@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { CountdownClock } from "@/components/CountdownClock";
@@ -25,10 +26,10 @@ export default function HomePage() {
           
           {/* Floating decorative elements removed for performance */}
           
-          <div className="container mx-auto px-4 compact:px-5 sp:px-6 tablet:px-8 relative z-10">
+          <div className="container mx-auto px-2 compact:px-3 sp:px-4 tablet:px-8 relative z-10">
             <div className="grid grid-cols-2 gap-2 compact:gap-3 sp:gap-5 mp:gap-6 tablet:gap-12 items-center">
               {/* Left Content */}
-              <div className="space-y-1.5 compact:space-y-2 sp:space-y-3 mp:space-y-4 tablet:space-y-8 order-1 text-gray-900">
+              <div className="space-y-1.5 compact:space-y-2 sp:space-y-3 mp:space-y-4 tablet:space-y-8 order-1 text-gray-900 text-left">
                 {/* Headline with Red "Fun" Badge */}
                 <h1 className="text-sm compact:text-base sp:text-xl mp:text-2xl phablet:text-4xl tablet:text-5xl laptop:text-7xl font-display font-black text-gray-900 leading-[1.1] compact:leading-tight font-['El_Messiri']">
                   Connect with the GlowFM:
@@ -54,29 +55,11 @@ export default function HomePage() {
                   passion into shaping tomorrow&apos;s sound. Engage in real-time Q&A sessions, drop a comment 
                   during a live performance, or join a dedicated forum.
                 </p>
-
-                {/* Facebook CTA Button */}
-                <div className="max-w-xl">
-                  <a 
-                    href="https://facebook.com/glowfm" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 compact:gap-3 bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 text-white px-4 compact:px-6 sp:px-8 mp:px-10 py-2 compact:py-3 sp:py-4 mp:py-5 rounded-lg compact:rounded-xl sp:rounded-2xl hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-xl compact:shadow-2xl hover:shadow-2xl transform hover:scale-105 font-['El_Messiri'] text-xs compact:text-sm sp:text-base mp:text-lg group"
-                  >
-                    <svg className="w-4 h-4 compact:w-5 compact:h-5 sp:w-6 sp:h-6" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                    Visit Our Facebook
-                    <svg className="w-3 h-3 compact:w-4 compact:h-4 sp:w-5 sp:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
-                  </a>
-                </div>
               </div>
 
               {/* Right Content - TILTED MICROPHONE IMAGE */}
-              <div className="relative h-[150px] compact:h-[180px] sp:h-[240px] mp:h-[300px] phablet:h-[380px] tablet:h-[600px] flex items-center justify-center order-2">
-                <div className="relative w-full h-full max-w-[120px] compact:max-w-[140px] sp:max-w-[180px] mp:max-w-[240px] phablet:max-w-sm tablet:max-w-lg">
+              <div className="relative h-auto min-h-[140px] compact:min-h-[160px] sp:min-h-[200px] mp:min-h-[240px] phablet:min-h-[300px] tablet:h-[600px] flex flex-col items-center justify-center order-2 mt-0 gap-4">
+                <div className="relative w-full h-[140px] compact:h-[160px] sp:h-[200px] mp:h-[240px] phablet:h-[300px] tablet:h-full max-w-[100px] compact:max-w-[120px] sp:max-w-[160px] mp:max-w-[200px] phablet:max-w-xs tablet:max-w-lg">
                   <div 
                     className="relative w-full h-full transform transition-transform duration-1000 hover:rotate-[15deg]"
                     style={{ 
@@ -102,6 +85,24 @@ export default function HomePage() {
                     </>
                   )}
                 </div>
+
+                {/* Facebook CTA Button */}
+                <div className="max-w-xl mx-0">
+                  <a 
+                    href="https://facebook.com/glowfm" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-1.5 compact:gap-2 bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 text-white px-3 compact:px-4 sp:px-6 py-1.5 compact:py-2 sp:py-3 rounded-lg hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 font-['El_Messiri'] text-[10px] compact:text-xs sp:text-sm group whitespace-nowrap"
+                  >
+                    <svg className="w-4 h-4 compact:w-5 compact:h-5 sp:w-6 sp:h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                    Visit Our Facebook
+                    <svg className="w-3 h-3 compact:w-4 compact:h-4 sp:w-5 sp:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -110,7 +111,7 @@ export default function HomePage() {
 
       {/* Radio Player Section - Listen Live with Futuristic Audio Visualizer */}
       <AnimatedSection>
-        <div className="relative bg-gradient-to-br from-[#0A0A0A] via-[#001F3F] to-[#0A0A0A] py-16 compact:py-20 sp:py-24 overflow-hidden">
+        <div id="live-player" className="relative bg-gradient-to-br from-[#0A0A0A] via-[#001F3F] to-[#0A0A0A] py-16 compact:py-20 sp:py-24 overflow-hidden">
           {/* Futuristic Background (Static) */}
           <div className="absolute inset-0 bg-[#001F3F]"></div>
           
@@ -128,7 +129,9 @@ export default function HomePage() {
             
             {/* Audio-Reactive 3D Player Component */}
             <div className="flex justify-center">
-              <AudioReactivePlayer />
+              <Suspense fallback={<div className="w-full h-64 flex items-center justify-center text-white">Loading Player...</div>}>
+                <AudioReactivePlayer />
+              </Suspense>
             </div>
           </div>
         </div>
@@ -605,7 +608,7 @@ export default function HomePage() {
                     asChild
                     className="inline-flex items-center gap-1.5 compact:gap-2 sp:gap-3 bg-white text-gray-900 border border-gray-900 sp:border-2 hover:bg-gray-900 hover:text-white px-3 compact:px-4 sp:px-6 mp:px-8 py-1.5 compact:py-2 sp:py-3 mp:py-4 rounded-full font-semibold text-[10px] compact:text-xs sp:text-sm mp:text-base lg:text-lg transition-all duration-300 shadow-lg hover:shadow-xl font-['El_Messiri']"
                   >
-                    <a href="https://play.google.com/store/apps" target="_blank" rel="noreferrer">
+                    <a href="https://play.google.com/store/apps/details?id=com.glow991.app&pcampaignid=web_share" target="_blank" rel="noreferrer">
                       <svg className="w-3 h-3 compact:w-4 compact:h-4 sp:w-5 sp:h-5 mp:w-6 mp:h-6" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
                       </svg>

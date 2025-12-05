@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { getAsset } from "@/lib/drive-assets";
 
 interface IconProps {
@@ -127,6 +127,7 @@ function renderLink(
 export function GlowNav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     if (!open) {
@@ -145,6 +146,22 @@ export function GlowNav() {
       return pathname === "/";
     }
     return pathname.startsWith(href);
+  };
+
+  const handleListenNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setOpen(false);
+    
+    if (pathname === "/") {
+      const playerSection = document.getElementById("live-player");
+      if (playerSection) {
+        playerSection.scrollIntoView({ behavior: "smooth" });
+        // Dispatch event to trigger play
+        window.dispatchEvent(new Event("glow-play-stream"));
+      }
+    } else {
+      router.push("/?play=true#live-player");
+    }
   };
 
   return (
@@ -176,16 +193,14 @@ export function GlowNav() {
         </nav>
 
         <div className="hidden items-center md:flex">
-          <a 
-            href="https://glow991fm.com/schedules/" 
-            target="_blank" 
-            rel="noopener noreferrer"
+          <button 
+            onClick={handleListenNow}
             className="relative group bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 text-slate-950 hover:from-orange-400 hover:via-yellow-400 hover:to-orange-400 rounded-full px-5 mlaptop:px-6 py-2 text-sm font-bold transition-all duration-300 shadow-[0_0_30px_rgba(251,146,60,0.6)] hover:shadow-[0_0_45px_rgba(251,146,60,0.9)] hover:scale-105 font-['El_Messiri'] overflow-hidden"
           >
             {/* Electronic Shimmer */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             <span className="relative z-10">Listen Now</span>
-          </a>
+          </button>
         </div>
 
         <button
@@ -234,16 +249,14 @@ export function GlowNav() {
                 )}
               </div>
               <div className="mt-6">
-                <a 
-                  href="https://glow991fm.com/schedules/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                <button 
+                  onClick={handleListenNow}
                   className="relative group w-full bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 text-slate-950 rounded-full px-4 sp:px-6 py-2.5 sp:py-3 text-sm font-bold hover:from-orange-400 hover:via-yellow-400 hover:to-orange-400 transition-all duration-300 font-['El_Messiri'] block text-center shadow-[0_0_30px_rgba(251,146,60,0.6)] hover:shadow-[0_0_45px_rgba(251,146,60,0.9)] overflow-hidden"
                 >
                   {/* Electronic Shimmer */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                   <span className="relative z-10">Listen Now</span>
-                </a>
+                </button>
               </div>
             </div>
           </div>
