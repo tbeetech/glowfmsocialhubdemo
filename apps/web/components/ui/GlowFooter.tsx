@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { SVGProps } from "react";
-import { Facebook, Instagram, Youtube, Twitter } from "lucide-react";
+import { Facebook, Instagram, Youtube, Twitter, MapPin, Phone, Mail } from "lucide-react";
 import { GlowButton } from "@/components/ui/GlowButton";
 
 interface GlyphProps extends SVGProps<SVGSVGElement> {}
@@ -17,11 +17,11 @@ function TikTokIcon(props: GlyphProps) {
 }
 
 const socialLinks = [
-  { label: "Instagram", href: "https://instagram.com/glow991fm", Icon: Instagram },
-  { label: "TikTok", href: "https://tiktok.com/@glow991fm", Icon: TikTokIcon },
-  { label: "YouTube", href: "https://youtube.com/@glow991fm", Icon: Youtube },
-  { label: "Facebook", href: "https://www.facebook.com/Glowfm/", Icon: Facebook },
-  { label: "X", href: "https://x.com/glow991fm", Icon: Twitter }
+  { label: "Instagram", href: "https://instagram.com/glow991fm", Icon: Instagram, color: "hover:text-pink-500 hover:border-pink-500/50" },
+  { label: "TikTok", href: "https://tiktok.com/@glow991fm", Icon: TikTokIcon, color: "hover:text-cyan-400 hover:border-cyan-400/50" },
+  { label: "YouTube", href: "https://youtube.com/@glow991fm", Icon: Youtube, color: "hover:text-red-500 hover:border-red-500/50" },
+  { label: "Facebook", href: "https://www.facebook.com/Glowfm/", Icon: Facebook, color: "hover:text-blue-500 hover:border-blue-500/50" },
+  { label: "X", href: "https://x.com/glow991fm", Icon: Twitter, color: "hover:text-white hover:border-white/50" }
 ] as const;
 
 const quickLinks = [
@@ -38,119 +38,147 @@ interface ContactDetail {
   label: string;
   display: string;
   href?: string;
+  icon?: React.ElementType;
 }
 
 const contactDetails: ReadonlyArray<ContactDetail> = [
-  { label: "Media House | Traffic", display: "0805 482 0000", href: "tel:+2348054820000" },
-  { label: "Studio", display: "0805 551 1110", href: "tel:+2348055511110" },
-  { label: "Studio", display: "0706 677 1822", href: "tel:+2347066771822" },
-  { label: "Careers", display: "Careers@glowfmradio.com", href: "mailto:Careers@glowfmradio.com" },
-  { label: "Marketing", display: "marketing@glowfmradio.com", href: "mailto:marketing@glowfmradio.com" },
-  { label: "Address", display: "1 Efon Alaye street Ijapo Estate, Akure, Akure, Nigeria." }
+  { label: "Marketing/Adverts", display: "+234 703 212 0921", href: "tel:+2347032120921", icon: Phone },
+  { label: "Marketing", display: "+234 703 022 3281", href: "tel:+2347030223281", icon: Phone },
+  { label: "Careers", display: "Careers@glowfmradio.com", href: "mailto:Careers@glowfmradio.com", icon: Mail },
+  { label: "Address", display: "1 Efon Alaye street Ijapo Estate, Akure, Akure, Nigeria.", icon: MapPin }
 ] as const;
 
 export function GlowFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[#03050B] text-white">
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12 md:flex-row md:items-start md:justify-between">
-        <div className="max-w-sm space-y-4">
-          <div className="flex items-center gap-3">
-            <span className="relative h-10 w-10 overflow-hidden rounded-full border border-white/15 bg-white/5">
-              <Image src={logoUrl} alt="Glow 99.1 FM logo" fill sizes="40px" className="object-contain" />
-            </span>
-            <div className="leading-tight">
-              <p className="font-display text-lg font-semibold uppercase tracking-[0.25em]">Glow 99.1 FM</p>
-              <p className="text-sm text-white/70">Your Station - Your Voice - Your Community</p>
+    <footer className="relative border-t border-white/10 bg-[#020408] text-white overflow-hidden font-['El_Messiri']">
+      {/* Ambient Glow Effects */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
+          
+          {/* Brand Column */}
+          <div className="lg:col-span-4 space-y-8">
+            <div className="flex items-center gap-4">
+              <div className="relative h-16 w-16 overflow-hidden rounded-2xl border border-white/10 bg-white/5 shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                <Image src={logoUrl} alt="Glow 99.1 FM logo" fill sizes="64px" className="object-contain p-2" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold uppercase tracking-widest text-white">Glow 99.1 FM</h3>
+                <p className="text-xs font-medium text-orange-400 tracking-[0.2em] uppercase">Your Station • Your Voice</p>
+              </div>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-400 max-w-md">
+              Broadcasting the pulse of campus life while engineering advertiser partnerships and sponsorship wins for the Glow community.
+            </p>
+            <div className="flex gap-4">
+               <GlowButton asChild variant="accent" size="sm" className="uppercase tracking-[0.25em] bg-orange-600 hover:bg-orange-500 border-none shadow-[0_0_20px_rgba(234,88,12,0.3)]">
+                <Link href="https://glow991fm.com/schedules/" target="_blank" rel="noreferrer">
+                  Listen Live
+                </Link>
+              </GlowButton>
             </div>
           </div>
-          <p className="text-sm text-white/70">
-            Broadcasting the pulse of campus life while engineering advertiser partnerships and sponsorship wins for the Glow community.
-          </p>
-          <GlowButton asChild variant="accent" size="sm" className="uppercase tracking-[0.25em]">
-            <Link href="https://glow991fm.com/schedules/" target="_blank" rel="noreferrer">
-              Listen Live
-            </Link>
-          </GlowButton>
-        </div>
-        <div className="grid gap-8 text-sm md:grid-cols-3">
-          <div>
-            <h4 className="font-display text-sm uppercase tracking-[0.3em] text-white/60">Quick Links</h4>
-            <ul className="mt-4 space-y-3">
-              {quickLinks.map((link) => {
-                const isExternal = link.href.startsWith("http");
-                return (
-                  <li key={link.label}>
-                    {isExternal ? (
-                      <a className="text-white/80 transition hover:text-glow-primary" href={link.href} rel="noreferrer">
-                        {link.label}
-                      </a>
-                    ) : (
-                      <Link className="text-white/80 transition hover:text-glow-primary" href={link.href} prefetch>
-                        {link.label}
-                      </Link>
-                    )}
+
+          {/* Links Grid */}
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+            
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-[0.25em] text-white mb-6 border-l-2 border-orange-500 pl-3">Quick Links</h4>
+              <ul className="space-y-4">
+                {quickLinks.map((link) => {
+                  const isExternal = link.href.startsWith("http");
+                  return (
+                    <li key={link.label}>
+                      {isExternal ? (
+                        <a className="group flex items-center text-sm text-slate-400 transition-colors hover:text-white" href={link.href} rel="noreferrer">
+                          <span className="w-1.5 h-1.5 rounded-full bg-white/10 mr-3 group-hover:bg-orange-500 transition-colors"></span>
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link className="group flex items-center text-sm text-slate-400 transition-colors hover:text-white" href={link.href} prefetch>
+                          <span className="w-1.5 h-1.5 rounded-full bg-white/10 mr-3 group-hover:bg-orange-500 transition-colors"></span>
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            {/* Connect */}
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-[0.25em] text-white mb-6 border-l-2 border-blue-500 pl-3">Connect</h4>
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map(({ label, href, Icon, color }) => (
+                  <a
+                    key={label}
+                    className={`group relative flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-slate-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${color}`}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                  >
+                    <Icon className="h-5 w-5 transition-transform group-hover:scale-110" aria-hidden />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-sm font-bold uppercase tracking-[0.25em] text-white mb-6 border-l-2 border-purple-500 pl-3">Contact</h4>
+              <ul className="space-y-4">
+                {contactDetails.map((item, idx) => (
+                  <li key={idx} className="flex gap-3 items-start">
+                    {item.icon && <item.icon className="w-4 h-4 text-slate-500 mt-0.5 shrink-0" />}
+                    <div className="space-y-1">
+                      <p className="text-[0.65rem] uppercase tracking-widest text-slate-500 font-bold">{item.label}</p>
+                      {item.href ? (
+                        <a href={item.href} className="block text-sm text-slate-300 hover:text-white transition-colors">
+                          {item.display}
+                        </a>
+                      ) : (
+                        <span className="block text-sm text-slate-300">{item.display}</span>
+                      )}
+                    </div>
                   </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-display text-sm uppercase tracking-[0.3em] text-white/60">Connect</h4>
-            <div className="mt-4 flex flex-wrap gap-3">
-              {socialLinks.map(({ label, href, Icon }) => (
-                <a
-                  key={label}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/80 transition hover:border-glow-primary/50 hover:text-glow-primary"
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                >
-                  <Icon className="h-4 w-4" aria-hidden />
-                  <span className="sr-only">{label}</span>
-                </a>
-              ))}
+                ))}
+              </ul>
             </div>
-          </div>
-          <div>
-            <h4 className="font-display text-sm uppercase tracking-[0.3em] text-white/60">Contact</h4>
-            <ul className="mt-4 space-y-3 text-white/80">
-              {contactDetails.map((item) => (
-                <li key={`${item.label}-${item.display}`}>
-                  <p className="text-xs uppercase tracking-[0.3em] text-white/50">{item.label}</p>
-                  {item.href ? (
-                    <a href={item.href} className="block text-white transition hover:text-glow-primary">
-                      {item.display}
-                    </a>
-                  ) : (
-                    <span className="block text-white/80">{item.display}</span>
-                  )}
-                </li>
-              ))}
-            </ul>
+
           </div>
         </div>
       </div>
-      <div className="border-t border-white/10 bg-black/40 py-4 text-center text-xs text-white/60">
-        &copy; {new Date().getFullYear()} Glow 99.1 FM —{" "}
-        <a
-          href="https://tobseytech.onrender.com"
-          target="_blank"
-          rel="noreferrer"
-          className="font-semibold text-glow-accent underline-offset-4 transition hover:text-white"
-        >
-          Built by tobseytech
-        </a>
-        <span className="mx-1 text-white/40">|</span>
-        <a
-          href="https://tbeetech.github.io"
-          target="_blank"
-          rel="noreferrer"
-          className="text-white/60 underline-offset-4 transition hover:text-white/90"
-        >
-          Portfolio
-        </a>
-        .
+
+      {/* Bottom Bar */}
+      <div className="relative border-t border-white/5 bg-black/60 backdrop-blur-xl">
+        <div className="mx-auto max-w-7xl px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+          <p>&copy; {new Date().getFullYear()} Glow 99.1 FM. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+             <a
+              href="https://tobseytech.onrender.com"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 hover:text-white transition-colors group"
+            >
+              <span className="uppercase tracking-wider font-bold text-[0.6rem]">Built by</span>
+              <span className="font-bold text-orange-500 group-hover:text-orange-400">tobseytech</span>
+            </a>
+            <div className="h-3 w-px bg-white/10"></div>
+            <a
+              href="https://tbeetech.github.io"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition-colors"
+            >
+              Portfolio
+            </a>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -43,7 +43,7 @@ export function Carousel({ children, className = "", itemClassName = "min-w-[85%
       {/* Left Arrow */}
       <button
         onClick={() => scroll('left')}
-        className={`absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 -ml-4 opacity-0 group-hover:opacity-100 disabled:opacity-0 ${!showLeftArrow ? 'invisible' : ''}`}
+        className={`absolute -left-4 sm:-left-12 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-orange-500 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 opacity-0 group-hover:opacity-100 disabled:opacity-0 ${!showLeftArrow ? 'invisible' : ''} border border-white/10 shadow-lg`}
         aria-label="Scroll left"
         disabled={!showLeftArrow}
       >
@@ -53,7 +53,7 @@ export function Carousel({ children, className = "", itemClassName = "min-w-[85%
       {/* Right Arrow */}
       <button
         onClick={() => scroll('right')}
-        className={`absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 -mr-4 opacity-0 group-hover:opacity-100 disabled:opacity-0 ${!showRightArrow ? 'invisible' : ''}`}
+        className={`absolute -right-4 sm:-right-12 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-orange-500 text-white p-3 rounded-full backdrop-blur-sm transition-all duration-300 opacity-0 group-hover:opacity-100 disabled:opacity-0 ${!showRightArrow ? 'invisible' : ''} border border-white/10 shadow-lg`}
         aria-label="Scroll right"
         disabled={!showRightArrow}
       >

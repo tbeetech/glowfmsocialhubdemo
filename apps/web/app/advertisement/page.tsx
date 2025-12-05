@@ -1,6 +1,9 @@
 ﻿"use client";
 
 import Link from "next/link";
+import { useRef } from "react";
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { FaMusic, FaBroadcastTower, FaGift, FaPercentage, FaScroll, FaVideo } from "react-icons/fa";
@@ -118,6 +121,20 @@ const advertisingPackages: AdPackage[] = [
 ];
 
 export default function AdvertisementPage() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const { current } = scrollContainerRef;
+      const scrollAmount = 400;
+      if (direction === 'left') {
+        current.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      } else {
+        current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen text-gray-900 bg-[#030511] relative overflow-x-hidden">
       {/* Futuristic Background Elements */}
@@ -150,15 +167,37 @@ export default function AdvertisementPage() {
             <div className="h-1 w-20 bg-gradient-to-r from-orange-500 to-red-500 mx-auto rounded-full"></div>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="relative group/carousel">
+            <button 
+              onClick={() => scroll('left')} 
+              className="absolute -left-4 lg:-left-12 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-orange-500 p-3 rounded-full text-white opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 backdrop-blur-sm border border-white/10 hover:scale-110 hidden md:block"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button 
+              onClick={() => scroll('right')} 
+              className="absolute -right-4 lg:-right-12 top-1/2 -translate-y-1/2 z-20 bg-black/50 hover:bg-orange-500 p-3 rounded-full text-white opacity-0 group-hover/carousel:opacity-100 transition-all duration-300 backdrop-blur-sm border border-white/10 hover:scale-110 hidden md:block"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            <div 
+              ref={scrollContainerRef}
+              className="flex overflow-x-auto gap-6 pb-12 px-4 snap-x snap-mandatory scrollbar-hide -mx-4 sm:mx-0"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
             {advertisingPackages.map((pkg) => (
-              <div
+              <motion.div
                 key={pkg.id}
-                className={`group relative flex flex-col rounded-[2rem] border p-8 transition-all duration-500 hover:-translate-y-2 ${
+                className={`min-w-[300px] md:min-w-[380px] snap-center group relative flex flex-col rounded-[2rem] border p-8 transition-all duration-500 ${
                   pkg.specialOffer
                     ? "border-orange-500/50 bg-gradient-to-b from-orange-900/20 to-black/40 shadow-[0_0_40px_-10px_rgba(249,115,22,0.3)]"
                     : "border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.05]"
                 } backdrop-blur-xl`}
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ duration: 0.3 }}
               >
                 {pkg.specialOffer && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2">
@@ -207,8 +246,9 @@ export default function AdvertisementPage() {
                     {pkg.ctaText}
                   </Link>
                 </GlowButton>
-              </div>
+              </motion.div>
             ))}
+            </div>
           </div>
         </AnimatedSection>
 

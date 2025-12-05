@@ -16,7 +16,7 @@ const compactCarouselItemClass = "min-w-[70%] sm:min-w-[40%] md:min-w-[30%] lg:m
 
 // Removed backdrop-blur and complex shadows for performance
 const glassPanel =
-  "rounded-2xl border border-white/10 bg-[#0a0a0a] p-5 sm:p-8 relative overflow-hidden";
+  "rounded-2xl border border-white/10 bg-[#0a0a0a] relative";
 
 // Expanded Data (6 items each)
 const youtubeHighlights = [
@@ -47,17 +47,17 @@ const instagramSpotlight = [
 const facebookStreams = [
   { 
     title: "Ale alariwo", 
-    summary: "Watch the latest episode of Ale alariwo on Glow FM.", 
-    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1967965624152476%2F&show_text=false&width=560&t=0" 
+    summary: "Watch the latest episode of Ale alariwo on Glow FM", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1415598613542699%2F&show_text=false&width=560&t=0" 
   },
   { 
-    title: "Sportainment", 
-    summary: "Catch up with the latest sports entertainment news.", 
-    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1804264817076500%2F&show_text=false&width=560&t=0" 
+    title: "Political Hangout", 
+    summary: "Catch up with the latest political discussions and analysis", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1020433393608370%2F&show_text=false&width=560&t=0" 
   },
   { 
     title: "Isues in the dialies", 
-    summary: "Discussing the pressing issues in the dailies.", 
+    summary: "Discussing the pressing issues in the dailies", 
     embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1898416690751080%2F&show_text=false&width=560&t=0" 
   }
 ];
@@ -129,7 +129,7 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.tiktok.com/@glow991fm"
           viewMoreText={<><FaTiktok className="mr-2 text-lg" /> View TikTok</>}
         >
-          <Carousel itemClassName="min-w-[260px] max-w-[260px]">
+          <Carousel itemClassName="min-w-[320px] max-w-[350px]">
             {tiktokReels.map((reel, idx) => (
               <div key={idx} className="group relative flex flex-col h-full">
                 {/* TV Frame Design */}
@@ -137,7 +137,7 @@ export default function SocialMediaPage() {
                   {/* Screen Glare/Reflection */}
                   <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none rounded-xl"></div>
                   
-                  <div className="aspect-[9/16] w-full bg-black relative z-10">
+                  <div className="h-[600px] w-full bg-black relative z-10">
                     <iframe 
                       title={reel.title} 
                       src={reel.embedUrl} 
@@ -171,7 +171,7 @@ export default function SocialMediaPage() {
           viewMoreLink="https://www.instagram.com/glow991fm/"
           viewMoreText={<><FaInstagram className="mr-2 text-lg" /> View Instagram</>}
         >
-          <Carousel itemClassName="min-w-[300px] max-w-[300px]">
+          <Carousel itemClassName="min-w-[320px] max-w-[350px]">
             {instagramSpotlight.map((item, idx) => (
               <div key={idx} className="group relative flex flex-col h-full">
                 {/* TV Frame Design */}
@@ -179,7 +179,7 @@ export default function SocialMediaPage() {
                   {/* Screen Glare */}
                   <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
                   
-                  <div className="relative aspect-[9/16] w-full bg-black z-10">
+                  <div className="relative h-[600px] w-full bg-black z-10">
                     <iframe
                       src={`https://www.instagram.com/reel/${item.embedId}/embed`}
                       className="h-full w-full"
@@ -269,7 +269,7 @@ function SocialSection({
     // Replaced AnimatedSection with simple section for performance
     <section id={id} className="space-y-8">
       <div className={`${glassPanel} space-y-8`}>
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-white/5 pb-6">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between border-b border-white/5 pb-6 mx-5 sm:mx-8 mt-5 sm:mt-8">
           <div className="space-y-2">
             <div className="flex items-center gap-3 mb-2">
               <div className={`p-2 rounded-xl ${iconColorClass}`}>
@@ -286,8 +286,10 @@ function SocialSection({
             {viewMoreText}
           </Link>
         </div>
-        {children}
-        <div className="flex justify-center pt-4 sm:hidden">
+        <div className="pb-5 sm:pb-8">
+          {children}
+        </div>
+        <div className="flex justify-center pt-4 sm:hidden px-5 pb-5">
            <Link href={viewMoreLink} target="_blank" rel="noreferrer" className={`${buttonClass} w-full`}>
             {viewMoreText}
           </Link>

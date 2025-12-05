@@ -7,12 +7,10 @@ const MAP_EMBED_SRC =
   "https://maps.google.com/maps?q=Glow%2099.1%20FM%2C%201%20Efon%20Alaye%20St%2C%20Ijapo%20Estate%2C%20Akure%2C%20Nigeria&t=&z=15&ie=UTF8&iwloc=&output=embed";
 
 const contactChannels = [
-  { label: "Media House | Traffic", value: "0805 482 0000", href: "tel:+2348054820000" },
-  { label: "Studio Hotline", value: "0805 551 1110", href: "tel:+2348055511110" },
-  { label: "Studio Hotline", value: "0706 677 1822", href: "tel:+2347066771822" },
   { label: "WhatsApp Broadcast", value: "Join Ember WhatsApp broadcast", href: WHATSAPP_BROADCAST_LINK },
   { label: "Careers", value: "Careers@glowfmradio.com", href: "mailto:Careers@glowfmradio.com" },
-  { label: "Marketing", value: "marketing@glowfmradio.com", href: "mailto:marketing@glowfmradio.com" }
+  { label: "Marketing/Adverts", value: "+234 703 212 0921", href: "tel:+2347032120921" },
+  { label: "Marketing", value: "+234 703 022 3281", href: "tel:+2347030223281" }
 ] as const;
 
 const contactReasons = [
