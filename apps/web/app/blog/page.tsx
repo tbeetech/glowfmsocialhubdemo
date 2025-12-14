@@ -95,7 +95,7 @@ const newsroomNotes = [
     summary:
       "Our audio lab shares the Dolby Atmos-inspired routing that keeps livestreams crisp even during pop-up broadcasts.",
     anchor: "production",
-    link: "https://www.youtube.com/@glow991fm",
+    link: "https://www.youtube.com/@glowtv-e8y",
     linkLabel: "Watch the studio tour"
   }
 ];

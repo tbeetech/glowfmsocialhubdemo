@@ -19,7 +19,7 @@ function TikTokIcon(props: GlyphProps) {
 const socialLinks = [
   { label: "Instagram", href: "https://instagram.com/glow991fm", Icon: Instagram, color: "hover:text-pink-500 hover:border-pink-500/50" },
   { label: "TikTok", href: "https://tiktok.com/@glow991fm", Icon: TikTokIcon, color: "hover:text-cyan-400 hover:border-cyan-400/50" },
-  { label: "YouTube", href: "https://youtube.com/@glow991fm", Icon: Youtube, color: "hover:text-red-500 hover:border-red-500/50" },
+  { label: "YouTube", href: "https://www.youtube.com/@glowtv-e8y", Icon: Youtube, color: "hover:text-red-500 hover:border-red-500/50" },
   { label: "Facebook", href: "https://www.facebook.com/Glowfm/", Icon: Facebook, color: "hover:text-blue-500 hover:border-blue-500/50" },
   { label: "X", href: "https://x.com/glow991fm", Icon: Twitter, color: "hover:text-white hover:border-white/50" }
 ] as const;

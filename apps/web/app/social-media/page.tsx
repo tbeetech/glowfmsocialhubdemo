@@ -77,7 +77,7 @@ export default function SocialMediaPage() {
           icon={<FaYoutube className="text-2xl" />}
           iconColorClass="bg-red-600/20 text-red-500"
           description="Catch up on our latest studio sessions, exclusive interviews, and live broadcasts."
-          viewMoreLink="https://www.youtube.com/@glow991fm"
+          viewMoreLink="https://www.youtube.com/@glowtv-e8y"
           viewMoreText={<><FaYoutube className="mr-2 text-lg" /> Launch YouTube</>}
         >
           <Carousel itemClassName={compactCarouselItemClass}>

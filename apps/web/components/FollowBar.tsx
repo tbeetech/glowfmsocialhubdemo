@@ -7,7 +7,7 @@ const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYg
 const links = [
   { label: "Instagram", href: "https://instagram.com/glow991fm", icon: FaInstagram, color: "hover:text-pink-500 hover:border-pink-500" },
   { label: "TikTok", href: "https://tiktok.com/@glow991fm", icon: FaTiktok, color: "hover:text-cyan-400 hover:border-cyan-400" },
-  { label: "YouTube", href: "https://youtube.com/@glow991fm", icon: FaYoutube, color: "hover:text-red-600 hover:border-red-600" },
+  { label: "YouTube", href: "https://www.youtube.com/@glowtv-e8y", icon: FaYoutube, color: "hover:text-red-600 hover:border-red-600" },
   { label: "Facebook", href: "https://www.facebook.com/Glowfm/", icon: FaFacebook, color: "hover:text-blue-600 hover:border-blue-600" },
   { label: "X", href: "https://x.com/glow991fm", icon: FaXTwitter, color: "hover:text-white hover:border-white" },
   { label: "WhatsApp", href: WHATSAPP_BROADCAST_LINK, icon: FaWhatsapp, color: "hover:text-green-500 hover:border-green-500" }

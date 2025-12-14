@@ -1,5 +1,6 @@
 "use client";
 import { Suspense } from "react";
+import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
 import { CountdownClock } from "@/components/CountdownClock";
@@ -26,31 +27,26 @@ export default function HomePage() {
           
           {/* Floating decorative elements removed for performance */}
           
-          <div className="container mx-auto px-2 compact:px-3 sp:px-4 tablet:px-8 relative z-10">
-            <div className="grid grid-cols-2 gap-2 compact:gap-3 sp:gap-5 mp:gap-6 tablet:gap-12 items-center">
+          <div className="container mx-auto px-3 compact:px-4 sp:px-5 tablet:px-8 relative z-10">
+            <div className="grid grid-cols-[1.25fr_0.75fr] compact:grid-cols-[1.3fr_0.7fr] sp:grid-cols-[1.4fr_0.8fr] tablet:grid-cols-2 gap-2 compact:gap-3 sp:gap-5 mp:gap-6 tablet:gap-12 items-center">
               {/* Left Content */}
-              <div className="space-y-1.5 compact:space-y-2 sp:space-y-3 mp:space-y-4 tablet:space-y-8 order-1 text-gray-900 text-left">
+              <div className="space-y-2 compact:space-y-3 sp:space-y-4 mp:space-y-5 tablet:space-y-8 order-1 text-left relative z-20">
                 {/* Headline with Red "Fun" Badge */}
-                <h1 className="text-sm compact:text-base sp:text-xl mp:text-2xl phablet:text-4xl tablet:text-5xl laptop:text-7xl font-display font-black text-gray-900 leading-[1.1] compact:leading-tight font-['El_Messiri']">
+                <h1 className="text-[1.35rem] compact:text-2xl sp:text-3xl mp:text-4xl phablet:text-5xl tablet:text-5xl laptop:text-7xl font-display font-black text-gray-900 leading-[1.1] compact:leading-tight drop-shadow-sm">
                   Connect with the GlowFM:
-                  <br className="hidden sp:block" />
-                  <span className="sp:hidden"> </span>
+                  <br className="block" />
                   Join & Engage In the
-                  <br className="hidden sp:block" />
-                  <span className="sp:hidden"> </span>
+                  <br className="block" />
                   Community&apos;s{" "}
-                  <span className="relative inline-block mt-0.5 compact:mt-1">
-                    <span className="relative z-10 text-white px-2 compact:px-3 sp:px-4 mp:px-5 py-1 compact:py-1.5 sp:py-2 mp:py-2.5 font-extrabold text-xs compact:text-sm sp:text-xl mp:text-2xl phablet:text-4xl">Fun</span>
+                  <span className="relative inline-block mt-1 align-middle">
+                    <span className="relative z-10 text-white px-2.5 compact:px-3 sp:px-4 mp:px-5 py-0.5 compact:py-1 sp:py-1.5 font-extrabold text-sm compact:text-base sp:text-xl mp:text-2xl phablet:text-4xl tracking-wide">Fun</span>
                     <span 
-                      className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-500 transform rotate-[-2deg] rounded-md compact:rounded-lg shadow-2xl"
-                      style={{ 
-                        boxShadow: '0 12px 24px rgba(220, 38, 38, 0.4), 0 6px 12px rgba(220, 38, 38, 0.2)'
-                      }}
+                      className="absolute inset-0 bg-gradient-to-r from-red-600 via-orange-500 to-red-500 transform -rotate-2 rounded-md compact:rounded-lg shadow-[0_4px_12px_rgba(220,38,38,0.3)]"
                     ></span>
                   </span>
                 </h1>
                 
-                <p className="text-[10px] compact:text-xs sp:text-sm mp:text-base phablet:text-lg max-w-xl leading-tight compact:leading-relaxed text-gray-700 font-body font-['El_Messiri']">
+                <p className="text-[0.65rem] compact:text-xs sp:text-sm mp:text-base phablet:text-lg max-w-xl leading-snug compact:leading-relaxed text-gray-700 font-body font-medium pr-1">
                   The most powerful element is the connection. Connect with the creators who are pouring their 
                   passion into shaping tomorrow&apos;s sound. Engage in real-time Q&A sessions, drop a comment 
                   during a live performance, or join a dedicated forum.
@@ -58,13 +54,13 @@ export default function HomePage() {
               </div>
 
               {/* Right Content - TILTED MICROPHONE IMAGE */}
-              <div className="relative h-auto min-h-[140px] compact:min-h-[160px] sp:min-h-[200px] mp:min-h-[240px] phablet:min-h-[300px] tablet:h-[600px] flex flex-col items-center justify-center order-2 mt-0 gap-4">
-                <div className="relative w-full h-[140px] compact:h-[160px] sp:h-[200px] mp:h-[240px] phablet:h-[300px] tablet:h-full max-w-[100px] compact:max-w-[120px] sp:max-w-[160px] mp:max-w-[200px] phablet:max-w-xs tablet:max-w-lg">
+              <div className="relative h-[220px] compact:h-[260px] sp:h-[320px] mp:h-[380px] phablet:h-[450px] tablet:h-[600px] flex flex-col items-center justify-center order-2 mt-0">
+                <div className="relative w-full h-[160px] compact:h-[200px] sp:h-[240px] mp:h-[280px] phablet:h-[340px] tablet:h-full max-w-[140px] compact:max-w-[180px] sp:max-w-[220px] mp:max-w-[260px] phablet:max-w-xs tablet:max-w-lg">
                   <div 
                     className="relative w-full h-full transform transition-transform duration-1000 hover:rotate-[15deg]"
                     style={{ 
-                      transform: 'rotate(12deg) translateX(10px)',
-                      filter: 'drop-shadow(0 15px 30px rgba(0, 0, 0, 0.12))'
+                      transform: 'rotate(8deg) scale(1.15) translateX(5px)',
+                      filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15))'
                     }}
                   >
                     <Image
@@ -80,27 +76,24 @@ export default function HomePage() {
                   {/* Glowing ring animation - scaled for mobile */}
                   {allowMotion && (
                     <>
-                      <div className="absolute top-1/2 left-1/2 w-40 compact:w-48 sp:w-56 mp:w-72 phablet:w-80 tablet:w-96 h-40 compact:h-48 sp:h-56 mp:h-72 phablet:h-80 tablet:h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-300/30 rounded-full animate-spin" style={{ animationDuration: '20s' }}></div>
-                      <div className="absolute top-1/2 left-1/2 w-32 compact:w-40 sp:w-48 mp:w-64 phablet:w-72 tablet:w-80 h-32 compact:h-40 sp:h-48 mp:h-64 phablet:h-72 tablet:h-80 -translate-x-1/2 -translate-y-1/2 border border-red-300/20 rounded-full animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}></div>
+                      <div className="absolute top-1/2 left-1/2 w-32 compact:w-40 sp:w-56 mp:w-64 phablet:w-80 tablet:w-96 h-32 compact:h-40 sp:h-56 mp:h-64 phablet:h-80 tablet:h-96 -translate-x-1/2 -translate-y-1/2 border border-orange-400/20 rounded-full animate-spin" style={{ animationDuration: '25s' }}></div>
+                      <div className="absolute top-1/2 left-1/2 w-24 compact:w-32 sp:w-40 mp:w-48 phablet:w-60 tablet:w-80 h-24 compact:h-32 sp:h-40 mp:h-48 phablet:h-60 tablet:h-80 -translate-x-1/2 -translate-y-1/2 border border-red-400/15 rounded-full animate-spin" style={{ animationDuration: '20s', animationDirection: 'reverse' }}></div>
                     </>
                   )}
                 </div>
 
-                {/* Facebook CTA Button */}
-                <div className="max-w-xl mx-0">
+                {/* Facebook CTA Button - Positioned below mic */}
+                <div className="mt-[-10px] compact:mt-[-15px] sp:mt-[-20px] relative z-20 w-full flex justify-center">
                   <a 
                     href="https://facebook.com/glowfm" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-1.5 compact:gap-2 bg-gradient-to-r from-orange-600 via-red-500 to-orange-600 text-white px-3 compact:px-4 sp:px-6 py-1.5 compact:py-2 sp:py-3 rounded-lg hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-xl hover:shadow-2xl transform hover:scale-105 font-['El_Messiri'] text-[10px] compact:text-xs sp:text-sm group whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-1.5 compact:gap-2 bg-gradient-to-r from-[#E85D04] via-[#FF0000] to-[#E85D04] text-white px-2.5 compact:px-3 sp:px-5 py-1.5 compact:py-2 sp:py-2.5 rounded-lg hover:from-orange-700 hover:to-red-600 transition-all duration-300 font-bold shadow-[0_8px_16px_rgba(232,93,4,0.3)] hover:shadow-2xl transform hover:scale-105 font-['El_Messiri'] text-[0.65rem] compact:text-[0.75rem] sp:text-sm group whitespace-nowrap border border-white/20"
                   >
-                    <svg className="w-4 h-4 compact:w-5 compact:h-5 sp:w-6 sp:h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-3 h-3 compact:w-3.5 compact:h-3.5 sp:w-4 sp:h-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                     </svg>
                     Visit Our Facebook
-                    <svg className="w-3 h-3 compact:w-4 compact:h-4 sp:w-5 sp:h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                    </svg>
                   </a>
                 </div>
               </div>
@@ -117,7 +110,7 @@ export default function HomePage() {
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-10 compact:mb-12 sp:mb-16">
-              <h2 className="text-4xl compact:text-5xl sp:text-6xl font-display font-black mb-4 compact:mb-5 font-['El_Messiri']">
+              <h2 className="text-4xl compact:text-5xl sp:text-6xl font-display font-black mb-4 compact:mb-5">
                 <span className="bg-gradient-to-r from-[#FF6600] via-[#00FFD5] to-[#FF6600] text-transparent bg-clip-text">
                   Live Audio Experience
                 </span>
@@ -386,14 +379,25 @@ export default function HomePage() {
               <p className="text-sm font-body text-gray-700 max-w-md">
                 Win Small prizes like tote bag, mini power bank, airtime, jotter
               </p>
-              <a 
-                href="https://www.facebook.com/share/r/14WpEP5taiv/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-indigo-900 text-white px-8 py-3 rounded-full hover:bg-indigo-800 transition-colors font-body inline-flex items-center gap-2 mt-4"
-              >
-                Participate Now →
-              </a>
+              <div className="flex flex-wrap gap-3 mt-4">
+                <a 
+                  href="https://www.facebook.com/share/r/14WpEP5taiv/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-indigo-900 text-white px-8 py-3 rounded-full hover:bg-indigo-800 transition-colors font-body inline-flex items-center gap-2"
+                >
+                  Participate Now →
+                </a>
+                <Link
+                  href="/final-5-players-quiz-answers"
+                  className="border-2 border-amber-500/70 text-amber-900 px-6 py-3 rounded-full font-body font-semibold bg-white/80 hover:bg-amber-50 transition-all inline-flex items-center gap-2 shadow-[0_10px_30px_rgba(251,191,36,0.25)]"
+                >
+                  Final 5 Quiz Answers
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
             </div>
             
             {/* Right side - Guy with Glasses - Flush to bottom */}
@@ -447,7 +451,7 @@ export default function HomePage() {
               </div>
 
               {/* Main Headline */}
-              <h2 className="text-3xl compact:text-4xl sp:text-5xl mp:text-6xl tablet:text-7xl laptop:text-8xl font-display font-black text-white mb-4 compact:mb-6 leading-tight font-['El_Messiri'] drop-shadow-[0_0_30px_rgba(251,191,36,0.8)]">
+              <h2 className="text-3xl compact:text-4xl sp:text-5xl mp:text-6xl tablet:text-7xl laptop:text-8xl font-display font-black text-white mb-4 compact:mb-6 leading-tight drop-shadow-[0_0_30px_rgba(251,191,36,0.8)]">
                 Ember Challenge
                 <br />
                 <span className="bg-gradient-to-r from-amber-300 via-purple-300 to-amber-300 bg-clip-text text-transparent animate-pulse drop-shadow-[0_0_40px_rgba(251,191,36,1)]">
@@ -455,7 +459,7 @@ export default function HomePage() {
                 </span>
               </h2>
               
-              <p className="text-base compact:text-lg sp:text-xl tablet:text-2xl font-body text-amber-100/95 max-w-3xl mx-auto leading-relaxed font-['El_Messiri'] drop-shadow-[0_0_20px_rgba(147,51,234,0.6)] mb-8 compact:mb-10">
+              <p className="text-base compact:text-lg sp:text-xl tablet:text-2xl font-body text-amber-100/95 max-w-3xl mx-auto leading-relaxed drop-shadow-[0_0_20px_rgba(147,51,234,0.6)] mb-8 compact:mb-10">
                 The most exciting challenge of the year is coming to an end. Don&apos;t miss your chance to participate!
               </p>
 
@@ -560,14 +564,14 @@ export default function HomePage() {
             <div className="grid grid-cols-2 gap-3 compact:gap-5 sp:gap-6 mp:gap-8 tablet:gap-12 lg:gap-16 items-center">
               {/* Left Content */}
               <div className="space-y-2 compact:space-y-3 sp:space-y-4 mp:space-y-5 tablet:space-y-6 lg:space-y-8">
-                <h2 className="text-lg compact:text-xl sp:text-2xl mp:text-3xl phablet:text-4xl tablet:text-5xl lg:text-6xl font-display font-bold text-gray-900 leading-tight font-['El_Messiri']">
+                <h2 className="text-lg compact:text-xl sp:text-2xl mp:text-3xl phablet:text-4xl tablet:text-5xl lg:text-6xl font-display font-bold text-gray-900 leading-tight">
                   Carry the Glow wherever 
                   <br className="hidden sp:block" />
                   <span className="sp:hidden"> </span>
                   the day takes you.
                 </h2>
                 
-                <p className="text-xs compact:text-sm sp:text-base mp:text-lg text-gray-600 font-body leading-relaxed max-w-lg font-['El_Messiri']">
+                <p className="text-xs compact:text-sm sp:text-base mp:text-lg text-gray-600 font-body leading-relaxed max-w-lg">
                   Download our mobile app and never miss a beat. Listen to your favorite shows, 
                   participate in challenges, and stay connected on the go!
                 </p>
@@ -580,7 +584,7 @@ export default function HomePage() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <span className="text-gray-900 font-body text-[10px] compact:text-xs sp:text-sm mp:text-base font-['El_Messiri']">Sync notification reminders</span>
+                    <span className="text-gray-900 font-body text-[10px] compact:text-xs sp:text-sm mp:text-base">Sync notification reminders</span>
                   </div>
                   
                   <div className="flex items-center gap-1.5 compact:gap-2 sp:gap-3">
@@ -589,7 +593,7 @@ export default function HomePage() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <span className="text-gray-900 font-body text-[10px] compact:text-xs sp:text-sm mp:text-base font-['El_Messiri']">Jump between music blocks</span>
+                    <span className="text-gray-900 font-body text-[10px] compact:text-xs sp:text-sm mp:text-base">Jump between music blocks</span>
                   </div>
                   
                   <div className="flex items-center gap-1.5 compact:gap-2 sp:gap-3">
@@ -598,7 +602,7 @@ export default function HomePage() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <span className="text-gray-900 font-body text-[10px] compact:text-xs sp:text-sm mp:text-base font-['El_Messiri']">Talk segments from a single playback surface</span>
+                    <span className="text-gray-900 font-body text-[10px] compact:text-xs sp:text-sm mp:text-base">Talk segments from a single playback surface</span>
                   </div>
                 </div>
 
@@ -679,7 +683,7 @@ export default function HomePage() {
 
               {/* YouTube */}
               <a 
-                href="https://youtube.com/@glowfm" 
+                href="https://www.youtube.com/@glowtv-e8y" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex flex-col items-center gap-3 hover:scale-110 transition-all duration-300"
