@@ -6,6 +6,7 @@ import "./globals.css";
 import { GlowNav } from "@/components/ui/GlowNav";
 import { GlowFooter } from "@/components/ui/GlowFooter";
 import { TreeFormGlobalCompression } from "@/components/providers/TreeFormGlobalCompression";
+import { EmberFinalBanner } from "@/components/EmberFinalBanner";
 
 const elMessiri = El_Messiri({
   subsets: ["latin"],
@@ -67,9 +68,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Script id="theme-init" strategy="beforeInteractive">{themeInitializer}</Script>
         {/* Optimized: Removed heavy glass canvas DOM elements */}
         <div className="global-glass-content">
+          <EmberFinalBanner />
           <GlowNav />
           <TreeFormGlobalCompression />
-          <main className="relative z-10 pt-20 overflow-x-hidden">{children}</main>
+          <main className="relative z-10 pt-32 overflow-x-hidden">{children}</main>
           <a
             href="https://glow991fm.com/schedules/"
             className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-2 rounded-full bg-white/15 px-5 py-3 text-sm font-semibold text-white shadow-2xl backdrop-blur-md transition hover:bg-white/25"

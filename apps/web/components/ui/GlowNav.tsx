@@ -165,7 +165,7 @@ export function GlowNav() {
   };
 
   return (
-  <header className="fixed top-0 z-[100] w-full">
+    <header className="fixed top-12 z-[100] w-full">
       <div className="absolute inset-0 bg-[#03050B]/95 border-b border-white/10 backdrop-blur-md"></div>
       
       <div className="mx-auto flex max-w-7xl items-center justify-between px-3 compact:px-4 phablet:px-5 lg:px-8 py-3 phablet:py-4 md:py-6 relative z-10">

@@ -54,6 +54,23 @@ export function GlowFooter() {
       {/* Ambient Glow Effects */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-orange-500/5 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+      {/* Interstellar radial starlight */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-60"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0, transparent 25%), radial-gradient(circle at 80% 10%, rgba(124,58,237,0.12) 0, transparent 30%), radial-gradient(circle at 60% 80%, rgba(255,153,51,0.08) 0, transparent 28%), radial-gradient(circle at 10% 80%, rgba(59,130,246,0.08) 0, transparent 24%)"
+        }}
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-30"
+        style={{
+          backgroundImage:
+            "radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.5), transparent), radial-gradient(1.5px 1.5px at 30% 40%, rgba(255,255,255,0.6), transparent), radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.4), transparent), radial-gradient(1.5px 1.5px at 85% 65%, rgba(255,255,255,0.45), transparent), radial-gradient(1px 1px at 45% 75%, rgba(255,255,255,0.5), transparent), radial-gradient(1.25px 1.25px at 55% 55%, rgba(255,255,255,0.35), transparent)"
+        }}
+        aria-hidden
+      />
 
       <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-8">
