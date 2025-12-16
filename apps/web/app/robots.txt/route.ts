@@ -1,13 +1,15 @@
-import { type MetadataRoute } from "next";
+const host = process.env.NEXT_PUBLIC_SITE_URL ?? "https://glow991fm.com";
 
-export default function robots(): MetadataRoute.Robots {
-  const host = process.env.NEXT_PUBLIC_SITE_URL ?? "https://glow991fm.com";
-  return {
-    rules: {
-      userAgent: "*",
-      allow: "/"
-    },
-    sitemap: `${host}/sitemap.xml`,
-    host
-  };
+export function GET() {
+  const body = [
+    "User-agent: *",
+    "Allow: /",
+    `Sitemap: ${host}/sitemap.xml`,
+    `Host: ${host.replace(/^https?:\/\//, "")}`
+  ].join("\n");
+
+  return new Response(body, {
+    status: 200,
+    headers: { "Content-Type": "text/plain" }
+  });
 }

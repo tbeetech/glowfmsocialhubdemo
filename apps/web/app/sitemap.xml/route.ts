@@ -1,5 +1,3 @@
-import { type MetadataRoute } from "next";
-
 const ROUTES = [
   "/",
   "/about",
@@ -12,14 +10,27 @@ const ROUTES = [
   "/final-5-players-quiz-answers"
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const host = process.env.NEXT_PUBLIC_SITE_URL ?? "https://glow991fm.com";
-  const now = new Date().toISOString();
+const host = process.env.NEXT_PUBLIC_SITE_URL ?? "https://glow991fm.com";
 
-  return ROUTES.map((path) => ({
-    url: `${host}${path}`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: path === "/" ? 1 : 0.7
-  }));
+export function GET() {
+  const now = new Date().toISOString();
+  const urlset = ROUTES.map(
+    (path) => `
+    <url>
+      <loc>${host}${path}</loc>
+      <lastmod>${now}</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>${path === "/" ? "1.0" : "0.7"}</priority>
+    </url>`
+  ).join("");
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    ${urlset}
+  </urlset>`;
+
+  return new Response(xml, {
+    status: 200,
+    headers: { "Content-Type": "application/xml" }
+  });
 }
