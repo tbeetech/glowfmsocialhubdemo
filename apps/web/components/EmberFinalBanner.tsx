@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function EmberFinalBanner() {
   return (
-    <div className="fixed top-0 left-0 right-0 z-[130] bg-gradient-to-r from-emerald-600 via-amber-500 to-rose-500 text-white shadow-lg">
+    <div className="fixed top-0 left-0 right-0 z-[130] bg-gradient-to-r from-emerald-600 via-amber-500 to-rose-500 text-white shadow-lg h-10 flex items-center">
       <div className="mx-auto flex max-w-7xl items-center gap-3 px-3 py-1 text-[11px] font-semibold overflow-hidden">
         <div className="relative flex-1 overflow-hidden">
           <div className="inline-flex whitespace-nowrap animate-banner-scroll">
