@@ -200,7 +200,7 @@ export default function AdvertisementPage() {
                 transition={{ duration: 0.3 }}
               >
                 {pkg.specialOffer && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <div className="flex justify-center mb-6">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-500 to-red-600 px-4 py-1.5 text-[0.65rem] font-bold uppercase tracking-widest text-white shadow-lg shadow-orange-500/40">
                       <FaGift className="text-xs" />
                       {pkg.specialOffer.label}
@@ -296,7 +296,6 @@ export default function AdvertisementPage() {
     </div>
   );
 }
-
 
 
 

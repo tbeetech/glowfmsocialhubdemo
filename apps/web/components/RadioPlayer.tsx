@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 
 export function RadioPlayer() {
@@ -60,11 +61,15 @@ export function RadioPlayer() {
         }}
       >
         <div className="flex items-center gap-3 p-4">
-          <img 
-            src="https://glow991fm.com/wp-content/uploads/2024/05/glowfm-logo-1.png" 
-            className={`w-[60px] h-[60px] rounded-full object-cover ${isPlaying ? 'vinyl-spin' : ''}`}
-            alt="Glow 99.1 FM"
-          />
+          <div className={`w-[60px] h-[60px] rounded-full overflow-hidden ${isPlaying ? 'vinyl-spin' : ''}`}>
+            <Image 
+              src="https://glow991fm.com/wp-content/uploads/2024/05/glowfm-logo-1.png"
+              alt="Glow 99.1 FM"
+              width={60}
+              height={60}
+              className="w-full h-full object-cover"
+            />
+          </div>
           <div className="flex-1">
             <span className="block text-base font-bold text-gray-900 mb-1">Glow 99.1 FM</span>
             <div className="flex items-center gap-1.5 mb-1">

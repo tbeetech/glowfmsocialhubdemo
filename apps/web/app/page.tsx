@@ -1,5 +1,5 @@
 "use client";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { GlowButton } from "@/components/ui/GlowButton";
@@ -13,6 +13,32 @@ import { usePerformanceMode } from "@/hooks/usePerformanceMode";
 
 export default function HomePage() {
   const { allowMotion } = usePerformanceMode();
+  const [participantCount, setParticipantCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    let retry: ReturnType<typeof setTimeout>;
+
+    const loadCount = async () => {
+      try {
+        const res = await fetch("/api/ember-final", { cache: "no-store" });
+        if (!res.ok) throw new Error("Failed to load participants");
+        const data = await res.json();
+        if (!active) return;
+        setParticipantCount(Array.isArray(data) ? data.length : 0);
+      } catch (error) {
+        if (active) setParticipantCount(null);
+      } finally {
+        if (active) retry = setTimeout(loadCount, 10000);
+      }
+    };
+
+    loadCount();
+    return () => {
+      active = false;
+      if (retry) clearTimeout(retry);
+    };
+  }, []);
 
 
   return (
@@ -282,15 +308,8 @@ export default function HomePage() {
       {/* Show Listings Section - Carousel with Navigation and Enhanced Background */}
       <AnimatedSection>
         <div className="py-16 relative overflow-hidden">
-          {/* Blurry radiant gradient background with joyful colors */}
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-100 via-orange-50 to-red-50"></div>
-            <div className="absolute top-20 left-4 compact:left-20 w-64 h-64 bg-gradient-to-br from-purple-400 to-indigo-500 rounded-full opacity-20 blur-3xl"></div>
-            <div className="absolute bottom-10 right-4 compact:right-10 w-80 h-80 bg-gradient-to-br from-orange-400 to-red-400 rounded-full opacity-15 blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-gradient-to-br from-red-300 to-pink-400 rounded-full opacity-10 blur-2xl"></div>
-            {/* Translucent white overlay for classic glow aesthetic */}
-            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm"></div>
-          </div>
+          {/* Simplified background for performance */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white to-orange-50"></div>
           
           <div className="relative z-10 text-center">
             <h2 className="text-4xl font-display font-bold mb-2 text-gray-900">Show Listings</h2>
@@ -312,35 +331,9 @@ export default function HomePage() {
           <div className="absolute bottom-4 left-4 w-12 h-12 border-b-4 border-l-4 border-purple-500/80 rounded-bl-2xl z-20"></div>
           <div className="absolute bottom-4 right-4 w-12 h-12 border-b-4 border-r-4 border-amber-500/80 rounded-br-2xl z-20"></div>
 
-          {/* Digital Confetti Scatterings */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-             {/* Top Left Cluster */}
-             <div className="absolute top-[10%] left-[10%] w-3 h-3 bg-amber-400/60 animate-[digital-float_8s_infinite_linear]" style={{ animationDelay: '0s' }}></div>
-             <div className="absolute top-[15%] left-[20%] w-2 h-2 bg-purple-500/60 animate-[digital-float_12s_infinite_linear]" style={{ animationDelay: '-2s' }}></div>
-             <div className="absolute top-[25%] left-[15%] w-4 h-4 bg-red-400/40 rounded-full animate-[digital-float_10s_infinite_linear]" style={{ animationDelay: '-5s' }}></div>
-             
-             {/* Top Right Cluster */}
-             <div className="absolute top-[12%] right-[15%] w-3 h-3 bg-blue-400/60 rotate-45 animate-[digital-float_9s_infinite_linear]" style={{ animationDelay: '-1s' }}></div>
-             <div className="absolute top-[20%] right-[25%] w-2 h-2 bg-amber-500/60 rounded-full animate-[digital-float_11s_infinite_linear]" style={{ animationDelay: '-3s' }}></div>
-             
-             {/* Center Area */}
-             <div className="absolute top-[40%] left-[40%] w-2 h-2 bg-purple-400/50 animate-[digital-float_15s_infinite_linear]" style={{ animationDelay: '-7s' }}></div>
-             <div className="absolute top-[35%] right-[40%] w-3 h-3 bg-orange-400/50 rotate-12 animate-[digital-float_13s_infinite_linear]" style={{ animationDelay: '-4s' }}></div>
-             
-             {/* Bottom Area */}
-             <div className="absolute bottom-[30%] left-[25%] w-4 h-4 bg-indigo-400/40 rounded-full animate-[digital-float_14s_infinite_linear]" style={{ animationDelay: '-6s' }}></div>
-             <div className="absolute bottom-[40%] right-[20%] w-2 h-2 bg-pink-400/60 animate-[digital-float_10s_infinite_linear]" style={{ animationDelay: '-2s' }}></div>
-             <div className="absolute bottom-[20%] right-[35%] w-3 h-3 bg-amber-300/50 rotate-90 animate-[digital-float_16s_infinite_linear]" style={{ animationDelay: '-8s' }}></div>
-             
-             {/* Scattered Small Bits */}
-             <div className="absolute top-[50%] left-[10%] w-1.5 h-1.5 bg-red-500/40 animate-[digital-float_7s_infinite_linear]" style={{ animationDelay: '-1s' }}></div>
-             <div className="absolute top-[60%] right-[10%] w-1.5 h-1.5 bg-blue-500/40 animate-[digital-float_9s_infinite_linear]" style={{ animationDelay: '-5s' }}></div>
-             <div className="absolute bottom-[15%] left-[50%] w-1.5 h-1.5 bg-green-400/40 animate-[digital-float_11s_infinite_linear]" style={{ animationDelay: '-3s' }}></div>
-          </div>
-
           {/* Glow FM Logo - Top Right Position */}
           <div className="absolute top-8 right-8 w-24 compact:w-28 tablet:w-32 h-24 compact:h-28 tablet:h-32 z-30">
-            <div className="bg-white rounded-full p-3 compact:p-4 shadow-[0_0_30px_rgba(251,191,36,0.4),0_0_50px_rgba(147,51,234,0.3)] border-4 border-amber-400/50 flex items-center justify-center w-full h-full hover:scale-110 transition-transform duration-300">
+            <div className="bg-white rounded-full p-3 compact:p-4 shadow-[0_0_30px_rgba(251,191,36,0.4),0_0_50px_rgba(147,51,234,0.3)] border-4 border-amber-400/50 flex items-center justify-center w-full h-full">
               <div className="relative w-full h-full">
                 <Image
                   src={getAsset("glowFmStandardLogo")}
@@ -374,25 +367,17 @@ export default function HomePage() {
               </div>
               
               <p className="text-lg font-body text-gray-900 font-semibold max-w-md mt-2">
-                The Ember Challenge Starts Now: Enter to Win!
+                final stage: enter to win
               </p>
               <p className="text-sm font-body text-gray-700 max-w-md">
-                Win Small prizes like tote bag, mini power bank, airtime, jotter
+                Stand a chance to win a brand new laptop
               </p>
               <div className="flex flex-wrap gap-3 mt-4">
-                <a 
-                  href="https://www.facebook.com/share/r/14WpEP5taiv/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-indigo-900 text-white px-8 py-3 rounded-full hover:bg-indigo-800 transition-colors font-body inline-flex items-center gap-2"
-                >
-                  Participate Now →
-                </a>
                 <Link
-                  href="/final-5-players-quiz-answers"
+                  href="/ember-final"
                   className="border-2 border-amber-500/70 text-amber-900 px-6 py-3 rounded-full font-body font-semibold bg-white/80 hover:bg-amber-50 transition-all inline-flex items-center gap-2 shadow-[0_10px_30px_rgba(251,191,36,0.25)]"
                 >
-                  Final 5 Quiz Answers
+                  Enter Final Quiz
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
@@ -484,50 +469,30 @@ export default function HomePage() {
             
             {/* CTA Section */}
             <div className="max-w-2xl mx-auto">
-              <div className="bg-gradient-to-br from-amber-900/40 via-purple-900/40 to-amber-900/40 backdrop-blur-xl border-2 border-amber-500/40 rounded-3xl p-6 compact:p-8 tablet:p-10 shadow-[0_0_50px_rgba(251,191,36,0.4),0_0_80px_rgba(147,51,234,0.3)]">
-                <div className="flex flex-col compact:flex-row items-center justify-center gap-4 compact:gap-6">
+              <div className="bg-white border border-amber-200 rounded-3xl p-6 compact:p-8 tablet:p-10 shadow-md">
+                <div className="flex flex-col items-center justify-center gap-4 compact:gap-6">
                   {/* Participate Button */}
                   <a 
                     href="https://www.facebook.com/share/r/14WpEP5taiv/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative bg-gradient-to-r from-amber-400 via-purple-400 to-amber-400 text-amber-950 px-8 compact:px-10 tablet:px-12 py-4 compact:py-5 rounded-full font-bold text-base compact:text-lg tablet:text-xl shadow-[0_0_40px_rgba(251,191,36,0.8)] hover:shadow-[0_0_60px_rgba(251,191,36,1),0_0_80px_rgba(147,51,234,0.8)] transform hover:scale-105 transition-all duration-300 font-['El_Messiri'] w-full compact:w-auto overflow-hidden border-2 border-purple-400/50 inline-block text-center"
+                    className="bg-amber-500 text-white px-8 compact:px-10 tablet:px-12 py-4 compact:py-5 rounded-full font-bold text-base compact:text-lg tablet:text-xl font-['El_Messiri'] w-full compact:w-auto text-center"
                   >
-                    <span className="relative z-10 flex items-center justify-center gap-3">
-                      🔥 Participate Now
-                      <svg className="w-5 h-5 compact:w-6 compact:h-6 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-300 to-amber-300 opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                    🔥 Participate Now
                   </a>
-
-                  {/* Learn More Button */}
-                  <button 
-                    className="group bg-amber-900/30 backdrop-blur-sm border-2 border-amber-400/60 text-amber-100 px-8 compact:px-10 py-4 compact:py-5 rounded-full font-bold text-base compact:text-lg hover:bg-purple-900/40 hover:border-purple-400/60 transition-all duration-300 font-['El_Messiri'] w-full compact:w-auto shadow-[0_0_20px_rgba(251,191,36,0.4)] hover:shadow-[0_0_30px_rgba(147,51,234,0.6)]"
-                  >
-                    <span className="flex items-center justify-center gap-2">
-                      View Prizes
-                      <svg className="w-5 h-5 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
-                    </span>
-                  </button>
                 </div>
 
                 {/* Stats Bar */}
-                <div className="grid grid-cols-3 gap-4 mt-6 compact:mt-8 pt-6 compact:pt-8 border-t border-amber-500/30">
+                <div className="grid grid-cols-2 gap-4 mt-6 compact:mt-8 pt-6 compact:pt-8 border-t border-amber-200">
                   <div className="text-center">
-                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-amber-300 font-['El_Messiri'] drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]">29</div>
-                    <div className="text-xs compact:text-sm text-amber-200/80 mt-1 font-['El_Messiri']">Participants</div>
+                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-amber-700 font-['El_Messiri']">
+                      {participantCount ?? "-"}
+                    </div>
+                    <div className="text-xs compact:text-sm text-amber-700/80 mt-1 font-['El_Messiri']">Participants</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-purple-300 font-['El_Messiri'] drop-shadow-[0_0_15px_rgba(147,51,234,0.8)]">10+</div>
-                    <div className="text-xs compact:text-sm text-amber-200/80 mt-1 font-['El_Messiri']">Prizes</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-amber-400 font-['El_Messiri'] animate-pulse drop-shadow-[0_0_20px_rgba(251,191,36,1)]">LIVE</div>
-                    <div className="text-xs compact:text-sm text-amber-200/80 mt-1 font-['El_Messiri']">Status</div>
+                    <div className="text-2xl compact:text-3xl tablet:text-4xl font-bold text-amber-700 font-['El_Messiri']">LIVE</div>
+                    <div className="text-xs compact:text-sm text-amber-700/80 mt-1 font-['El_Messiri']">Status</div>
                   </div>
                 </div>
               </div>
@@ -552,13 +517,7 @@ export default function HomePage() {
 
       {/* Google Play App Section - Enhanced Design */}
       <AnimatedSection>
-        <div className="py-20 bg-gradient-to-br from-orange-50 via-white to-red-50 relative overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 left-4 compact:left-10 w-32 h-32 bg-gradient-to-br from-orange-400 to-red-400 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 right-4 compact:right-20 w-48 h-48 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-green-400 to-blue-400 rounded-full blur-3xl"></div>
-          </div>
+        <div className="py-20 bg-gradient-to-br from-orange-50 to-white relative overflow-hidden">
 
           <div className="container mx-auto px-4 compact:px-5 sp:px-6 tablet:px-8 relative z-10">
             <div className="grid grid-cols-2 gap-3 compact:gap-5 sp:gap-6 mp:gap-8 tablet:gap-12 lg:gap-16 items-center">

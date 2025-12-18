@@ -1,14 +1,11 @@
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { ContactForm } from "@/components/ContactForm";
-import { CareerForm } from "@/components/CareerForm";
 
-const WHATSAPP_BROADCAST_LINK = "https://chat.whatsapp.com/BZvP92OCqir0cahZUlSYgI";
 const MAP_EMBED_SRC =
   "https://maps.google.com/maps?q=Glow%2099.1%20FM%2C%201%20Efon%20Alaye%20St%2C%20Ijapo%20Estate%2C%20Akure%2C%20Nigeria&t=&z=15&ie=UTF8&iwloc=&output=embed";
 
 const contactChannels = [
-  { label: "WhatsApp Broadcast", value: "Join Ember WhatsApp broadcast", href: WHATSAPP_BROADCAST_LINK },
-  { label: "Careers", value: "Careers@glowfmradio.com", href: "mailto:Careers@glowfmradio.com" },
+  { label: "Finance", value: "finance@glowfmradio.com", href: "mailto:finance@glowfmradio.com" },
   { label: "Marketing/Adverts", value: "+234 703 212 0921", href: "tel:+2347032120921" },
   { label: "Marketing", value: "+234 703 022 3281", href: "tel:+2347030223281" }
 ] as const;
@@ -185,91 +182,6 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
           </div>
         </AnimatedSection>
 
-        {/* Join the Social Media Team Section */}
-        <AnimatedSection className="mx-4 pb-16">
-          <div className="rounded-3xl bg-gradient-to-br from-purple-600 via-blue-600 to-indigo-600 p-8 text-white shadow-2xl relative overflow-hidden">
-            {/* Background decorative elements */}
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute -top-20 -right-20 w-80 h-80 bg-white/20 rounded-full blur-3xl"></div>
-              <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
-            </div>
-            
-            <div className="max-w-6xl mx-auto relative z-10">
-              <div className="text-center mb-12">
-                <span className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-6 py-3 text-sm uppercase tracking-[0.3em] text-white/90 font-['El_Messiri'] font-bold shadow-lg">
-                  Join Our Team
-                </span>
-                <h2 className="text-4xl font-bold sm:text-5xl md:text-6xl mt-6 font-['El_Messiri'] leading-tight">
-                  Join the Social Media Team
-                </h2>
-                <p className="text-white/90 mt-6 text-xl font-semibold max-w-3xl mx-auto font-['El_Messiri'] leading-relaxed">
-                  Are you passionate about digital storytelling, content creation, and building online communities? 
-                  Join our dynamic social media team!
-                </p>
-              </div>
-              
-              <div className="grid lg:grid-cols-2 gap-12 items-start">
-                <div className="space-y-8">
-                  <div className="bg-white/10 rounded-2xl p-8 backdrop-blur-md shadow-xl">
-                    <h3 className="text-2xl font-bold text-white mb-6 font-['El_Messiri']">What We&apos;re Looking For:</h3>
-                    <ul className="space-y-3 text-white/90 font-['El_Messiri'] text-lg">
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Creative content creators with fresh ideas
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Social media enthusiasts with platform expertise
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Graphic designers and video editors
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Community managers and engagement specialists
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Analytics experts and growth hackers
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="bg-white/10 rounded-2xl p-8 backdrop-blur-md shadow-xl">
-                    <h3 className="text-2xl font-bold text-white mb-6 font-['El_Messiri']">What We Offer:</h3>
-                    <ul className="space-y-3 text-white/90 font-['El_Messiri'] text-lg">
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Real-world experience in radio and digital media
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Portfolio building opportunities
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Mentorship from industry professionals
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Flexible working arrangements
-                      </li>
-                      <li className="flex items-center gap-3">
-                        <div className="w-2 h-2 bg-white rounded-full"></div>
-                        Career development and networking
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                
-                <div className="bg-white/15 rounded-2xl p-8 backdrop-blur-md shadow-xl">
-                  <h3 className="text-2xl font-bold text-white mb-8 font-['El_Messiri']">Apply Now</h3>
-                  <CareerForm />
-                </div>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
       </div>
     </div>
   );

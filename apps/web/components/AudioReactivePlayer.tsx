@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { AudioVisualizer, type FrequencyData } from "@/lib/audio-visualizer";
 import { usePerformanceMode } from "@/hooks/usePerformanceMode";
@@ -16,24 +16,6 @@ export function AudioReactivePlayer() {
   const visualizerRef = useRef<AudioVisualizer | null>(null);
   const { allowMotion } = usePerformanceMode();
   const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const shouldPlay = searchParams.get("play") === "true";
-    if (shouldPlay && !isPlaying) {
-      togglePlay();
-    }
-
-    const handlePlayEvent = () => {
-      if (!isPlaying) {
-        togglePlay();
-      }
-    };
-
-    window.addEventListener("glow-play-stream", handlePlayEvent);
-    return () => {
-      window.removeEventListener("glow-play-stream", handlePlayEvent);
-    };
-  }, [searchParams]);
 
   useEffect(() => {
     if (audioRef.current) {
@@ -59,7 +41,7 @@ export function AudioReactivePlayer() {
     }
   }, [allowMotion]);
 
-  const togglePlay = async () => {
+  const togglePlay = useCallback(async () => {
     if (!audioRef.current) return;
     
     try {
@@ -86,7 +68,25 @@ export function AudioReactivePlayer() {
     } catch (error) {
       console.error("Error playing audio:", error);
     }
-  };
+  }, [allowMotion, isPlaying]);
+
+  useEffect(() => {
+    const shouldPlay = searchParams.get("play") === "true";
+    if (shouldPlay && !isPlaying) {
+      togglePlay();
+    }
+
+    const handlePlayEvent = () => {
+      if (!isPlaying) {
+        togglePlay();
+      }
+    };
+
+    window.addEventListener("glow-play-stream", handlePlayEvent);
+    return () => {
+      window.removeEventListener("glow-play-stream", handlePlayEvent);
+    };
+  }, [searchParams, isPlaying, togglePlay]);
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseInt(e.target.value);

@@ -46,9 +46,9 @@ const instagramSpotlight = [
 
 const facebookStreams = [
   { 
-    title: "Ale alariwo", 
-    summary: "Watch the latest episode of Ale alariwo on Glow FM", 
-    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1415598613542699%2F&show_text=false&width=560&t=0" 
+    title: "OROPO", 
+    summary: "Watch the latest episode of OROPO on Glow FM", 
+    embedUrl: "https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2FGlowfm%2Fvideos%2F1195467462027462%2F&show_text=false&width=560&t=0" 
   },
   { 
     title: "Political Hangout", 
@@ -82,12 +82,8 @@ export default function SocialMediaPage() {
         >
           <Carousel itemClassName={compactCarouselItemClass}>
             {youtubeHighlights.map((highlight, idx) => (
-              <div key={idx} className="group relative flex flex-col h-full">
-                {/* TV Frame Design */}
-                <div className="relative rounded-xl border-2 border-gray-800 bg-gray-900 shadow-xl overflow-hidden ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
-                  {/* Screen Glare */}
-                  <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
-                  
+              <div key={idx} className="relative flex flex-col h-full">
+                <div className="relative rounded-xl border border-gray-800 bg-gray-900 shadow-md overflow-hidden">
                   <div className="aspect-video w-full bg-black relative z-10">
                     <iframe
                       title={highlight.title}
@@ -100,15 +96,14 @@ export default function SocialMediaPage() {
                     />
                   </div>
                   
-                  {/* TV Chin */}
                   <div className="h-8 bg-gray-900 border-t border-white/5 flex items-center justify-center gap-2">
-                    <div className="w-1 h-1 rounded-full bg-red-500 animate-pulse"></div>
+                    <div className="w-1 h-1 rounded-full bg-red-500"></div>
                     <div className="w-12 h-0.5 bg-white/10 rounded-full"></div>
                   </div>
                 </div>
 
                 <div className="mt-4 flex flex-col justify-between gap-2 px-2">
-                  <h3 className="line-clamp-2 text-lg font-bold text-white group-hover:text-orange-400 transition-colors font-['El_Messiri']">{highlight.title}</h3>
+                  <h3 className="line-clamp-2 text-lg font-bold text-white font-['El_Messiri']">{highlight.title}</h3>
                   <span className="w-fit inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-slate-400 font-bold border border-white/5">
                     <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span>
                     Studio relay
@@ -131,12 +126,8 @@ export default function SocialMediaPage() {
         >
           <Carousel itemClassName="min-w-[320px] max-w-[350px]">
             {tiktokReels.map((reel, idx) => (
-              <div key={idx} className="group relative flex flex-col h-full">
-                {/* TV Frame Design */}
-                <div className="relative rounded-xl border-4 border-gray-900 bg-gray-900 shadow-xl overflow-hidden ring-1 ring-white/10">
-                  {/* Screen Glare/Reflection */}
-                  <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none rounded-xl"></div>
-                  
+              <div key={idx} className="relative flex flex-col h-full">
+                <div className="relative rounded-xl border border-gray-900 bg-gray-900 shadow-md overflow-hidden">
                   <div className="h-[600px] w-full bg-black relative z-10">
                     <iframe 
                       title={reel.title} 
@@ -149,9 +140,8 @@ export default function SocialMediaPage() {
                   </div>
                 </div>
                 
-                {/* TV Stand / Label */}
                 <div className="mt-4 text-center px-4">
-                  <h3 className="line-clamp-1 text-lg font-bold text-white group-hover:text-pink-400 transition-colors font-['El_Messiri']">{reel.title}</h3>
+                  <h3 className="line-clamp-1 text-lg font-bold text-white font-['El_Messiri']">{reel.title}</h3>
                   <span className="mt-1 inline-block rounded-full bg-white/5 px-3 py-1 text-[0.6rem] uppercase tracking-[0.25em] text-slate-400 font-bold border border-white/5">
                     {reel.metric}
                   </span>
@@ -173,12 +163,8 @@ export default function SocialMediaPage() {
         >
           <Carousel itemClassName="min-w-[320px] max-w-[350px]">
             {instagramSpotlight.map((item, idx) => (
-              <div key={idx} className="group relative flex flex-col h-full">
-                {/* TV Frame Design */}
-                <div className="relative rounded-xl border-2 border-gray-800 bg-gray-900 shadow-xl overflow-hidden ring-1 ring-white/10 transition-transform duration-300 group-hover:scale-[1.02]">
-                  {/* Screen Glare */}
-                  <div className="absolute inset-0 z-20 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
-                  
+              <div key={idx} className="relative flex flex-col h-full">
+                <div className="relative rounded-xl border border-gray-800 bg-gray-900 shadow-md overflow-hidden">
                   <div className="relative h-[600px] w-full bg-black z-10">
                     <iframe
                       src={`https://www.instagram.com/reel/${item.embedId}/embed`}
@@ -192,8 +178,8 @@ export default function SocialMediaPage() {
                 </div>
 
                 <div className="mt-4 space-y-2 px-2">
-                  <h3 className="line-clamp-1 text-lg font-bold text-white group-hover:text-purple-400 transition-colors font-['El_Messiri']">{item.title}</h3>
-                  <Link href={item.href} target="_blank" rel="noreferrer" className="text-xs text-slate-400 hover:text-white flex items-center gap-1 uppercase tracking-wider font-bold font-['El_Messiri']">
+                  <h3 className="line-clamp-1 text-lg font-bold text-white font-['El_Messiri']">{item.title}</h3>
+                  <Link href={item.href} target="_blank" rel="noreferrer" className="text-xs text-slate-400 flex items-center gap-1 uppercase tracking-wider font-bold font-['El_Messiri']">
                     View Post <FaExternalLinkAlt className="text-[0.6rem]" />
                   </Link>
                 </div>
